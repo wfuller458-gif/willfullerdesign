@@ -11,7 +11,7 @@ const HistoryShowcase = () => {
       tooltipImages: [
         "/images/tooltip/jlr-1.png",
         "/images/tooltip/jlr-2.png"
-      ]
+      ] as [string, string]
     },
     {
       date: "2012",
@@ -21,7 +21,7 @@ const HistoryShowcase = () => {
         "/images/tooltip/suru-1.png",
         "/images/tooltip/suru-2.png",
         "/images/tooltip/suru-3.png"
-      ]
+      ] as [string, string, string]
     },
     {
       date: "2020",
@@ -30,7 +30,7 @@ const HistoryShowcase = () => {
       tooltipImages: [
         "/images/tooltip/freelance-1.png",
         "/images/tooltip/freelance-2.png"
-      ]
+      ] as [string, string]
     },
     {
       date: "2019",
@@ -40,7 +40,7 @@ const HistoryShowcase = () => {
         "/images/tooltip/unm-1.png",
         "/images/tooltip/unm-2.png",
         "/images/tooltip/unm-3.png"
-      ]
+      ] as [string, string, string]
     },
     {
       date: "2018",
@@ -49,7 +49,7 @@ const HistoryShowcase = () => {
       tooltipImages: [
         "/images/tooltip/chargedup-1.png",
         "/images/tooltip/chargedup-2.png"
-      ]
+      ] as [string, string]
     },
     {
       date: "2015",
@@ -59,7 +59,7 @@ const HistoryShowcase = () => {
         "/images/tooltip/lboro-1.png",
         "/images/tooltip/lboro-2.png",
         "/images/tooltip/lboro-3.png"
-      ]
+      ] as [string, string, string]
     },
   ];
 
