@@ -291,7 +291,6 @@ export default function Home() {
 
       {/* Grey Banner */}
       <Banner
-        text="That's nice where has come from?"
         variant="grey"
       />
 
