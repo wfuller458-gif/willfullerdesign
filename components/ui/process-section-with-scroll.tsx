@@ -123,7 +123,6 @@ export const ProcessSectionWithScroll: React.FC<ProcessSectionWithScrollProps> =
         </div>
         <div style={{ flexShrink: 0 }}>
           <Banner
-            text="Let's make it a reality 2025! Request a free initial consultation now."
             variant="orange"
             onAppointmentClick={onAppointmentClick}
           />
