@@ -225,10 +225,7 @@ export default function DefenderProject() {
             onClose={() => {
               setIsAppointmentOpen(false);
             }}
-            onCancel={() => {
-              setIsAppointmentOpen(false);
-            }}
-            onNext={(data) => {
+            onSubmit={(data) => {
               setAppointmentData(data);
               setIsAppointmentOpen(false);
               setIsAppointmentContactOpen(true);
