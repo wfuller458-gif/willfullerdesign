@@ -28,6 +28,7 @@ export default function RangeRoverProject() {
   const [dashboardImageVisible, setDashboardImageVisible] = useState(false);
   const [interiorImageVisible, setInteriorImageVisible] = useState(false);
   const [sideImageVisible, setSideImageVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -37,6 +38,18 @@ export default function RangeRoverProject() {
   const dashboardImageRef = useRef<HTMLDivElement>(null);
   const interiorImageRef = useRef<HTMLDivElement>(null);
   const sideImageRef = useRef<HTMLDivElement>(null);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Disable scrolling when any menu is open
   useEffect(() => {
@@ -56,6 +69,15 @@ export default function RangeRoverProject() {
   // Parallax scroll effect
   useEffect(() => {
     const handleScroll = () => {
+      // Disable parallax on mobile
+      if (isMobile) {
+        setImageTransform(0);
+        setDashboardTransform(0);
+        setInteriorTransform(0);
+        setSideTransform(0);
+        return;
+      }
+
       const windowHeight = window.innerHeight;
 
       // Hero image parallax
@@ -102,7 +124,7 @@ export default function RangeRoverProject() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
 
   // Fade-in effect on mount
   useEffect(() => {
@@ -170,7 +192,167 @@ export default function RangeRoverProject() {
   }, []);
 
   return (
-    <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh', overflowX: 'hidden' }}>
+      <style>
+        {`
+          /* Tablet */
+          @media (max-width: 1024px) {
+            .project-hero-container {
+              flex-direction: column !important;
+            }
+
+            .project-hero-main {
+              height: 400px !important;
+            }
+
+            .project-hero-column {
+              width: 100% !important;
+              flex-direction: row !important;
+            }
+
+            .project-hero-small {
+              height: 200px !important;
+              flex: 1 !important;
+            }
+
+            .project-title {
+              font-size: 48px !important;
+            }
+
+            .project-text {
+              font-size: 18px !important;
+            }
+
+            .project-two-column {
+              flex-direction: column !important;
+              gap: 32px !important;
+            }
+
+            .project-column {
+              max-width: 100% !important;
+            }
+
+            .project-image-large {
+              height: 400px !important;
+            }
+          }
+
+          /* Mobile */
+          @media (max-width: 768px) {
+            .project-hero-main {
+              height: 300px !important;
+            }
+
+            .project-hero-small {
+              height: 150px !important;
+            }
+
+            .project-title {
+              font-size: 36px !important;
+            }
+
+            .project-subtitle {
+              font-size: 16px !important;
+            }
+
+            .project-text {
+              font-size: 16px !important;
+            }
+
+            .project-image-large {
+              height: 300px !important;
+            }
+
+            .project-image-medium {
+              height: 250px !important;
+            }
+          }
+
+          /* Small Mobile */
+          @media (max-width: 480px) {
+            .project-hero-container {
+              flex-direction: column !important;
+            }
+
+            .project-hero-column {
+              width: 100% !important;
+              gap: 8px !important;
+            }
+
+            .project-hero-main {
+              height: 180px !important;
+              width: 100% !important;
+              flex: none !important;
+            }
+
+            .project-hero-small {
+              height: 180px !important;
+              width: 100% !important;
+            }
+
+            .project-title {
+              font-size: 28px !important;
+            }
+
+            .project-subtitle {
+              font-size: 14px !important;
+            }
+
+            .project-text {
+              font-size: 14px !important;
+            }
+
+            .project-image-large {
+              height: 250px !important;
+            }
+
+            .project-image-medium {
+              height: 200px !important;
+            }
+
+            .project-scroll-indicator {
+              display: none !important;
+            }
+
+            .project-content-padding {
+              padding-left: 16px !important;
+            }
+
+            .project-details-left {
+              width: 100% !important;
+              margin-bottom: 24px !important;
+            }
+          }
+
+          /* Responsive container widths and padding */
+          @media (max-width: 1200px) {
+            .project-wide-image {
+              width: 100% !important;
+              max-width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
+
+            .project-content-padding {
+              padding-left: 60px !important;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .project-content-padding {
+              padding-left: 24px !important;
+            }
+
+            .project-details-container {
+              gap: 32px !important;
+            }
+
+            .project-details-left {
+              width: 100% !important;
+            }
+          }
+        `}
+      </style>
       {/* Sticky Header */}
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header
@@ -296,70 +478,91 @@ export default function RangeRoverProject() {
         {/* Hero Images */}
         <div
           ref={heroRef}
+          className="project-hero-container"
           style={{
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
             gap: '8px',
             marginBottom: '32px',
           }}
         >
-          {/* Large left image */}
-          <div
-            style={{
-              flex: '1',
-              height: '620px',
-              borderRadius: '4px',
-              overflow: 'hidden',
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'opacity 800ms ease-out, transform 800ms ease-out',
-            }}
-          >
+          {/* Mobile-only main image - shown first on mobile */}
+          {isMobile && (
             <div
+              className="project-hero-mobile-main"
               style={{
+                height: '180px',
                 width: '100%',
-                height: '100%',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out',
                 backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                transform: `translateY(${imageTransform}px)`,
-                transition: 'transform 0.1s ease-out',
               }}
             />
-          </div>
+          )}
 
-          {/* Right column with 2 images */}
+          {/* Main large image - left side (desktop only) */}
+          {!isMobile && (
+            <div
+              className="project-hero-main"
+              style={{
+                flex: '1',
+                height: '620px',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out',
+                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+              }}
+            />
+          )}
+
+          {/* Column for two smaller images - right side */}
           <div
+            className="project-hero-column"
             style={{
               display: 'flex',
               flexDirection: 'column',
               gap: '8px',
-              width: '404px',
+              width: isMobile ? '100%' : '404px',
             }}
           >
+            {/* Top small image */}
             <div
+              className="project-hero-small"
               style={{
-                height: '306px',
+                height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 100ms',
                 backgroundImage: 'url(/images/projects/range-rover/preview-2.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 100ms, transform 800ms ease-out 100ms',
               }}
             />
+
+            {/* Bottom small image */}
             <div
+              className="project-hero-small"
               style={{
-                height: '306px',
+                height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 200ms',
                 backgroundImage: 'url(/images/projects/range-rover/top%20section%20image%203.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 200ms, transform 800ms ease-out 200ms',
               }}
             />
           </div>
@@ -376,7 +579,7 @@ export default function RangeRoverProject() {
           }}
         >
           <h1
-            className="font-display font-light"
+            className="font-display font-light project-title"
             style={{
               fontSize: '64px',
               lineHeight: '1.4',
@@ -389,6 +592,7 @@ export default function RangeRoverProject() {
           </h1>
 
           <div
+            className="project-scroll-indicator"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -398,7 +602,7 @@ export default function RangeRoverProject() {
             }}
           >
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-subtitle"
               style={{
                 fontSize: '20px',
                 color: 'var(--brand-black)',
@@ -437,6 +641,7 @@ export default function RangeRoverProject() {
         {/* Project Details Section */}
         <div
           ref={detailsRef}
+          className="project-two-column project-details-container"
           style={{
             display: 'flex',
             gap: '121px',
@@ -444,9 +649,9 @@ export default function RangeRoverProject() {
           }}
         >
           {/* Left: Tags/Categories */}
-          <div style={{ width: '300px' }}>
+          <div className="project-details-left project-column" style={{ width: '300px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -468,9 +673,9 @@ export default function RangeRoverProject() {
           </div>
 
           {/* Right: Description */}
-          <div style={{ flex: 1, maxWidth: '600px' }}>
+          <div className="project-column" style={{ flex: 1, maxWidth: '600px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -487,8 +692,10 @@ export default function RangeRoverProject() {
         {/* Large Dashboard Image */}
         <div
           ref={dashboardImageRef}
+          className="project-wide-image project-image-large"
           style={{
-            width: '1100px',
+            maxWidth: '1100px',
+            width: '100%',
             height: '400px',
             margin: '0 auto 100px',
             borderRadius: '4px',
@@ -515,6 +722,7 @@ export default function RangeRoverProject() {
         {/* Two Column Text Section */}
         <div
           ref={textSection1Ref}
+          className="project-two-column project-content-padding"
           style={{
             display: 'flex',
             gap: '122px',
@@ -522,9 +730,9 @@ export default function RangeRoverProject() {
             paddingLeft: '226px',
           }}
         >
-          <div style={{ flex: 1, maxWidth: '600px' }}>
+          <div className="project-column" style={{ flex: 1, maxWidth: '600px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -537,9 +745,9 @@ export default function RangeRoverProject() {
             </p>
           </div>
 
-          <div style={{ width: '300px' }}>
+          <div className="project-column" style={{ width: '300px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -556,6 +764,7 @@ export default function RangeRoverProject() {
         {/* Large Interior Image */}
         <div
           ref={interiorImageRef}
+          className="project-image-large"
           style={{
             width: '100%',
             height: '830px',
@@ -584,6 +793,7 @@ export default function RangeRoverProject() {
         {/* Feature Teams Integration Section */}
         <div
           ref={textSection2Ref}
+          className="project-two-column project-content-padding"
           style={{
             display: 'flex',
             gap: '95px',
@@ -591,9 +801,9 @@ export default function RangeRoverProject() {
             paddingLeft: '74px',
           }}
         >
-          <div style={{ flex: 1, maxWidth: '600px' }}>
+          <div className="project-column" style={{ flex: 1, maxWidth: '600px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -607,7 +817,7 @@ export default function RangeRoverProject() {
             </p>
 
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -621,7 +831,7 @@ export default function RangeRoverProject() {
             </p>
 
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',

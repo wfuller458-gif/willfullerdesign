@@ -26,6 +26,7 @@ export default function AvinyaProject() {
   const [textSection2Visible, setTextSection2Visible] = useState(false);
   const [dashboardImageVisible, setDashboardImageVisible] = useState(false);
   const [interiorImageVisible, setInteriorImageVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -34,6 +35,18 @@ export default function AvinyaProject() {
   const textSection2Ref = useRef<HTMLDivElement>(null);
   const dashboardImageRef = useRef<HTMLDivElement>(null);
   const interiorImageRef = useRef<HTMLDivElement>(null);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Disable scrolling when any menu is open
   useEffect(() => {
@@ -53,6 +66,14 @@ export default function AvinyaProject() {
   // Parallax scroll effect
   useEffect(() => {
     const handleScroll = () => {
+      // Disable parallax on mobile
+      if (isMobile) {
+        setImageTransform(0);
+        setDashboardTransform(0);
+        setInteriorTransform(0);
+        return;
+      }
+
       const windowHeight = window.innerHeight;
 
       // Hero image parallax
@@ -89,7 +110,7 @@ export default function AvinyaProject() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
 
   // Fade-in effect on mount
   useEffect(() => {
@@ -150,7 +171,133 @@ export default function AvinyaProject() {
   }, []);
 
   return (
-    <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh', overflowX: 'hidden' }}>
+      <style>
+        {`
+          /* Tablet */
+          @media (max-width: 1024px) {
+            .project-hero-container {
+              flex-direction: column !important;
+            }
+            .project-hero-main {
+              height: 400px !important;
+            }
+            .project-hero-column {
+              width: 100% !important;
+              flex-direction: row !important;
+            }
+            .project-hero-small {
+              height: 200px !important;
+              flex: 1 !important;
+            }
+            .project-title {
+              font-size: 48px !important;
+            }
+            .project-text {
+              font-size: 18px !important;
+            }
+            .project-two-column {
+              flex-direction: column !important;
+              gap: 32px !important;
+            }
+            .project-column {
+              max-width: 100% !important;
+            }
+            .project-image-large {
+              height: 400px !important;
+            }
+          }
+          /* Mobile */
+          @media (max-width: 768px) {
+            .project-hero-main {
+              height: 300px !important;
+            }
+            .project-hero-small {
+              height: 150px !important;
+            }
+            .project-title {
+              font-size: 36px !important;
+            }
+            .project-subtitle {
+              font-size: 16px !important;
+            }
+            .project-text {
+              font-size: 16px !important;
+            }
+            .project-image-large {
+              height: 300px !important;
+            }
+            .project-image-medium {
+              height: 250px !important;
+            }
+          }
+          /* Small Mobile */
+          @media (max-width: 480px) {
+            .project-hero-main {
+              height: 350px !important;
+              width: 100% !important;
+              flex: none !important;
+              order: -1 !important;
+            }
+            .project-hero-column {
+              flex-direction: column !important;
+              width: 100% !important;
+            }
+            .project-hero-small {
+              height: 180px !important;
+              width: 100% !important;
+            }
+            .project-title {
+              font-size: 28px !important;
+            }
+            .project-subtitle {
+              font-size: 14px !important;
+            }
+            .project-text {
+              font-size: 14px !important;
+            }
+            .project-image-large {
+              height: 250px !important;
+            }
+            .project-image-medium {
+              height: 200px !important;
+            }
+            .project-scroll-indicator {
+              display: none !important;
+            }
+            .project-content-padding {
+              padding-left: 16px !important;
+            }
+            .project-details-left {
+              width: 100% !important;
+              margin-bottom: 24px !important;
+            }
+          }
+          /* Responsive container widths */
+          @media (max-width: 1200px) {
+            .project-wide-image {
+              width: 100% !important;
+              max-width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
+            .project-content-padding {
+              padding-left: 60px !important;
+            }
+          }
+          @media (max-width: 768px) {
+            .project-content-padding {
+              padding-left: 24px !important;
+            }
+            .project-details-container {
+              gap: 32px !important;
+            }
+            .project-details-left {
+              width: 100% !important;
+            }
+          }
+        `}
+      </style>
       {/* Sticky Header */}
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header
@@ -276,39 +423,33 @@ export default function AvinyaProject() {
         {/* Hero Images */}
         <div
           ref={heroRef}
+          className="project-hero-container"
           style={{
             display: 'flex',
             gap: '8px',
             marginBottom: '32px',
           }}
         >
-          {/* Large left image */}
+          {/* Main large image - left side */}
           <div
+            className="project-hero-main"
             style={{
               flex: '1',
               height: '620px',
               borderRadius: '4px',
               overflow: 'hidden',
+              position: 'relative',
               opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'opacity 800ms ease-out, transform 800ms ease-out',
+              transition: 'opacity 800ms ease-out',
+              backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
             }}
-          >
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                transform: `translateY(${imageTransform}px)`,
-                transition: 'transform 0.1s ease-out',
-              }}
-            />
-          </div>
+          />
 
-          {/* Right column with 2 images */}
+          {/* Column for two smaller images - right side */}
           <div
+            className="project-hero-column"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -316,7 +457,9 @@ export default function AvinyaProject() {
               width: '404px',
             }}
           >
+            {/* Top small image */}
             <div
+              className="project-hero-small"
               style={{
                 height: '306px',
                 borderRadius: '4px',
@@ -325,11 +468,13 @@ export default function AvinyaProject() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 100ms, transform 800ms ease-out 100ms',
+                transition: 'opacity 800ms ease-out 100ms',
               }}
             />
+
+            {/* Bottom small image */}
             <div
+              className="project-hero-small"
               style={{
                 height: '306px',
                 borderRadius: '4px',
@@ -338,8 +483,7 @@ export default function AvinyaProject() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 200ms, transform 800ms ease-out 200ms',
+                transition: 'opacity 800ms ease-out 200ms',
               }}
             />
           </div>
@@ -356,7 +500,7 @@ export default function AvinyaProject() {
           }}
         >
           <h1
-            className="font-display font-light"
+            className="font-display font-light project-title"
             style={{
               fontSize: '64px',
               lineHeight: '1.4',
@@ -369,6 +513,7 @@ export default function AvinyaProject() {
           </h1>
 
           <div
+            className="project-scroll-indicator"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -417,6 +562,7 @@ export default function AvinyaProject() {
         {/* Project Details Section */}
         <div
           ref={detailsRef}
+          className="project-two-column"
           style={{
             display: 'flex',
             gap: '121px',
@@ -424,9 +570,9 @@ export default function AvinyaProject() {
           }}
         >
           {/* Left: Tags/Categories */}
-          <div style={{ width: '300px' }}>
+          <div className="project-details-left" style={{ width: '300px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -442,9 +588,9 @@ export default function AvinyaProject() {
           </div>
 
           {/* Right: Description */}
-          <div style={{ flex: 1, maxWidth: '600px' }}>
+          <div className="project-column" style={{ flex: 1, maxWidth: '600px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -461,8 +607,10 @@ export default function AvinyaProject() {
         {/* Large Dashboard Image */}
         <div
           ref={dashboardImageRef}
+          className="project-wide-image project-image-large"
           style={{
-            width: '1100px',
+            maxWidth: '1100px',
+            width: '100%',
             height: '400px',
             margin: '0 auto 100px',
             borderRadius: '4px',
@@ -489,6 +637,7 @@ export default function AvinyaProject() {
         {/* Two Column Text Section */}
         <div
           ref={textSection1Ref}
+          className="project-two-column project-content-padding"
           style={{
             display: 'flex',
             gap: '122px',
@@ -496,9 +645,9 @@ export default function AvinyaProject() {
             paddingLeft: '226px',
           }}
         >
-          <div style={{ flex: 1, maxWidth: '600px' }}>
+          <div className="project-column" style={{ flex: 1, maxWidth: '600px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -511,9 +660,9 @@ export default function AvinyaProject() {
             </p>
           </div>
 
-          <div style={{ width: '300px' }}>
+          <div className="project-column" style={{ width: '300px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -530,6 +679,7 @@ export default function AvinyaProject() {
         {/* Large Interior Image */}
         <div
           ref={interiorImageRef}
+          className="project-image-medium"
           style={{
             width: '100%',
             height: '830px',
@@ -558,6 +708,7 @@ export default function AvinyaProject() {
         {/* Feature Teams Integration Section */}
         <div
           ref={textSection2Ref}
+          className="project-two-column project-content-padding"
           style={{
             display: 'flex',
             gap: '122px',
@@ -565,9 +716,9 @@ export default function AvinyaProject() {
             paddingLeft: '226px',
           }}
         >
-          <div style={{ flex: 1, maxWidth: '600px' }}>
+          <div className="project-column" style={{ flex: 1, maxWidth: '600px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
@@ -580,9 +731,9 @@ export default function AvinyaProject() {
             </p>
           </div>
 
-          <div style={{ width: '300px' }}>
+          <div className="project-column" style={{ width: '300px' }}>
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-text"
               style={{
                 fontSize: '20px',
                 lineHeight: '1.4',
