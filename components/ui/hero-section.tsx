@@ -159,12 +159,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             }
 
             .hero-tagline {
-              font-size: 14px;
+              font-size: 16px;
             }
 
             .hero-heading {
-              font-size: 28px;
-              line-height: 34px;
+              font-size: 40px;
+              line-height: 46px;
             }
 
             .hero-carousel-wrapper {

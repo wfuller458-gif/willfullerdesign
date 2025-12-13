@@ -184,14 +184,14 @@ export function HistoryItem({ date, company, tooltipDescription, tooltipImages, 
 
             .history-date {
               top: 18px;
-              font-size: 14px;
+              font-size: 18px;
               left: 8px;
             }
 
             .history-company {
-              left: 110px;
+              left: 120px;
               top: 18px;
-              font-size: 14px;
+              font-size: 18px;
             }
 
             .history-dot {

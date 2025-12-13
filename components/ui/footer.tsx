@@ -372,7 +372,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             .footer-column {
               padding: 12px;
-              min-height: 100px;
+              min-height: 130px;
             }
 
             .footer-tagline {

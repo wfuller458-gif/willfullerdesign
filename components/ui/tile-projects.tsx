@@ -172,8 +172,8 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
             .tile-projects-images {
               right: 12px;
               left: auto;
-              width: calc(100% - 190px);
-              max-width: 200px;
+              width: calc(100% - 200px);
+              max-width: 190px;
             }
 
             .tile-projects-project-name {
@@ -189,7 +189,7 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
             }
 
             .tile-projects-image-square {
-              width: 70px;
+              width: 65px;
               height: 95px;
             }
           }
