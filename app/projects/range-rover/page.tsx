@@ -192,7 +192,7 @@ export default function RangeRoverProject() {
   }, []);
 
   return (
-    <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
       <style>
         {`
           /* Tablet */
