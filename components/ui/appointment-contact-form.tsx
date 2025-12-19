@@ -31,6 +31,22 @@ export const AppointmentContactForm: React.FC<AppointmentContactFormProps> = ({
   const [project, setProject] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Update theme color when form opens/closes
+  React.useEffect(() => {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    const originalColor = metaThemeColor?.getAttribute('content') || '#f7f7f0';
+
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', '#1E1E1C');
+    }
+
+    return () => {
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', originalColor);
+      }
+    };
+  }, []);
+
   const handleSubmit = async () => {
     if (isSubmitting) return;
 

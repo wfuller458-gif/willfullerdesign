@@ -17,6 +17,25 @@ export const Menu: React.FC<MenuProps> = ({
 }) => {
   const navigationItems = ['Home', 'Projects', 'About', 'Contact'];
 
+  // Update theme color when menu opens/closes
+  React.useEffect(() => {
+    // Store original color
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    const originalColor = metaThemeColor?.getAttribute('content') || '#f7f7f0';
+
+    // Set dark menu color
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', '#1E1E1C');
+    }
+
+    // Restore original color on unmount
+    return () => {
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', originalColor);
+      }
+    };
+  }, []);
+
   const handleNavigation = (item: string) => {
     if (item === 'Contact' && onContactClick) {
       onContactClick();
