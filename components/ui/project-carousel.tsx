@@ -20,6 +20,20 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if device is mobile/touch
+  React.useEffect(() => {
+    const checkMobile = () => {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 1024;
+      setIsMobile(isTouchDevice && isSmallScreen);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Map images to project names and images based on the pattern: RR 1, Avinya 1, DEF 1, RR 2, Avinya 2, DEF 2, RR 3, Avinya 3, DEF 3
   const getProjectData = (index: number): { name: string; images: [string, string, string]; href: string } => {
@@ -68,8 +82,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
             height: 330px;
           }
 
-          .carousel-track:hover {
-            animation-play-state: paused;
+          @media (hover: hover) and (pointer: fine) {
+            .carousel-track:hover {
+              animation-play-state: paused;
+            }
           }
 
           .carousel-item {
@@ -137,11 +153,11 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
 
       <div
         className="carousel-track"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => !isMobile && setIsHovered(true)}
+        onMouseLeave={() => !isMobile && setIsHovered(false)}
         style={{
           display: 'flex',
-          gap: isHovered ? '44px' : '8px',
+          gap: isHovered && !isMobile ? '44px' : '8px',
           alignItems: 'center',
           width: 'fit-content',
           transition: 'gap 0.3s ease'
@@ -151,14 +167,14 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
         {images.map((image, index) => (
           <div
             key={`first-${index}`}
-            className={`carousel-item ${isHovered ? 'hovered' : ''}`}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
+            className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
+            onMouseEnter={() => !isMobile && setHoveredIndex(index)}
+            onMouseLeave={() => !isMobile && setHoveredIndex(null)}
             style={{
               flexShrink: 0,
               borderRadius: '4px',
               overflow: 'visible',
-              opacity: isHovered && hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 1,
+              opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 1,
               transition: 'width 0.3s ease, height 0.3s ease, opacity 0.3s ease',
               position: 'relative',
               zIndex: hoveredIndex === index ? 100 : 1
@@ -175,7 +191,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
                 borderRadius: '4px'
               }}
             />
-            {hoveredIndex === index && (
+            {hoveredIndex === index && !isMobile && (
               <div
                 style={{
                   position: 'absolute',
@@ -202,14 +218,14 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           return (
             <div
               key={`second-${index}`}
-              className={`carousel-item ${isHovered ? 'hovered' : ''}`}
-              onMouseEnter={() => setHoveredIndex(duplicateIndex)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
+              onMouseEnter={() => !isMobile && setHoveredIndex(duplicateIndex)}
+              onMouseLeave={() => !isMobile && setHoveredIndex(null)}
               style={{
                 flexShrink: 0,
                 borderRadius: '4px',
                 overflow: 'visible',
-                opacity: isHovered && hoveredIndex !== null && hoveredIndex !== duplicateIndex ? 0.5 : 1,
+                opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== duplicateIndex ? 0.5 : 1,
                 transition: 'width 0.3s ease, height 0.3s ease, opacity 0.3s ease',
                 position: 'relative',
                 zIndex: hoveredIndex === duplicateIndex ? 100 : 1
@@ -226,7 +242,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
                   borderRadius: '4px'
                 }}
               />
-              {hoveredIndex === duplicateIndex && (
+              {hoveredIndex === duplicateIndex && !isMobile && (
                 <div
                   style={{
                     position: 'absolute',

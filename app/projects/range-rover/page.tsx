@@ -42,7 +42,7 @@ export default function RangeRoverProject() {
   // Detect mobile screen size
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 480);
+      setIsMobile(window.innerWidth <= 1024);
     };
 
     checkMobile();
@@ -235,6 +235,12 @@ export default function RangeRoverProject() {
             .project-image-large {
               height: 400px !important;
             }
+
+            .project-side-portrait {
+              width: 100% !important;
+              max-width: 100% !important;
+              height: 500px !important;
+            }
           }
 
           /* Mobile */
@@ -265,6 +271,16 @@ export default function RangeRoverProject() {
 
             .project-image-medium {
               height: 250px !important;
+            }
+
+            .project-side-portrait {
+              width: 100% !important;
+              max-width: 100% !important;
+              height: 400px !important;
+            }
+
+            .project-section-spacing {
+              margin-bottom: 48px !important;
             }
           }
 
@@ -322,6 +338,16 @@ export default function RangeRoverProject() {
               width: 100% !important;
               margin-bottom: 24px !important;
             }
+
+            .project-side-portrait {
+              width: 100% !important;
+              max-width: 100% !important;
+              height: 300px !important;
+            }
+
+            .project-section-spacing {
+              margin-bottom: 32px !important;
+            }
           }
 
           /* Responsive container widths and padding */
@@ -361,18 +387,30 @@ export default function RangeRoverProject() {
         />
       </div>
 
+      <style>
+        {`
+          .overlay-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            padding: 16px;
+          }
+
+          @media (max-width: 768px) {
+            .overlay-wrapper {
+              padding: 0 !important;
+            }
+          }
+        `}
+      </style>
+
       {/* Menu Overlay */}
       {isMenuOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <Menu
             onClose={() => setIsMenuOpen(false)}
             onAppointmentClick={() => {
@@ -389,16 +427,7 @@ export default function RangeRoverProject() {
 
       {/* Contact Form Overlay */}
       {isContactOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <ContactForm
             onClose={() => setIsContactOpen(false)}
             onSubmit={(contactData) => {
@@ -411,18 +440,7 @@ export default function RangeRoverProject() {
 
       {/* Appointment Form Overlay - Step 1: Pick Date & Time */}
       {isAppointmentOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            zIndex: 9999,
-            padding: '16px'
-          }}
-        >
+        <div className="overlay-wrapper">
           <AppointmentForm
             onClose={() => {
               setIsAppointmentOpen(false);
@@ -438,18 +456,7 @@ export default function RangeRoverProject() {
 
       {/* Appointment Contact Form Overlay - Step 2: Submit Contact Info */}
       {isAppointmentContactOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            zIndex: 9999,
-            padding: '16px'
-          }}
-        >
+        <div className="overlay-wrapper">
           <AppointmentContactForm
             onClose={() => setIsAppointmentContactOpen(false)}
             onBack={() => {
@@ -641,7 +648,7 @@ export default function RangeRoverProject() {
         {/* Project Details Section */}
         <div
           ref={detailsRef}
-          className="project-two-column project-details-container"
+          className="project-two-column project-details-container project-section-spacing"
           style={{
             display: 'flex',
             gap: '121px',
@@ -692,7 +699,7 @@ export default function RangeRoverProject() {
         {/* Large Dashboard Image */}
         <div
           ref={dashboardImageRef}
-          className="project-wide-image project-image-large"
+          className="project-wide-image project-image-large project-section-spacing"
           style={{
             maxWidth: '1100px',
             width: '100%',
@@ -722,7 +729,7 @@ export default function RangeRoverProject() {
         {/* Two Column Text Section */}
         <div
           ref={textSection1Ref}
-          className="project-two-column project-content-padding"
+          className="project-two-column project-content-padding project-section-spacing"
           style={{
             display: 'flex',
             gap: '122px',
@@ -764,7 +771,7 @@ export default function RangeRoverProject() {
         {/* Large Interior Image */}
         <div
           ref={interiorImageRef}
-          className="project-image-large"
+          className="project-image-large project-section-spacing"
           style={{
             width: '100%',
             height: '830px',
@@ -847,6 +854,7 @@ export default function RangeRoverProject() {
           {/* Right side image */}
           <div
             ref={sideImageRef}
+            className="project-side-portrait"
             style={{
               width: '405px',
               height: '542px',

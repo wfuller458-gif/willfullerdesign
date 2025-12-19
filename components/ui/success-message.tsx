@@ -26,6 +26,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
 
   return (
     <div
+      className="success-message-container"
       style={{
         width: '531px',
         height: 'calc(100vh - 32px)',
@@ -34,8 +35,35 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
         overflow: 'hidden'
       }}
     >
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .success-message-container {
+              width: 100vw !important;
+              height: 100vh !important;
+              border-radius: 0 !important;
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
+            }
+
+            .success-message-background {
+              border-radius: 0 !important;
+            }
+
+            .success-message-svg {
+              display: none !important;
+            }
+
+            .success-message-title {
+              font-size: 40px !important;
+            }
+          }
+        `}
+      </style>
       {/* Background with blur */}
       <div
+        className="success-message-background"
         style={{
           position: 'absolute',
           top: 0,
@@ -52,6 +80,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
 
       {/* SVG gradient stroke overlay */}
       <svg
+        className="success-message-svg"
         style={{
           position: 'absolute',
           top: 0,

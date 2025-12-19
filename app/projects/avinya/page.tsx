@@ -39,7 +39,7 @@ export default function AvinyaProject() {
   // Detect mobile screen size
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 480);
+      setIsMobile(window.innerWidth <= 1024);
     };
 
     checkMobile();
@@ -230,6 +230,9 @@ export default function AvinyaProject() {
             .project-image-medium {
               height: 250px !important;
             }
+            .project-section-spacing {
+              margin-bottom: 48px !important;
+            }
           }
           /* Small Mobile */
           @media (max-width: 480px) {
@@ -272,6 +275,9 @@ export default function AvinyaProject() {
               width: 100% !important;
               margin-bottom: 24px !important;
             }
+            .project-section-spacing {
+              margin-bottom: 32px !important;
+            }
           }
           /* Responsive container widths */
           @media (max-width: 1200px) {
@@ -306,18 +312,30 @@ export default function AvinyaProject() {
         />
       </div>
 
+      <style>
+        {`
+          .overlay-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            padding: 16px;
+          }
+
+          @media (max-width: 768px) {
+            .overlay-wrapper {
+              padding: 0 !important;
+            }
+          }
+        `}
+      </style>
+
       {/* Menu Overlay */}
       {isMenuOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <Menu
             onClose={() => setIsMenuOpen(false)}
             onAppointmentClick={() => {
@@ -334,16 +352,7 @@ export default function AvinyaProject() {
 
       {/* Contact Form Overlay */}
       {isContactOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <ContactForm
             onClose={() => setIsContactOpen(false)}
             onSubmit={(contactData) => {
@@ -356,18 +365,7 @@ export default function AvinyaProject() {
 
       {/* Appointment Form Overlay - Step 1: Pick Date & Time */}
       {isAppointmentOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            zIndex: 9999,
-            padding: '16px'
-          }}
-        >
+        <div className="overlay-wrapper">
           <AppointmentForm
             onClose={() => {
               setIsAppointmentOpen(false);
@@ -383,18 +381,7 @@ export default function AvinyaProject() {
 
       {/* Appointment Contact Form Overlay - Step 2: Submit Contact Info */}
       {isAppointmentContactOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            zIndex: 9999,
-            padding: '16px'
-          }}
-        >
+        <div className="overlay-wrapper">
           <AppointmentContactForm
             onClose={() => setIsAppointmentContactOpen(false)}
             onBack={() => {
@@ -562,7 +549,7 @@ export default function AvinyaProject() {
         {/* Project Details Section */}
         <div
           ref={detailsRef}
-          className="project-two-column"
+          className="project-two-column project-section-spacing"
           style={{
             display: 'flex',
             gap: '121px',
@@ -607,7 +594,7 @@ export default function AvinyaProject() {
         {/* Large Dashboard Image */}
         <div
           ref={dashboardImageRef}
-          className="project-wide-image project-image-large"
+          className="project-wide-image project-image-large project-section-spacing"
           style={{
             maxWidth: '1100px',
             width: '100%',
@@ -637,7 +624,7 @@ export default function AvinyaProject() {
         {/* Two Column Text Section */}
         <div
           ref={textSection1Ref}
-          className="project-two-column project-content-padding"
+          className="project-two-column project-content-padding project-section-spacing"
           style={{
             display: 'flex',
             gap: '122px',
@@ -679,7 +666,7 @@ export default function AvinyaProject() {
         {/* Large Interior Image */}
         <div
           ref={interiorImageRef}
-          className="project-image-medium"
+          className="project-image-medium project-section-spacing"
           style={{
             width: '100%',
             height: '830px',

@@ -23,8 +23,20 @@ export function ProjectPreview({
 }: ProjectPreviewProps) {
   const [imageTransform, setImageTransform] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 900);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,11 +44,15 @@ export function ProjectPreview({
       const rect = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      if (rect.top < windowHeight && rect.bottom > 0) {
+      // Only apply parallax on desktop
+      if (!isMobile && rect.top < windowHeight && rect.bottom > 0) {
         const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
         const centerOffset = scrollProgress - 0.5;
         const parallaxOffset = centerOffset * 100;
         setImageTransform(parallaxOffset);
+      } else if (isMobile) {
+        // Reset transform on mobile
+        setImageTransform(0);
       }
 
       // Trigger animations when content panel enters viewport
@@ -54,7 +70,7 @@ export function ProjectPreview({
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
   return (
     <>
       <style>
@@ -225,7 +241,7 @@ export function ProjectPreview({
             alt=""
             style={{
               width: '100%',
-              height: '120%',
+              height: isMobile ? '100%' : '120%',
               objectFit: 'cover',
               transform: `translateY(${imageTransform}px)`,
               transition: 'transform 0.1s ease-out',

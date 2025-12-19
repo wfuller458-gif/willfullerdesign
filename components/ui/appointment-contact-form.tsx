@@ -83,6 +83,7 @@ export const AppointmentContactForm: React.FC<AppointmentContactFormProps> = ({
 
   return (
     <div
+      className="appointment-contact-form-container"
       style={{
         width: '531px',
         height: 'calc(100vh - 32px)',
@@ -91,8 +92,35 @@ export const AppointmentContactForm: React.FC<AppointmentContactFormProps> = ({
         overflow: 'hidden'
       }}
     >
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .appointment-contact-form-container {
+              width: 100vw !important;
+              height: 100vh !important;
+              border-radius: 0 !important;
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
+            }
+
+            .appointment-contact-form-background {
+              border-radius: 0 !important;
+            }
+
+            .appointment-contact-form-svg {
+              display: none !important;
+            }
+
+            .appointment-contact-form-title {
+              font-size: 40px !important;
+            }
+          }
+        `}
+      </style>
       {/* Background with blur */}
       <div
+        className="appointment-contact-form-background"
         style={{
           position: 'absolute',
           top: 0,
@@ -109,6 +137,7 @@ export const AppointmentContactForm: React.FC<AppointmentContactFormProps> = ({
 
       {/* SVG gradient stroke overlay */}
       <svg
+        className="appointment-contact-form-svg"
         style={{
           position: 'absolute',
           top: 0,

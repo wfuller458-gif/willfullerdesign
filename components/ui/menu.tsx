@@ -52,17 +52,30 @@ export const Menu: React.FC<MenuProps> = ({
             opacity: 0.7;
           }
 
-          /* Full screen menu for small viewports */
-          @media (max-width: 563px) {
+          /* Full screen menu for mobile */
+          @media (max-width: 768px) {
             .menu-container {
               width: 100vw !important;
               height: 100vh !important;
               border-radius: 0 !important;
-              padding: 32px !important;
+              padding: 32px 16px !important;
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
             }
 
             .menu-svg-border {
               display: none !important;
+            }
+
+            .menu-buttons-container {
+              flex-direction: column !important;
+            }
+
+            .menu-buttons-container button {
+              width: 100% !important;
+              font-size: 16px !important;
+              padding: 12px 16px !important;
             }
           }
         `}
@@ -308,6 +321,7 @@ export const Menu: React.FC<MenuProps> = ({
 
       {/* Bottom section with CTA buttons */}
       <div
+        className="menu-buttons-container"
         style={{
           display: 'flex',
           gap: '16px',

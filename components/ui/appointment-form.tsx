@@ -33,6 +33,7 @@ export const AppointmentForm: React.FC<AppointmentFormProps> = ({
 
   return (
     <div
+      className="appointment-form-container"
       style={{
         width: '531px',
         height: 'calc(100vh - 32px)',
@@ -41,8 +42,35 @@ export const AppointmentForm: React.FC<AppointmentFormProps> = ({
         overflow: 'hidden'
       }}
     >
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .appointment-form-container {
+              width: 100vw !important;
+              height: 100vh !important;
+              border-radius: 0 !important;
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
+            }
+
+            .appointment-form-background {
+              border-radius: 0 !important;
+            }
+
+            .appointment-form-svg {
+              display: none !important;
+            }
+
+            .appointment-form-title {
+              font-size: 40px !important;
+            }
+          }
+        `}
+      </style>
       {/* Background with blur */}
       <div
+        className="appointment-form-background"
         style={{
           position: 'absolute',
           top: 0,
@@ -59,6 +87,7 @@ export const AppointmentForm: React.FC<AppointmentFormProps> = ({
 
       {/* SVG gradient stroke overlay */}
       <svg
+        className="appointment-form-svg"
         style={{
           position: 'absolute',
           top: 0,
@@ -122,6 +151,7 @@ export const AppointmentForm: React.FC<AppointmentFormProps> = ({
             }}
           >
             <h1
+              className="appointment-form-title"
               style={{
                 fontFamily: 'DM Sans, sans-serif',
                 fontWeight: 300,

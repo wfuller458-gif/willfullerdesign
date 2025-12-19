@@ -28,12 +28,15 @@ export default function Home() {
   const [imageScale, setImageScale] = useState(1);
   const [imageOpacity, setImageOpacity] = useState(1);
   const [imageMargin, setImageMargin] = useState({ normal: 100, negative: -100 });
+  const [isMobile, setIsMobile] = useState(false);
   const imageRef = React.useRef<HTMLDivElement>(null);
 
-  // Calculate responsive margins based on window width
+  // Detect mobile and calculate responsive margins based on window width
   React.useEffect(() => {
-    const updateMargins = () => {
+    const updateMarginsAndMobile = () => {
       const width = window.innerWidth;
+      setIsMobile(width <= 1024);
+
       if (width <= 480) {
         setImageMargin({ normal: 32, negative: -32 });
       } else if (width <= 768) {
@@ -45,9 +48,9 @@ export default function Home() {
       }
     };
 
-    updateMargins();
-    window.addEventListener('resize', updateMargins);
-    return () => window.removeEventListener('resize', updateMargins);
+    updateMarginsAndMobile();
+    window.addEventListener('resize', updateMarginsAndMobile);
+    return () => window.removeEventListener('resize', updateMarginsAndMobile);
   }, []);
 
   // Disable scrolling when any menu is open
@@ -69,6 +72,13 @@ export default function Home() {
     const handleScroll = () => {
       if (!imageRef.current) return;
 
+      // Disable parallax on mobile
+      if (isMobile) {
+        setImageScale(1);
+        setImageOpacity(1);
+        return;
+      }
+
       const rect = imageRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
@@ -88,7 +98,7 @@ export default function Home() {
     handleScroll(); // Initial check
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
 
   return (
     <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
@@ -529,30 +539,30 @@ export default function Home() {
         }}
       />
 
+      <style>
+        {`
+          .overlay-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            padding: 16px;
+          }
+
+          @media (max-width: 768px) {
+            .overlay-wrapper {
+              padding: 0 !important;
+            }
+          }
+        `}
+      </style>
+
       {/* Menu Overlay */}
       {isMenuOpen && (
-        <>
-          <style>
-            {`
-              .menu-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.3);
-                z-index: 1000;
-                padding: 16px;
-              }
-
-              @media (max-width: 563px) {
-                .menu-overlay {
-                  padding: 0 !important;
-                }
-              }
-            `}
-          </style>
-          <div className="menu-overlay">
+          <div className="overlay-wrapper">
           <Menu
             onClose={() => setIsMenuOpen(false)}
             onAppointmentClick={() => {
@@ -567,21 +577,11 @@ export default function Home() {
             }}
           />
         </div>
-        </>
       )}
 
       {/* Contact Form Overlay */}
       {isContactOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <ContactForm
             onClose={() => {
               setIsContactOpen(false);
@@ -604,16 +604,7 @@ export default function Home() {
 
       {/* Appointment Form Overlay - Step 1: Pick Date & Time */}
       {isAppointmentOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <AppointmentForm
             onClose={() => {
               setIsAppointmentOpen(false);
@@ -635,16 +626,7 @@ export default function Home() {
 
       {/* Appointment Contact Form Overlay - Step 2: Submit Contact Info */}
       {isAppointmentContactOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <AppointmentContactForm
             onClose={() => setIsAppointmentContactOpen(false)}
             onBack={() => {
@@ -664,32 +646,14 @@ export default function Home() {
 
       {/* Success Message Overlay */}
       {isSuccessOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <SuccessMessage onClose={() => setIsSuccessOpen(false)} />
         </div>
       )}
 
       {/* Contact Success Message Overlay */}
       {isContactSuccessOpen && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
-          padding: '16px'
-        }}>
+        <div className="overlay-wrapper">
           <SuccessMessage
             title="Thanks for your message!"
             message={
