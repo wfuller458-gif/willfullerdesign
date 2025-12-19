@@ -236,12 +236,6 @@ export default function DefenderProject() {
           }
           /* Small Mobile */
           @media (max-width: 480px) {
-            .project-hero-main {
-              height: 350px !important;
-              width: 100% !important;
-              flex: none !important;
-              order: -1 !important;
-            }
             .project-hero-column {
               flex-direction: column !important;
               width: 100% !important;
