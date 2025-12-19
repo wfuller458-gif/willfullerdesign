@@ -262,7 +262,8 @@ export const AppointmentForm: React.FC<AppointmentFormProps> = ({
             display: 'flex',
             justifyContent: onBack ? 'space-between' : 'flex-end',
             width: '100%',
-            flexShrink: 0
+            flexShrink: 0,
+            paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
           }}
         >
           {onBack && (

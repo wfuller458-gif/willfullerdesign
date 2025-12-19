@@ -346,7 +346,8 @@ export const Menu: React.FC<MenuProps> = ({
           gap: '16px',
           width: '100%',
           position: 'relative',
-          zIndex: 1
+          zIndex: 1,
+          paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
         }}
       >
         <Button variant="primary-white" onClick={onAppointmentClick}>

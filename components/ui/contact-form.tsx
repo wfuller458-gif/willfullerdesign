@@ -300,7 +300,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           style={{
             display: 'flex',
             justifyContent: onBack ? 'space-between' : 'flex-end',
-            width: '100%'
+            width: '100%',
+            paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
           }}
         >
           {onBack && (

@@ -226,7 +226,8 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
             display: 'flex',
             justifyContent: 'flex-end',
             width: '100%',
-            flexShrink: 0
+            flexShrink: 0,
+            paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
           }}
         >
           <button

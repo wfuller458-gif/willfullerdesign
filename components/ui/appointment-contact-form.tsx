@@ -310,7 +310,8 @@ export const AppointmentContactForm: React.FC<AppointmentContactFormProps> = ({
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            width: '100%'
+            width: '100%',
+            paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
           }}
         >
           <button
