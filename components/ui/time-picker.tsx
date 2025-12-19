@@ -33,7 +33,8 @@ export const TimePicker: React.FC<TimePickerProps> = ({
         display: 'flex',
         flexDirection: 'column',
         gap: '16px',
-        width: '467px'
+        width: '100%',
+        maxWidth: '467px'
       }}
     >
       <p
