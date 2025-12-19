@@ -417,31 +417,52 @@ export default function DefenderProject() {
             marginBottom: '32px',
           }}
         >
-          {/* Large left image */}
-          <div
-            className="project-hero-main"
-            style={{
-              flex: '1',
-              height: '620px',
-              borderRadius: '4px',
-              overflow: 'hidden',
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'opacity 800ms ease-out, transform 800ms ease-out',
-            }}
-          >
+          {/* Mobile-only main image - shown first on mobile */}
+          {isMobile && (
             <div
+              className="project-hero-mobile-main"
               style={{
+                height: '180px',
                 width: '100%',
-                height: '100%',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out',
                 backgroundImage: 'url(/images/projects/Defender/Hero.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                transform: `translateY(${imageTransform}px)`,
-                transition: 'transform 0.1s ease-out',
               }}
             />
-          </div>
+          )}
+
+          {/* Large left image (desktop only) */}
+          {!isMobile && (
+            <div
+              className="project-hero-main"
+              style={{
+                flex: '1',
+                height: '620px',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                transition: 'opacity 800ms ease-out, transform 800ms ease-out',
+              }}
+            >
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  backgroundImage: 'url(/images/projects/Defender/Hero.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center center',
+                  transform: `translateY(${imageTransform}px)`,
+                  transition: 'transform 0.1s ease-out',
+                }}
+              />
+            </div>
+          )}
 
           {/* Right column with 2 images */}
           <div
@@ -450,13 +471,13 @@ export default function DefenderProject() {
               display: 'flex',
               flexDirection: 'column',
               gap: '8px',
-              width: '404px',
+              width: isMobile ? '100%' : '404px',
             }}
           >
             <div
               className="project-hero-small"
               style={{
-                height: '306px',
+                height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
                 backgroundImage: 'url(/images/projects/Defender/image%203.jpg)',
@@ -470,7 +491,7 @@ export default function DefenderProject() {
             <div
               className="project-hero-small"
               style={{
-                height: '306px',
+                height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
                 backgroundImage: 'url(/images/projects/Defender/image%202.jpg)',

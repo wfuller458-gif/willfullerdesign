@@ -417,22 +417,43 @@ export default function AvinyaProject() {
             marginBottom: '32px',
           }}
         >
-          {/* Main large image - left side */}
-          <div
-            className="project-hero-main"
-            style={{
-              flex: '1',
-              height: '620px',
-              borderRadius: '4px',
-              overflow: 'hidden',
-              position: 'relative',
-              opacity: isVisible ? 1 : 0,
-              transition: 'opacity 800ms ease-out',
-              backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center center',
-            }}
-          />
+          {/* Mobile-only main image - shown first on mobile */}
+          {isMobile && (
+            <div
+              className="project-hero-mobile-main"
+              style={{
+                height: '180px',
+                width: '100%',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out',
+                backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+              }}
+            />
+          )}
+
+          {/* Main large image - left side (desktop only) */}
+          {!isMobile && (
+            <div
+              className="project-hero-main"
+              style={{
+                flex: '1',
+                height: '620px',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out',
+                backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+              }}
+            />
+          )}
 
           {/* Column for two smaller images - right side */}
           <div
@@ -441,14 +462,14 @@ export default function AvinyaProject() {
               display: 'flex',
               flexDirection: 'column',
               gap: '8px',
-              width: '404px',
+              width: isMobile ? '100%' : '404px',
             }}
           >
             {/* Top small image */}
             <div
               className="project-hero-small"
               style={{
-                height: '306px',
+                height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
                 backgroundImage: 'url(/images/projects/Avinya/Image%202.png)',
@@ -463,7 +484,7 @@ export default function AvinyaProject() {
             <div
               className="project-hero-small"
               style={{
-                height: '306px',
+                height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
                 backgroundImage: 'url(/images/projects/Avinya/Project%202%20image.png)',
