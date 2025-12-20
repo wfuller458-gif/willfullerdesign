@@ -13,6 +13,7 @@ import { SuccessMessage } from '@/components/ui/success-message';
 
 // About Images Component
 function AboutImages({ className = "" }: { className?: string }) {
+  const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -41,18 +42,25 @@ function AboutImages({ className = "" }: { className?: string }) {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className={className}
-      style={{
-        position: 'relative',
-        width: '1200px',
-        height: '700px',
-        margin: '0 auto'
-      }}
-    >
+    <div className={`about-images-wrapper ${className}`}>
       <style>
         {`
+          .about-images-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+          }
+
+          /* Desktop: Overlapping hover animation */
+          .about-images-desktop {
+            position: relative;
+            width: 1200px;
+            height: 700px;
+            margin: 0 auto;
+            display: block;
+          }
+
           .about-image-item {
             position: absolute;
             border-radius: 4px;
@@ -120,47 +128,81 @@ function AboutImages({ className = "" }: { className?: string }) {
             height: 340px;
           }
 
+          /* Mobile/Tablet: Simple grid */
+          .about-images-grid {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 60px 0;
+          }
+
+          .about-images-grid img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 4px;
+          }
+
+          /* Show desktop on large screens */
+          @media (min-width: 1101px) {
+            .about-images-desktop {
+              display: block;
+            }
+            .about-images-grid {
+              display: none;
+            }
+          }
+
+          /* Show grid on smaller screens */
           @media (max-width: 1100px) {
-            .about-images-container {
-              transform: scale(0.9);
+            .about-images-desktop {
+              display: none;
+            }
+            .about-images-grid {
+              display: grid;
             }
           }
 
-          @media (max-width: 900px) {
-            .about-images-container {
-              transform: scale(0.8);
-            }
-          }
-
-          @media (max-width: 768px) {
-            .about-images-container {
-              transform: scale(0.7);
-            }
-          }
-
+          /* Stack vertically on very small screens */
           @media (max-width: 600px) {
-            .about-images-container {
-              transform: scale(0.6);
+            .about-images-grid {
+              grid-template-columns: 1fr;
+              max-width: 400px;
+              margin: 0 auto;
+              padding: 40px 0;
             }
-          }
 
-          @media (max-width: 480px) {
-            .about-images-container {
-              transform: scale(0.5);
+            .about-images-grid img:nth-child(2),
+            .about-images-grid img:nth-child(3) {
+              display: none;
             }
           }
         `}
       </style>
 
-      <div className={`about-image-item about-image-left ${isExpanded ? 'hovered' : ''}`}>
+      {/* Desktop: Overlapping scroll animation */}
+      <div
+        ref={containerRef}
+        className="about-images-desktop"
+      >
+        <div className={`about-image-item about-image-left ${isExpanded ? 'hovered' : ''}`}>
+          <img src="/images/about/left.png" alt="About" />
+        </div>
+
+        <div className={`about-image-item about-image-middle ${isExpanded ? 'hovered' : ''}`}>
+          <img src="/images/about/middle.png" alt="About" />
+        </div>
+
+        <div className={`about-image-item about-image-right ${isExpanded ? 'hovered' : ''}`}>
+          <img src="/images/about/right.png" alt="About" />
+        </div>
+      </div>
+
+      {/* Mobile/Tablet: Simple grid */}
+      <div className="about-images-grid">
         <img src="/images/about/left.png" alt="About" />
-      </div>
-
-      <div className={`about-image-item about-image-middle ${isExpanded ? 'hovered' : ''}`}>
         <img src="/images/about/middle.png" alt="About" />
-      </div>
-
-      <div className={`about-image-item about-image-right ${isExpanded ? 'hovered' : ''}`}>
         <img src="/images/about/right.png" alt="About" />
       </div>
     </div>
@@ -238,7 +280,7 @@ export default function AboutPage() {
 
           .about-description {
             max-width: 1099px;
-            margin: 0 auto 100px;
+            margin: 32px auto 100px;
             font-family: var(--font-heading);
             font-weight: 300;
             font-size: 42px;
@@ -369,6 +411,10 @@ export default function AboutPage() {
               line-height: 46px;
             }
 
+            .hide-on-mobile {
+              display: none;
+            }
+
             .about-description {
               font-size: 24px;
             }
@@ -445,7 +491,7 @@ export default function AboutPage() {
 
           @media (max-width: 768px) {
             .overlay-wrapper {
-              padding: 0 !important;
+              padding: 0 0 env(safe-area-inset-bottom, 80px) 0 !important;
             }
           }
         `}
@@ -465,7 +511,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="about-hero">
         <p className="about-subtitle">
-          Designer and builder for all things <strong style={{ fontWeight: 700 }}>Automotive.</strong>
+          Designer<span className="hide-on-mobile"> and builder</span> for all things <strong style={{ fontWeight: 700 }}>Automotive.</strong>
         </p>
         <h1 className="about-title">About</h1>
       </div>

@@ -94,7 +94,7 @@ export const Menu: React.FC<MenuProps> = ({
             .menu-buttons-container button {
               width: 100% !important;
               font-size: 16px !important;
-              padding: 12px 16px !important;
+              padding: 16px 16px !important;
             }
           }
         `}

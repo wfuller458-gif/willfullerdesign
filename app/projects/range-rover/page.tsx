@@ -402,7 +402,7 @@ export default function RangeRoverProject() {
 
           @media (max-width: 768px) {
             .overlay-wrapper {
-              padding: 0 !important;
+              padding: 0 0 env(safe-area-inset-bottom, 80px) 0 !important;
             }
           }
         `}
