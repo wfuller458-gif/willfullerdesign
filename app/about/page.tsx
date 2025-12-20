@@ -13,13 +13,37 @@ import { SuccessMessage } from '@/components/ui/success-message';
 
 // About Images Component
 function AboutImages({ className = "" }: { className?: string }) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Expand when scrolling into view, shrink when scrolling out
+        setIsExpanded(entry.isIntersecting);
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the element is visible
+        rootMargin: '-100px 0px', // Adjust trigger point
+      }
+    );
+
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
 
   return (
     <div
+      ref={containerRef}
       className={className}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       style={{
         position: 'relative',
         width: '1200px',
@@ -128,15 +152,15 @@ function AboutImages({ className = "" }: { className?: string }) {
         `}
       </style>
 
-      <div className={`about-image-item about-image-left ${isHovered ? 'hovered' : ''}`}>
+      <div className={`about-image-item about-image-left ${isExpanded ? 'hovered' : ''}`}>
         <img src="/images/about/left.png" alt="About" />
       </div>
 
-      <div className={`about-image-item about-image-middle ${isHovered ? 'hovered' : ''}`}>
+      <div className={`about-image-item about-image-middle ${isExpanded ? 'hovered' : ''}`}>
         <img src="/images/about/middle.png" alt="About" />
       </div>
 
-      <div className={`about-image-item about-image-right ${isHovered ? 'hovered' : ''}`}>
+      <div className={`about-image-item about-image-right ${isExpanded ? 'hovered' : ''}`}>
         <img src="/images/about/right.png" alt="About" />
       </div>
     </div>
@@ -291,7 +315,7 @@ export default function AboutPage() {
           }
 
           .about-carousel-section {
-            margin: 100px 0;
+            margin: 100px 0 0 0;
             height: 432px;
             overflow: hidden;
           }
@@ -329,7 +353,7 @@ export default function AboutPage() {
             }
 
             .about-carousel-section {
-              margin: 80px 0;
+              margin: 80px 0 0 0;
               height: 350px;
             }
           }
@@ -366,7 +390,7 @@ export default function AboutPage() {
             }
 
             .about-carousel-section {
-              margin: 60px 0;
+              margin: 60px 0 0 0;
               height: 280px;
             }
           }
@@ -403,7 +427,7 @@ export default function AboutPage() {
             }
 
             .about-carousel-section {
-              margin: 40px 0;
+              margin: 40px 0 0 0;
               height: 250px;
             }
           }
