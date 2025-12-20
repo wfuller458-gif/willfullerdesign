@@ -11,7 +11,8 @@ const buttonVariants = cva(
         "secondary-black": "justify-center rounded-full border border-brand-black text-brand-black hover:bg-brand-white px-4 py-4 text-xl font-light",
         "primary-white": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-orange hover:text-brand-black hover:border-brand-black px-4 py-4 text-xl font-light",
         "secondary-white": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-white-30 px-4 py-4 text-xl font-light",
-        "whatsapp": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-whatsapp hover:text-brand-black hover:border-brand-black px-4 py-4 text-xl font-light",
+        "whatsapp": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-whatsapp hover:text-brand-white hover:border-brand-whatsapp px-4 py-4 text-xl font-light",
+        "whatsapp-black": "justify-center rounded-full border border-brand-black text-brand-black hover:bg-brand-whatsapp hover:text-brand-white hover:border-brand-whatsapp px-4 py-4 text-xl font-light",
         "menu": "text-brand-black text-base font-medium",
         "text-icon": "text-brand-black text-xl font-light",
       },
@@ -34,7 +35,7 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, children, asChild, ...props }, ref) => {
-    const isWhatsApp = variant === "whatsapp";
+    const isWhatsApp = variant === "whatsapp" || variant === "whatsapp-black";
     const isMenu = variant === "menu";
     const isTextIcon = variant === "text-icon";
     const hasAnimatedIcon = variant === "primary-black" || variant === "primary-white" ||

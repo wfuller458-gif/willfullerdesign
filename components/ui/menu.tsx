@@ -247,6 +247,54 @@ export const Menu: React.FC<MenuProps> = ({
               );
             }
 
+            if (item === 'About') {
+              return (
+                <Link
+                  key={item}
+                  href="/about"
+                  className="nav-link-button"
+                  style={{
+                    fontFamily: 'DM Sans, sans-serif',
+                    fontWeight: 300,
+                    fontSize: '64px',
+                    lineHeight: '1.2',
+                    color: 'var(--brand-white)',
+                    textTransform: 'capitalize',
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    display: 'inline-block',
+                    height: '77px',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)'
+                    }}
+                  >
+                    {item}
+                  </span>
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: '100%',
+                      display: 'inline-block',
+                      transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)'
+                    }}
+                  >
+                    {item}
+                  </span>
+                </Link>
+              );
+            }
+
             return (
               <button
                 key={item}

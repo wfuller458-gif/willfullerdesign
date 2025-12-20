@@ -435,7 +435,7 @@ export const Footer: React.FC<FooterProps> = ({
             <NavItem
               key={item}
               label={item}
-              href={item === 'Home' ? '/' : item === 'Projects' ? '/projects' : undefined}
+              href={item === 'Home' ? '/' : item === 'Projects' ? '/projects' : item === 'About' ? '/about' : undefined}
               onClick={item === 'Contact' ? onContactClick : undefined}
             />
           ))}
