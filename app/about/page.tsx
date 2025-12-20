@@ -23,7 +23,7 @@ function AboutImages({ className = "" }: { className?: string }) {
       style={{
         position: 'relative',
         width: '1200px',
-        height: '800px',
+        height: '700px',
         margin: '0 auto'
       }}
     >
@@ -321,7 +321,7 @@ export default function AboutPage() {
             }
 
             .about-images-section {
-              margin: 0 auto 80px;
+              margin: 0 auto 0;
             }
 
             .about-cta-heading {
@@ -354,7 +354,7 @@ export default function AboutPage() {
             }
 
             .about-images-section {
-              margin: 0 auto 60px;
+              margin: 0 auto 0;
             }
 
             .about-cta-heading {
@@ -391,7 +391,7 @@ export default function AboutPage() {
             }
 
             .about-images-section {
-              margin: 0 auto 40px;
+              margin: 0 auto 0;
             }
 
             .about-cta-heading {
