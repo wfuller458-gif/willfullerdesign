@@ -89,12 +89,13 @@ export const Menu: React.FC<MenuProps> = ({
 
             .menu-buttons-container {
               flex-direction: column !important;
+              align-items: flex-start !important;
             }
 
             .menu-buttons-container button {
-              width: 100% !important;
-              font-size: 16px !important;
-              padding: 16px 16px !important;
+              width: auto !important;
+              font-size: 20px !important;
+              padding: 16px !important;
             }
           }
         `}
