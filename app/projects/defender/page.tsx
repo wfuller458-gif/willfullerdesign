@@ -427,7 +427,7 @@ export default function DefenderProject() {
             />
           )}
 
-          {/* Large left image (desktop only) */}
+          {/* Main large image - left side (desktop only) */}
           {!isMobile && (
             <div
               className="project-hero-main"
@@ -436,26 +436,17 @@ export default function DefenderProject() {
                 height: '620px',
                 borderRadius: '4px',
                 overflow: 'hidden',
+                position: 'relative',
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out, transform 800ms ease-out',
+                transition: 'opacity 800ms ease-out',
+                backgroundImage: 'url(/images/projects/Defender/Hero.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
               }}
-            >
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundImage: 'url(/images/projects/Defender/Hero.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center center',
-                  transform: `translateY(${imageTransform}px)`,
-                  transition: 'transform 0.1s ease-out',
-                }}
-              />
-            </div>
+            />
           )}
 
-          {/* Right column with 2 images */}
+          {/* Column for two smaller images - right side */}
           <div
             className="project-hero-column"
             style={{
@@ -465,32 +456,35 @@ export default function DefenderProject() {
               width: isMobile ? '100%' : '404px',
             }}
           >
+            {/* Top small image */}
             <div
               className="project-hero-small"
               style={{
                 height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 100ms',
                 backgroundImage: 'url(/images/projects/Defender/image%203.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 100ms, transform 800ms ease-out 100ms',
               }}
             />
+
+            {/* Bottom small image */}
             <div
               className="project-hero-small"
               style={{
                 height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 200ms',
                 backgroundImage: 'url(/images/projects/Defender/image%202.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 200ms, transform 800ms ease-out 200ms',
               }}
             />
           </div>

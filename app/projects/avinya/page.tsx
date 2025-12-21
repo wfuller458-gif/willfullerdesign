@@ -463,11 +463,12 @@ export default function AvinyaProject() {
                 height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 100ms',
                 backgroundImage: 'url(/images/projects/Avinya/Image%202.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                opacity: isVisible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 100ms',
               }}
             />
 
@@ -478,11 +479,12 @@ export default function AvinyaProject() {
                 height: isMobile ? '180px' : '306px',
                 borderRadius: '4px',
                 overflow: 'hidden',
+                position: 'relative',
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 200ms',
                 backgroundImage: 'url(/images/projects/Avinya/Project%202%20image.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                opacity: isVisible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 200ms',
               }}
             />
           </div>
