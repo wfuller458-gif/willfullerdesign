@@ -8,7 +8,7 @@ import { ContactForm } from "@/components/ui/contact-form";
 import { AppointmentForm } from "@/components/ui/appointment-form";
 import { AppointmentContactForm } from "@/components/ui/appointment-contact-form";
 
-export default function AvinyaProject() {
+export default function RangeRoverProject() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
@@ -19,6 +19,7 @@ export default function AvinyaProject() {
   const [imageTransform, setImageTransform] = useState(0);
   const [dashboardTransform, setDashboardTransform] = useState(0);
   const [interiorTransform, setInteriorTransform] = useState(0);
+  const [sideTransform, setSideTransform] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -26,6 +27,7 @@ export default function AvinyaProject() {
   const [textSection2Visible, setTextSection2Visible] = useState(false);
   const [dashboardImageVisible, setDashboardImageVisible] = useState(false);
   const [interiorImageVisible, setInteriorImageVisible] = useState(false);
+  const [sideImageVisible, setSideImageVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -35,6 +37,7 @@ export default function AvinyaProject() {
   const textSection2Ref = useRef<HTMLDivElement>(null);
   const dashboardImageRef = useRef<HTMLDivElement>(null);
   const interiorImageRef = useRef<HTMLDivElement>(null);
+  const sideImageRef = useRef<HTMLDivElement>(null);
 
   // Detect mobile screen size
   useEffect(() => {
@@ -71,6 +74,7 @@ export default function AvinyaProject() {
         setImageTransform(0);
         setDashboardTransform(0);
         setInteriorTransform(0);
+        setSideTransform(0);
         return;
       }
 
@@ -82,7 +86,7 @@ export default function AvinyaProject() {
         if (rect.top < windowHeight && rect.bottom > 0) {
           const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
           const centerOffset = scrollProgress - 0.5;
-          setImageTransform(centerOffset * 100);
+          setImageTransform(centerOffset * -40);
         }
       }
 
@@ -103,6 +107,16 @@ export default function AvinyaProject() {
           const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
           const centerOffset = scrollProgress - 0.5;
           setInteriorTransform(centerOffset * 100);
+        }
+      }
+
+      // Side portrait image parallax
+      if (sideImageRef.current) {
+        const rect = sideImageRef.current.getBoundingClientRect();
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
+          const centerOffset = scrollProgress - 0.5;
+          setSideTransform(centerOffset * 100);
         }
       }
     };
@@ -163,6 +177,13 @@ export default function AvinyaProject() {
           setInteriorImageVisible(true);
         }
       }
+
+      if (sideImageRef.current) {
+        const rect = sideImageRef.current.getBoundingClientRect();
+        if (rect.top < windowHeight * 0.9 && rect.bottom > windowHeight * 0.1) {
+          setSideImageVisible(true);
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -179,101 +200,157 @@ export default function AvinyaProject() {
             .project-hero-container {
               flex-direction: column !important;
             }
+
             .project-hero-main {
               height: 400px !important;
             }
+
             .project-hero-column {
               width: 100% !important;
               flex-direction: row !important;
             }
+
             .project-hero-small {
               height: 200px !important;
               flex: 1 !important;
             }
+
             .project-title {
               font-size: 48px !important;
             }
+
             .project-text {
               font-size: 18px !important;
             }
+
             .project-two-column {
               flex-direction: column !important;
               gap: 32px !important;
             }
+
             .project-column {
               max-width: 100% !important;
             }
+
             .project-image-large {
               height: 400px !important;
             }
+
+            .project-side-portrait {
+              width: 100% !important;
+              max-width: 100% !important;
+              height: 500px !important;
+            }
           }
+
           /* Mobile */
           @media (max-width: 768px) {
             .project-hero-main {
               height: 300px !important;
             }
+
             .project-hero-small {
               height: 150px !important;
             }
+
             .project-title {
               font-size: 36px !important;
             }
+
             .project-subtitle {
               font-size: 16px !important;
             }
+
             .project-text {
               font-size: 16px !important;
             }
+
             .project-image-large {
               height: 300px !important;
             }
+
             .project-image-medium {
               height: 250px !important;
             }
+
+            .project-side-portrait {
+              width: 100% !important;
+              max-width: 100% !important;
+              height: 400px !important;
+            }
+
             .project-section-spacing {
               margin-bottom: 48px !important;
             }
           }
+
           /* Small Mobile */
           @media (max-width: 480px) {
-            .project-hero-column {
+            .project-hero-container {
               flex-direction: column !important;
-              width: 100% !important;
             }
+
+            .project-hero-column {
+              width: 100% !important;
+              gap: 8px !important;
+            }
+
+            .project-hero-main {
+              height: 180px !important;
+              width: 100% !important;
+              flex: none !important;
+            }
+
             .project-hero-small {
               height: 180px !important;
               width: 100% !important;
             }
+
             .project-title {
               font-size: 28px !important;
             }
+
             .project-subtitle {
               font-size: 14px !important;
             }
+
             .project-text {
               font-size: 14px !important;
             }
+
             .project-image-large {
               height: 250px !important;
             }
+
             .project-image-medium {
               height: 200px !important;
             }
+
             .project-scroll-indicator {
               display: none !important;
             }
+
             .project-content-padding {
               padding-left: 16px !important;
             }
+
             .project-details-left {
               width: 100% !important;
               margin-bottom: 24px !important;
             }
+
+            .project-side-portrait {
+              width: 100% !important;
+              max-width: 100% !important;
+              height: 300px !important;
+            }
+
             .project-section-spacing {
               margin-bottom: 32px !important;
             }
           }
-          /* Responsive container widths */
+
+          /* Responsive container widths and padding */
           @media (max-width: 1200px) {
             .project-wide-image {
               width: 100% !important;
@@ -281,17 +358,21 @@ export default function AvinyaProject() {
               margin-left: 0 !important;
               margin-right: 0 !important;
             }
+
             .project-content-padding {
               padding-left: 60px !important;
             }
           }
+
           @media (max-width: 768px) {
             .project-content-padding {
               padding-left: 24px !important;
             }
+
             .project-details-container {
               gap: 32px !important;
             }
+
             .project-details-left {
               width: 100% !important;
             }
@@ -420,7 +501,7 @@ export default function AvinyaProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
-                backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
+                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -439,7 +520,7 @@ export default function AvinyaProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
-                backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
+                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -466,7 +547,7 @@ export default function AvinyaProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 100ms',
-                backgroundImage: 'url(/images/projects/Avinya/Image 2.png)',
+                backgroundImage: 'url(/images/projects/range-rover/preview-2.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -482,7 +563,7 @@ export default function AvinyaProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 200ms',
-                backgroundImage: 'url(/images/projects/Avinya/Project 2 image.png)',
+                backgroundImage: 'url(/images/projects/range-rover/top%20section%20image%203.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -510,7 +591,7 @@ export default function AvinyaProject() {
               transition: 'opacity 800ms ease-out',
             }}
           >
-            Avinya
+            Range Rover
           </h1>
 
           <div
@@ -524,7 +605,7 @@ export default function AvinyaProject() {
             }}
           >
             <p
-              className="font-sans font-light"
+              className="font-sans font-light project-subtitle"
               style={{
                 fontSize: '20px',
                 color: 'var(--brand-black)',
@@ -563,7 +644,7 @@ export default function AvinyaProject() {
         {/* Project Details Section */}
         <div
           ref={detailsRef}
-          className="project-two-column project-section-spacing"
+          className="project-two-column project-details-container project-section-spacing"
           style={{
             display: 'flex',
             gap: '121px',
@@ -571,7 +652,7 @@ export default function AvinyaProject() {
           }}
         >
           {/* Left: Tags/Categories */}
-          <div className="project-details-left" style={{ width: '300px' }}>
+          <div className="project-details-left project-column" style={{ width: '300px' }}>
             <p
               className="font-sans font-light project-text"
               style={{
@@ -582,9 +663,15 @@ export default function AvinyaProject() {
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              Design Systems
+              Instrument Cluster
               <br />
-              UI Theme Switching
+              Head Up Display (HUD)
+              <br />
+              Human Machine Interface
+              <br />
+              User Centre Design
+              <br />
+              Design Systems
             </p>
           </div>
 
@@ -600,7 +687,7 @@ export default function AvinyaProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              For the Tata Avinya programme, I adapted the next-generation instrument cluster design system I had developed for JLR vehicles so it could be reused within Tata Motors' brand ecosystem. Both vehicles were planned to be built on the shared EMA architecture, the cluster software is developed through a single pipeline, with UI themes functioning as brand-specific reskins on top of the same core system.
+              While the work itself is confidential, my role as a UX Designer at Jaguar Land rover (JLR) has focused on designing the next generation of digital instrument clusters and head-up displays for upcoming Range Rover and Defender models scheduled for release between 2026–2030.
             </p>
           </div>
         </div>
@@ -626,7 +713,7 @@ export default function AvinyaProject() {
             style={{
               width: '100%',
               height: '100%',
-              backgroundImage: 'url(/images/projects/Avinya/Image%203.png)',
+              backgroundImage: 'url(/images/projects/range-rover/wide%20image.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transform: `translateY(${dashboardTransform}px)`,
@@ -657,7 +744,7 @@ export default function AvinyaProject() {
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              As part of this collaboration, I was tasked with extending the existing atomic component library to cover three new Avinya specific UI themes. Each theme required its own visual identity
+              I designed the new instrument cluster and head-up display experiences using a user-centred design approach, incorporating the latest internal research on attention management and driver distraction. My focus was on creating layouts, interaction patterns, and visual hierarchies that support safe glance behaviour and minimise cognitive load, ensuring
             </p>
           </div>
 
@@ -672,7 +759,7 @@ export default function AvinyaProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              while still adhering to the underlying system structure used across both brands.
+              essential information is always clear, accessible, and appropriately prioritised across different driving contexts.
             </p>
           </div>
         </div>
@@ -680,7 +767,7 @@ export default function AvinyaProject() {
         {/* Large Interior Image */}
         <div
           ref={interiorImageRef}
-          className="project-image-medium project-section-spacing"
+          className="project-image-large project-section-spacing"
           style={{
             width: '100%',
             height: '830px',
@@ -697,7 +784,7 @@ export default function AvinyaProject() {
             style={{
               width: '100%',
               height: '100%',
-              backgroundImage: 'url(/images/projects/Avinya/image%204.jpg)',
+              backgroundImage: 'url(/images/projects/range-rover/Large.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transform: `translateY(${interiorTransform}px)`,
@@ -712,9 +799,9 @@ export default function AvinyaProject() {
           className="project-two-column project-content-padding"
           style={{
             display: 'flex',
-            gap: '122px',
+            gap: '95px',
             marginBottom: '64px',
-            paddingLeft: '226px',
+            paddingLeft: '74px',
           }}
         >
           <div className="project-column" style={{ flex: 1, maxWidth: '600px' }}>
@@ -724,15 +811,28 @@ export default function AvinyaProject() {
                 fontSize: '20px',
                 lineHeight: '1.4',
                 color: 'var(--brand-black)',
+                marginBottom: '50px',
                 opacity: textSection2Visible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              The themes were created using the same token-driven foundations, component logic, and interaction patterns, ensuring full compatibility with the engineering pipeline while enabling Tata to deliver a distinct design direction. This approach allowed both
+              I developed a layout that allow multiple feature teams to integrate seamlessly into the cluster environment. This includes dedicated areas for Advanced Driver Assistance Systems (ADAS) to present situational awareness, adaptable regions for the native TomTom-powered navigation system, and clear safe areas for Apple CarPlay and Android Auto so connected experiences coexist smoothly with the vehicle's own UI.
             </p>
-          </div>
 
-          <div className="project-column" style={{ width: '300px' }}>
+            <p
+              className="font-sans font-light project-text"
+              style={{
+                fontSize: '20px',
+                lineHeight: '1.4',
+                color: 'var(--brand-black)',
+                marginBottom: '50px',
+                opacity: textSection2Visible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 150ms',
+              }}
+            >
+              To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.
+            </p>
+
             <p
               className="font-sans font-light project-text"
               style={{
@@ -740,11 +840,39 @@ export default function AvinyaProject() {
                 lineHeight: '1.4',
                 color: 'var(--brand-black)',
                 opacity: textSection2Visible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 100ms',
+                transition: 'opacity 800ms ease-out 300ms',
               }}
             >
-              organisations to produce consistent, high-quality software efficiently across shared platforms.
+              To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.
             </p>
+          </div>
+
+          {/* Right side image */}
+          <div
+            ref={sideImageRef}
+            className="project-side-portrait"
+            style={{
+              width: '405px',
+              height: '542px',
+              borderRadius: '4px',
+              overflow: 'hidden',
+              backgroundColor: '#d9d9d9',
+              opacity: sideImageVisible ? 1 : 0,
+              transform: sideImageVisible ? 'translateY(0)' : 'translateY(30px)',
+              transition: 'opacity 800ms ease-out, transform 800ms ease-out',
+            }}
+          >
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                backgroundImage: 'url(/images/projects/range-rover/Portrait.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                transform: `translateY(${sideTransform}px)`,
+                transition: 'transform 0.1s ease-out',
+              }}
+            />
           </div>
         </div>
       </div>
