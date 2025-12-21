@@ -466,7 +466,7 @@ export default function AvinyaProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 100ms',
-                backgroundImage: 'url(/images/projects/Avinya/Image%202.png)',
+                backgroundImage: 'url(/images/projects/Avinya/Image 2.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -482,7 +482,7 @@ export default function AvinyaProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 200ms',
-                backgroundImage: 'url(/images/projects/Avinya/Project%202%20image.png)',
+                backgroundImage: 'url(/images/projects/Avinya/Project 2 image.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}

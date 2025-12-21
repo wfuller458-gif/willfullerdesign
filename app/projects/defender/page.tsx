@@ -466,7 +466,7 @@ export default function DefenderProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 100ms',
-                backgroundImage: 'url(/images/projects/Defender/image%203.jpg)',
+                backgroundImage: 'url(/images/projects/Defender/image 3.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -482,7 +482,7 @@ export default function DefenderProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 200ms',
-                backgroundImage: 'url(/images/projects/Defender/image%202.jpg)',
+                backgroundImage: 'url(/images/projects/Defender/image 2.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
