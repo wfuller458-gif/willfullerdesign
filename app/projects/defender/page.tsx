@@ -403,6 +403,7 @@ export default function DefenderProject() {
           className="project-hero-container"
           style={{
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
             gap: '8px',
             marginBottom: '32px',
           }}
