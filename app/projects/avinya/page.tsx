@@ -71,7 +71,6 @@ export default function RangeRoverProject() {
         setImageTransform(0);
         setDashboardTransform(0);
         setInteriorTransform(0);
-        setSideTransform(0);
         return;
       }
 
