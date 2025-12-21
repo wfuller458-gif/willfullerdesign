@@ -19,7 +19,6 @@ export default function RangeRoverProject() {
   const [imageTransform, setImageTransform] = useState(0);
   const [dashboardTransform, setDashboardTransform] = useState(0);
   const [interiorTransform, setInteriorTransform] = useState(0);
-  const [sideTransform, setSideTransform] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -27,7 +26,6 @@ export default function RangeRoverProject() {
   const [textSection2Visible, setTextSection2Visible] = useState(false);
   const [dashboardImageVisible, setDashboardImageVisible] = useState(false);
   const [interiorImageVisible, setInteriorImageVisible] = useState(false);
-  const [sideImageVisible, setSideImageVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -37,7 +35,6 @@ export default function RangeRoverProject() {
   const textSection2Ref = useRef<HTMLDivElement>(null);
   const dashboardImageRef = useRef<HTMLDivElement>(null);
   const interiorImageRef = useRef<HTMLDivElement>(null);
-  const sideImageRef = useRef<HTMLDivElement>(null);
 
   // Detect mobile screen size
   useEffect(() => {
@@ -109,16 +106,6 @@ export default function RangeRoverProject() {
           setInteriorTransform(centerOffset * 100);
         }
       }
-
-      // Side portrait image parallax
-      if (sideImageRef.current) {
-        const rect = sideImageRef.current.getBoundingClientRect();
-        if (rect.top < windowHeight && rect.bottom > 0) {
-          const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-          const centerOffset = scrollProgress - 0.5;
-          setSideTransform(centerOffset * 100);
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -175,13 +162,6 @@ export default function RangeRoverProject() {
         const rect = interiorImageRef.current.getBoundingClientRect();
         if (rect.top < windowHeight * 0.9 && rect.bottom > windowHeight * 0.1) {
           setInteriorImageVisible(true);
-        }
-      }
-
-      if (sideImageRef.current) {
-        const rect = sideImageRef.current.getBoundingClientRect();
-        if (rect.top < windowHeight * 0.9 && rect.bottom > windowHeight * 0.1) {
-          setSideImageVisible(true);
         }
       }
     };
@@ -591,7 +571,7 @@ export default function RangeRoverProject() {
               transition: 'opacity 800ms ease-out',
             }}
           >
-            Range Rover
+            Avinya
           </h1>
 
           <div
@@ -663,15 +643,9 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              Instrument Cluster
-              <br />
-              Head Up Display (HUD)
-              <br />
-              Human Machine Interface
-              <br />
-              User Centre Design
-              <br />
               Design Systems
+              <br />
+              UI Theme Switching
             </p>
           </div>
 
@@ -687,7 +661,7 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              While the work itself is confidential, my role as a UX Designer at Jaguar Land rover (JLR) has focused on designing the next generation of digital instrument clusters and head-up displays for upcoming Range Rover and Defender models scheduled for release between 2026–2030.
+              For the Tata Avinya programme, I adapted the next-generation instrument cluster design system I had developed for JLR vehicles so it could be reuse within Tata Motors' brand ecosystem. Both vehicles were planned to be built on the shared EMA architecture, the cluster software is developed through a single pipeline, with UI themes functioning as brand-specific reskins on top of the same core system.
             </p>
           </div>
         </div>
@@ -744,7 +718,7 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              I designed the new instrument cluster and head-up display experiences using a user-centred design approach, incorporating the latest internal research on attention management and driver distraction. My focus was on creating layouts, interaction patterns, and visual hierarchies that support safe glance behaviour and minimise cognitive load, ensuring
+              As part of this collaboration, I was tasked with extending the existing atomic component library to cover three new Avinya specific UI themes. Each theme required its own visual identity
             </p>
           </div>
 
@@ -759,7 +733,7 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              essential information is always clear, accessible, and appropriately prioritised across different driving contexts.
+              while still adhering to the underlying system structure used across both brands.
             </p>
           </div>
         </div>
@@ -811,68 +785,27 @@ export default function RangeRoverProject() {
                 fontSize: '20px',
                 lineHeight: '1.4',
                 color: 'var(--brand-black)',
-                marginBottom: '50px',
                 opacity: textSection2Visible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              I developed a layout that allow multiple feature teams to integrate seamlessly into the cluster environment. This includes dedicated areas for Advanced Driver Assistance Systems (ADAS) to present situational awareness, adaptable regions for the native TomTom-powered navigation system, and clear safe areas for Apple CarPlay and Android Auto so connected experiences coexist smoothly with the vehicle's own UI.
-            </p>
-
-            <p
-              className="font-sans font-light project-text"
-              style={{
-                fontSize: '20px',
-                lineHeight: '1.4',
-                color: 'var(--brand-black)',
-                marginBottom: '50px',
-                opacity: textSection2Visible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 150ms',
-              }}
-            >
-              To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.
-            </p>
-
-            <p
-              className="font-sans font-light project-text"
-              style={{
-                fontSize: '20px',
-                lineHeight: '1.4',
-                color: 'var(--brand-black)',
-                opacity: textSection2Visible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 300ms',
-              }}
-            >
-              To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.
+              The themes were created using the same token-driven foundations, component logic, and interaction patterns, ensuring full compatibility with the engineering pipeline while enabling Tata to deliver a distinct design direction. This approach allowed both
             </p>
           </div>
 
-          {/* Right side image */}
-          <div
-            ref={sideImageRef}
-            className="project-side-portrait"
-            style={{
-              width: '405px',
-              height: '542px',
-              borderRadius: '4px',
-              overflow: 'hidden',
-              backgroundColor: '#d9d9d9',
-              opacity: sideImageVisible ? 1 : 0,
-              transform: sideImageVisible ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'opacity 800ms ease-out, transform 800ms ease-out',
-            }}
-          >
-            <div
+          <div className="project-column" style={{ width: '300px' }}>
+            <p
+              className="font-sans font-light project-text"
               style={{
-                width: '100%',
-                height: '100%',
-                backgroundImage: 'url(/images/projects/range-rover/Portrait.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                transform: `translateY(${sideTransform}px)`,
-                transition: 'transform 0.1s ease-out',
+                fontSize: '20px',
+                lineHeight: '1.4',
+                color: 'var(--brand-black)',
+                opacity: textSection2Visible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 100ms',
               }}
-            />
+            >
+              organisations to produce consistent, high-quality software efficiently across shared platforms.
+            </p>
           </div>
         </div>
       </div>
