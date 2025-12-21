@@ -481,7 +481,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
-                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
+                backgroundImage: 'url(/images/projects/Avinya/hero1.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -500,7 +500,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
-                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
+                backgroundImage: 'url(/images/projects/Avinya/hero1.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -527,7 +527,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 100ms',
-                backgroundImage: 'url(/images/projects/range-rover/preview-2.jpg)',
+                backgroundImage: 'url(/images/projects/Avinya/hero2.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -543,7 +543,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 200ms',
-                backgroundImage: 'url(/images/projects/range-rover/top%20section%20image%203.png)',
+                backgroundImage: 'url(/images/projects/Avinya/hero3.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -687,7 +687,7 @@ export default function RangeRoverProject() {
             style={{
               width: '100%',
               height: '100%',
-              backgroundImage: 'url(/images/projects/range-rover/wide%20image.jpg)',
+              backgroundImage: 'url(/images/projects/Avinya/project1.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transform: `translateY(${dashboardTransform}px)`,
@@ -758,7 +758,7 @@ export default function RangeRoverProject() {
             style={{
               width: '100%',
               height: '100%',
-              backgroundImage: 'url(/images/projects/range-rover/Large.png)',
+              backgroundImage: 'url(/images/projects/Avinya/project2.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transform: `translateY(${interiorTransform}px)`,
