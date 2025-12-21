@@ -540,10 +540,10 @@ export default function AboutPage() {
                 variant="primary-black"
                 onClick={() => {
                   setShowBackButton(false);
-                  setIsAppointmentOpen(true);
+                  setIsContactOpen(true);
                 }}
               >
-                Make An Appointment
+                Get In Touch
               </Button>
               <Button
                 variant="whatsapp-black"
@@ -573,10 +573,6 @@ export default function AboutPage() {
 
       {/* Footer */}
       <Footer
-        onAppointmentClick={() => {
-          setShowBackButton(false);
-          setIsAppointmentOpen(true);
-        }}
         onContactClick={() => {
           setShowBackButton(false);
           setIsContactOpen(true);
@@ -588,11 +584,6 @@ export default function AboutPage() {
         <div className="overlay-wrapper">
           <Menu
             onClose={() => setIsMenuOpen(false)}
-            onAppointmentClick={() => {
-              setIsMenuOpen(false);
-              setShowBackButton(true);
-              setIsAppointmentOpen(true);
-            }}
             onContactClick={() => {
               setIsMenuOpen(false);
               setShowBackButton(true);
@@ -679,14 +670,7 @@ export default function AboutPage() {
         <div className="overlay-wrapper">
           <SuccessMessage
             title="Thanks for your message!"
-            message={
-              <>
-                We've received your enquiry and will reply shortly.
-                <br />
-                <br />
-                A confirmation email is on its way — check your junk folder if you don't see it.
-              </>
-            }
+            message="We've received your enquiry and will reply shortly."
             onClose={() => setIsContactSuccessOpen(false)}
           />
         </div>

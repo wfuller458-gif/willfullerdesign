@@ -332,10 +332,6 @@ export default function DefenderProject() {
         <div className="overlay-wrapper">
           <Menu
             onClose={() => setIsMenuOpen(false)}
-            onAppointmentClick={() => {
-              setIsMenuOpen(false);
-              setIsAppointmentOpen(true);
-            }}
             onContactClick={() => {
               setIsMenuOpen(false);
               setIsContactOpen(true);
@@ -765,7 +761,6 @@ export default function DefenderProject() {
       </div>
 
       <Footer
-        onAppointmentClick={() => setIsAppointmentOpen(true)}
         onContactClick={() => setIsContactOpen(true)}
       />
     </div>

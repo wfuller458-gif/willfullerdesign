@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { ArrowRight } from "./icons";
 
 type ProjectState = "Range Rover" | "Avinya" | "Defender";
@@ -13,9 +14,21 @@ export interface TileProjectsProps {
 export function TileProjects({ defaultProject = "Range Rover", interactive = true }: TileProjectsProps) {
   const [activeProject, setActiveProject] = useState<ProjectState>(defaultProject);
   const [isHovering, setIsHovering] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<ProjectState | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const projects: ProjectState[] = ["Range Rover", "Avinya", "Defender"];
+
+  const getProjectUrl = (project: ProjectState) => {
+    switch (project) {
+      case "Range Rover":
+        return "/projects/range-rover";
+      case "Avinya":
+        return "/projects/avinya";
+      case "Defender":
+        return "/projects/defender";
+    }
+  };
 
   // Auto-cycle through projects
   useEffect(() => {
@@ -40,6 +53,15 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
     <>
       <style>
         {`
+          @keyframes bounceRight {
+            0%, 100% {
+              transform: translateX(0);
+            }
+            50% {
+              transform: translateX(4px);
+            }
+          }
+
           .tile-projects {
             position: relative;
             width: 600px;
@@ -47,6 +69,10 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
             border: 1px solid var(--brand-black);
             border-radius: 8px;
             overflow: hidden;
+          }
+
+          .arrow-bounce {
+            animation: bounceRight 1s ease-in-out infinite;
           }
 
           @media (max-width: 1280px) {
@@ -85,6 +111,32 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
           .tile-projects-project-name {
             font-size: 32px;
             line-height: 1.3;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            height: 42px;
+          }
+
+          .project-text-wrapper {
+            display: inline-block;
+            transition: transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1);
+          }
+
+          .project-text-wrapper.hovered {
+            transform: translateY(-100%);
+          }
+
+          .project-text-duplicate {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            display: inline-block;
+            transition: transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1);
+          }
+
+          .project-text-duplicate.hovered {
+            transform: translateY(-100%);
+            opacity: 0.7;
           }
 
           .tile-projects-image-top {
@@ -195,7 +247,11 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
           }
         `}
       </style>
-      <div className="tile-projects">
+      <div
+        className="tile-projects"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
       {/* Dividing line under "Projects" */}
       <div
         className="absolute"
@@ -224,7 +280,7 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
 
       {/* Arrow icon */}
       <div
-        className="absolute"
+        className={`absolute ${isHovering ? 'arrow-bounce' : ''}`}
         style={{
           right: '11px',
           top: '11px',
@@ -243,18 +299,24 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
           top: '63px',
           gap: '0px',
         }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
       >
         {projects.map((project) => (
-          <div
+          <Link
             key={project}
+            href={getProjectUrl(project)}
             className="flex items-center"
             style={{
               gap: '10px',
               cursor: 'pointer',
+              textDecoration: 'none',
             }}
-            onMouseEnter={() => interactive && setActiveProject(project)}
+            onMouseEnter={() => {
+              if (interactive) {
+                setActiveProject(project);
+                setHoveredProject(project);
+              }
+            }}
+            onMouseLeave={() => setHoveredProject(null)}
           >
             <p
               className="font-display font-light tile-projects-project-name"
@@ -263,7 +325,12 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
                 transition: 'color 300ms ease',
               }}
             >
-              {project}
+              <span className={`project-text-wrapper ${hoveredProject === project ? 'hovered' : ''}`}>
+                {project}
+              </span>
+              <span className={`project-text-duplicate ${hoveredProject === project ? 'hovered' : ''}`}>
+                {project}
+              </span>
             </p>
             {activeProject === project && (
               <div
@@ -287,7 +354,7 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
                 </p>
               </div>
             )}
-          </div>
+          </Link>
         ))}
       </div>
 

@@ -8,16 +8,16 @@ export interface HeroSectionProps {
   buttonText?: string;
   location?: string;
   country?: string;
-  onAppointmentClick?: () => void;
+  onContactClick?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   tagline = 'Bespoke websites for all things Automotive.',
   heading = 'Digital solutions as refined as the machines you love.',
-  buttonText = 'Make An Appointment',
+  buttonText = 'Get In Touch',
   location = 'Stratford-Upon-Avon',
   country = 'United Kingdom',
-  onAppointmentClick
+  onContactClick
 }) => {
   const [ukTime, setUkTime] = useState('');
 
@@ -186,7 +186,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </h1>
 
         {/* CTA Button */}
-        <Button variant="primary-black" onClick={onAppointmentClick}>
+        <Button variant="primary-black" onClick={onContactClick}>
           {buttonText}
         </Button>
       </div>

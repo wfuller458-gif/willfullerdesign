@@ -5,14 +5,12 @@ import { Button } from './button';
 export interface MenuProps {
   onClose?: () => void;
   onNavigate?: (section: string) => void;
-  onAppointmentClick?: () => void;
   onContactClick?: () => void;
 }
 
 export const Menu: React.FC<MenuProps> = ({
   onClose,
   onNavigate,
-  onAppointmentClick,
   onContactClick
 }) => {
   const navigationItems = ['Home', 'Projects', 'About', 'Contact'];
@@ -399,8 +397,8 @@ export const Menu: React.FC<MenuProps> = ({
           paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
         }}
       >
-        <Button variant="primary-white" onClick={onAppointmentClick}>
-          Make An Appointment
+        <Button variant="primary-white" onClick={onContactClick}>
+          Get In Touch
         </Button>
         <Button variant="whatsapp" onClick={() => window.open('https://wa.me/447305088562', '_blank')}>
           WhatsApp

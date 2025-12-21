@@ -114,9 +114,9 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <HeroSection onAppointmentClick={() => {
+      <HeroSection onContactClick={() => {
         setShowBackButton(false);
-        setIsAppointmentOpen(true);
+        setIsContactOpen(true);
       }} />
 
       {/* Intro Text */}
@@ -258,9 +258,9 @@ export default function Home() {
 
       {/* Process Section + Banner - Scroll-driven */}
       <div style={{ position: 'relative', zIndex: imageScale < 0.8 ? 2 : 0 }}>
-        <ProcessSectionWithScroll onAppointmentClick={() => {
+        <ProcessSectionWithScroll onContactClick={() => {
           setShowBackButton(false);
-          setIsAppointmentOpen(true);
+          setIsContactOpen(true);
         }} />
       </div>
 
@@ -529,10 +529,6 @@ export default function Home() {
 
       {/* Footer */}
       <Footer
-        onAppointmentClick={() => {
-          setShowBackButton(false);
-          setIsAppointmentOpen(true);
-        }}
         onContactClick={() => {
           setShowBackButton(false);
           setIsContactOpen(true);
@@ -565,11 +561,6 @@ export default function Home() {
           <div className="overlay-wrapper">
           <Menu
             onClose={() => setIsMenuOpen(false)}
-            onAppointmentClick={() => {
-              setIsMenuOpen(false);
-              setShowBackButton(true);
-              setIsAppointmentOpen(true);
-            }}
             onContactClick={() => {
               setIsMenuOpen(false);
               setShowBackButton(true);
@@ -656,14 +647,7 @@ export default function Home() {
         <div className="overlay-wrapper">
           <SuccessMessage
             title="Thanks for your message!"
-            message={
-              <>
-                We've received your enquiry and will reply shortly.
-                <br />
-                <br />
-                A confirmation email is on its way — check your junk folder if you don't see it.
-              </>
-            }
+            message="We've received your enquiry and will reply shortly."
             onClose={() => setIsContactSuccessOpen(false)}
           />
         </div>

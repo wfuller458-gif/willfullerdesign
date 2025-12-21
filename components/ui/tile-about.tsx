@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ArrowRight } from "./icons";
 
 export interface TileAboutProps {
@@ -26,6 +27,15 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
     <>
       <style>
         {`
+          @keyframes bounceRight {
+            0%, 100% {
+              transform: translateX(0);
+            }
+            50% {
+              transform: translateX(4px);
+            }
+          }
+
           .tile-about {
             position: relative;
             width: 600px;
@@ -34,6 +44,13 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
             border: 1px solid var(--brand-black);
             border-radius: 8px;
             overflow: hidden;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+          }
+
+          .arrow-bounce {
+            animation: bounceRight 1s ease-in-out infinite;
           }
 
           .about-images-container {
@@ -156,7 +173,8 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
           }
         `}
       </style>
-      <div
+      <Link
+        href="/about"
         className="tile-about"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -189,7 +207,7 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
 
       {/* Arrow icon - white for this tile */}
       <div
-        className="absolute"
+        className={`absolute ${isHovered ? 'arrow-bounce' : ''}`}
         style={{
           right: '11px',
           top: '11px',
@@ -242,7 +260,7 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
           />
         </div>
       </div>
-    </div>
+    </Link>
     </>
   );
 }

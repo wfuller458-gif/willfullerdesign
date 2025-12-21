@@ -2,10 +2,10 @@ import { Button } from "./button";
 
 export interface BannerProps {
   variant: "orange" | "grey";
-  onAppointmentClick?: () => void;
+  onContactClick?: () => void;
 }
 
-export function Banner({ variant, onAppointmentClick }: BannerProps) {
+export function Banner({ variant, onContactClick }: BannerProps) {
   const isOrange = variant === "orange";
 
   return (
@@ -90,9 +90,9 @@ export function Banner({ variant, onAppointmentClick }: BannerProps) {
           <Button
             variant="secondary-black"
             className="shrink-0"
-            onClick={isOrange ? onAppointmentClick : undefined}
+            onClick={isOrange ? onContactClick : undefined}
           >
-            {isOrange ? "Make An Appointment" : "View All Projects"}
+            {isOrange ? "Get In Touch" : "View All Projects"}
           </Button>
         </div>
       </div>

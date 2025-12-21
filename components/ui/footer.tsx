@@ -235,13 +235,11 @@ const WhatsAppButton = () => {
 
 export interface FooterProps {
   year?: string;
-  onAppointmentClick?: () => void;
   onContactClick?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   year = '2025',
-  onAppointmentClick,
   onContactClick
 }) => {
   const [currentTime, setCurrentTime] = useState('');
@@ -452,9 +450,11 @@ export const Footer: React.FC<FooterProps> = ({
             left: '16px',
             fontSize: '12px',
             fontWeight: 300,
-            color: 'var(--brand-black)'
+            color: 'var(--brand-black)',
+            lineHeight: '1.5'
           }}>
-            All rights reserved Will Fuller
+            <div>Image credits: Jaguar Land Rover Media Centre and Tata Motors</div>
+            <div>All rights reserved Will Fuller</div>
           </div>
           <div style={{
             position: 'absolute',
@@ -483,7 +483,7 @@ export const Footer: React.FC<FooterProps> = ({
         border: '1px solid var(--brand-black)',
         borderTop: 'none'
       }}>
-        <Banner variant="orange" onAppointmentClick={onAppointmentClick} />
+        <Banner variant="orange" onContactClick={onContactClick} />
       </div>
     </div>
     </>

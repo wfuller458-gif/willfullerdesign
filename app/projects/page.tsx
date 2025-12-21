@@ -183,10 +183,6 @@ export default function Projects() {
 
       {/* Footer */}
       <Footer
-        onAppointmentClick={() => {
-          setShowBackButton(false);
-          setIsAppointmentOpen(true);
-        }}
         onContactClick={() => {
           setShowBackButton(false);
           setIsContactOpen(true);
@@ -219,11 +215,6 @@ export default function Projects() {
           <div className="menu-overlay">
             <Menu
               onClose={() => setIsMenuOpen(false)}
-              onAppointmentClick={() => {
-                setIsMenuOpen(false);
-                setShowBackButton(true);
-                setIsAppointmentOpen(true);
-              }}
               onContactClick={() => {
                 setIsMenuOpen(false);
                 setShowBackButton(true);
@@ -356,14 +347,7 @@ export default function Projects() {
         }}>
           <SuccessMessage
             title="Thanks for your message!"
-            message={
-              <>
-                We've received your enquiry and will reply shortly.
-                <br />
-                <br />
-                A confirmation email is on its way — check your junk folder if you don't see it.
-              </>
-            }
+            message="We've received your enquiry and will reply shortly."
             onClose={() => setIsContactSuccessOpen(false)}
           />
         </div>

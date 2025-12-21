@@ -5,10 +5,10 @@ import { ProcessSection } from './process-section';
 import { Banner } from './banner';
 
 export interface ProcessSectionWithScrollProps {
-  onAppointmentClick?: () => void;
+  onContactClick?: () => void;
 }
 
-export const ProcessSectionWithScroll: React.FC<ProcessSectionWithScrollProps> = ({ onAppointmentClick }) => {
+export const ProcessSectionWithScroll: React.FC<ProcessSectionWithScrollProps> = ({ onContactClick }) => {
   const [activeProcess, setActiveProcess] = useState<'Strategy' | 'Design' | 'Development' | 'Support'>('Strategy');
   const [contentOpacity, setContentOpacity] = useState(1);
   const [progressWidth, setProgressWidth] = useState(100);
@@ -169,7 +169,7 @@ export const ProcessSectionWithScroll: React.FC<ProcessSectionWithScrollProps> =
         <div style={{ flexShrink: 0 }}>
           <Banner
             variant="orange"
-            onAppointmentClick={onAppointmentClick}
+            onContactClick={onContactClick}
           />
         </div>
       </div>

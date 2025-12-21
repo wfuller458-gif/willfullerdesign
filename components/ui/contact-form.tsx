@@ -26,6 +26,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const [phone, setPhone] = useState('');
   const [project, setProject] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [nameError, setNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+  const [projectError, setProjectError] = useState('');
 
   // Update theme color when form opens/closes
   React.useEffect(() => {
@@ -46,39 +50,75 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const handleSubmit = async () => {
     if (isSubmitting) return;
 
-    // Basic validation
-    if (!name || !email || !phone || !project) {
-      alert('Please fill in all fields');
+    // Clear previous errors
+    setNameError('');
+    setEmailError('');
+    setPhoneError('');
+    setProjectError('');
+
+    let hasError = false;
+
+    // Validate all fields
+    if (!name.trim()) {
+      setNameError('Please enter your name');
+      hasError = true;
+    }
+
+    if (!email.trim()) {
+      setEmailError('Please enter your email address');
+      hasError = true;
+    } else {
+      // Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        setEmailError('Please enter a valid email address');
+        hasError = true;
+      }
+    }
+
+    // Phone is optional - no validation required
+
+    if (!project.trim()) {
+      setProjectError('Please tell us about your project');
+      hasError = true;
+    }
+
+    if (hasError) {
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name,
-          email,
-          phone,
-          project,
+          access_key: '05e386d1-3c59-4705-b7e2-2b80a661f55c',
+          name: name,
+          email: email,
+          phone: phone,
+          message: project,
+          subject: 'New Contact Form Submission - Will Fuller Design',
+          from_name: 'Will Fuller Design Website',
         }),
       });
 
-      if (!response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
+        // Call the original onSubmit callback to show success message
+        onSubmit?.({
+          name,
+          email,
+          phone,
+          project
+        });
+      } else {
         throw new Error('Failed to submit form');
       }
-
-      // Call the original onSubmit callback to show success message
-      onSubmit?.({
-        name,
-        email,
-        phone,
-        project
-      });
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('There was an error submitting the form. Please try again.');
@@ -269,28 +309,45 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               label="Name"
               placeholder="Name"
               value={name}
-              onChange={setName}
+              onChange={(value) => {
+                setName(value);
+                if (nameError) setNameError('');
+              }}
+              error={nameError}
             />
 
             <FormInput
               label="Email"
               placeholder="Email"
               value={email}
-              onChange={setEmail}
+              onChange={(value) => {
+                setEmail(value);
+                if (emailError) setEmailError('');
+              }}
+              type="email"
+              error={emailError}
             />
 
             <FormInput
               label="Phone"
               placeholder="Phone number"
               value={phone}
-              onChange={setPhone}
+              onChange={(value) => {
+                setPhone(value);
+                if (phoneError) setPhoneError('');
+              }}
+              error={phoneError}
             />
 
             <FormTextarea
               label="Tell Us About Your Project"
               placeholder="Your project"
               value={project}
-              onChange={setProject}
+              onChange={(value) => {
+                setProject(value);
+                if (projectError) setProjectError('');
+              }}
+              error={projectError}
             />
           </div>
         </div>
