@@ -8,7 +8,7 @@ import { ContactForm } from "@/components/ui/contact-form";
 import { AppointmentForm } from "@/components/ui/appointment-form";
 import { AppointmentContactForm } from "@/components/ui/appointment-contact-form";
 
-export default function RangeRoverProject() {
+export default function DefenderProject() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
@@ -19,7 +19,6 @@ export default function RangeRoverProject() {
   const [imageTransform, setImageTransform] = useState(0);
   const [dashboardTransform, setDashboardTransform] = useState(0);
   const [interiorTransform, setInteriorTransform] = useState(0);
-  const [sideTransform, setSideTransform] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -27,7 +26,6 @@ export default function RangeRoverProject() {
   const [textSection2Visible, setTextSection2Visible] = useState(false);
   const [dashboardImageVisible, setDashboardImageVisible] = useState(false);
   const [interiorImageVisible, setInteriorImageVisible] = useState(false);
-  const [sideImageVisible, setSideImageVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -37,7 +35,6 @@ export default function RangeRoverProject() {
   const textSection2Ref = useRef<HTMLDivElement>(null);
   const dashboardImageRef = useRef<HTMLDivElement>(null);
   const interiorImageRef = useRef<HTMLDivElement>(null);
-  const sideImageRef = useRef<HTMLDivElement>(null);
 
   // Detect mobile screen size
   useEffect(() => {
@@ -74,7 +71,6 @@ export default function RangeRoverProject() {
         setImageTransform(0);
         setDashboardTransform(0);
         setInteriorTransform(0);
-        setSideTransform(0);
         return;
       }
 
@@ -107,16 +103,6 @@ export default function RangeRoverProject() {
           const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
           const centerOffset = scrollProgress - 0.5;
           setInteriorTransform(centerOffset * 100);
-        }
-      }
-
-      // Side portrait image parallax
-      if (sideImageRef.current) {
-        const rect = sideImageRef.current.getBoundingClientRect();
-        if (rect.top < windowHeight && rect.bottom > 0) {
-          const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-          const centerOffset = scrollProgress - 0.5;
-          setSideTransform(centerOffset * 100);
         }
       }
     };
@@ -175,13 +161,6 @@ export default function RangeRoverProject() {
         const rect = interiorImageRef.current.getBoundingClientRect();
         if (rect.top < windowHeight * 0.9 && rect.bottom > windowHeight * 0.1) {
           setInteriorImageVisible(true);
-        }
-      }
-
-      if (sideImageRef.current) {
-        const rect = sideImageRef.current.getBoundingClientRect();
-        if (rect.top < windowHeight * 0.9 && rect.bottom > windowHeight * 0.1) {
-          setSideImageVisible(true);
         }
       }
     };
@@ -501,7 +480,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
-                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
+                backgroundImage: 'url(/images/projects/Defender/Hero.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -520,7 +499,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
-                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
+                backgroundImage: 'url(/images/projects/Defender/Hero.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -547,7 +526,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 100ms',
-                backgroundImage: 'url(/images/projects/range-rover/preview-2.jpg)',
+                backgroundImage: 'url(/images/projects/Defender/image%202.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -563,7 +542,7 @@ export default function RangeRoverProject() {
                 position: 'relative',
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 200ms',
-                backgroundImage: 'url(/images/projects/range-rover/top%20section%20image%203.png)',
+                backgroundImage: 'url(/images/projects/Defender/image%203.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
               }}
@@ -591,7 +570,7 @@ export default function RangeRoverProject() {
               transition: 'opacity 800ms ease-out',
             }}
           >
-            Range Rover
+            Defender
           </h1>
 
           <div
@@ -663,15 +642,15 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              Instrument Cluster
+              Controls
               <br />
-              Head Up Display (HUD)
+              Modes
+              <br />
+              Cameras
+              <br />
+              Off-Road Cockpit
               <br />
               Human Machine Interface
-              <br />
-              User Centre Design
-              <br />
-              Design Systems
             </p>
           </div>
 
@@ -687,7 +666,7 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              While the work itself is confidential, my role as a UX Designer at Jaguar Land rover (JLR) has focused on designing the next generation of digital instrument clusters and head-up displays for upcoming Range Rover and Defender models scheduled for release between 2026–2030.
+              I contributed to a forward looking project at Jaguar Land Rover exploring how off-road controls could evolve for future Defender vehicles. The vision was to imagine an off-road cockpit that brings together cameras, terrain technologies, and new feature ideas into a seamless, intuitive experience.
             </p>
           </div>
         </div>
@@ -713,7 +692,7 @@ export default function RangeRoverProject() {
             style={{
               width: '100%',
               height: '100%',
-              backgroundImage: 'url(/images/projects/range-rover/wide%20image.jpg)',
+              backgroundImage: 'url(/images/projects/Defender/image%204.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transform: `translateY(${dashboardTransform}px)`,
@@ -744,7 +723,7 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              I designed the new instrument cluster and head-up display experiences using a user-centred design approach, incorporating the latest internal research on attention management and driver distraction. My focus was on creating layouts, interaction patterns, and visual hierarchies that support safe glance behaviour and minimise cognitive load, ensuring
+              Working alongside teams from Design, Brand, UX, Engineering, and off-road specialists, I took part in design workshops where we explored how future drivers might interact with their vehicle in challenging environments. Through rapid ideation, sketching, and low-fidelity concepts, I helped generate a wide range of ideas
             </p>
           </div>
 
@@ -759,7 +738,7 @@ export default function RangeRoverProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              essential information is always clear, accessible, and appropriately prioritised across different driving contexts.
+              centred on clarity, usability, and the unique character of the Defender.
             </p>
           </div>
         </div>
@@ -784,7 +763,7 @@ export default function RangeRoverProject() {
             style={{
               width: '100%',
               height: '100%',
-              backgroundImage: 'url(/images/projects/range-rover/Large.png)',
+              backgroundImage: 'url(/images/projects/Defender/image%203.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transform: `translateY(${interiorTransform}px)`,
@@ -811,68 +790,27 @@ export default function RangeRoverProject() {
                 fontSize: '20px',
                 lineHeight: '1.4',
                 color: 'var(--brand-black)',
-                marginBottom: '50px',
                 opacity: textSection2Visible ? 1 : 0,
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              I developed a layout that allow multiple feature teams to integrate seamlessly into the cluster environment. This includes dedicated areas for Advanced Driver Assistance Systems (ADAS) to present situational awareness, adaptable regions for the native TomTom-powered navigation system, and clear safe areas for Apple CarPlay and Android Auto so connected experiences coexist smoothly with the vehicle's own UI.
-            </p>
-
-            <p
-              className="font-sans font-light project-text"
-              style={{
-                fontSize: '20px',
-                lineHeight: '1.4',
-                color: 'var(--brand-black)',
-                marginBottom: '50px',
-                opacity: textSection2Visible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 150ms',
-              }}
-            >
-              To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.
-            </p>
-
-            <p
-              className="font-sans font-light project-text"
-              style={{
-                fontSize: '20px',
-                lineHeight: '1.4',
-                color: 'var(--brand-black)',
-                opacity: textSection2Visible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 300ms',
-              }}
-            >
-              To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.
+              A key part of my approach was making the experience not only easy to use, but genuinely fun, engaging, and memorable. Off-roading isn't just about capability it's about adventure. Many of my concepts focused on how the interface could build confidence, encourage exploration, and help drivers create unforgettable experiences behind the wheel.
             </p>
           </div>
 
-          {/* Right side image */}
-          <div
-            ref={sideImageRef}
-            className="project-side-portrait"
-            style={{
-              width: '405px',
-              height: '542px',
-              borderRadius: '4px',
-              overflow: 'hidden',
-              backgroundColor: '#d9d9d9',
-              opacity: sideImageVisible ? 1 : 0,
-              transform: sideImageVisible ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'opacity 800ms ease-out, transform 800ms ease-out',
-            }}
-          >
-            <div
+          <div className="project-column" style={{ width: '300px' }}>
+            <p
+              className="font-sans font-light project-text"
               style={{
-                width: '100%',
-                height: '100%',
-                backgroundImage: 'url(/images/projects/range-rover/Portrait.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                transform: `translateY(${sideTransform}px)`,
-                transition: 'transform 0.1s ease-out',
+                fontSize: '20px',
+                lineHeight: '1.4',
+                color: 'var(--brand-black)',
+                opacity: textSection2Visible ? 1 : 0,
+                transition: 'opacity 800ms ease-out 100ms',
               }}
-            />
+            >
+              The result is a collection of imaginative concepts that rethink how future Defender owners could connect with their vehicle, the terrain, and the thrill of off-road driving.
+            </p>
           </div>
         </div>
       </div>
