@@ -396,7 +396,7 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
             <div
               className="tile-projects-image-top"
               style={{
-                backgroundImage: 'url(/images/projects/Avinya/Hero.jpg)',
+                backgroundImage: 'url(/images/projects/Avinya/hero1.jpg)',
               }}
             />
 
@@ -405,13 +405,13 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
               <div
                 className="tile-projects-image-wide"
                 style={{
-                  backgroundImage: 'url(/images/projects/Avinya/Image%201.png)',
+                  backgroundImage: 'url(/images/projects/Avinya/project1.png)',
                 }}
               />
               <div
                 className="tile-projects-image-square"
                 style={{
-                  backgroundImage: 'url(/images/projects/Avinya/Image%202.png)',
+                  backgroundImage: 'url(/images/projects/Avinya/hero2.png)',
                 }}
               />
             </div>

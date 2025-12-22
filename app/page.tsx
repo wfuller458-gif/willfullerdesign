@@ -284,9 +284,9 @@ export default function Home() {
         <ProjectPreview
           title="Avinya"
           description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software."
-          mainImage="/images/projects/Avinya/Hero.jpg"
-          previewImage1="/images/projects/Avinya/Image 1.png"
-          previewImage2="/images/projects/Avinya/Image 2.png"
+          mainImage="/images/projects/Avinya/hero1.jpg"
+          previewImage1="/images/projects/Avinya/project1.png"
+          previewImage2="/images/projects/Avinya/hero2.png"
           projectLink="/projects/avinya"
         />
         <ProjectPreview
