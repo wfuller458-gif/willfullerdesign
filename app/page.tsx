@@ -25,33 +25,6 @@ export default function Home() {
   const [isContactSuccessOpen, setIsContactSuccessOpen] = useState(false);
   const [appointmentData, setAppointmentData] = useState<{ date?: Date; time?: string }>({});
   const [showBackButton, setShowBackButton] = useState(false);
-  const [imageScale, setImageScale] = useState(1);
-  const [imageOpacity, setImageOpacity] = useState(1);
-  const [imageMargin, setImageMargin] = useState({ normal: 100, negative: -100 });
-  const [isMobile, setIsMobile] = useState(false);
-  const imageRef = React.useRef<HTMLDivElement>(null);
-
-  // Detect mobile and calculate responsive margins based on window width
-  React.useEffect(() => {
-    const updateMarginsAndMobile = () => {
-      const width = window.innerWidth;
-      setIsMobile(width <= 1024);
-
-      if (width <= 480) {
-        setImageMargin({ normal: 32, negative: -32 });
-      } else if (width <= 768) {
-        setImageMargin({ normal: 40, negative: -40 });
-      } else if (width <= 1024) {
-        setImageMargin({ normal: 60, negative: -60 });
-      } else {
-        setImageMargin({ normal: 100, negative: -100 });
-      }
-    };
-
-    updateMarginsAndMobile();
-    window.addEventListener('resize', updateMarginsAndMobile);
-    return () => window.removeEventListener('resize', updateMarginsAndMobile);
-  }, []);
 
   // Disable scrolling when any menu is open
   React.useEffect(() => {
@@ -67,38 +40,6 @@ export default function Home() {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen, isContactOpen, isAppointmentOpen, isAppointmentContactOpen, isSuccessOpen, isContactSuccessOpen]);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      if (!imageRef.current) return;
-
-      // Disable parallax on mobile
-      if (isMobile) {
-        setImageScale(1);
-        setImageOpacity(1);
-        return;
-      }
-
-      const rect = imageRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Calculate how far the image has scrolled past the top of viewport
-      const scrollProgress = Math.max(0, -rect.top / windowHeight);
-
-      // Scale down from 1 to 0.5 as it scrolls up
-      const newScale = Math.max(0.5, 1 - scrollProgress * 0.5);
-      setImageScale(newScale);
-
-      // Fade out as it scales down
-      const newOpacity = Math.max(0, 1 - scrollProgress * 1.5);
-      setImageOpacity(newOpacity);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile]);
 
   return (
     <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
@@ -176,88 +117,10 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Full-width Image with 90px padding */}
-      <style>
-        {`
-          .full-width-image-container {
-            padding-left: 90px;
-            padding-right: 90px;
-            perspective: 1000px;
-            position: relative;
-            z-index: 1;
-            transition: margin-bottom 0.3s ease-out;
-          }
-
-          .full-width-image {
-            width: 100%;
-            height: 600px;
-            background-color: #333;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-            transform-origin: center center;
-            border-radius: 8px;
-          }
-
-          /* Tablet and below */
-          @media (max-width: 1024px) {
-            .full-width-image-container {
-              padding-left: 40px;
-              padding-right: 40px;
-              margin-bottom: 60px;
-            }
-
-            .full-width-image {
-              height: 450px;
-            }
-          }
-
-          /* Mobile */
-          @media (max-width: 768px) {
-            .full-width-image-container {
-              padding-left: 24px;
-              padding-right: 24px;
-              margin-bottom: 40px;
-            }
-
-            .full-width-image {
-              height: 350px;
-            }
-          }
-
-          /* Small mobile */
-          @media (max-width: 480px) {
-            .full-width-image-container {
-              padding-left: 16px;
-              padding-right: 16px;
-              margin-bottom: 32px;
-            }
-
-            .full-width-image {
-              height: 250px;
-            }
-          }
-        `}
-      </style>
-      <div
-        className="full-width-image-container"
-        style={{
-          marginBottom: imageScale < 0.8 ? `${imageMargin.negative}px` : `${imageMargin.normal}px`
-        }}
-      >
-        <div
-          ref={imageRef}
-          className="full-width-image"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1600&q=80)',
-            transform: `scale(${imageScale})`,
-            opacity: imageOpacity
-          }}
-        />
-      </div>
+      {/* Full-width personal photo section - removed temporarily until right photo is available */}
 
       {/* Process Section + Banner - Scroll-driven */}
-      <div style={{ position: 'relative', zIndex: imageScale < 0.8 ? 2 : 0 }}>
+      <div style={{ position: 'relative' }}>
         <ProcessSectionWithScroll onContactClick={() => {
           setShowBackButton(false);
           setIsContactOpen(true);
