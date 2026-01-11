@@ -113,7 +113,7 @@ export default function Home() {
       </style>
       <div className="intro-text-section">
         <p className="intro-text">
-          I create bespoke solutions for automotive specialists who value trust, precision, and attention to detail. No templates — just refined experiences, tailored to your needs and built around how your business works.
+          I create tailored digital solutions for teams that value creativity, craft, and thoughtful execution. No templates just refined experiences built around your product, your users, and how your business actually works.
         </p>
       </div>
 
@@ -145,6 +145,14 @@ export default function Home() {
           projectLink="/projects/range-rover"
         />
         <ProjectPreview
+          title="Swipe Save"
+          description="A mobile budgeting app that uses a swipe-based interface to help users accurately review and categorise their bank transactions, making budgeting faster, clearer, and more consistent."
+          mainImage="/images/projects/swipe-save/main.png"
+          previewImage1="/images/projects/swipe-save/preview-1.png"
+          previewImage2="/images/projects/swipe-save/preview-2.png"
+          projectLink="/projects/swipe-save"
+        />
+        <ProjectPreview
           title="Avinya"
           description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software."
           mainImage="/images/projects/Avinya/hero1.jpg"
@@ -153,12 +161,36 @@ export default function Home() {
           projectLink="/projects/avinya"
         />
         <ProjectPreview
+          title="Vibey"
+          description="A lightweight tool that brings planning, notes, and prompt writing into one interface, making Claude Code faster and more comfortable to use without relying on the terminal."
+          mainImage="/images/projects/vibey/main.png"
+          previewImage1="/images/projects/vibey/preview-1.png"
+          previewImage2="/images/projects/vibey/preview-2.png"
+          projectLink="/projects/vibey"
+        />
+        <ProjectPreview
           title="Defender"
           description="Explored future off-road experiences for upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
           mainImage="/images/projects/Defender/Hero.png"
           previewImage1="/images/projects/Defender/image%203.jpg"
           previewImage2="/images/projects/Defender/image%202.jpg"
           projectLink="/projects/defender"
+        />
+        <ProjectPreview
+          title="Feed It Back"
+          description="Design work on the core inbox of a multi-channel review management platform, helping restaurant teams prioritise, respond to, and manage high volumes of customer feedback."
+          mainImage="/images/projects/feed-it-back/main.png"
+          previewImage1="/images/projects/feed-it-back/preview-1.png"
+          previewImage2="/images/projects/feed-it-back/preview-2.png"
+          projectLink="/projects/feed-it-back"
+        />
+        <ProjectPreview
+          title="ChargedUp"
+          description="Early-stage creative work for a startup rolling out phone charging stations across London, spanning product visuals, marketing assets, and landing pages."
+          mainImage="/images/projects/chargedup/main.png"
+          previewImage1="/images/projects/chargedup/preview-1.png"
+          previewImage2="/images/projects/chargedup/preview-2.png"
+          projectLink="/projects/chargedup"
         />
       </div>
 
@@ -205,7 +237,7 @@ export default function Home() {
 
         <History entries={[
           {
-            date: "2022 - 2025",
+            date: "2022 - 2026",
             company: "Jaguar Land Rover",
             tooltipDescription: "At Jaguar Land Rover's Gaydon headquarters, I work as a UX Designer in the Human–Machine Interface team, designing touchscreens, instrument clusters, and head-up displays for Land Rover vehicles. I collaborate with engineers and designers to create intuitive, premium in-car experiences, and have delivered features that have made it into production cars.",
             tooltipImages: ["/images/tooltip/jlr-1.png", "/images/tooltip/jlr-2.png"]
@@ -338,7 +370,7 @@ export default function Home() {
               fontFamily: 'PT Serif, serif',
               fontWeight: 700,
               fontStyle: 'italic'
-            }}>Automotive.</span>
+            }}>Design.</span>
           </h2>
         </div>
       </>

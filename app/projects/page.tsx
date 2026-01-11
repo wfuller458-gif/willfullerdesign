@@ -146,7 +146,7 @@ export default function Projects() {
         {/* Projects Title */}
         <div className="projects-title-section">
           <p className="projects-tagline">
-            All things <strong style={{ fontWeight: 700 }}>Automotive.</strong>
+            UX / Product Designer.
           </p>
           <h1 className="projects-title">
             Projects
@@ -164,6 +164,14 @@ export default function Projects() {
           projectLink="/projects/range-rover"
         />
         <ProjectPreview
+          title="Swipe Save"
+          description="A mobile budgeting app that uses a swipe-based interface to help users accurately review and categorise their bank transactions, making budgeting faster, clearer, and more consistent."
+          mainImage="/images/projects/swipe-save/main.png"
+          previewImage1="/images/projects/swipe-save/preview-1.png"
+          previewImage2="/images/projects/swipe-save/preview-2.png"
+          projectLink="/projects/swipe-save"
+        />
+        <ProjectPreview
           title="Avinya"
           description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software."
           mainImage="/images/projects/Avinya/hero1.jpg"
@@ -172,12 +180,36 @@ export default function Projects() {
           projectLink="/projects/avinya"
         />
         <ProjectPreview
+          title="Vibey"
+          description="A lightweight tool that brings planning, notes, and prompt writing into one interface, making Claude Code faster and more comfortable to use without relying on the terminal."
+          mainImage="/images/projects/vibey/main.png"
+          previewImage1="/images/projects/vibey/preview-1.png"
+          previewImage2="/images/projects/vibey/preview-2.png"
+          projectLink="/projects/vibey"
+        />
+        <ProjectPreview
           title="Defender"
           description="Explored future off-road experiences for upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
           mainImage="/images/projects/Defender/Hero.png"
           previewImage1="/images/projects/Defender/image%203.jpg"
           previewImage2="/images/projects/Defender/image%202.jpg"
           projectLink="/projects/defender"
+        />
+        <ProjectPreview
+          title="Feed It Back"
+          description="Design work on the core inbox of a multi-channel review management platform, helping restaurant teams prioritise, respond to, and manage high volumes of customer feedback."
+          mainImage="/images/projects/feed-it-back/main.png"
+          previewImage1="/images/projects/feed-it-back/preview-1.png"
+          previewImage2="/images/projects/feed-it-back/preview-2.png"
+          projectLink="/projects/feed-it-back"
+        />
+        <ProjectPreview
+          title="ChargedUp"
+          description="Early-stage creative work for a startup rolling out phone charging stations across London, spanning product visuals, marketing assets, and landing pages."
+          mainImage="/images/projects/chargedup/main.png"
+          previewImage1="/images/projects/chargedup/preview-1.png"
+          previewImage2="/images/projects/chargedup/preview-2.png"
+          projectLink="/projects/chargedup"
         />
       </div>
 

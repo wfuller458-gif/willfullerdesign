@@ -84,7 +84,7 @@ export function Banner({ variant, onContactClick }: BannerProps) {
             style={{ color: 'var(--brand-black)' }}
           >
             {isOrange
-              ? "Let's talk about it in more detail. Request a free initial consultation now."
+              ? "Is there a role or project you think I'd be well suited for?"
               : "There's more where that came from!"}
           </p>
           <Button

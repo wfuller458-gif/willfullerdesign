@@ -12,8 +12,8 @@ export interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
-  tagline = 'Bespoke websites for all things Automotive.',
-  heading = 'Digital solutions as refined as the machines you love.',
+  tagline = 'UX / Product Designer.',
+  heading = 'Helping startups turn ideas into usable, scalable products',
   buttonText = 'Get In Touch',
   location = 'Stratford-Upon-Avon',
   country = 'United Kingdom',
@@ -81,8 +81,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           .hero-heading {
             font-family: DM Sans, sans-serif;
             font-weight: 300;
-            font-size: 84px;
-            line-height: 90px;
+            font-size: 76px;
+            line-height: 82px;
             color: var(--brand-black);
             text-align: center;
             margin: 0;
@@ -177,12 +177,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="hero-content">
         {/* Tagline */}
         <p className="hero-tagline">
-          Bespoke websites for all things <strong style={{ fontWeight: 700 }}>Automotive.</strong>
+          UX / Product Designer.
         </p>
 
         {/* Main heading with mixed fonts */}
         <h1 className="hero-heading">
-          Digital solutions as refined as the <em style={{ fontFamily: 'PT Serif, serif', fontWeight: 700, fontStyle: 'italic' }}>machines</em> you love.
+          Helping <span style={{ fontFamily: 'Source Serif Pro, serif', fontWeight: 700, fontStyle: 'italic' }}>startups</span> turn ideas into usable, scalable products
         </h1>
 
         {/* CTA Button */}

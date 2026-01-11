@@ -35,27 +35,55 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Map images to project names and images based on the pattern: RR 1, Avinya 1, DEF 1, RR 2, Avinya 2, DEF 2, RR 3, Avinya 3, DEF 3
+  // Map images to project names and images based on the pattern for 7 projects
   const getProjectData = (index: number): { name: string; images: [string, string, string]; href: string } => {
-    const pattern = index % 3;
+    const pattern = index % 7;
     if (pattern === 0) {
       return {
         name: 'Range Rover',
-        images: [images[0], images[3], images[6]] as [string, string, string],
+        images: ['/images/projects/range-rover/main.jpg', '/images/projects/range-rover/preview-1.jpg', '/images/projects/range-rover/preview-2.jpg'] as [string, string, string],
         href: '/projects/range-rover'
       };
     }
     if (pattern === 1) {
       return {
+        name: 'Swipe Save',
+        images: ['/images/projects/swipe-save/main.png', '/images/projects/swipe-save/preview-1.png', '/images/projects/swipe-save/preview-2.png'] as [string, string, string],
+        href: '/projects/swipe-save'
+      };
+    }
+    if (pattern === 2) {
+      return {
         name: 'Avinya',
-        images: [images[1], images[4], images[7]] as [string, string, string],
+        images: ['/images/projects/Avinya/hero1.jpg', '/images/projects/Avinya/project1.png', '/images/projects/Avinya/hero2.png'] as [string, string, string],
         href: '/projects/avinya'
       };
     }
+    if (pattern === 3) {
+      return {
+        name: 'Vibey',
+        images: ['/images/projects/vibey/main.png', '/images/projects/vibey/preview-1.png', '/images/projects/vibey/preview-2.png'] as [string, string, string],
+        href: '/projects/vibey'
+      };
+    }
+    if (pattern === 4) {
+      return {
+        name: 'Defender',
+        images: ['/images/projects/Defender/Hero.png', '/images/projects/Defender/image%203.jpg', '/images/projects/Defender/image%202.jpg'] as [string, string, string],
+        href: '/projects/defender'
+      };
+    }
+    if (pattern === 5) {
+      return {
+        name: 'Feed It Back',
+        images: ['/images/projects/feed-it-back/main.png', '/images/projects/feed-it-back/preview-1.png', '/images/projects/feed-it-back/preview-2.png'] as [string, string, string],
+        href: '/projects/feed-it-back'
+      };
+    }
     return {
-      name: 'Defender',
-      images: [images[2], images[5], images[8]] as [string, string, string],
-      href: '/projects/defender'
+      name: 'ChargedUp',
+      images: ['/images/projects/chargedup/main.png', '/images/projects/chargedup/preview-1.png', '/images/projects/chargedup/preview-2.png'] as [string, string, string],
+      href: '/projects/chargedup'
     };
   };
 

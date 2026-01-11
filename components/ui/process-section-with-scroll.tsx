@@ -9,12 +9,12 @@ export interface ProcessSectionWithScrollProps {
 }
 
 export const ProcessSectionWithScroll: React.FC<ProcessSectionWithScrollProps> = ({ onContactClick }) => {
-  const [activeProcess, setActiveProcess] = useState<'Strategy' | 'Design' | 'Development' | 'Support'>('Strategy');
+  const [activeProcess, setActiveProcess] = useState<'Strategy' | 'Design' | 'Delivery' | 'Support'>('Strategy');
   const [contentOpacity, setContentOpacity] = useState(1);
   const [progressWidth, setProgressWidth] = useState(100);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const processes = ['Strategy', 'Design', 'Development', 'Support'] as const;
+  const processes = ['Strategy', 'Design', 'Delivery', 'Support'] as const;
   const rafRef = useRef<number | null>(null);
   const lastUpdateRef = useRef<number>(0);
 

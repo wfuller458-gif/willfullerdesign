@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "./icons";
 
-type ProjectState = "Range Rover" | "Avinya" | "Defender";
+type ProjectState = "Range Rover" | "Swipe Save" | "Avinya" | "Vibey" | "Defender" | "Feed It Back" | "ChargedUp";
 
 export interface TileProjectsProps {
   defaultProject?: ProjectState;
@@ -17,16 +17,24 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
   const [hoveredProject, setHoveredProject] = useState<ProjectState | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const projects: ProjectState[] = ["Range Rover", "Avinya", "Defender"];
+  const projects: ProjectState[] = ["Range Rover", "Swipe Save", "Avinya", "Vibey", "Defender", "Feed It Back", "ChargedUp"];
 
   const getProjectUrl = (project: ProjectState) => {
     switch (project) {
       case "Range Rover":
         return "/projects/range-rover";
+      case "Swipe Save":
+        return "/projects/swipe-save";
       case "Avinya":
         return "/projects/avinya";
+      case "Vibey":
+        return "/projects/vibey";
       case "Defender":
         return "/projects/defender";
+      case "Feed It Back":
+        return "/projects/feed-it-back";
+      case "ChargedUp":
+        return "/projects/chargedup";
     }
   };
 
@@ -440,6 +448,118 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
                 className="tile-projects-image-square"
                 style={{
                   backgroundImage: 'url(/images/projects/Defender/image%202.jpg)',
+                }}
+              />
+            </div>
+          </>
+        )}
+
+        {activeProject === "Swipe Save" && (
+          <>
+            {/* Top large image */}
+            <div
+              className="tile-projects-image-top"
+              style={{
+                backgroundImage: 'url(/images/projects/swipe-save/main.png)',
+              }}
+            />
+
+            {/* Bottom row - 2 images */}
+            <div className="tile-projects-image-bottom-row">
+              <div
+                className="tile-projects-image-wide"
+                style={{
+                  backgroundImage: 'url(/images/projects/swipe-save/preview-1.png)',
+                }}
+              />
+              <div
+                className="tile-projects-image-square"
+                style={{
+                  backgroundImage: 'url(/images/projects/swipe-save/preview-2.png)',
+                }}
+              />
+            </div>
+          </>
+        )}
+
+        {activeProject === "Vibey" && (
+          <>
+            {/* Top large image */}
+            <div
+              className="tile-projects-image-top"
+              style={{
+                backgroundImage: 'url(/images/projects/vibey/main.png)',
+              }}
+            />
+
+            {/* Bottom row - 2 images */}
+            <div className="tile-projects-image-bottom-row">
+              <div
+                className="tile-projects-image-wide"
+                style={{
+                  backgroundImage: 'url(/images/projects/vibey/preview-1.png)',
+                }}
+              />
+              <div
+                className="tile-projects-image-square"
+                style={{
+                  backgroundImage: 'url(/images/projects/vibey/preview-2.png)',
+                }}
+              />
+            </div>
+          </>
+        )}
+
+        {activeProject === "Feed It Back" && (
+          <>
+            {/* Top large image */}
+            <div
+              className="tile-projects-image-top"
+              style={{
+                backgroundImage: 'url(/images/projects/feed-it-back/main.png)',
+              }}
+            />
+
+            {/* Bottom row - 2 images */}
+            <div className="tile-projects-image-bottom-row">
+              <div
+                className="tile-projects-image-wide"
+                style={{
+                  backgroundImage: 'url(/images/projects/feed-it-back/preview-1.png)',
+                }}
+              />
+              <div
+                className="tile-projects-image-square"
+                style={{
+                  backgroundImage: 'url(/images/projects/feed-it-back/preview-2.png)',
+                }}
+              />
+            </div>
+          </>
+        )}
+
+        {activeProject === "ChargedUp" && (
+          <>
+            {/* Top large image */}
+            <div
+              className="tile-projects-image-top"
+              style={{
+                backgroundImage: 'url(/images/projects/chargedup/main.png)',
+              }}
+            />
+
+            {/* Bottom row - 2 images */}
+            <div className="tile-projects-image-bottom-row">
+              <div
+                className="tile-projects-image-wide"
+                style={{
+                  backgroundImage: 'url(/images/projects/chargedup/preview-1.png)',
+                }}
+              />
+              <div
+                className="tile-projects-image-square"
+                style={{
+                  backgroundImage: 'url(/images/projects/chargedup/preview-2.png)',
                 }}
               />
             </div>

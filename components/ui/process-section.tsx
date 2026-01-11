@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export interface ProcessSectionProps {
-  defaultProcess?: 'Strategy' | 'Design' | 'Development' | 'Support';
+  defaultProcess?: 'Strategy' | 'Design' | 'Delivery' | 'Support';
   strategyImage?: string;
   designImage?: string;
   developmentImage?: string;
@@ -15,11 +15,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   strategyImage = '/images/process/strategy.png',
   designImage = '/images/process/design.png',
   developmentImage = '/images/process/development.png',
-  supportImage = '/images/process/support.png',
+  supportImage = '/images/projects/range-rover/preview-2.jpg',
   disableHover = false,
   contentOpacity = 1
 }) => {
-  const [internalActiveProcess, setInternalActiveProcess] = useState<'Strategy' | 'Design' | 'Development' | 'Support'>(defaultProcess);
+  const [internalActiveProcess, setInternalActiveProcess] = useState<'Strategy' | 'Design' | 'Delivery' | 'Support'>(defaultProcess);
 
   // Use defaultProcess when disableHover is true, otherwise use internal state
   const activeProcess = disableHover ? defaultProcess : internalActiveProcess;
@@ -28,22 +28,22 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   const processes = [
     {
       name: 'Strategy' as const,
-      description: "Every project begins with understanding your business, where you are today and where you want to be. In the Strategy phase, I take time to learn about your goals, your customers, and the pain points holding your current website back. Together, we identify what's working, what's missing, and what can be improved. This gives us a clear roadmap for building a website that not only looks great, but genuinely supports your business objectives.",
+      description: "I seek roles that allow me to work closely with business and product stakeholders to define clear goals and solve meaningful problems, from early stage startups to scaling organisations. I translate these goals into focused product roadmaps, prioritising high-impact features and shaping well-scoped MVPs. My approach is to design scalable solutions that can evolve over time, delivering maximum user and business value with minimal engineering effort. This work is grounded in an agile, iterative mindset, supporting continuous feedback and improvement.",
       image: strategyImage
     },
     {
       name: 'Design' as const,
-      description: "With a clear strategy in place, I translate our insights into a fully bespoke, custom design that's crafted specifically for your business. Every page, layout, and interaction is purpose built, pixel-perfect, visually engaging, and shaped around the goals we identified together. This isn't just about making something that looks great; it's about creating a design that solves real problems, elevates your brand, and supports your business objectives from the very first click.",
+      description: "I bring a strong, structured design process to my work, with a high level of proficiency in Figma. I favour starting with low fidelity, even sketching with pen and paper, using post-it notes, and mapping user flows before moving into high fidelity designs. This allows me to explore ideas quickly, validate direction early, and work with speed and efficiency. By focusing on structure and intent before polished UI, I consistently deliver higher quality outcomes that directly address the problem at hand.",
       image: designImage
     },
     {
-      name: 'Development' as const,
-      description: "Once the design is approved, I bring it to life with code. Every build is crafted to be fast, responsive, and optimised for real-world performance across all devices. I handle everything from setting up the technical foundations to integrating the features your business needs so you end up with a website that not only looks the part but is fast and responsive, and in a format which is easy for you to manage going forwards.",
+      name: 'Delivery' as const,
+      description: "I am experienced in designing and maintaining highly complex, scalable design systems built on atomic design principles and robust component construction. I am currently responsible for the Driver Information component library, aligned with underlying software, serving multiple vehicle programmes and UI themes, including Land Rover, Range Rover, Defender, Tata Motors, and the new Jaguar Type 00. I have a lot of experience working closely with developers, producing clear, readable designs that can be easily translated into code.",
       image: developmentImage
     },
     {
       name: 'Support' as const,
-      description: "After your website goes live, I don't just leave you to handle things on your own. I provide ongoing support to keep everything running smoothly. You'll also get access to a simple, custom dashboard where you can easily update your content and view clear insights and analytics about how your website is performing. It gives you an effortless way to keep your site up to date while I look after all the technical work behind the scenes.",
+      description: "I have experience in design and maintenance roles, including maintaining the current instrument cluster software for Range Rover. This involves managing design updates and ensuring compliance with global automotive regulations, allowing Range Rover products to continue selling across multiple markets. My updates have been delivered via over the air software updates to hundreds of thousands of vehicles. I am keen to find a role that allows me to build products from the ground up, then continue iterating and improving them, finding product–market fit, and scaling solutions over time.",
       image: supportImage
     }
   ];
