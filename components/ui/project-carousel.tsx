@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { TooltipSmall } from './tooltip-small';
 
 export interface ProjectCarouselProps {
   images?: string[];
 }
 
-export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
+export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
   images = [
     '/images/carousel/1.png',
     '/images/carousel/2.png',
@@ -36,7 +36,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   }, []);
 
   // Map images to project names and images based on the pattern for 7 projects
-  const getProjectData = (index: number): { name: string; images: [string, string, string]; href: string } => {
+  const getProjectData = useCallback((index: number): { name: string; images: [string, string, string]; href: string } => {
     const pattern = index % 7;
     if (pattern === 0) {
       return {
@@ -85,7 +85,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       images: ['/images/projects/chargedup/main.png', '/images/projects/chargedup/preview-1.png', '/images/projects/chargedup/preview-2.png'] as [string, string, string],
       href: '/projects/chargedup'
     };
-  };
+  }, []);
 
   return (
     <div style={{
@@ -108,6 +108,8 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           .carousel-track {
             animation: scroll-left 40s linear infinite;
             height: 330px;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
           }
 
           @media (hover: hover) and (pointer: fine) {
@@ -211,6 +213,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
             <img
               src={image}
               alt={`Project ${index + 1}`}
+              loading="lazy"
               style={{
                 width: '100%',
                 height: '100%',
@@ -262,6 +265,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
               <img
                 src={image}
                 alt={`Project ${index + 1}`}
+                loading="lazy"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -294,4 +298,4 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       </div>
     </div>
   );
-};
+});

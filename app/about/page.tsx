@@ -511,7 +511,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="about-hero">
         <p className="about-subtitle">
-          Designer<span className="hide-on-mobile"> and builder</span> for all things <strong style={{ fontWeight: 700 }}>Automotive.</strong>
+          UX / Product Designer
         </p>
         <h1 className="about-title">About</h1>
       </div>
@@ -523,7 +523,7 @@ export default function AboutPage() {
 
       {/* Description */}
       <p className="about-description">
-        I'm a designer and developer building high performance websites that combine thoughtful user experience, refined user interface design, with smart integrations to support your business needs.
+        I'm a designer focused on building clear, usable digital products combining well considered UX, high quality UI, and practical systems that help businesses grow.
       </p>
 
       {/* Content Section */}
@@ -532,8 +532,8 @@ export default function AboutPage() {
           {/* Left Column - CTA */}
           <div className="about-cta-section">
             <div className="about-cta-text">
-              <h2 className="about-cta-heading">Have a project in mind?</h2>
-              <p className="about-cta-subheading">Let's build something that performs.</p>
+              <h2 className="about-cta-heading">Get in touch</h2>
+              <p className="about-cta-subheading">Have a role or project in mind?</p>
             </div>
             <div className="about-cta-buttons">
               <Button
@@ -557,10 +557,10 @@ export default function AboutPage() {
           {/* Right Column - Text Content */}
           <div className="about-text-content">
             <p>
-              I currently work as a UX Designer at Jaguar Land Rover. Alongside my role, I take on select freelance projects, helping automotive business owners create websites and digital tools that not only look great but are practical, intuitive, and make running their business simpler and more efficient.
+              I currently work as a UX Designer at Jaguar Land Rover, designing Instrument Clusters, Head-Up Displays, and digital experiences within complex automotive systems. Alongside this, I take on select freelance and startup projects, helping teams design and ship websites and digital tools that are intuitive, scalable, and ready to build.
             </p>
             <p>
-              With several years of experience designing websites, apps, and digital products, I bring a balance of creativity and problem-solving to every project—applying the same care, precision, and user-focused thinking found in the next generation of Land Rover digital interfaces.
+              I have experience in a wide range of industries and have worked in startups and consultancies. I'm particularly interested in early stage work, shaping products from the ground up, and exploring how emerging AI tools such as Claude Code can support faster, more effective product design and development.
             </p>
           </div>
         </div>
