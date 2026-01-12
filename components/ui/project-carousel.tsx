@@ -16,6 +16,11 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
     '/images/carousel/7.png',
     '/images/carousel/8.png',
     '/images/carousel/9.png',
+    '/images/carousel/10.png',
+    '/images/carousel/11.png',
+    '/images/carousel/12.png',
+    '/images/carousel/13.png',
+    '/images/carousel/14.png',
   ]
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -106,7 +111,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
           }
 
           .carousel-track {
-            animation: scroll-left 40s linear infinite;
+            animation: scroll-left 50s linear infinite;
             height: 330px;
             will-change: transform;
             transform: translate3d(0, 0, 0);
