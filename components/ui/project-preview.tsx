@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from "./button";
 
 export interface ProjectPreviewProps {
@@ -21,11 +22,20 @@ export function ProjectPreview({
   previewImage2,
   projectLink = "#",
 }: ProjectPreviewProps) {
+  const router = useRouter();
   const [imageTransform, setImageTransform] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = (e: React.MouseEvent) => {
+    // Don't navigate if clicking on the button itself (let the button handle it)
+    if ((e.target as HTMLElement).closest('.project-preview-button')) {
+      return;
+    }
+    router.push(projectLink);
+  };
 
   // Check if mobile on mount and resize
   useEffect(() => {
@@ -79,6 +89,7 @@ export function ProjectPreview({
             display: flex;
             align-items: center;
             overflow: hidden;
+            cursor: pointer;
           }
 
           .project-preview-content {
@@ -218,6 +229,7 @@ export function ProjectPreview({
       </style>
       <div
         className="project-preview-container"
+        onClick={handleClick}
         style={{
           width: '100%',
           maxWidth: '100%',
