@@ -758,7 +758,7 @@ export default function SwipeSaveProject() {
               transition: 'opacity 800ms ease-out',
             }}
           >
-            Instead of trawling through long transaction lists, Swipe Save presents each transaction in a Tinder-style swipe interface. Users can quickly approve, remove, or edit the auto-assigned category for every transaction, with streaks to encourage consistency. The goal is to help users know exactly when, where, and what they're spending money on—while making budgeting feel lightweight and even enjoyable.
+            Instead of trawling through long transaction lists, Swipe Save presents each transaction in a Tinder-style swipe interface. Users can quickly approve, remove, or edit the auto-assigned category for every transaction, with streaks to encourage consistency. The goal is to help users know exactly when, where, and what they're spending money on while making budgeting feel lightweight and even enjoyable.
           </p>
         </div>
 
@@ -811,7 +811,7 @@ export default function SwipeSaveProject() {
                 transition: 'opacity 800ms ease-out',
               }}
             >
-              Around six months ago, I began experimenting with AI tools to explore how far they could take me in both design and development. The first app I built and launched on the App Store was a simple macOS budgeting app. It allowed users to upload CSV bank statements, categorise transactions, and track budgets.
+              Around six months ago, I began experimenting with AI tools to explore how far they could take me in both design and development. The first app I built and launched on the App Store was a simple Mac budgeting app. It allowed users to upload CSV bank statements, categorise transactions, and track budgets.
             </p>
 
             <p
@@ -825,7 +825,7 @@ export default function SwipeSaveProject() {
                 transition: 'opacity 800ms ease-out 150ms',
               }}
             >
-              While building that app, I found that Claude Code performed best for my workflow. One clear limitation, however, was UI generation. AI generated interfaces often look generic and unpolished. I found better results when prompting with specific design systems such as Apple's iOS design language which I used successfully in my macOS app.
+              While building that app, I found that Claude Code performed best for my workflow. One clear limitation, however, was UI generation. AI generated interfaces often look generic and unpolished. I found better results when prompting with specific design systems such as Apple's iOS design language which I used successfully in my Mac app.
             </p>
 
             <p
@@ -838,7 +838,7 @@ export default function SwipeSaveProject() {
                 transition: 'opacity 800ms ease-out 300ms',
               }}
             >
-              Although I still use my macOS budgeting app, I became frustrated with how manual the process was due to the lack of direct bank connectivity. Since building it, my workflow with Claude Code has improved significantly, and by connecting it to an MCP server and sharing Figma designs, I'm now able to create truly custom UI that goes far beyond generic AI output.
+              Although I still use my Mac budgeting app, I became frustrated with how manual the process was due to the lack of direct bank connectivity. Since building it, my workflow with Claude Code has improved significantly, and by connecting it to an MCP server and sharing Figma designs, I'm now able to create truly custom UI that goes far beyond generic AI output.
             </p>
           </div>
 

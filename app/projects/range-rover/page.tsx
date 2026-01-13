@@ -825,22 +825,8 @@ export default function RangeRoverProject() {
                 fontSize: '20px',
                 lineHeight: '1.4',
                 color: 'var(--brand-black)',
-                marginBottom: '50px',
                 opacity: textSection2Visible ? 1 : 0,
                 transition: 'opacity 800ms ease-out 150ms',
-              }}
-            >
-              To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.
-            </p>
-
-            <p
-              className="font-sans font-light project-text"
-              style={{
-                fontSize: '20px',
-                lineHeight: '1.4',
-                color: 'var(--brand-black)',
-                opacity: textSection2Visible ? 1 : 0,
-                transition: 'opacity 800ms ease-out 300ms',
               }}
             >
               To support brand differentiation, I implemented a multi-theme system that allows quick switching between visual identities as well as light/dark modes. This system was built using variables and tokens, allowing teams to deliver multiple branded experiences without duplicating work.

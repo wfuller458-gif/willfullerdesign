@@ -557,7 +557,7 @@ export default function AboutPage() {
           {/* Right Column - Text Content */}
           <div className="about-text-content">
             <p>
-              I currently work as a UX Designer at Jaguar Land Rover, designing Instrument Clusters, Head-Up Displays, and digital experiences within complex automotive systems. Alongside this, I take on select freelance and startup projects, helping teams design and ship websites and digital tools that are intuitive, scalable, and ready to build.
+              I currently work as a UX Designer at Jaguar Land Rover, designing Instrument Clusters, Head-Up Displays, and digital experiences within complex automotive systems.
             </p>
             <p>
               I have experience in a wide range of industries and have worked in startups and consultancies. I'm particularly interested in early stage work, shaping products from the ground up, and exploring how emerging AI tools such as Claude Code can support faster, more effective product design and development.

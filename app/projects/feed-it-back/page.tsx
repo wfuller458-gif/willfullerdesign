@@ -755,7 +755,7 @@ export default function FeedItBackProject() {
               transition: 'opacity 800ms ease-out',
             }}
           >
-            The project was scoped by Full Clarity, and I was assigned responsibility for designing the core inbox experience—the most critical and complex screen in the product.
+            The project was scoped by Full Clarity, and I was assigned responsibility for designing the core inbox experience, the most critical and complex screen in the product.
           </p>
 
           <p
@@ -854,7 +854,7 @@ export default function FeedItBackProject() {
               transition: 'opacity 800ms ease-out 200ms',
             }}
           >
-            Balancing speed, clarity, and control within a single screen was the core design challenge—ensuring power users could act quickly without being overwhelmed by complexity.
+            Balancing speed, clarity, and control within a single screen was the core design challenge, ensuring power users could act quickly without being overwhelmed by complexity.
           </p>
         </div>
       </div>
