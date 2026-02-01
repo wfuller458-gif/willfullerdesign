@@ -691,7 +691,7 @@ export default function VibeyProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              I built Vibey to move faster on my side projects. Claude Code massively expanded what I can build as a designer, but working entirely in a terminal never felt natural. Editing long prompts is painful. There's no spellcheck. No proper dictation. Planning and prompting felt harder than it needed to be.
+              I built Vibey to move faster on my AI coding projects. Claude Code massively expanded what I can build as a designer, but working entirely in a terminal never felt natural. Editing long prompts is painful. There's no spellcheck. No proper dictation. Planning and prompting felt harder than it needed to be.
             </p>
           </div>
         </div>

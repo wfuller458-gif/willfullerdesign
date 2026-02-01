@@ -706,7 +706,7 @@ export default function SwipeSaveProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              Swipe Save is a side project I've been working on over the last month (December 2025 – January 2026). It's a mobile budgeting app that connects directly to your bank accounts via Plaid and rethinks how people review and categorise their spending.
+              Swipe Save is a personal project I've been working on. It's a mobile budgeting app that connects directly to your bank accounts via Plaid and rethinks how people review and categorise their spending.
             </p>
           </div>
         </div>
