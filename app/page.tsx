@@ -170,7 +170,7 @@ export default function Home() {
         />
         <ProjectPreview
           title="Defender"
-          description="Explored future off-road experiences for upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
+          description="Leading the UX for off-road experiences on upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
           mainImage="/images/projects/Defender/Hero.png"
           previewImage1="/images/projects/Defender/image%203.jpg"
           previewImage2="/images/projects/Defender/image%202.jpg"

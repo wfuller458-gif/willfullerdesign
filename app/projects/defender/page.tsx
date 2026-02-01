@@ -666,7 +666,7 @@ export default function DefenderProject() {
                 transition: 'opacity 800ms ease-out 100ms',
               }}
             >
-              I contributed to a forward looking project at Jaguar Land Rover exploring how off-road controls could evolve for future Defender vehicles. The vision was to imagine an off-road cockpit that brings together cameras, terrain technologies, and new feature ideas into a seamless, intuitive experience.
+              I have been leading the UX in a forward looking project at Jaguar Land Rover exploring how off-road controls could evolve for future Defender vehicles. The vision was to imagine an off-road cockpit that brings together cameras, terrain technologies, and new feature ideas into a seamless, intuitive experience.
             </p>
           </div>
         </div>
