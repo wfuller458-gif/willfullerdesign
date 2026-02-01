@@ -28,7 +28,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   const processes = [
     {
       name: 'Strategy' as const,
-      description: "I seek roles that allow me to work closely with business and product stakeholders to define clear goals and solve meaningful problems, from early stage startups to scaling organisations. I translate these goals into focused product roadmaps, prioritising high-impact features and shaping well-scoped MVPs. My approach is to design scalable solutions that can evolve over time, delivering maximum user and business value with minimal engineering effort. This work is grounded in an agile, iterative mindset, supporting continuous feedback and improvement.",
+      description: "I seek roles that allow me to work closely with business and product stakeholders to define clear goals and solve meaningful problems, from early stage startups to scaling organisations. I translate these goals into focused product roadmaps, prioritising high impact features and shaping well scoped MVPs. My approach is to design scalable solutions that can evolve over time, delivering maximum user and business value with minimal engineering effort. This work is grounded in an agile, iterative mindset, supporting continuous feedback and improvement.",
       image: strategyImage
     },
     {
@@ -38,12 +38,12 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
     },
     {
       name: 'Delivery' as const,
-      description: "I am experienced in designing and maintaining highly complex, scalable design systems built on atomic design principles and robust component construction. I am currently responsible for the Driver Information component library, aligned with underlying software, serving multiple vehicle programmes and UI themes, including Land Rover, Range Rover, Defender, Tata Motors, and the new Jaguar Type 00. I have a lot of experience working closely with developers, producing clear, readable designs that can be easily translated into code.",
+      description: "I am experienced in designing and maintaining highly complex, design systems built on atomic design principles and robust component construction. At Jaguar Land Rover I am responsible for the Driver Information component library, aligned with underlying software, serving multiple vehicle programmes and UI themes, including Land Rover, Range Rover, Defender, Tata Motors, and the new Jaguar Type 00. I have a lot of experience working closely with developers, producing clear, readable designs that can be easily translated into code.",
       image: developmentImage
     },
     {
       name: 'Support' as const,
-      description: "I have experience in design and maintenance roles, including maintaining the current instrument cluster software for Range Rover. This involves managing design updates and ensuring compliance with global automotive regulations, allowing Range Rover products to continue selling across multiple markets. My updates have been delivered via over the air software updates to hundreds of thousands of vehicles. I am keen to find a role that allows me to build products from the ground up, then continue iterating and improving them, finding product–market fit, and scaling solutions over time.",
+      description: "I have experience maintaining the current instrument cluster software for Range Rover. This involves managing design updates and ensuring compliance with global automotive regulations, allowing Range Rover products to continue selling globally. My updates have been delivered via over the air software updates to hundreds of thousands of vehicles.",
       image: supportImage
     }
   ];

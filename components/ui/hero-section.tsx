@@ -13,7 +13,7 @@ export interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   tagline = 'UX / Product Designer.',
-  heading = 'Helping startups turn ideas into usable, scalable products',
+  heading = 'Helping businesses turn ideas into usable, scalable products',
   buttonText = 'Get In Touch',
   location = 'Stratford-Upon-Avon',
   country = 'United Kingdom',
@@ -182,7 +182,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Main heading with mixed fonts */}
         <h1 className="hero-heading">
-          Helping <span style={{ fontFamily: 'Source Serif Pro, serif', fontWeight: 700, fontStyle: 'italic' }}>startups</span> turn ideas into usable, scalable products
+          Helping <span style={{ fontFamily: 'Source Serif Pro, serif', fontWeight: 700, fontStyle: 'italic' }}>businesses</span> turn ideas into usable, scalable products
         </h1>
 
         {/* CTA Button */}
