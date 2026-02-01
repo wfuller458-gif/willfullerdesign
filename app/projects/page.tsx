@@ -156,12 +156,12 @@ export default function Projects() {
         {/* Project Previews */}
         <div className="projects-list">
         <ProjectPreview
-          title="Range Rover"
-          description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
-          mainImage="/images/projects/range-rover/main.jpg"
-          previewImage1="/images/projects/range-rover/preview-1.jpg"
-          previewImage2="/images/projects/range-rover/preview-2.jpg"
-          projectLink="/projects/range-rover"
+          title="Defender"
+          description="Leading the UX for off-road experiences on upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
+          mainImage="/images/projects/Defender/Hero.png"
+          previewImage1="/images/projects/Defender/image%203.jpg"
+          previewImage2="/images/projects/Defender/image%202.jpg"
+          projectLink="/projects/defender"
         />
         <ProjectPreview
           title="Swipe Save"
@@ -188,12 +188,12 @@ export default function Projects() {
           projectLink="/projects/vibey"
         />
         <ProjectPreview
-          title="Defender"
-          description="Leading the UX for off-road experiences on upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
-          mainImage="/images/projects/Defender/Hero.png"
-          previewImage1="/images/projects/Defender/image%203.jpg"
-          previewImage2="/images/projects/Defender/image%202.jpg"
-          projectLink="/projects/defender"
+          title="Range Rover"
+          description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
+          mainImage="/images/projects/range-rover/main.jpg"
+          previewImage1="/images/projects/range-rover/preview-1.jpg"
+          previewImage2="/images/projects/range-rover/preview-2.jpg"
+          projectLink="/projects/range-rover"
         />
         <ProjectPreview
           title="Feed It Back"
