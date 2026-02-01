@@ -442,7 +442,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Column 3: Tagline + Copyright */}
         <div className="footer-column footer-column-3">
           <div className="footer-tagline">
-            Helping <span className="footer-tagline-italic">startups</span> turn ideas into usable, scalable products
+            Helping <span className="footer-tagline-italic">businesses</span> turn ideas into usable, scalable products
           </div>
           <div style={{
             position: 'absolute',
