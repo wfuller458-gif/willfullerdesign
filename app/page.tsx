@@ -3,12 +3,9 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { HeroSection } from '@/components/ui/hero-section';
-import { ProcessSectionWithScroll } from '@/components/ui/process-section-with-scroll';
 import { Banner } from '@/components/ui/banner';
 import { ProjectPreview } from '@/components/ui/project-preview';
 import { History } from '@/components/ui/history';
-import { TileProjects } from '@/components/ui/tile-projects';
-import { TileAbout } from '@/components/ui/tile-about';
 import { Footer } from '@/components/ui/footer';
 import { Menu } from '@/components/ui/menu';
 
@@ -97,15 +94,8 @@ export default function Home() {
       </style>
       <div className="intro-text-section">
         <p className="intro-text">
-          I create tailored digital solutions for teams that value creativity, craft, and thoughtful execution. No templates just refined experiences built around your product, your users, and how your business actually works.
+          I turn ideas into reality through expert judgment, craft, and a relentless attention to detail, creating experiences people love.
         </p>
-      </div>
-
-      {/* Full-width personal photo section - removed temporarily until right photo is available */}
-
-      {/* Process Section + Banner - Scroll-driven */}
-      <div style={{ position: 'relative' }}>
-        <ProcessSectionWithScroll onContactClick={handleContact} />
       </div>
 
       {/* Project Previews */}
@@ -247,153 +237,6 @@ export default function Home() {
           }
         ]} />
       </div>
-
-      {/* Explore Further Section */}
-      <>
-        <style>
-          {`
-            .explore-section {
-              width: 100%;
-              margin-top: 100px;
-              margin-bottom: 80px;
-              padding-left: 16px;
-              padding-right: 16px;
-            }
-
-            .explore-label {
-              font-family: Inter, sans-serif;
-              font-weight: 400;
-              font-size: 20px;
-              line-height: 1.4;
-              color: var(--brand-black);
-              margin-bottom: 24px;
-              text-align: center;
-            }
-
-            .explore-heading {
-              font-size: 42px;
-              line-height: 1.3;
-              color: var(--brand-black);
-              margin-bottom: 50px;
-              text-align: center;
-              max-width: 843px;
-              margin-left: auto;
-              margin-right: auto;
-            }
-
-            @media (max-width: 900px) {
-              .explore-section {
-                margin-top: 80px;
-                margin-bottom: 60px;
-              }
-
-              .explore-label {
-                font-size: 18px;
-              }
-
-              .explore-heading {
-                font-size: 36px;
-                margin-bottom: 40px;
-              }
-            }
-
-            @media (max-width: 600px) {
-              .explore-section {
-                margin-top: 60px;
-                margin-bottom: 50px;
-              }
-
-              .explore-label {
-                font-size: 16px;
-              }
-
-              .explore-heading {
-                font-size: 28px;
-                margin-bottom: 32px;
-              }
-            }
-
-            @media (max-width: 480px) {
-              .explore-section {
-                margin-top: 40px;
-                margin-bottom: 40px;
-              }
-
-              .explore-label {
-                font-size: 14px;
-              }
-
-              .explore-heading {
-                font-size: 24px;
-                margin-bottom: 24px;
-              }
-            }
-          `}
-        </style>
-        <div className="explore-section">
-          <p className="explore-label">
-            Explore Further
-          </p>
-          <h2 className="explore-heading">
-            <span style={{
-              fontFamily: 'DM Sans, sans-serif',
-              fontWeight: 300
-            }}>I'm easy to reach and even easier to work with — let's chat all things </span>
-            <span style={{
-              fontFamily: 'PT Serif, serif',
-              fontWeight: 700,
-              fontStyle: 'italic'
-            }}>Design.</span>
-          </h2>
-        </div>
-      </>
-
-      {/* Projects and About Tiles */}
-      <>
-        <style>
-          {`
-            .tiles-container {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              gap: 32px;
-              margin: 80px 16px;
-            }
-
-            @media (max-width: 1280px) {
-              .tiles-container {
-                flex-direction: column;
-                margin: 60px 16px;
-                gap: 24px;
-              }
-            }
-
-            @media (max-width: 900px) {
-              .tiles-container {
-                margin: 50px 16px;
-                gap: 20px;
-              }
-            }
-
-            @media (max-width: 600px) {
-              .tiles-container {
-                margin: 40px 16px;
-                gap: 16px;
-              }
-            }
-
-            @media (max-width: 480px) {
-              .tiles-container {
-                margin: 30px 16px;
-              }
-            }
-          `}
-        </style>
-        <div className="tiles-container">
-          <TileProjects />
-          <TileAbout />
-        </div>
-      </>
 
       {/* Footer */}
       <Footer onContactClick={handleContact} />

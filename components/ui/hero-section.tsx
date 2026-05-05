@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ProjectCarousel } from './project-carousel';
 import { Button } from './button';
+
+const TAGLINES = [
+  'User centred design',
+  'User experience design',
+  'User interface design',
+];
 
 export interface HeroSectionProps {
   tagline?: string;
@@ -20,6 +27,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onContactClick
 }) => {
   const [ukTime, setUkTime] = useState('');
+  const [taglineIndex, setTaglineIndex] = useState(0);
+
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setTaglineIndex(i => (i + 1) % TAGLINES.length);
+    }, 4200);
+    return () => clearInterval(cycle);
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -60,7 +75,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 24px;
+            gap: 0;
             padding-top: 128px;
             padding-bottom: 128px;
             padding-left: 90px;
@@ -175,14 +190,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </style>
       {/* Main content - centered */}
       <div className="hero-content">
-        {/* Tagline */}
-        <p className="hero-tagline">
-          UX / Product Designer.
-        </p>
+        {/* Cycling tagline */}
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={taglineIndex}
+            className="hero-tagline"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+          >
+            {TAGLINES[taglineIndex]}
+          </motion.p>
+        </AnimatePresence>
 
-        {/* Main heading with mixed fonts */}
-        <h1 className="hero-heading">
-          Helping <span style={{ fontFamily: 'Source Serif Pro, serif', fontWeight: 700, fontStyle: 'italic' }}>businesses</span> turn ideas into usable, scalable products
+        {/* Main heading */}
+        <h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }}>
+          Making Ideas Real
         </h1>
 
         {/* CTA Button */}
@@ -191,11 +215,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </Button>
       </div>
 
-      {/* Location and time - above carousel */}
+      {/* Location and availability - above carousel */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
           paddingLeft: '16px',
           paddingRight: '16px',
           paddingBottom: '16px'
@@ -211,20 +236,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             margin: 0
           }}
         >
-          {location}
+          Stratford-Upon-Avon, UK
         </p>
-        <p
+        <div
           style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 300,
-            fontSize: '12px',
-            lineHeight: '100%',
-            color: 'var(--brand-black)',
-            margin: 0
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px',
+            backgroundColor: '#E0EADB',
+            borderRadius: '4px',
+            paddingTop: '4px',
+            paddingBottom: '4px',
+            paddingLeft: '8px',
+            paddingRight: '8px'
           }}
         >
-          {country} {ukTime}
-        </p>
+          <span style={{ color: '#008E24', fontSize: '8px', lineHeight: 1 }}>●</span>
+          <span
+            style={{
+              fontFamily: 'DM Sans, sans-serif',
+              fontWeight: 500,
+              fontSize: '12px',
+              lineHeight: '100%',
+              color: '#008E24'
+            }}
+          >
+            Available For Work
+          </span>
+        </div>
       </div>
 
       {/* Carousel at bottom - extends beyond container */}
