@@ -61,26 +61,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       className="hero-section"
       style={{
         width: '100%',
-        minHeight: 'calc(100vh - 150px)',
         backgroundColor: 'var(--brand-off-white-100)',
-        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
         overflow: 'hidden'
       }}
     >
       <style>
         {`
+          .hero-upper {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
           .hero-content {
-            position: relative;
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0;
-            padding-top: 128px;
-            padding-bottom: 128px;
-            padding-left: 90px;
-            padding-right: 90px;
-            min-height: calc(100vh - 150px - 330px);
+            padding: 40px 90px;
           }
 
           .hero-tagline {
@@ -105,168 +107,150 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           }
 
           .hero-carousel-wrapper {
+            height: 330px;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
             width: 3040px;
-            height: 330px;
           }
 
-          /* Tablet and below */
           @media (max-width: 1024px) {
+            .hero-upper {
+              height: 80vh;
+            }
+            .hero-carousel-wrapper {
+              height: 250px;
+            }
             .hero-content {
-              padding-left: 40px;
-              padding-right: 40px;
-              padding-top: 80px;
-              padding-bottom: 80px;
-              min-height: calc(100vh - 150px - 250px);
+              padding: 40px;
             }
-
-            .hero-tagline {
-              font-size: 18px;
-            }
-
             .hero-heading {
               font-size: 56px;
               line-height: 60px;
               max-width: 700px;
             }
-
-            .hero-carousel-wrapper {
-              height: 250px;
+            .hero-tagline {
+              font-size: 18px;
             }
           }
 
-          /* Mobile */
           @media (max-width: 768px) {
+            .hero-upper {
+              height: 80vh;
+            }
+            .hero-carousel-wrapper {
+              height: 200px;
+            }
             .hero-content {
-              padding-left: 24px;
-              padding-right: 24px;
-              padding-top: 60px;
-              padding-bottom: 60px;
-              gap: 16px;
-              min-height: calc(100vh - 150px - 200px);
+              padding: 32px 24px;
             }
-
-            .hero-tagline {
-              font-size: 16px;
-            }
-
             .hero-heading {
               font-size: 36px;
               line-height: 42px;
               max-width: 100%;
             }
-
-            .hero-carousel-wrapper {
-              height: 200px;
-            }
-          }
-
-          /* Small mobile */
-          @media (max-width: 480px) {
-            .hero-content {
-              padding-left: 16px;
-              padding-right: 16px;
-              padding-top: 40px;
-              padding-bottom: 40px;
-              min-height: calc(100vh - 150px - 180px);
-            }
-
             .hero-tagline {
               font-size: 16px;
             }
+          }
 
-            .hero-heading {
-              font-size: 40px;
-              line-height: 46px;
+          @media (max-width: 480px) {
+            .hero-upper {
+              height: 80vh;
             }
-
             .hero-carousel-wrapper {
               height: 180px;
+            }
+            .hero-content {
+              padding: 24px 16px;
+            }
+            .hero-heading {
+              font-size: 32px;
+              line-height: 38px;
             }
           }
         `}
       </style>
-      {/* Main content - centered */}
-      <div className="hero-content">
-        {/* Cycling tagline */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={taglineIndex}
-            className="hero-tagline"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-          >
-            {TAGLINES[taglineIndex]}
-          </motion.p>
-        </AnimatePresence>
 
-        {/* Main heading */}
-        <h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }}>
-          Making Ideas Real
-        </h1>
+      {/* Upper 80vh: content + location bar */}
+      <div className="hero-upper">
+        {/* Centered content */}
+        <div className="hero-content">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={taglineIndex}
+              className="hero-tagline"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
+              {TAGLINES[taglineIndex]}
+            </motion.p>
+          </AnimatePresence>
 
-        {/* CTA Button */}
-        <Button variant="primary-black" onClick={onContactClick}>
-          {buttonText}
-        </Button>
-      </div>
+          <h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }}>
+            Making Ideas Real
+          </h1>
 
-      {/* Location and availability - above carousel */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingLeft: '16px',
-          paddingRight: '16px',
-          paddingBottom: '16px'
-        }}
-      >
-        <p
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 300,
-            fontSize: '12px',
-            lineHeight: '100%',
-            color: 'var(--brand-black)',
-            margin: 0
-          }}
-        >
-          Stratford-Upon-Avon, UK
-        </p>
+          <Button variant="primary-black" onClick={onContactClick}>
+            {buttonText}
+          </Button>
+        </div>
+
+        {/* Location and availability — pinned to bottom of 80vh */}
         <div
           style={{
-            display: 'inline-flex',
+            display: 'flex',
+            justifyContent: 'space-between',
             alignItems: 'center',
-            gap: '4px',
-            backgroundColor: '#E0EADB',
-            borderRadius: '4px',
-            paddingTop: '4px',
-            paddingBottom: '4px',
-            paddingLeft: '8px',
-            paddingRight: '8px'
+            paddingLeft: '16px',
+            paddingRight: '16px',
+            paddingBottom: '16px'
           }}
         >
-          <span style={{ color: '#008E24', fontSize: '8px', lineHeight: 1 }}>●</span>
-          <span
+          <p
             style={{
-              fontFamily: 'DM Sans, sans-serif',
-              fontWeight: 500,
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: 300,
               fontSize: '12px',
               lineHeight: '100%',
-              color: '#008E24'
+              color: 'var(--brand-black)',
+              margin: 0
             }}
           >
-            Available For Work
-          </span>
+            Stratford-Upon-Avon, UK
+          </p>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              backgroundColor: '#E0EADB',
+              borderRadius: '4px',
+              paddingTop: '4px',
+              paddingBottom: '4px',
+              paddingLeft: '8px',
+              paddingRight: '8px'
+            }}
+          >
+            <span style={{ color: '#008E24', fontSize: '8px', lineHeight: 1 }}>●</span>
+            <span
+              style={{
+                fontFamily: 'DM Sans, sans-serif',
+                fontWeight: 500,
+                fontSize: '12px',
+                lineHeight: '100%',
+                color: '#008E24'
+              }}
+            >
+              Available For Work
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Carousel at bottom - extends beyond container */}
+      {/* Carousel — always 20vh */}
       <div className="hero-carousel-wrapper">
         <ProjectCarousel />
       </div>
