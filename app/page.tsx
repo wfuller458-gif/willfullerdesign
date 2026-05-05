@@ -11,26 +11,16 @@ import { TileProjects } from '@/components/ui/tile-projects';
 import { TileAbout } from '@/components/ui/tile-about';
 import { Footer } from '@/components/ui/footer';
 import { Menu } from '@/components/ui/menu';
-import { ContactForm } from '@/components/ui/contact-form';
-import { AppointmentForm } from '@/components/ui/appointment-form';
-import { AppointmentContactForm } from '@/components/ui/appointment-contact-form';
-import { SuccessMessage } from '@/components/ui/success-message';
+
+const handleContact = () => {
+  window.location.href = 'mailto:will.fuller22@hotmail.com';
+};
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
-  const [isAppointmentContactOpen, setIsAppointmentContactOpen] = useState(false);
-  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
-  const [isContactSuccessOpen, setIsContactSuccessOpen] = useState(false);
-  const [appointmentData, setAppointmentData] = useState<{ date?: Date; time?: string }>({});
-  const [showBackButton, setShowBackButton] = useState(false);
 
-  // Disable scrolling when any menu is open
   React.useEffect(() => {
-    const isAnyMenuOpen = isMenuOpen || isContactOpen || isAppointmentOpen || isAppointmentContactOpen || isSuccessOpen || isContactSuccessOpen;
-
-    if (isAnyMenuOpen) {
+    if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -39,7 +29,7 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isMenuOpen, isContactOpen, isAppointmentOpen, isAppointmentContactOpen, isSuccessOpen, isContactSuccessOpen]);
+  }, [isMenuOpen]);
 
   return (
     <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
@@ -47,18 +37,12 @@ export default function Home() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header
           onMenuClick={() => setIsMenuOpen(true)}
-          onContactClick={() => {
-            setShowBackButton(false);
-            setIsContactOpen(true);
-          }}
+          onContactClick={handleContact}
         />
       </div>
 
       {/* Hero Section */}
-      <HeroSection onContactClick={() => {
-        setShowBackButton(false);
-        setIsContactOpen(true);
-      }} />
+      <HeroSection onContactClick={handleContact} />
 
       {/* Intro Text */}
       <style>
@@ -121,10 +105,7 @@ export default function Home() {
 
       {/* Process Section + Banner - Scroll-driven */}
       <div style={{ position: 'relative' }}>
-        <ProcessSectionWithScroll onContactClick={() => {
-          setShowBackButton(false);
-          setIsContactOpen(true);
-        }} />
+        <ProcessSectionWithScroll onContactClick={handleContact} />
       </div>
 
       {/* Project Previews */}
@@ -160,15 +141,7 @@ export default function Home() {
           previewImage2="/images/projects/Avinya/hero2.png"
           projectLink="/projects/avinya"
         />
-        <ProjectPreview
-          title="Vibey"
-          description="A lightweight tool that brings planning, notes, and prompt writing into one interface, making Claude Code faster and more comfortable to use without relying on the terminal."
-          mainImage="/images/projects/vibey/main.png"
-          previewImage1="/images/projects/vibey/preview-1.png"
-          previewImage2="/images/projects/vibey/preview-2.png"
-          projectLink="/projects/vibey"
-        />
-        <ProjectPreview
+<ProjectPreview
           title="Range Rover"
           description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
           mainImage="/images/projects/range-rover/main.jpg"
@@ -423,12 +396,7 @@ export default function Home() {
       </>
 
       {/* Footer */}
-      <Footer
-        onContactClick={() => {
-          setShowBackButton(false);
-          setIsContactOpen(true);
-        }}
-      />
+      <Footer onContactClick={handleContact} />
 
       <style>
         {`
@@ -453,97 +421,13 @@ export default function Home() {
 
       {/* Menu Overlay */}
       {isMenuOpen && (
-          <div className="overlay-wrapper">
+        <div className="overlay-wrapper">
           <Menu
             onClose={() => setIsMenuOpen(false)}
             onContactClick={() => {
               setIsMenuOpen(false);
-              setShowBackButton(true);
-              setIsContactOpen(true);
+              handleContact();
             }}
-          />
-        </div>
-      )}
-
-      {/* Contact Form Overlay */}
-      {isContactOpen && (
-        <div className="overlay-wrapper">
-          <ContactForm
-            onClose={() => {
-              setIsContactOpen(false);
-              setShowBackButton(false);
-            }}
-            onBack={showBackButton ? () => {
-              setIsContactOpen(false);
-              setShowBackButton(false);
-              setIsMenuOpen(true);
-            } : undefined}
-            onSubmit={(contactData) => {
-              console.log('Contact form submitted:', contactData);
-              setIsContactOpen(false);
-              setShowBackButton(false);
-              setIsContactSuccessOpen(true);
-            }}
-          />
-        </div>
-      )}
-
-      {/* Appointment Form Overlay - Step 1: Pick Date & Time */}
-      {isAppointmentOpen && (
-        <div className="overlay-wrapper">
-          <AppointmentForm
-            onClose={() => {
-              setIsAppointmentOpen(false);
-              setShowBackButton(false);
-            }}
-            onBack={showBackButton ? () => {
-              setIsAppointmentOpen(false);
-              setShowBackButton(false);
-              setIsMenuOpen(true);
-            } : undefined}
-            onSubmit={(data) => {
-              setAppointmentData(data);
-              setIsAppointmentOpen(false);
-              setIsAppointmentContactOpen(true);
-            }}
-          />
-        </div>
-      )}
-
-      {/* Appointment Contact Form Overlay - Step 2: Submit Contact Info */}
-      {isAppointmentContactOpen && (
-        <div className="overlay-wrapper">
-          <AppointmentContactForm
-            onClose={() => setIsAppointmentContactOpen(false)}
-            onBack={() => {
-              setIsAppointmentContactOpen(false);
-              setIsAppointmentOpen(true);
-            }}
-            appointmentDate={appointmentData.date}
-            appointmentTime={appointmentData.time}
-            onSubmit={(contactData) => {
-              console.log('Appointment booked:', { ...appointmentData, ...contactData });
-              setIsAppointmentContactOpen(false);
-              setIsSuccessOpen(true);
-            }}
-          />
-        </div>
-      )}
-
-      {/* Success Message Overlay */}
-      {isSuccessOpen && (
-        <div className="overlay-wrapper">
-          <SuccessMessage onClose={() => setIsSuccessOpen(false)} />
-        </div>
-      )}
-
-      {/* Contact Success Message Overlay */}
-      {isContactSuccessOpen && (
-        <div className="overlay-wrapper">
-          <SuccessMessage
-            title="Thanks for your message!"
-            message="We've received your enquiry and will reply shortly."
-            onClose={() => setIsContactSuccessOpen(false)}
           />
         </div>
       )}

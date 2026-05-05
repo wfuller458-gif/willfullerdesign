@@ -10,14 +10,12 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
     '/images/carousel/1.png',
     '/images/carousel/2.png',
     '/images/carousel/3.png',
-    '/images/carousel/4.png',
     '/images/carousel/5.png',
     '/images/carousel/6.png',
     '/images/carousel/7.png',
     '/images/carousel/8.png',
     '/images/carousel/9.png',
     '/images/carousel/10.png',
-    '/images/carousel/11.png',
     '/images/carousel/12.png',
     '/images/carousel/13.png',
     '/images/carousel/14.png',
@@ -42,7 +40,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
 
   // Map images to project names and images based on the pattern for 7 projects
   const getProjectData = useCallback((index: number): { name: string; images: [string, string, string]; href: string } => {
-    const pattern = index % 7;
+    const pattern = index % 6;
     if (pattern === 0) {
       return {
         name: 'Range Rover',
@@ -66,19 +64,12 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
     }
     if (pattern === 3) {
       return {
-        name: 'Vibey',
-        images: ['/images/projects/vibey/main.png', '/images/projects/vibey/preview-1.png', '/images/projects/vibey/preview-2.png'] as [string, string, string],
-        href: '/projects/vibey'
-      };
-    }
-    if (pattern === 4) {
-      return {
         name: 'Defender',
         images: ['/images/projects/Defender/Hero.png', '/images/projects/Defender/image%203.jpg', '/images/projects/Defender/image%202.jpg'] as [string, string, string],
         href: '/projects/defender'
       };
     }
-    if (pattern === 5) {
+    if (pattern === 4) {
       return {
         name: 'Feed It Back',
         images: ['/images/projects/feed-it-back/main.png', '/images/projects/feed-it-back/preview-1.png', '/images/projects/feed-it-back/preview-2.png'] as [string, string, string],

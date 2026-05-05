@@ -179,15 +179,7 @@ export default function Projects() {
           previewImage2="/images/projects/Avinya/hero2.png"
           projectLink="/projects/avinya"
         />
-        <ProjectPreview
-          title="Vibey"
-          description="A lightweight tool that brings planning, notes, and prompt writing into one interface, making Claude Code faster and more comfortable to use without relying on the terminal."
-          mainImage="/images/projects/vibey/main.png"
-          previewImage1="/images/projects/vibey/preview-1.png"
-          previewImage2="/images/projects/vibey/preview-2.png"
-          projectLink="/projects/vibey"
-        />
-        <ProjectPreview
+<ProjectPreview
           title="Range Rover"
           description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
           mainImage="/images/projects/range-rover/main.jpg"
