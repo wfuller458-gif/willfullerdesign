@@ -7,12 +7,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        "primary-black": "justify-center rounded-full border border-brand-black text-brand-black hover:bg-brand-orange px-4 py-4 text-xl font-light",
+        "primary-black": "justify-center rounded-full border border-brand-black text-brand-black hover:bg-[#E0EADB] hover:text-[#008E24] hover:border-[#008E24] px-4 py-4 text-xl font-light",
         "secondary-black": "justify-center rounded-full border border-brand-black text-brand-black hover:bg-brand-white px-4 py-4 text-xl font-light",
-        "primary-white": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-orange hover:text-brand-black hover:border-brand-black px-4 py-4 text-xl font-light",
+        "primary-white": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-[#E0EADB] hover:text-[#008E24] hover:border-[#008E24] px-4 py-4 text-xl font-light",
         "secondary-white": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-white-30 px-4 py-4 text-xl font-light",
         "whatsapp": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-whatsapp hover:text-brand-white hover:border-brand-whatsapp px-4 py-4 text-xl font-light",
         "whatsapp-black": "justify-center rounded-full border border-brand-black text-brand-black hover:bg-brand-whatsapp hover:text-brand-white hover:border-brand-whatsapp px-4 py-4 text-xl font-light",
+        "primary-green": "justify-center rounded-full border border-brand-white text-brand-white hover:bg-brand-whatsapp hover:text-brand-white hover:border-brand-whatsapp px-4 py-4 text-xl font-light",
         "menu": "text-brand-black text-base font-medium",
         "text-icon": "text-brand-black text-xl font-light",
       },
@@ -39,7 +40,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const isMenu = variant === "menu";
     const isTextIcon = variant === "text-icon";
     const hasAnimatedIcon = variant === "primary-black" || variant === "primary-white" ||
-                            variant === "secondary-black" || variant === "secondary-white";
+                            variant === "secondary-black" || variant === "secondary-white" ||
+                            variant === "primary-green";
 
     return (
       <button

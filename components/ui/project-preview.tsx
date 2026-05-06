@@ -1,379 +1,203 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from "./button";
+
+export interface Bullet {
+  icon?: string;
+  text: string;
+}
 
 export interface ProjectPreviewProps {
   title: string;
   description: string;
-  mainImage?: string;
-  previewImage1?: string;
-  previewImage2?: string;
+  bullets: Bullet[];
+  mainImage: string;
+  secondaryImage: string;
   projectLink?: string;
 }
 
 export function ProjectPreview({
   title,
   description,
+  bullets,
   mainImage,
-  previewImage1,
-  previewImage2,
-  projectLink = "#",
+  secondaryImage,
+  projectLink = '#',
 }: ProjectPreviewProps) {
   const router = useRouter();
-  const [imageTransform, setImageTransform] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = (e: React.MouseEvent) => {
-    // Don't navigate if clicking on the button itself (let the button handle it)
-    if ((e.target as HTMLElement).closest('.project-preview-button')) {
-      return;
-    }
-    router.push(projectLink);
-  };
-
-  // Check if mobile on mount and resize
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 900);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Only apply parallax on desktop
-      if (!isMobile && rect.top < windowHeight && rect.bottom > 0) {
-        const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-        const centerOffset = scrollProgress - 0.5;
-        const parallaxOffset = centerOffset * 100;
-        setImageTransform(parallaxOffset);
-      } else if (isMobile) {
-        // Reset transform on mobile
-        setImageTransform(0);
-      }
-
-      // Trigger animations when content panel enters viewport
-      if (contentRef.current) {
-        const contentRect = contentRef.current.getBoundingClientRect();
-        // Show animations when in viewport, hide when out
-        if (contentRect.top < windowHeight * 0.9 && contentRect.bottom > windowHeight * 0.1) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile]);
   return (
     <>
-      <style>
-        {`
-          .project-preview-container {
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            cursor: pointer;
-          }
+      <style>{`
+        .pp-wrap {
+          width: 100%;
+          padding: 0 25px 25px 25px;
+          box-sizing: border-box;
+          background-color: var(--brand-off-white-100);
+          cursor: pointer;
+        }
 
-          .project-preview-content {
-            width: 421px;
-            flex-shrink: 0;
-            align-self: stretch;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-sizing: border-box;
-          }
+        .pp-rule {
+          border: none;
+          border-top: 0.5px solid #9C9C9C;
+          margin: 0 0 25px 0;
+        }
 
-          .project-preview-title {
-            font-size: 32px;
-            line-height: 1.3;
-          }
+        .pp-text-row {
+          display: grid;
+          grid-template-columns: 843fr 379fr;
+          column-gap: 8px;
+          align-items: end;
+        }
 
-          .project-preview-description {
-            font-size: 16px;
-            line-height: 1.3;
-          }
+        .pp-left {
+          min-width: 0;
+        }
 
-          .project-preview-images {
-            gap: 8px;
-            overflow: hidden;
-            max-width: 100%;
-          }
+        .pp-title {
+          font-family: DM Sans, sans-serif;
+          font-weight: 300;
+          font-size: 64px;
+          line-height: 1.05;
+          color: var(--brand-black);
+          margin: 0 0 16px 0;
+        }
 
-          .project-preview-image-wide {
-            flex: 1;
-            height: 150px;
-            min-width: 0;
-            max-width: calc(100% - 158px);
-          }
+        .pp-description {
+          font-family: DM Sans, sans-serif;
+          font-weight: 300;
+          font-size: 16px;
+          line-height: 1.5;
+          color: var(--brand-black);
+          margin: 0;
+          max-width: 600px;
+        }
 
-          .project-preview-image-square {
-            width: 150px;
-            height: 150px;
-            flex-shrink: 0;
-          }
+        .pp-bullets {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          min-width: 0;
+        }
 
-          .project-preview-button {
-            margin-top: 16px;
-          }
+        .pp-bullet {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+        }
 
-          /* Medium breakpoint - stack vertically */
-          @media (max-width: 900px) {
-            .project-preview-container {
-              flex-direction: column;
-            }
+        .pp-bullet-icon {
+          width: 24px;
+          height: 24px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
-            .project-preview-content {
-              width: 100%;
-              max-width: 100%;
-              padding: 24px;
-              overflow: hidden;
-            }
+        .pp-bullet-icon-placeholder {
+          width: 24px;
+          height: 24px;
+          border: 1px solid #9C9C9C;
+          border-radius: 2px;
+          flex-shrink: 0;
+        }
 
-            .project-preview-title {
-              font-size: 28px;
-            }
+        .pp-bullet-text {
+          font-family: DM Sans, sans-serif;
+          font-weight: 300;
+          font-size: 12px;
+          line-height: 1.5;
+          color: var(--brand-black);
+        }
 
-            .project-preview-description {
-              font-size: 15px;
-            }
+        .pp-images {
+          margin-top: 50px;
+          display: flex;
+          gap: 8px;
+          height: 559px;
+        }
 
-            .project-preview-image-wide {
-              height: 120px;
-              max-width: 240px;
-              flex: 0 0 auto;
-            }
+        .pp-image-main {
+          flex: 843;
+          border-radius: 4px;
+          overflow: hidden;
+          background-color: #d9d9d9;
+          height: 100%;
+        }
 
-            .project-preview-image-square {
-              width: 120px;
-              height: 120px;
-              flex-shrink: 0;
-            }
+        .pp-image-secondary {
+          flex: 379;
+          border-radius: 4px;
+          overflow: hidden;
+          background-color: #d9d9d9;
+          height: 100%;
+        }
 
-            .project-preview-button {
-              margin-top: 24px;
-            }
-          }
+        .pp-image-main img,
+        .pp-image-secondary img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
 
-          /* Small breakpoint */
-          @media (max-width: 600px) {
-            .project-preview-content {
-              padding: 20px;
-            }
+        @media (max-width: 1024px) {
+          .pp-title { font-size: 48px; }
+          .pp-images { height: 420px; }
+        }
 
-            .project-preview-title {
-              font-size: 24px;
-            }
+        @media (max-width: 1024px) {
+          .pp-text-row { grid-template-columns: 1fr; gap: 32px; align-items: start; }
+          .pp-title { font-size: 36px; }
+          .pp-images { height: 300px; }
+        }
 
-            .project-preview-description {
-              font-size: 14px;
-            }
+        @media (max-width: 480px) {
+          .pp-wrap { padding: 20px 16px; }
+          .pp-title { font-size: 28px; }
+          .pp-images { height: 220px; }
+        }
+      `}</style>
 
-            .project-preview-image-wide {
-              height: 100px;
-              max-width: 240px;
-            }
+      <div className="pp-wrap" onClick={() => router.push(projectLink)}>
 
-            .project-preview-image-square {
-              width: 100px;
-              height: 100px;
-              flex-shrink: 0;
-            }
-          }
+        <hr className="pp-rule" />
 
-          /* Mobile breakpoint */
-          @media (max-width: 480px) {
-            .project-preview-content {
-              padding: 16px;
-            }
+        {/* Text row */}
+        <div className="pp-text-row">
+          {/* Left: title + description */}
+          <div className="pp-left">
+            <h2 className="pp-title">{title}</h2>
+            <p className="pp-description">{description}</p>
+          </div>
 
-            .project-preview-title {
-              font-size: 20px;
-            }
-
-            .project-preview-image-wide {
-              height: 80px;
-              max-width: 190px;
-            }
-
-            .project-preview-image-square {
-              width: 80px;
-              height: 80px;
-              flex-shrink: 0;
-            }
-
-            .project-preview-button {
-              margin-top: 32px;
-            }
-          }
-        `}
-      </style>
-      <div
-        className="project-preview-container"
-        onClick={handleClick}
-        style={{
-          width: '100%',
-          maxWidth: '100%',
-          backgroundColor: 'var(--brand-off-white-100)',
-          boxSizing: 'border-box',
-        }}
-      >
-      {/* Left side - Main image */}
-      <div
-        ref={containerRef}
-        style={{
-          flex: 1,
-          alignSelf: 'stretch',
-          backgroundColor: '#d9d9d9',
-          overflow: 'hidden',
-        }}
-      >
-        {mainImage && (
-          <img
-            src={mainImage}
-            alt=""
-            style={{
-              width: '100%',
-              height: isMobile ? '100%' : '120%',
-              objectFit: 'cover',
-              transform: `translateY(${imageTransform}px)`,
-              transition: 'transform 0.1s ease-out',
-            }}
-          />
-        )}
-      </div>
-
-      {/* Right side - Content */}
-      <div
-        ref={contentRef}
-        className="project-preview-content"
-      >
-        {/* Top section - Title, description, preview images */}
-        <div
-          className="flex flex-col"
-          style={{
-            gap: '16px',
-            width: '100%',
-          }}
-        >
-          {/* Title */}
-          <h2
-            className="project-preview-title font-display font-light"
-            style={{
-              color: 'var(--brand-black)',
-              opacity: isVisible ? 1 : 0,
-              transition: 'opacity 800ms ease-out',
-            }}
-          >
-            {title}
-          </h2>
-
-          {/* Description */}
-          <p
-            className="project-preview-description font-display font-light"
-            style={{
-              color: 'var(--brand-black)',
-              opacity: isVisible ? 1 : 0,
-              transition: 'opacity 800ms ease-out 100ms',
-            }}
-          >
-            {description}
-          </p>
-
-          {/* Preview images */}
-          <div
-            className="project-preview-images flex"
-            style={{
-              width: '100%',
-            }}
-          >
-            {/* Wide preview image */}
-            <div
-              className="project-preview-image-wide"
-              style={{
-                backgroundColor: '#d9d9d9',
-                borderRadius: '4px',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 200ms, transform 800ms ease-out 200ms',
-              }}
-            >
-              {previewImage1 && (
-                <img
-                  src={previewImage1}
-                  alt=""
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    borderRadius: '4px',
-                  }}
-                />
-              )}
-            </div>
-
-            {/* Square preview image */}
-            <div
-              className="project-preview-image-square"
-              style={{
-                backgroundColor: '#d9d9d9',
-                borderRadius: '4px',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'opacity 800ms ease-out 350ms, transform 800ms ease-out 350ms',
-              }}
-            >
-              {previewImage2 && (
-                <img
-                  src={previewImage2}
-                  alt=""
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    borderRadius: '4px',
-                  }}
-                />
-              )}
-            </div>
+          {/* Right: bullets */}
+          <div className="pp-bullets">
+            {bullets.map((bullet, i) => (
+              <div key={i} className="pp-bullet">
+                {bullet.icon
+                  ? <img src={bullet.icon} alt="" className="pp-bullet-icon" style={{ width: 24, height: 24 }} />
+                  : <div className="pp-bullet-icon-placeholder" />
+                }
+                <span className="pp-bullet-text">{bullet.text}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Bottom section - View project button */}
-        <div
-          className="project-preview-button"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 800ms ease-out 150ms',
-          }}
-        >
-          <Button variant="text-icon" asChild>
-            <Link href={projectLink}>
-              View project
-            </Link>
-          </Button>
+        {/* Images */}
+        <div className="pp-images">
+          <div className="pp-image-main">
+            <img src={mainImage} alt={title} />
+          </div>
+          <div className="pp-image-secondary">
+            <img src={secondaryImage} alt={title} />
+          </div>
         </div>
+
       </div>
-    </div>
     </>
   );
 }

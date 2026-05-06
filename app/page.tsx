@@ -3,10 +3,9 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { HeroSection } from '@/components/ui/hero-section';
-import { Banner } from '@/components/ui/banner';
 import { ProjectPreview } from '@/components/ui/project-preview';
-import { History } from '@/components/ui/history';
 import { Footer } from '@/components/ui/footer';
+import { RecommendationCarousel } from '@/components/ui/recommendation-carousel';
 import { Menu } from '@/components/ui/menu';
 
 const handleContact = () => {
@@ -46,7 +45,7 @@ export default function Home() {
         {`
           .intro-text-section {
             margin: 0 auto;
-            padding: 80px 90px;
+            padding: 150px 90px;
           }
 
           .intro-text {
@@ -61,7 +60,7 @@ export default function Home() {
           /* Tablet and below */
           @media (max-width: 1024px) {
             .intro-text-section {
-              padding: 60px 40px;
+              padding: 150px 40px;
             }
 
             .intro-text {
@@ -99,71 +98,70 @@ export default function Home() {
       </div>
 
       {/* Project Previews */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        alignItems: 'center',
-        marginTop: '16px',
-        marginBottom: '16px'
-      }}>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '75px' }}>
         <ProjectPreview
-          title="Defender"
-          description="Leading the UX for off-road experiences on upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
+          title="Off-Road Controls"
+          description="Lead the UX for upcoming Defender models by delivering an off-road experience that unifies cameras, terrain systems and incorporate new features into a seamless, engaging cockpit focused on usability, confidence and adventure."
+          bullets={[
+            { text: 'Designed next generation Defender next-generation off-road experience' },
+            { text: 'UX ownership of every off-road feature' },
+            { text: 'Unified physical controls and digital feedback' },
+          ]}
           mainImage="/images/projects/Defender/Hero.png"
-          previewImage1="/images/projects/Defender/image%203.jpg"
-          previewImage2="/images/projects/Defender/image%202.jpg"
+          secondaryImage="/images/projects/Defender/image%202.jpg"
           projectLink="/projects/defender"
+        />
+        <ProjectPreview
+          title="Range Rover"
+          description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
+          bullets={[
+            { text: 'Atomic design system for next-gen displays' },
+            { text: 'Cross-team integration across software and hardware' },
+            { text: 'User-centred research informing layout decisions' },
+          ]}
+          mainImage="/images/projects/range-rover/main.jpg"
+          secondaryImage="/images/projects/range-rover/preview-1.jpg"
+          projectLink="/projects/range-rover"
+        />
+        <ProjectPreview
+          title="Avinya"
+          description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software platform."
+          bullets={[
+            { text: 'Three distinct UI themes within one system' },
+            { text: 'Atomic component architecture' },
+            { text: 'Delivered a scalable design language for Tata Motors' },
+          ]}
+          mainImage="/images/projects/Avinya/hero1.jpg"
+          secondaryImage="/images/projects/Avinya/hero2.png"
+          projectLink="/projects/avinya"
         />
         <ProjectPreview
           title="Swipe Save"
           description="A mobile budgeting app that uses a swipe-based interface to help users accurately review and categorise their bank transactions, making budgeting faster, clearer, and more consistent."
+          bullets={[
+            { text: 'Swipe-based transaction categorisation' },
+            { text: 'Clear visual budget breakdowns' },
+            { text: 'Designed end-to-end from concept to prototype' },
+          ]}
           mainImage="/images/projects/swipe-save/main.png"
-          previewImage1="/images/projects/swipe-save/preview-1.png"
-          previewImage2="/images/projects/swipe-save/preview-2.png"
+          secondaryImage="/images/projects/swipe-save/preview-1.png"
           projectLink="/projects/swipe-save"
-        />
-        <ProjectPreview
-          title="Avinya"
-          description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software."
-          mainImage="/images/projects/Avinya/hero1.jpg"
-          previewImage1="/images/projects/Avinya/project1.png"
-          previewImage2="/images/projects/Avinya/hero2.png"
-          projectLink="/projects/avinya"
-        />
-<ProjectPreview
-          title="Range Rover"
-          description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
-          mainImage="/images/projects/range-rover/main.jpg"
-          previewImage1="/images/projects/range-rover/preview-1.jpg"
-          previewImage2="/images/projects/range-rover/preview-2.jpg"
-          projectLink="/projects/range-rover"
         />
         <ProjectPreview
           title="Feed It Back"
           description="Design work on the core inbox of a multi-channel review management platform, helping restaurant teams prioritise, respond to, and manage high volumes of customer feedback."
+          bullets={[
+            { text: 'Multi-channel review inbox design' },
+            { text: 'Triage and response workflow optimisation' },
+            { text: 'Used by major UK restaurant groups' },
+          ]}
           mainImage="/images/projects/feed-it-back/main.png"
-          previewImage1="/images/projects/feed-it-back/preview-1.png"
-          previewImage2="/images/projects/feed-it-back/preview-2.png"
+          secondaryImage="/images/projects/feed-it-back/preview-1.png"
           projectLink="/projects/feed-it-back"
-        />
-        <ProjectPreview
-          title="ChargedUp"
-          description="Early-stage creative work for a startup rolling out phone charging stations across London, spanning product visuals, marketing assets, and landing pages."
-          mainImage="/images/projects/chargedup/main.png"
-          previewImage1="/images/projects/chargedup/preview-1.png"
-          previewImage2="/images/projects/chargedup/preview-2.png"
-          projectLink="/projects/chargedup"
         />
       </div>
 
-      {/* Grey Banner */}
-      <Banner
-        variant="grey"
-      />
-
-
-      {/* Design Experience Timeline */}
+      {/* Recommendations Section Header */}
       <div style={{
         width: '100%',
         marginTop: '100px',
@@ -178,64 +176,25 @@ export default function Home() {
           marginBottom: '24px',
           textAlign: 'center'
         }}>
-          Timeline
+          Recommendations
         </p>
         <h2 style={{
           fontSize: '42px',
           lineHeight: '1.3',
           color: 'var(--brand-black)',
-          marginBottom: '50px',
+          marginBottom: '0',
           textAlign: 'center'
         }}>
           <span style={{
             fontFamily: 'DM Sans, sans-serif',
             fontWeight: 300
-          }}>Design </span>
-          <span style={{
-            fontFamily: 'PT Serif, serif',
-            fontWeight: 700,
-            fontStyle: 'italic'
-          }}>Experience</span>
+          }}>Tangible Impact</span>
         </h2>
+      </div>
 
-        <History entries={[
-          {
-            date: "2022 - 2026",
-            company: "Jaguar Land Rover",
-            tooltipDescription: "At Jaguar Land Rover's Gaydon headquarters, I work as a UX Designer in the Human–Machine Interface team, designing touchscreens, instrument clusters, and head-up displays for Land Rover vehicles. I collaborate with engineers and designers to create intuitive, premium in-car experiences, and have delivered features that have made it into production cars.",
-            tooltipImages: ["/images/tooltip/jlr-1.png", "/images/tooltip/jlr-2.png"]
-          },
-          {
-            date: "2021",
-            company: "Suru Partners",
-            tooltipDescription: "At Suru Partners in Coventry, I worked as a UX/UI Designer, creating websites and web applications for a variety of clients. Operating within an agile delivery framework, I collaborated closely with software developers and the directors to deliver full designs.",
-            tooltipImages: ["/images/tooltip/suru-1.png", "/images/tooltip/suru-2.png", "/images/tooltip/suru-3.png"]
-          },
-          {
-            date: "2020",
-            company: "Freelance",
-            tooltipDescription: "I freelanced as a designer, working with a start up in Berlin where I was responsible for designing their entire web app, created to support independent restaurateurs. A highlight was seeing an early version adopted by Subway chains. I also worked with Full Clarity on projects in healthcare and hospitality, including a GP training platform and Feed It Back, a tool used by major restaurant groups to manage and respond to customer reviews across multiple channels.",
-            tooltipImages: ["/images/tooltip/freelance-1.png", "/images/tooltip/freelance-2.png"]
-          },
-          {
-            date: "2019",
-            company: "University of New Mexico",
-            tooltipDescription: "I studied at the University of New Mexico on a full athletic scholarship, competing in cross country and track while working toward a degree in Sports Administration. During this time I got the opportunity to compete in races all across the US. Alongside my academic and athletic commitments, I had the opportunity to study some graphic design classes.",
-            tooltipImages: ["/images/tooltip/unm-1.png", "/images/tooltip/unm-2.png", "/images/tooltip/unm-3.png"]
-          },
-          {
-            date: "2018",
-            company: "Charged Up",
-            tooltipDescription: "I joined ChargedUp, a London-based start-up, as their first design intern, working directly with the four founders. I contributed to the launch by creating CAD models and product renderings, designing and building the entire website, producing marketing materials, and supporting their social media ads. Being involved in so many parts of the launch made it a fast-paced and really fun experience.",
-            tooltipImages: ["/images/tooltip/chargedup-1.png", "/images/tooltip/chargedup-2.png"]
-          },
-          {
-            date: "2015",
-            company: "Loughborough University",
-            tooltipDescription: "I studied Industrial Design (BA) and graduated with a First Class Honours degree. The course covered everything from sketching and engineering drawings to workshop skills in metalwork, woodworking, machining, model making and injection-moulding processes. Alongside my studies, I competed for the university in cross country and track, and also earned selections for multiple England and Great Britain teams.",
-            tooltipImages: ["/images/tooltip/lboro-1.png", "/images/tooltip/lboro-2.png", "/images/tooltip/lboro-3.png"]
-          }
-        ]} />
+      {/* Recommendation Cards */}
+      <div style={{ marginBottom: '100px' }}>
+        <RecommendationCarousel />
       </div>
 
       {/* Footer */}
@@ -251,13 +210,7 @@ export default function Home() {
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.3);
             z-index: 1000;
-            padding: 16px;
-          }
-
-          @media (max-width: 768px) {
-            .overlay-wrapper {
-              padding: 0 0 env(safe-area-inset-bottom, 80px) 0 !important;
-            }
+            padding: 0;
           }
         `}
       </style>

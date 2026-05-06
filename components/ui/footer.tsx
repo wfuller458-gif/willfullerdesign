@@ -1,7 +1,8 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, WhatsApp } from './icons';
-import { Banner } from './banner';
+import { ArrowUpRight } from './icons';
 
 const NavItem = ({ label, onClick, href }: { label: string; onClick?: () => void; href?: string }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -78,22 +79,19 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         flex: 1,
-        border: '1px solid var(--brand-black)',
-        borderTop: 'none',
-        padding: '16px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         gap: '8px',
         cursor: 'pointer',
-        backgroundColor: isHovered ? 'var(--brand-black)' : 'transparent',
+        backgroundColor: isHovered ? '#E0EADB' : 'transparent',
         transition: 'background-color 750ms cubic-bezier(0.16, 1.2, 0.3, 1)'
       }}
     >
       <span style={{
         fontSize: '16px',
         fontWeight: 300,
-        color: isHovered ? 'var(--brand-white)' : 'var(--brand-black)',
+        color: isHovered ? '#008E24' : 'var(--brand-black)',
         position: 'relative',
         overflow: 'hidden',
         display: 'inline-block',
@@ -129,7 +127,7 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
       }}>
         <div style={{
           position: 'absolute',
-          color: isHovered ? 'var(--brand-white)' : 'var(--brand-black)',
+          color: isHovered ? '#008E24' : 'var(--brand-black)',
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1), color 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translate(100%, -100%)' : 'translate(0, 0)'
         }}>
@@ -137,7 +135,7 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
         </div>
         <div style={{
           position: 'absolute',
-          color: isHovered ? 'var(--brand-white)' : 'var(--brand-black)',
+          color: isHovered ? '#008E24' : 'var(--brand-black)',
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1), color 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translate(0, 0)' : 'translate(-100%, 100%)'
         }}>
@@ -148,101 +146,13 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
   );
 };
 
-const WhatsAppButton = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleClick = () => {
-    window.open('https://wa.me/447305088562', '_blank');
-  };
-
-  return (
-    <div
-      onClick={handleClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        flex: 1,
-        border: '1px solid var(--brand-black)',
-        borderTop: 'none',
-        borderLeft: 'none',
-        padding: '16px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '8px',
-        backgroundColor: isHovered ? 'var(--brand-whatsapp)' : 'transparent',
-        cursor: 'pointer',
-        transition: 'background-color 750ms cubic-bezier(0.16, 1.2, 0.3, 1)'
-      }}
-    >
-      <span style={{
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '24px',
-        height: '24px'
-      }}>
-        <div style={{
-          position: 'absolute',
-          color: isHovered ? 'var(--brand-white)' : 'var(--brand-black)',
-          transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1), color 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
-          transform: isHovered ? 'translateY(-100%)' : 'translateY(0)'
-        }}>
-          <WhatsApp />
-        </div>
-        <div style={{
-          position: 'absolute',
-          color: isHovered ? 'var(--brand-white)' : 'var(--brand-black)',
-          transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1), color 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
-          transform: isHovered ? 'translateY(0)' : 'translateY(100%)'
-        }}>
-          <WhatsApp />
-        </div>
-      </span>
-      <span style={{
-        fontSize: '16px',
-        fontWeight: 500,
-        color: isHovered ? 'var(--brand-white)' : 'var(--brand-black)',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'inline-block',
-        whiteSpace: 'nowrap',
-        transition: 'color 750ms cubic-bezier(0.16, 1.2, 0.3, 1)'
-      }}>
-        <span style={{
-          display: 'inline-block',
-          transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
-          transform: isHovered ? 'translateY(-100%)' : 'translateY(0)'
-        }}>
-          WhatsApp
-        </span>
-        <span style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          display: 'inline-block',
-          transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
-          transform: isHovered ? 'translateY(0)' : 'translateY(100%)'
-        }}>
-          WhatsApp
-        </span>
-      </span>
-    </div>
-  );
-};
-
 export interface FooterProps {
-  year?: string;
   onContactClick?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({
-  year = '2025',
-  onContactClick
-}) => {
+export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
   const [currentTime, setCurrentTime] = useState('');
+  const year = new Date().getFullYear();
 
   useEffect(() => {
     const updateTime = () => {
@@ -254,238 +164,82 @@ export const Footer: React.FC<FooterProps> = ({
       });
       setCurrentTime(time);
     };
-
-    // Update immediately
     updateTime();
-
-    // Update every second
     const interval = setInterval(updateTime, 1000);
-
     return () => clearInterval(interval);
   }, []);
+
+  const colBase: React.CSSProperties = {
+    flex: 1,
+    border: '0.5px solid #9C9C9C',
+    padding: '16px',
+    position: 'relative',
+    height: '180px',
+    fontFamily: 'Inter, sans-serif'
+  };
+
   return (
-    <>
-      <style>
-        {`
-          .footer-container {
-            width: calc(100% - 32px);
-            margin: 0 16px 16px 16px;
-            background-color: var(--brand-off-white-200);
-            border-radius: 4px;
-            overflow: hidden;
-            font-family: Inter, sans-serif;
-          }
-
-          .footer-top-row {
-            display: flex;
-          }
-
-          .footer-column {
-            flex: 1;
-            border: 1px solid var(--brand-black);
-            padding: 16px;
-            position: relative;
-            height: 200px;
-          }
-
-          .footer-column-1 {
-            border-radius: 4px 0 0 0;
-          }
-
-          .footer-column-2 {
-            border-left: none;
-          }
-
-          .footer-column-3 {
-            border-left: none;
-            border-radius: 0 4px 0 0;
-          }
-
-          .footer-tagline {
-            font-size: 20px;
-            font-weight: 300;
-            color: var(--brand-black);
-            line-height: 1.4;
-            max-width: 300px;
-            font-family: Inter, sans-serif;
-          }
-
-          .footer-tagline-italic {
-            font-family: Source Serif Pro, serif;
-            font-style: italic;
-            font-weight: 900;
-            font-size: 24px;
-          }
-
-          @media (max-width: 900px) {
-            .footer-tagline {
-              font-size: 18px;
-            }
-
-            .footer-tagline-italic {
-              font-size: 22px;
-            }
-          }
-
-          @media (max-width: 600px) {
-            .footer-top-row {
-              flex-direction: column;
-            }
-
-            .footer-column {
-              height: auto;
-              min-height: 120px;
-            }
-
-            .footer-column-1 {
-              border-radius: 4px 4px 0 0;
-              border-bottom: none;
-            }
-
-            .footer-column-2 {
-              border-left: 1px solid var(--brand-black);
-              border-bottom: none;
-            }
-
-            .footer-column-3 {
-              border-left: 1px solid var(--brand-black);
-              border-radius: 0;
-            }
-
-            .footer-tagline {
-              font-size: 16px;
-              max-width: 100%;
-            }
-
-            .footer-tagline-italic {
-              font-size: 20px;
-            }
-          }
-
-          @media (max-width: 480px) {
-            .footer-container {
-              width: calc(100% - 16px);
-              margin: 0 8px 8px 8px;
-            }
-
-            .footer-column {
-              padding: 12px;
-              min-height: 130px;
-            }
-
-            .footer-tagline {
-              font-size: 14px;
-            }
-
-            .footer-tagline-italic {
-              font-size: 18px;
-            }
-          }
-        `}
-      </style>
-      <div className="footer-container">
-        {/* Top Row - 3 Columns */}
-        <div className="footer-top-row">
-        {/* Column 1: Will Fuller + Location + Time */}
-        <div className="footer-column footer-column-1">
-          <div style={{
-            fontSize: '16px',
-            fontWeight: 300,
-            color: 'var(--brand-black)',
-            position: 'absolute',
-            top: '16px',
-            left: '16px'
-          }}>
-            Will Fuller
-          </div>
-          <div style={{
-            position: 'absolute',
-            bottom: '16px',
-            left: '16px',
-            fontSize: '12px',
-            fontWeight: 300,
-            color: 'var(--brand-black)',
-            lineHeight: '1.5'
-          }}>
-            <div>Stratford-Upon-Avon</div>
-            <div>Warwickshire</div>
-            <div>United Kingdom</div>
-          </div>
-          <div style={{
-            position: 'absolute',
-            bottom: '16px',
-            right: '16px',
-            fontSize: '12px',
-            fontWeight: 300,
-            color: 'var(--brand-black)'
-          }}>
-            {currentTime}
-          </div>
-        </div>
-
-        {/* Column 2: Navigation */}
-        <div className="footer-column footer-column-2" style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '8px'
+    <div style={{
+      width: '100%',
+      backgroundColor: 'var(--brand-off-white-200)',
+      overflow: 'hidden',
+      display: 'flex'
+    }}>
+      {/* Left — nav + copyright */}
+      <div style={{ ...colBase, display: 'flex', flexDirection: 'column', gap: '8px', borderRadius: '0' }}>
+        {['Home', 'Projects', 'About'].map((item) => (
+          <NavItem
+            key={item}
+            label={item}
+            href={item === 'Home' ? '/' : item === 'Projects' ? '/projects' : '/about'}
+          />
+        ))}
+        <span style={{
+          position: 'absolute',
+          bottom: '16px',
+          right: '16px',
+          fontSize: '12px',
+          fontWeight: 300,
+          color: 'var(--brand-black)'
         }}>
-          {['Home', 'Projects', 'About', 'Contact'].map((item) => (
-            <NavItem
-              key={item}
-              label={item}
-              href={item === 'Home' ? '/' : item === 'Projects' ? '/projects' : item === 'About' ? '/about' : undefined}
-              onClick={item === 'Contact' ? onContactClick : undefined}
-            />
-          ))}
-        </div>
-
-        {/* Column 3: Tagline + Copyright */}
-        <div className="footer-column footer-column-3">
-          <div className="footer-tagline">
-            Helping <span className="footer-tagline-italic">businesses</span> turn ideas into usable, scalable products
-          </div>
-          <div style={{
-            position: 'absolute',
-            bottom: '16px',
-            left: '16px',
-            fontSize: '12px',
-            fontWeight: 300,
-            color: 'var(--brand-black)',
-            lineHeight: '1.5'
-          }}>
-            <div>Image credits: Jaguar Land Rover Media Centre and Tata Motors</div>
-            <div>All rights reserved Will Fuller</div>
-          </div>
-          <div style={{
-            position: 'absolute',
-            bottom: '16px',
-            right: '16px',
-            fontSize: '12px',
-            fontWeight: 300,
-            color: 'var(--brand-black)'
-          }}>
-            ©{year}
-          </div>
-        </div>
+          ©{year}
+        </span>
       </div>
 
-      {/* Middle Row - Appointment + WhatsApp */}
-      <div style={{ display: 'flex' }}>
-        {/* Get In Touch */}
+      {/* Middle — Get In Touch */}
+      <div style={{ ...colBase, borderLeft: 'none', padding: 0, display: 'flex' }}>
         <GetInTouchButton onClick={onContactClick} />
-
-        {/* WhatsApp */}
-        <WhatsAppButton />
       </div>
 
-      {/* Bottom Row - Orange CTA */}
-      <div style={{
-        border: '1px solid var(--brand-black)',
-        borderTop: 'none'
-      }}>
-        <Banner variant="orange" onContactClick={onContactClick} />
+      {/* Right — name, address, time */}
+      <div style={{ ...colBase, borderLeft: 'none', borderRadius: '0' }}>
+        <span style={{ fontSize: '16px', fontWeight: 300, color: 'var(--brand-black)' }}>
+          Will Fuller
+        </span>
+        <div style={{
+          position: 'absolute',
+          bottom: '16px',
+          left: '16px',
+          fontSize: '12px',
+          fontWeight: 300,
+          color: 'var(--brand-black)',
+          lineHeight: '1.6'
+        }}>
+          <div>Stratford-Upon-Avon</div>
+          <div>Warwickshire</div>
+          <div>United Kingdom</div>
+        </div>
+        <span style={{
+          position: 'absolute',
+          bottom: '16px',
+          right: '16px',
+          fontSize: '12px',
+          fontWeight: 300,
+          color: 'var(--brand-black)'
+        }}>
+          {currentTime}
+        </span>
       </div>
     </div>
-    </>
   );
 };

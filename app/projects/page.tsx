@@ -1,6 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const TAGLINES = [
+  'User centred design',
+  'User experience design',
+  'User interface design',
+];
 import { Header } from '@/components/ui/header';
 import { ProjectPreview } from '@/components/ui/project-preview';
 import { Footer } from '@/components/ui/footer';
@@ -19,6 +26,14 @@ export default function Projects() {
   const [isContactSuccessOpen, setIsContactSuccessOpen] = useState(false);
   const [appointmentData, setAppointmentData] = useState<{ date?: Date; time?: string }>({});
   const [showBackButton, setShowBackButton] = useState(false);
+  const [taglineIndex, setTaglineIndex] = useState(0);
+
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setTaglineIndex(i => (i + 1) % TAGLINES.length);
+    }, 4200);
+    return () => clearInterval(cycle);
+  }, []);
 
   // Disable scrolling when any menu is open
   React.useEffect(() => {
@@ -60,9 +75,9 @@ export default function Projects() {
 
           .projects-title {
             font-family: DM Sans, sans-serif;
-            font-weight: 400;
-            font-size: 84px;
-            line-height: 90px;
+            font-weight: 300;
+            font-size: 76px;
+            line-height: 82px;
             color: var(--brand-black);
             margin: 0;
           }
@@ -88,6 +103,7 @@ export default function Projects() {
             .projects-title {
               font-size: 56px;
               line-height: 60px;
+              font-weight: 300;
             }
 
             .projects-list {
@@ -145,65 +161,86 @@ export default function Projects() {
 
         {/* Projects Title */}
         <div className="projects-title-section">
-          <p className="projects-tagline">
-            UX / Product Designer.
-          </p>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={taglineIndex}
+              className="projects-tagline"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
+              {TAGLINES[taglineIndex]}
+            </motion.p>
+          </AnimatePresence>
           <h1 className="projects-title">
             Projects
           </h1>
         </div>
 
         {/* Project Previews */}
-        <div className="projects-list">
-        <ProjectPreview
-          title="Defender"
-          description="Leading the UX for off-road experiences on upcoming Defender models, contributing concepts that unify cameras, terrain systems and new features into a seamless, engaging cockpit experience focused on usability, confidence and adventure."
-          mainImage="/images/projects/Defender/Hero.png"
-          previewImage1="/images/projects/Defender/image%203.jpg"
-          previewImage2="/images/projects/Defender/image%202.jpg"
-          projectLink="/projects/defender"
-        />
-        <ProjectPreview
-          title="Swipe Save"
-          description="A mobile budgeting app that uses a swipe-based interface to help users accurately review and categorise their bank transactions, making budgeting faster, clearer, and more consistent."
-          mainImage="/images/projects/swipe-save/main.png"
-          previewImage1="/images/projects/swipe-save/preview-1.png"
-          previewImage2="/images/projects/swipe-save/preview-2.png"
-          projectLink="/projects/swipe-save"
-        />
-        <ProjectPreview
-          title="Avinya"
-          description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software."
-          mainImage="/images/projects/Avinya/hero1.jpg"
-          previewImage1="/images/projects/Avinya/project1.png"
-          previewImage2="/images/projects/Avinya/hero2.png"
-          projectLink="/projects/avinya"
-        />
-<ProjectPreview
-          title="Range Rover"
-          description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
-          mainImage="/images/projects/range-rover/main.jpg"
-          previewImage1="/images/projects/range-rover/preview-1.jpg"
-          previewImage2="/images/projects/range-rover/preview-2.jpg"
-          projectLink="/projects/range-rover"
-        />
-        <ProjectPreview
-          title="Feed It Back"
-          description="Design work on the core inbox of a multi-channel review management platform, helping restaurant teams prioritise, respond to, and manage high volumes of customer feedback."
-          mainImage="/images/projects/feed-it-back/main.png"
-          previewImage1="/images/projects/feed-it-back/preview-1.png"
-          previewImage2="/images/projects/feed-it-back/preview-2.png"
-          projectLink="/projects/feed-it-back"
-        />
-        <ProjectPreview
-          title="ChargedUp"
-          description="Early-stage creative work for a startup rolling out phone charging stations across London, spanning product visuals, marketing assets, and landing pages."
-          mainImage="/images/projects/chargedup/main.png"
-          previewImage1="/images/projects/chargedup/preview-1.png"
-          previewImage2="/images/projects/chargedup/preview-2.png"
-          projectLink="/projects/chargedup"
-        />
-      </div>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '75px' }}>
+          <ProjectPreview
+            title="Off-Road Controls"
+            description="Lead the UX for upcoming Defender models by delivering an off-road experience that unifies cameras, terrain systems and incorporate new features into a seamless, engaging cockpit focused on usability, confidence and adventure."
+            bullets={[
+              { text: 'Designed next generation Defender off-road experience' },
+              { text: 'UX ownership of every off-road feature' },
+              { text: 'Unified physical controls and digital feedback' },
+            ]}
+            mainImage="/images/projects/Defender/Hero.png"
+            secondaryImage="/images/projects/Defender/image%202.jpg"
+            projectLink="/projects/defender"
+          />
+          <ProjectPreview
+            title="Range Rover"
+            description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
+            bullets={[
+              { text: 'Atomic design system for next-gen displays' },
+              { text: 'Cross-team integration across software and hardware' },
+              { text: 'User-centred research informing layout decisions' },
+            ]}
+            mainImage="/images/projects/range-rover/main.jpg"
+            secondaryImage="/images/projects/range-rover/preview-1.jpg"
+            projectLink="/projects/range-rover"
+          />
+          <ProjectPreview
+            title="Avinya"
+            description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software platform."
+            bullets={[
+              { text: 'Three distinct UI themes within one system' },
+              { text: 'Atomic component architecture' },
+              { text: 'Delivered a scalable design language for Tata Motors' },
+            ]}
+            mainImage="/images/projects/Avinya/hero1.jpg"
+            secondaryImage="/images/projects/Avinya/hero2.png"
+            projectLink="/projects/avinya"
+          />
+          <ProjectPreview
+            title="Swipe Save"
+            description="A mobile budgeting app that uses a swipe-based interface to help users accurately review and categorise their bank transactions, making budgeting faster, clearer, and more consistent."
+            bullets={[
+              { text: 'Swipe-based transaction categorisation' },
+              { text: 'Clear visual budget breakdowns' },
+              { text: 'Designed end-to-end from concept to prototype' },
+            ]}
+            mainImage="/images/projects/swipe-save/main.png"
+            secondaryImage="/images/projects/swipe-save/preview-1.png"
+            projectLink="/projects/swipe-save"
+          />
+          <ProjectPreview
+            title="Feed It Back"
+            description="Design work on the core inbox of a multi-channel review management platform, helping restaurant teams prioritise, respond to, and manage high volumes of customer feedback."
+            bullets={[
+              { text: 'Multi-channel review inbox design' },
+              { text: 'Triage and response workflow optimisation' },
+              { text: 'Used by major UK restaurant groups' },
+            ]}
+            mainImage="/images/projects/feed-it-back/main.png"
+            secondaryImage="/images/projects/feed-it-back/preview-1.png"
+            projectLink="/projects/feed-it-back"
+          />
+        </div>
 
       {/* Footer */}
       <Footer
@@ -226,13 +263,7 @@ export default function Projects() {
                 bottom: 0;
                 background-color: rgba(0, 0, 0, 0.3);
                 z-index: 1000;
-                padding: 16px;
-              }
-
-              @media (max-width: 563px) {
-                .menu-overlay {
-                  padding: 0 !important;
-                }
+                padding: 0;
               }
             `}
           </style>
@@ -259,7 +290,7 @@ export default function Projects() {
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           zIndex: 1000,
-          padding: '16px'
+          padding: '0'
         }}>
           <ContactForm
             onClose={() => {
@@ -291,7 +322,7 @@ export default function Projects() {
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           zIndex: 1000,
-          padding: '16px'
+          padding: '0'
         }}>
           <AppointmentForm
             onClose={() => {
@@ -322,7 +353,7 @@ export default function Projects() {
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           zIndex: 1000,
-          padding: '16px'
+          padding: '0'
         }}>
           <AppointmentContactForm
             onClose={() => setIsAppointmentContactOpen(false)}
@@ -351,7 +382,7 @@ export default function Projects() {
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           zIndex: 1000,
-          padding: '16px'
+          padding: '0'
         }}>
           <SuccessMessage onClose={() => setIsSuccessOpen(false)} />
         </div>
@@ -367,7 +398,7 @@ export default function Projects() {
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           zIndex: 1000,
-          padding: '16px'
+          padding: '0'
         }}>
           <SuccessMessage
             title="Thanks for your message!"

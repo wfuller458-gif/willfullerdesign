@@ -13,7 +13,7 @@ export const Menu: React.FC<MenuProps> = ({
   onNavigate,
   onContactClick
 }) => {
-  const navigationItems = ['Home', 'Projects', 'About', 'Contact'];
+  const navigationItems = ['Home', 'Projects', 'About'];
 
   // Update theme color when menu opens/closes
   React.useEffect(() => {
@@ -47,11 +47,11 @@ export const Menu: React.FC<MenuProps> = ({
       className="menu-container"
       style={{
         width: '531px',
-        height: 'calc(100vh - 32px)',
+        height: '100vh',
         backgroundColor: 'rgba(30, 30, 28, 0.7)',
         backdropFilter: 'blur(15px)',
         WebkitBackdropFilter: 'blur(15px)',
-        borderRadius: '8px',
+        borderRadius: '0',
         padding: '32px',
         display: 'flex',
         flexDirection: 'column',
@@ -98,38 +98,6 @@ export const Menu: React.FC<MenuProps> = ({
           }
         `}
       </style>
-      {/* SVG gradient stroke overlay */}
-      <svg
-        className="menu-svg-border"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient id="menuStroke" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#1D1D1D" />
-            <stop offset="50%" stopColor="#51514C" />
-            <stop offset="100%" stopColor="#1E1E1C" />
-          </linearGradient>
-        </defs>
-        <rect
-          x="2"
-          y="2"
-          width="calc(100% - 4px)"
-          height="calc(100% - 4px)"
-          rx="8"
-          fill="none"
-          stroke="url(#menuStroke)"
-          strokeWidth="4"
-        />
-      </svg>
       {/* Top section with navigation and close button */}
       <div
         style={{
@@ -397,7 +365,7 @@ export const Menu: React.FC<MenuProps> = ({
           paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
         }}
       >
-        <Button variant="primary-white" onClick={onContactClick}>
+        <Button variant="primary-green" onClick={onContactClick}>
           Get In Touch
         </Button>
         <Button variant="whatsapp" onClick={() => window.open('https://wa.me/447305088562', '_blank')}>
