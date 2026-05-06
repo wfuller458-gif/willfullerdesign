@@ -171,7 +171,10 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
 
   const colBase: React.CSSProperties = {
     flex: 1,
-    border: '0.5px solid #9C9C9C',
+    borderTop: '0.5px solid #9C9C9C',
+    borderBottom: '0.5px solid #9C9C9C',
+    borderLeft: '0.5px solid #9C9C9C',
+    borderRight: '0.5px solid #9C9C9C',
     padding: '16px',
     position: 'relative',
     height: '180px',
