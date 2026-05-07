@@ -111,7 +111,7 @@ export function ProjectPreview({
           font-family: DM Sans, sans-serif;
           font-weight: 300;
           font-size: 64px;
-          line-height: 1.05;
+          line-height: 1.3;
           color: var(--brand-black);
           margin: 0 0 16px 0;
         }

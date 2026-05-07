@@ -38,11 +38,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   });
 
   useEffect(() => {
+    if (!animateIn) return;
     const cycle = setInterval(() => {
       setTaglineIndex(i => (i + 1) % TAGLINES.length);
     }, 4200);
     return () => clearInterval(cycle);
-  }, []);
+  }, [animateIn]);
 
   useEffect(() => {
     const updateTime = () => {
