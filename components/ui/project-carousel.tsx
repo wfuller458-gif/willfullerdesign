@@ -1,5 +1,11 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { TooltipSmall } from './tooltip-small';
+import { useLoading } from '@/contexts/loading-context';
+
+const INTRO_DELAY = 1800;
+const STAGGER = 100;
+const IMG_DUR = 0.4;
 
 export interface ProjectCarouselProps {
   images?: string[];
@@ -24,6 +30,24 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
+  const { animateIn } = useLoading();
+  const hasStarted = React.useRef(false);
+
+  useEffect(() => {
+    if (!animateIn || hasStarted.current) return;
+    hasStarted.current = true;
+    const count = images.length;
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => setVisibleCount(i + 1), INTRO_DELAY + i * STAGGER);
+    }
+    setTimeout(() => {
+      setScrolling(true);
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }, INTRO_DELAY + (count - 1) * STAGGER + IMG_DUR * 1000);
+  }, [animateIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Detect if device is mobile/touch
   React.useEffect(() => {
@@ -178,22 +202,27 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
           gap: isHovered && !isMobile ? '44px' : '8px',
           alignItems: 'center',
           width: 'fit-content',
-          transition: 'gap 0.3s ease'
+          transition: 'gap 0.3s ease',
+          animationPlayState: !scrolling || (isHovered && !isMobile) ? 'paused' : 'running',
         }}
       >
-        {/* First set of images */}
+        {/* First set — right to left stagger */}
         {images.map((image, index) => (
-          <div
+          <motion.div
             key={`first-${index}`}
             className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
             onMouseEnter={() => !isMobile && setHoveredIndex(index)}
             onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+            initial={{ opacity: 0, y: 8 }}
+            animate={visibleCount >= images.length - index
+              ? { opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 1, y: 0 }
+              : { opacity: 0, y: 8 }}
+            transition={{ duration: IMG_DUR, ease: 'easeInOut' }}
             style={{
               flexShrink: 0,
               borderRadius: '4px',
               overflow: 'visible',
-              opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 1,
-              transition: 'width 0.3s ease, height 0.3s ease, opacity 0.3s ease',
+              transition: 'width 0.3s ease, height 0.3s ease',
               position: 'relative',
               zIndex: hoveredIndex === index ? 100 : 1
             }}
@@ -228,10 +257,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
                 />
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
 
-        {/* Duplicate set for seamless loop */}
+        {/* Duplicate set — visible once scrolling starts */}
         {images.map((image, index) => {
           const duplicateIndex = index + images.length;
           return (
@@ -244,7 +273,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
                 flexShrink: 0,
                 borderRadius: '4px',
                 overflow: 'visible',
-                opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== duplicateIndex ? 0.5 : 1,
+                opacity: !scrolling ? 0 : isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== duplicateIndex ? 0.5 : 1,
                 transition: 'width 0.3s ease, height 0.3s ease, opacity 0.3s ease',
                 position: 'relative',
                 zIndex: hoveredIndex === duplicateIndex ? 100 : 1

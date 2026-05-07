@@ -276,14 +276,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* Carousel — always 20vh */}
-      <motion.div
-        className="hero-carousel-wrapper"
-        initial={{ opacity: 0 }}
-        animate={animateIn ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.6, delay: 2.0, ease: 'easeOut' }}
-      >
+      <div className="hero-carousel-wrapper">
         <ProjectCarousel />
-      </motion.div>
+      </div>
     </div>
   );
 };

@@ -96,33 +96,38 @@ export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadP
       <div className="pin-panel" style={{
         position: 'fixed',
         top: 0, left: 0,
-        width: '420px',
+        width: '531px',
         height: '100vh',
-        backgroundColor: 'rgba(30, 30, 28, 0.82)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        backgroundColor: 'rgba(30, 30, 28, 0.7)',
+        backdropFilter: 'blur(15px)',
+        WebkitBackdropFilter: 'blur(15px)',
         zIndex: 201,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '40px 40px 56px',
+        padding: '32px',
         boxSizing: 'border-box',
       }}>
 
-        {/* Header */}
-        <div>
+        {/* Header row — title left, close right (matches menu) */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <p style={{ color: 'rgba(255,255,255,0.45)', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', margin: '0 0 10px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              Enter PIN to access
+            </p>
+            <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
+              {projectTitle}
+            </h2>
+          </div>
           <button
             onClick={onClose}
-            style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '18px', cursor: 'pointer', padding: 0, lineHeight: 1, marginBottom: '56px', display: 'block' }}
+            style={{ width: '32px', height: '32px', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+            aria-label="Close"
           >
-            ✕
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: 'var(--brand-white)' }}>
+              <path d="M24 8L8 24M8 8L24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', margin: '0 0 10px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-            Enter PIN to access
-          </p>
-          <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
-            {projectTitle}
-          </h2>
         </div>
 
         {/* PIN dots */}

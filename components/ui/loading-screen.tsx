@@ -33,6 +33,9 @@ export function LoadingScreen() {
 
   // Exit timer
   useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     const allVisibleMs = (WORD_DELAY + WORD_DUR) * 1000;
     const t = setTimeout(() => setExiting(true), allVisibleMs + HOLD);
     return () => clearTimeout(t);
@@ -48,7 +51,10 @@ export function LoadingScreen() {
             : { duration: 0 }
           }
           onAnimationComplete={() => {
-            if (exiting) { setVisible(false); triggerAnimateIn(); }
+            if (exiting) {
+              setVisible(false);
+              triggerAnimateIn();
+            }
           }}
           style={{
             position: 'fixed', inset: 0,
