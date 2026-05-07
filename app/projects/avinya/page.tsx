@@ -1,13 +1,11 @@
 'use client';
-
 import { useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { Footer } from '@/components/ui/footer';
 import { Menu } from '@/components/ui/menu';
 import { ContactForm } from '@/components/ui/contact-form';
 import { ProjectHero } from '@/components/ui/project-hero';
-
-export default function AvinyaProject() {
+export default function TrainingPlatformProject() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   return (
@@ -16,7 +14,7 @@ export default function AvinyaProject() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header onMenuClick={() => setIsMenuOpen(true)} onContactClick={() => setIsContactOpen(true)} />
       </div>
-      <ProjectHero title="Avinya" year="2023" brand="Tata Motors" industry="Automotive" directors={['TBC']} deliverables={['Design System', 'UI Themes', 'Component Library']} heroImage="/images/projects/Avinya/hero1.jpg" />
+      <ProjectHero title="Training Platform" year="2020" brand="Full Clarity" industry="Healthcare" directors={['Ed Kemp']} deliverables={['Web App', 'UX Design', 'Wireframes']} heroImage="" />
       <Footer onContactClick={() => setIsContactOpen(true)} />
       {isMenuOpen && <div className="overlay-wrapper"><Menu onClose={() => setIsMenuOpen(false)} onContactClick={() => { setIsMenuOpen(false); setIsContactOpen(true); }} /></div>}
       {isContactOpen && <div className="overlay-wrapper"><ContactForm onClose={() => setIsContactOpen(false)} onSubmit={() => setIsContactOpen(false)} /></div>}

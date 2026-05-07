@@ -1,13 +1,11 @@
 'use client';
-
 import { useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { Footer } from '@/components/ui/footer';
 import { Menu } from '@/components/ui/menu';
 import { ContactForm } from '@/components/ui/contact-form';
 import { ProjectHero } from '@/components/ui/project-hero';
-
-export default function SwipeSaveProject() {
+export default function TrickTrainerProject() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   return (
@@ -16,7 +14,7 @@ export default function SwipeSaveProject() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header onMenuClick={() => setIsMenuOpen(true)} onContactClick={() => setIsContactOpen(true)} />
       </div>
-      <ProjectHero title="Swipe Save" year="2022" brand="Swipe Save" industry="FinTech" directors={['TBC']} deliverables={['Mobile App', 'UX Design', 'Prototype']} heroImage="/images/projects/swipe-save/main.png" />
+      <ProjectHero title="Trick Trainer" year="2025" brand="Personal Project" industry="AI / ML" directors={['Will Fuller']} deliverables={['iOS App', 'Pose Detection', 'ML Model']} heroImage="" />
       <Footer onContactClick={() => setIsContactOpen(true)} />
       {isMenuOpen && <div className="overlay-wrapper"><Menu onClose={() => setIsMenuOpen(false)} onContactClick={() => { setIsMenuOpen(false); setIsContactOpen(true); }} /></div>}
       {isContactOpen && <div className="overlay-wrapper"><ContactForm onClose={() => setIsContactOpen(false)} onSubmit={() => setIsContactOpen(false)} /></div>}

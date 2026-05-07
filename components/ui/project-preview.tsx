@@ -1,12 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { PinPad } from './pin-pad';
+
+const PadlockIcon = () => (
+  <svg width="36" height="42" viewBox="0 0 36 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="19" width="32" height="21" rx="3" stroke="white" strokeWidth="2.5"/>
+    <path d="M10 19V13C10 8.582 13.582 5 18 5s8 3.582 8 8v6" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+    <circle cx="18" cy="30" r="3" fill="white"/>
+    <rect x="16.5" y="30" width="3" height="5" rx="1.5" fill="white"/>
+  </svg>
+);
 
 export interface Bullet {
   icon?: string;
   text: string;
 }
+
+export type BubbleVariant = 'open' | 'locked' | 'coming-soon';
 
 export interface ProjectPreviewProps {
   title: string;
@@ -15,6 +27,8 @@ export interface ProjectPreviewProps {
   mainImage: string;
   secondaryImage: string;
   projectLink?: string;
+  bubbleVariant?: BubbleVariant;
+  pin?: string;
 }
 
 export function ProjectPreview({
@@ -24,8 +38,46 @@ export function ProjectPreview({
   mainImage,
   secondaryImage,
   projectLink = '#',
+  bubbleVariant,
+  pin = '1234',
 }: ProjectPreviewProps) {
   const router = useRouter();
+  const [showPin, setShowPin] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [bubblePos, setBubblePos] = useState({ x: 0, y: 0 });
+  const targetPos = useRef({ x: 0, y: 0 });
+  const currentPos = useRef({ x: 0, y: 0 });
+  const rafRef = useRef<number>(0);
+
+  const animate = useCallback(() => {
+    const lerp = 0.12;
+    currentPos.current.x += (targetPos.current.x - currentPos.current.x) * lerp;
+    currentPos.current.y += (targetPos.current.y - currentPos.current.y) * lerp;
+    setBubblePos({ x: currentPos.current.x, y: currentPos.current.y });
+    rafRef.current = requestAnimationFrame(animate);
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    targetPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }, []);
+
+  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    targetPos.current = { x, y };
+    currentPos.current = { x, y };
+    setIsHovering(true);
+    rafRef.current = requestAnimationFrame(animate);
+  }, [animate]);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovering(false);
+    cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
 
   return (
     <>
@@ -117,6 +169,7 @@ export function ProjectPreview({
           display: flex;
           gap: 8px;
           height: 559px;
+          position: relative;
         }
 
         .pp-image-main {
@@ -161,7 +214,11 @@ export function ProjectPreview({
         }
       `}</style>
 
-      <div className="pp-wrap" onClick={() => router.push(projectLink)}>
+      <div className="pp-wrap" onClick={() => {
+        if (bubbleVariant === 'coming-soon') return;
+        if (bubbleVariant === 'locked') { setShowPin(true); return; }
+        router.push(projectLink);
+      }}>
 
         <hr className="pp-rule" />
 
@@ -188,16 +245,58 @@ export function ProjectPreview({
         </div>
 
         {/* Images */}
-        <div className="pp-images">
-          <div className="pp-image-main">
-            <img src={mainImage} alt={title} />
-          </div>
-          <div className="pp-image-secondary">
-            <img src={secondaryImage} alt={title} />
-          </div>
+        <div
+          className="pp-images"
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="pp-image-main" style={{ backgroundColor: '#D9D9D9' }} />
+          <div className="pp-image-secondary" style={{ backgroundColor: '#D9D9D9' }} />
+
+          {/* Cursor bubble */}
+          {isHovering && bubbleVariant && (
+            <div style={{
+              position: 'absolute',
+              left: bubblePos.x,
+              top: bubblePos.y,
+              transform: 'translate(-50%, -50%)',
+              width: '144px',
+              height: '144px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(40, 40, 40, 0.72)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              pointerEvents: 'none',
+              zIndex: 10,
+            }}>
+              {bubbleVariant === 'open' && (
+                <span style={{ color: 'white', fontSize: '20px', fontFamily: 'DM Sans, sans-serif', fontWeight: 300 }}>
+                  Open
+                </span>
+              )}
+              {bubbleVariant === 'locked' && <PadlockIcon />}
+              {bubbleVariant === 'coming-soon' && (
+                <span style={{ color: 'white', fontSize: '16px', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, textAlign: 'center', lineHeight: 1.4 }}>
+                  Coming<br />Soon...
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
       </div>
+      {showPin && (
+        <PinPad
+          projectTitle={title}
+          correctPin={pin}
+          onSuccess={() => { setShowPin(false); router.push(projectLink); }}
+          onClose={() => setShowPin(false)}
+        />
+      )}
     </>
   );
 }

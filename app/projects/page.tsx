@@ -188,57 +188,47 @@ export default function Projects() {
               { text: 'UX ownership of every off-road feature' },
               { text: 'Unified physical controls and digital feedback' },
             ]}
-            mainImage="/images/projects/Defender/Hero.png"
-            secondaryImage="/images/projects/Defender/image%202.jpg"
-            projectLink="/projects/defender"
-          />
-          <ProjectPreview
-            title="Range Rover"
-            description="Designed next-generation digital displays for upcoming Range Rover and Defender models, creating an atomic design system and layout framework informed by user-centred research, attention management, and cross-team integration."
-            bullets={[
-              { text: 'Atomic design system for next-gen displays' },
-              { text: 'Cross-team integration across software and hardware' },
-              { text: 'User-centred research informing layout decisions' },
-            ]}
-            mainImage="/images/projects/range-rover/main.jpg"
-            secondaryImage="/images/projects/range-rover/preview-1.jpg"
-            projectLink="/projects/range-rover"
-          />
-          <ProjectPreview
-            title="Avinya"
-            description="Design system with three Avinya specific UI themes, enabling Tata Motors to deliver a distinct visual identity through a unified software platform."
-            bullets={[
-              { text: 'Three distinct UI themes within one system' },
-              { text: 'Atomic component architecture' },
-              { text: 'Delivered a scalable design language for Tata Motors' },
-            ]}
-            mainImage="/images/projects/Avinya/hero1.jpg"
-            secondaryImage="/images/projects/Avinya/hero2.png"
-            projectLink="/projects/avinya"
-          />
-          <ProjectPreview
-            title="Swipe Save"
-            description="A mobile budgeting app that uses a swipe-based interface to help users accurately review and categorise their bank transactions, making budgeting faster, clearer, and more consistent."
-            bullets={[
-              { text: 'Swipe-based transaction categorisation' },
-              { text: 'Clear visual budget breakdowns' },
-              { text: 'Designed end-to-end from concept to prototype' },
-            ]}
-            mainImage="/images/projects/swipe-save/main.png"
-            secondaryImage="/images/projects/swipe-save/preview-1.png"
-            projectLink="/projects/swipe-save"
+            mainImage="" secondaryImage="" projectLink="/projects/defender" bubbleVariant="locked"
           />
           <ProjectPreview
             title="Feed It Back"
-            description="Design work on the core inbox of a multi-channel review management platform, helping restaurant teams prioritise, respond to, and manage high volumes of customer feedback."
+            description="Redesigned the case management platform for Feed It Back, a hospitality guest feedback tool used by major restaurant chains. Delivered the user experience design by transferring user research findings, into user flows, wireframes and full fidelity designs, for improved navigation, usability, and mobile compatibility."
             bullets={[
-              { text: 'Multi-channel review inbox design' },
-              { text: 'Triage and response workflow optimisation' },
-              { text: 'Used by major UK restaurant groups' },
+              { text: 'Receives millions of reviews from top hospitality brands' },
+              { text: 'Multi million investment secured after platform overhaul' },
+              { text: "Feed It Back's platform continues to grow" },
             ]}
-            mainImage="/images/projects/feed-it-back/main.png"
-            secondaryImage="/images/projects/feed-it-back/preview-1.png"
-            projectLink="/projects/feed-it-back"
+            mainImage="" secondaryImage="" projectLink="/projects/feed-it-back" bubbleVariant="open"
+          />
+          <ProjectPreview
+            title="Driver Displays"
+            description="Designed future digital driver displays for Land Rover vehicles, with a focus on cognitive load and attention management. Also responsible for maintaining and updating existing displays to ensure continued saleability across global markets."
+            bullets={[
+              { text: 'Designs delivered for 120+ markets to 100,000+ vehicles' },
+              { text: 'Integrated Apple CarPlay and Android Auto' },
+              { text: 'Designed next generation driver displays' },
+            ]}
+            mainImage="" secondaryImage="" projectLink="/projects/range-rover" bubbleVariant="locked"
+          />
+          <ProjectPreview
+            title="Training Platform"
+            description="Designed the user experience for a medical education platform for general practitioners and primary care clinicians, taking it from an in person service to a fully digital solution. Transferring user interview findings, into user flows, wireframes and full fidelity designs."
+            bullets={[
+              { text: '30,000 clinicians supported annually through the platform' },
+              { text: 'Enabling professionals to complete training digitally' },
+              { text: 'In person only service to fully digital offering' },
+            ]}
+            mainImage="" secondaryImage="" projectLink="/projects/avinya" bubbleVariant="locked"
+          />
+          <ProjectPreview
+            title="Trick Trainer"
+            description="Building fun side project, trick trainer app with my Black Labrador. It is a trick recognition tool that uses pose detection to detect when he's completed a command. The goal is to eventually have it entertain him autonomously. Its a passion project and dog enrichment experiment."
+            bullets={[
+              { text: 'Leveraging machine learning and pose detection models' },
+              { text: 'Using the latest AI tools to bring my concepts to life' },
+              { text: 'Proof of concept build completed and tested' },
+            ]}
+            mainImage="" secondaryImage="" projectLink="/projects/swipe-save" bubbleVariant="coming-soon"
           />
         </div>
 

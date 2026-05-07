@@ -1,13 +1,11 @@
 'use client';
-
 import { useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { Footer } from '@/components/ui/footer';
 import { Menu } from '@/components/ui/menu';
 import { ContactForm } from '@/components/ui/contact-form';
 import { ProjectHero } from '@/components/ui/project-hero';
-
-export default function RangeRoverProject() {
+export default function DriverDisplaysProject() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   return (
@@ -16,7 +14,7 @@ export default function RangeRoverProject() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header onMenuClick={() => setIsMenuOpen(true)} onContactClick={() => setIsContactOpen(true)} />
       </div>
-      <ProjectHero title="Range Rover" year="2023" brand="Range Rover" industry="Automotive" directors={['TBC']} deliverables={['Instrument Cluster', 'Head Up Display', 'Design System']} heroImage="/images/projects/range-rover/main.jpg" />
+      <ProjectHero title="Driver Displays" year="2023" brand="Land Rover" industry="Automotive" directors={['TBC']} deliverables={['Instrument Cluster', 'Head Up Display', 'Design System']} heroImage="" />
       <Footer onContactClick={() => setIsContactOpen(true)} />
       {isMenuOpen && <div className="overlay-wrapper"><Menu onClose={() => setIsMenuOpen(false)} onContactClick={() => { setIsMenuOpen(false); setIsContactOpen(true); }} /></div>}
       {isContactOpen && <div className="overlay-wrapper"><ContactForm onClose={() => setIsContactOpen(false)} onSubmit={() => setIsContactOpen(false)} /></div>}

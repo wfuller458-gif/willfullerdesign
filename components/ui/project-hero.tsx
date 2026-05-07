@@ -137,8 +137,8 @@ export function ProjectHero({
         </div>
       </div>
 
-      {/* Full-width 16:9 hero image */}
-      <img src={heroImage} alt={title} className="ph-image" />
+      {/* Full-width 16:9 hero image — grey placeholder */}
+      <div className="ph-image" style={{ backgroundColor: '#D9D9D9' }} />
     </>
   );
 }
