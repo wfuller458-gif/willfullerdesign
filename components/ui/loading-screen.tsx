@@ -1,34 +1,39 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLoading } from '@/contexts/loading-context';
 
-const NAME = 'Will Fuller';
-const STAGGER = 0.07;       // delay between each letter (s)
-const LETTER_DUR = 0.6;     // each letter's rise duration (s)
-const HOLD = 600;            // ms to hold after all letters visible
-const EXIT_DUR = 1.0;        // screen slide-up duration (s)
+const WORDS = ['Will', 'Fuller'];
+const WORD_DELAY = 0.35;
+const WORD_DUR = 0.4;
+const HOLD = 700;
+const EXIT_DUR = 1.0;
+
 
 export function LoadingScreen() {
   const [visible, setVisible] = useState(true);
   const [exiting, setExiting] = useState(false);
+  const [count, setCount] = useState(0);
   const { triggerAnimateIn } = useLoading();
 
-  // Shuffle evenly-spaced delays so order is random but coverage is uniform
-  const delays = useMemo(() => {
-    const arr = NAME.split('').map((_, i) => i * STAGGER);
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+  // Counter 0 → 100, completes when both words are fully visible
+  useEffect(() => {
+    const totalMs = (WORD_DELAY + WORD_DUR) * 1000;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / totalMs, 1);
+      setCount(Math.floor(p * 100));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
+  // Exit timer
   useEffect(() => {
-    // Last letter (rightmost) has delay 0, first letter has max delay
-    const maxDelay = (NAME.length - 1) * STAGGER;
-    const allVisibleMs = (maxDelay + LETTER_DUR) * 1000;
+    const allVisibleMs = (WORD_DELAY + WORD_DUR) * 1000;
     const t = setTimeout(() => setExiting(true), allVisibleMs + HOLD);
     return () => clearTimeout(t);
   }, []);
@@ -43,50 +48,49 @@ export function LoadingScreen() {
             : { duration: 0 }
           }
           onAnimationComplete={() => {
-            if (exiting) {
-              setVisible(false);
-              triggerAnimateIn();
-            }
+            if (exiting) { setVisible(false); triggerAnimateIn(); }
           }}
           style={{
-            position: 'fixed',
-            inset: 0,
+            position: 'fixed', inset: 0,
             backgroundColor: '#000000',
             zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
-          {/* Letter row */}
-          <div style={{ display: 'flex' }}>
-            {NAME.split('').map((letter, i) => (
-                <div
-                  key={i}
-                  style={{ overflow: 'hidden', display: 'inline-block', lineHeight: 1.15 }}
-                >
-                  <motion.span
-                    initial={{ y: '110%' }}
-                    animate={{ y: 0 }}
-                    transition={{
-                      delay: delays[i],
-                      duration: LETTER_DUR,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    style={{
-                      display: 'inline-block',
-                      color: '#ffffff',
-                      fontSize: '96px',
-                      lineHeight: 1.15,
-                      fontFamily: 'DM Sans, sans-serif',
-                      fontWeight: 500,
-                      whiteSpace: 'pre',
-                      letterSpacing: '-0.02em',
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                </div>
+          {/* Bottom right — counter */}
+          <span style={{
+            position: 'absolute',
+            bottom: '16px',
+            right: '16px',
+            fontFamily: 'DM Sans, sans-serif',
+            fontWeight: 300,
+            fontSize: '42px',
+            lineHeight: 1,
+            color: 'rgba(255, 255, 255, 0.6)',
+          }}>
+            {count}
+          </span>
+
+          {/* Name */}
+          <div style={{ display: 'flex', gap: '26px' }}>
+            {WORDS.map((word, i) => (
+              <motion.span
+                key={word}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * WORD_DELAY, duration: WORD_DUR, ease: 'easeInOut' }}
+                style={{
+                  display: 'inline-block',
+                  color: '#ffffff',
+                  fontSize: '96px',
+                  lineHeight: 1.15,
+                  fontFamily: 'DM Sans, sans-serif',
+                  fontWeight: 500,
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                {word}
+              </motion.span>
             ))}
           </div>
         </motion.div>

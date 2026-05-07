@@ -184,7 +184,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="hero-upper">
         {/* Centered content */}
         <div className="hero-content">
-          <motion.div {...fadeUp(0.15)}>
+          <motion.div {...fadeUp(1.3)}>
             <AnimatePresence mode="wait">
               <motion.p
                 key={taglineIndex}
@@ -199,11 +199,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </AnimatePresence>
           </motion.div>
 
-          <motion.h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }} {...fadeUp(0)}>
-            Making Ideas Real
-          </motion.h1>
+          <h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }}>
+            {['Making', 'Ideas', 'Real'].map((word, i) => (
+              <span key={word} style={{ display: 'inline-block', marginRight: i < 2 ? '0.22em' : 0 }}>
+                <motion.span
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                  transition={{ delay: i * 0.45, duration: 0.65, ease: 'easeInOut' }}
+                  style={{ display: 'inline-block' }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
 
-          <motion.div {...fadeUp(0.25)}>
+          <motion.div {...fadeUp(1.6)}>
             <Button variant="primary-black" onClick={onContactClick}>
               {buttonText}
             </Button>
@@ -212,7 +223,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Location and availability — pinned to bottom of 80vh */}
         <motion.div
-          {...fadeUp(0.35)}
+          {...fadeUp(1.8)}
           style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -268,7 +279,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         className="hero-carousel-wrapper"
         initial={{ opacity: 0 }}
         animate={animateIn ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+        transition={{ duration: 0.6, delay: 2.0, ease: 'easeOut' }}
       >
         <ProjectCarousel />
       </motion.div>
