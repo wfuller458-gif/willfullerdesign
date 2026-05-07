@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ProjectCarousel } from './project-carousel';
 import { Button } from './button';
+import { useLoading } from '@/contexts/loading-context';
 
 const TAGLINES = [
   'User centred design',
@@ -28,6 +29,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   const [ukTime, setUkTime] = useState('');
   const [taglineIndex, setTaglineIndex] = useState(0);
+  const { animateIn } = useLoading();
+
+  const fadeUp = (delay: number) => ({
+    initial: { opacity: 0, y: 20 },
+    animate: animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+  });
 
   useEffect(() => {
     const cycle = setInterval(() => {
@@ -176,30 +184,35 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="hero-upper">
         {/* Centered content */}
         <div className="hero-content">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={taglineIndex}
-              className="hero-tagline"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-            >
-              {TAGLINES[taglineIndex]}
-            </motion.p>
-          </AnimatePresence>
+          <motion.div {...fadeUp(0.15)}>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={taglineIndex}
+                className="hero-tagline"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+              >
+                {TAGLINES[taglineIndex]}
+              </motion.p>
+            </AnimatePresence>
+          </motion.div>
 
-          <h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }}>
+          <motion.h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }} {...fadeUp(0)}>
             Making Ideas Real
-          </h1>
+          </motion.h1>
 
-          <Button variant="primary-black" onClick={onContactClick}>
-            {buttonText}
-          </Button>
+          <motion.div {...fadeUp(0.25)}>
+            <Button variant="primary-black" onClick={onContactClick}>
+              {buttonText}
+            </Button>
+          </motion.div>
         </div>
 
         {/* Location and availability — pinned to bottom of 80vh */}
-        <div
+        <motion.div
+          {...fadeUp(0.35)}
           style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -247,13 +260,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               Available For Work
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Carousel — always 20vh */}
-      <div className="hero-carousel-wrapper">
+      <motion.div
+        className="hero-carousel-wrapper"
+        initial={{ opacity: 0 }}
+        animate={animateIn ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+      >
         <ProjectCarousel />
-      </div>
+      </motion.div>
     </div>
   );
 };

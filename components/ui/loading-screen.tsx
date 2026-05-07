@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLoading } from '@/contexts/loading-context';
 
 const NAME = 'Will Fuller';
 const STAGGER = 0.07;       // delay between each letter (s)
@@ -12,6 +13,7 @@ const EXIT_DUR = 1.0;        // screen slide-up duration (s)
 export function LoadingScreen() {
   const [visible, setVisible] = useState(true);
   const [exiting, setExiting] = useState(false);
+  const { triggerAnimateIn } = useLoading();
 
   // Shuffle evenly-spaced delays so order is random but coverage is uniform
   const delays = useMemo(() => {
@@ -40,7 +42,12 @@ export function LoadingScreen() {
             ? { duration: EXIT_DUR, ease: [0.76, 0, 0.24, 1] }
             : { duration: 0 }
           }
-          onAnimationComplete={() => { if (exiting) setVisible(false); }}
+          onAnimationComplete={() => {
+            if (exiting) {
+              setVisible(false);
+              triggerAnimateIn();
+            }
+          }}
           style={{
             position: 'fixed',
             inset: 0,
