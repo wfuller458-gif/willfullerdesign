@@ -9,7 +9,7 @@ const IMG_DUR = 0.4;
 
 // Soft nav timings — carousel starts after "Real" finishes (~1.55s)
 const SOFT_INTRO_DELAY = 1600;
-const SOFT_STAGGER = 60;
+const SOFT_STAGGER = 42;
 
 export interface ProjectCarouselProps {
   images?: string[];
