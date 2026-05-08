@@ -36,6 +36,11 @@ export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadP
   }, [entered, shake, solved, pinLength, correctPin, onSuccess]);
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key >= '0' && e.key <= '9') press(e.key);
       else if (e.key === 'Backspace') press('del');
@@ -50,10 +55,10 @@ export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadP
       <style>{`
         .pin-btn {
           cursor: pointer;
-          width: 72px;
-          height: 72px;
-          border-radius: 50%;
-          border: none;
+          width: 100%;
+          height: 88px;
+          border-radius: 0;
+          border: 0.5px solid rgba(255, 255, 255, 0.35);
           background: transparent;
           color: white;
           font-family: DM Sans, sans-serif;
@@ -65,10 +70,32 @@ export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadP
           transition: background-color 200ms ease;
           user-select: none;
           -webkit-user-select: none;
+          box-sizing: border-box;
         }
         .pin-btn:hover { background-color: rgba(255,255,255,0.08); }
         .pin-btn:active { background-color: rgba(255,255,255,0.18); }
         .pin-btn-action { color: rgba(255,255,255,0.45) !important; font-size: 16px !important; letter-spacing: 0.05em; }
+
+        .pin-btn-wrap {
+          position: relative;
+          overflow: hidden;
+          display: inline-block;
+          line-height: 1;
+        }
+        .pin-btn-label {
+          display: block;
+          transition: transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1);
+        }
+        .pin-btn:hover .pin-btn-label { transform: translateY(-100%); }
+
+        .pin-btn-label-dup {
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          text-align: center;
+          transform: translateY(100%);
+          transition: transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1);
+        }
+        .pin-btn:hover .pin-btn-label-dup { transform: translateY(0); }
 
         @keyframes pin-shake {
           0%, 100% { transform: translateX(0); }
@@ -140,26 +167,45 @@ export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadP
               width: '13px',
               height: '13px',
               borderRadius: '50%',
-              backgroundColor: i < entered.length
-                ? solved ? '#008E24' : 'white'
-                : 'transparent',
-              border: `1.5px solid ${i < entered.length ? (solved ? '#008E24' : 'white') : 'rgba(255,255,255,0.3)'}`,
+              backgroundColor: i < entered.length ? 'white' : 'transparent',
+              border: `1.5px solid ${i < entered.length ? 'white' : 'rgba(255,255,255,0.3)'}`,
               transition: 'background-color 0.15s ease, border-color 0.15s ease',
-            }} />
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              {solved && i < entered.length && (
+                <svg width="7" height="6" viewBox="0 0 7 6" fill="none">
+                  <path d="M1 3L2.5 4.5L6 1" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              )}
+            </div>
           ))}
         </div>
 
         {/* Number grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '4px', justifyItems: 'center' }}>
-          {BUTTONS.map((btn) => (
-            <button
-              key={btn}
-              className={`pin-btn${btn === 'clr' || btn === 'del' ? ' pin-btn-action' : ''}`}
-              onClick={() => press(btn)}
-            >
-              {btn === 'del' ? '⌫' : btn === 'clr' ? 'CLR' : btn}
-            </button>
-          ))}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
+          {BUTTONS.map((btn, i) => {
+            const label = btn === 'del' ? '⌫' : btn === 'clr' ? 'CLR' : btn;
+            const radius =
+              i === 0  ? '30px 0 0 0' :
+              i === 2  ? '0 30px 0 0' :
+              i === 9  ? '0 0 0 30px' :
+              i === 11 ? '0 0 30px 0' : '0';
+            return (
+              <button
+                key={btn}
+                className={`pin-btn${btn === 'clr' || btn === 'del' ? ' pin-btn-action' : ''}`}
+                style={{ borderRadius: radius }}
+                onClick={() => press(btn)}
+              >
+                <span className="pin-btn-wrap">
+                  <span className="pin-btn-label">{label}</span>
+                  <span className="pin-btn-label-dup">{label}</span>
+                </span>
+              </button>
+            );
+          })}
         </div>
 
       </div>

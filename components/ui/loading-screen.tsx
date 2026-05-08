@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLoading } from '@/contexts/loading-context';
 
@@ -10,15 +11,35 @@ const WORD_DUR = 0.4;
 const HOLD = 700;
 const EXIT_DUR = 1.0;
 
-
 export function LoadingScreen() {
-  const [visible, setVisible] = useState(true);
-  const [exiting, setExiting] = useState(false);
-  const [count, setCount] = useState(0);
+  const pathname = usePathname();
   const { triggerAnimateIn } = useLoading();
 
-  // Counter 0 → 100, completes when both words are fully visible
+  // visible is true only if the very first page loaded was '/'
+  // useState initialiser runs once on mount — subsequent navigations don't change this
+  const [visible, setVisible] = useState(pathname === '/');
+  const [exiting, setExiting] = useState(false);
+  const [count, setCount] = useState(0);
+
+  // If not showing animation, trigger page animations immediately
   useEffect(() => {
+    if (!visible) triggerAnimateIn();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Scroll lock + exit timer — only runs when animation is active
+  useEffect(() => {
+    if (!visible) return;
+    window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    const allVisibleMs = (WORD_DELAY + WORD_DUR) * 1000;
+    const t = setTimeout(() => setExiting(true), allVisibleMs + HOLD);
+    return () => clearTimeout(t);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Counter 0 → 100
+  useEffect(() => {
+    if (!visible) return;
     const totalMs = (WORD_DELAY + WORD_DUR) * 1000;
     const start = performance.now();
     let raf: number;
@@ -29,17 +50,9 @@ export function LoadingScreen() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Exit timer
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-    const allVisibleMs = (WORD_DELAY + WORD_DUR) * 1000;
-    const t = setTimeout(() => setExiting(true), allVisibleMs + HOLD);
-    return () => clearTimeout(t);
-  }, []);
+  if (!visible) return null;
 
   return (
     <AnimatePresence>
@@ -52,6 +65,8 @@ export function LoadingScreen() {
           }
           onAnimationComplete={() => {
             if (exiting) {
+              document.body.style.overflow = '';
+              document.documentElement.style.overflow = '';
               setVisible(false);
               triggerAnimateIn();
             }
