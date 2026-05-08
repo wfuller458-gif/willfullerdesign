@@ -7,6 +7,10 @@ const INTRO_DELAY = 1800;
 const STAGGER = 100;
 const IMG_DUR = 0.4;
 
+// Soft nav timings — carousel starts after "Real" finishes (~1.55s)
+const SOFT_INTRO_DELAY = 1600;
+const SOFT_STAGGER = 60;
+
 export interface ProjectCarouselProps {
   images?: string[];
 }
@@ -34,19 +38,30 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
   const [scrolling, setScrolling] = useState(false);
   const { animateIn } = useLoading();
   const hasStarted = React.useRef(false);
+  // Capture whether animateIn was already true when this component mounted
+  const isSoftNav = React.useRef(animateIn);
 
   useEffect(() => {
     if (!animateIn || hasStarted.current) return;
     hasStarted.current = true;
+
+    const softNav = isSoftNav.current;
+    const intro = softNav ? SOFT_INTRO_DELAY : INTRO_DELAY;
+    const stagger = softNav ? SOFT_STAGGER : STAGGER;
     const count = images.length;
+
+    // Lock scroll during carousel stagger on soft nav too
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
     for (let i = 0; i < count; i++) {
-      setTimeout(() => setVisibleCount(i + 1), INTRO_DELAY + i * STAGGER);
+      setTimeout(() => setVisibleCount(i + 1), intro + i * stagger);
     }
     setTimeout(() => {
       setScrolling(true);
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
-    }, INTRO_DELAY + (count - 1) * STAGGER + IMG_DUR * 1000);
+    }, intro + (count - 1) * stagger + IMG_DUR * 1000);
   }, [animateIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Detect if device is mobile/touch
