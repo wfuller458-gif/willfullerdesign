@@ -1,4 +1,5 @@
 'use client';
+import { ScrollHintBubble } from '@/components/ui/scroll-hint-bubble';
 
 export interface GalleryImage {
   src?: string;
@@ -195,22 +196,24 @@ export function ProjectSectionWithGallery({
           </div>
         </div>
 
-        <div className="pswg-gallery">
-          <div className="pswg-gallery-lead" />
-          {images.map((img, i) => {
-            const imgWidth = Math.round(galleryHeight * (img.width / img.height));
-            return (
-              <div key={i} className="pswg-gallery-item">
-                {img.src
-                  ? <img src={img.src} alt={img.label} className="pswg-gallery-img" style={{ width: imgWidth, height: galleryHeight }} />
-                  : <div className="pswg-gallery-img" style={{ width: imgWidth, height: galleryHeight }} />
-                }
-                <span className="pswg-gallery-label">{img.label}</span>
-              </div>
-            );
-          })}
-          <div className="pswg-gallery-spacer" />
-        </div>
+        <ScrollHintBubble>
+          <div className="pswg-gallery">
+            <div className="pswg-gallery-lead" />
+            {images.map((img, i) => {
+              const imgWidth = Math.round(galleryHeight * (img.width / img.height));
+              return (
+                <div key={i} className="pswg-gallery-item">
+                  {img.src
+                    ? <img src={img.src} alt={img.label} className="pswg-gallery-img" style={{ width: imgWidth, height: galleryHeight }} />
+                    : <div className="pswg-gallery-img" style={{ width: imgWidth, height: galleryHeight }} />
+                  }
+                  <span className="pswg-gallery-label">{img.label}</span>
+                </div>
+              );
+            })}
+            <div className="pswg-gallery-spacer" />
+          </div>
+        </ScrollHintBubble>
       </div>
     </>
   );

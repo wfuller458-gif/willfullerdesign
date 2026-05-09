@@ -1,4 +1,5 @@
 'use client';
+import { ScrollHintBubble } from '@/components/ui/scroll-hint-bubble';
 
 export interface GalleryStripImage {
   src?: string;
@@ -81,22 +82,24 @@ export function ProjectGalleryStrip({
         }
       `}</style>
 
-      <div className={`pgs-gallery ${reversed ? 'pgs-gallery-rtl' : 'pgs-gallery-ltr'}`}>
-        <div className="pgs-spacer" />
-        {images.map((img, i) => {
-          const imgWidth = Math.round(galleryHeight * (img.width / img.height));
-          return (
-            <div key={i} className="pgs-item">
-              {img.src
-                ? <img src={img.src} alt={img.label} className="pgs-img" style={{ width: imgWidth, height: galleryHeight }} />
-                : <div className="pgs-img" style={{ width: imgWidth, height: galleryHeight }} />
-              }
-              <span className="pgs-label">{img.label}</span>
-            </div>
-          );
-        })}
-        <div className="pgs-trail" />
-      </div>
+      <ScrollHintBubble>
+        <div className={`pgs-gallery ${reversed ? 'pgs-gallery-rtl' : 'pgs-gallery-ltr'}`}>
+          <div className="pgs-spacer" />
+          {images.map((img, i) => {
+            const imgWidth = Math.round(galleryHeight * (img.width / img.height));
+            return (
+              <div key={i} className="pgs-item">
+                {img.src
+                  ? <img src={img.src} alt={img.label} className="pgs-img" style={{ width: imgWidth, height: galleryHeight }} />
+                  : <div className="pgs-img" style={{ width: imgWidth, height: galleryHeight }} />
+                }
+                <span className="pgs-label">{img.label}</span>
+              </div>
+            );
+          })}
+          <div className="pgs-trail" />
+        </div>
+      </ScrollHintBubble>
     </>
   );
 }
