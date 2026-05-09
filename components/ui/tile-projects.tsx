@@ -374,7 +374,7 @@ case "Defender":
             <div
               className="tile-projects-image-top"
               style={{
-                backgroundImage: 'url(/images/projects/range-rover/main.jpg)',
+                backgroundImage: undefined,
               }}
             />
 
@@ -383,13 +383,13 @@ case "Defender":
               <div
                 className="tile-projects-image-wide"
                 style={{
-                  backgroundImage: 'url(/images/projects/range-rover/preview-1.jpg)',
+                  backgroundImage: undefined,
                 }}
               />
               <div
                 className="tile-projects-image-square"
                 style={{
-                  backgroundImage: 'url(/images/projects/range-rover/preview-2.jpg)',
+                  backgroundImage: undefined,
                 }}
               />
             </div>
@@ -402,7 +402,7 @@ case "Defender":
             <div
               className="tile-projects-image-top"
               style={{
-                backgroundImage: 'url(/images/projects/Avinya/hero1.jpg)',
+                backgroundImage: undefined,
               }}
             />
 
@@ -411,13 +411,13 @@ case "Defender":
               <div
                 className="tile-projects-image-wide"
                 style={{
-                  backgroundImage: 'url(/images/projects/Avinya/project1.png)',
+                  backgroundImage: undefined,
                 }}
               />
               <div
                 className="tile-projects-image-square"
                 style={{
-                  backgroundImage: 'url(/images/projects/Avinya/hero2.png)',
+                  backgroundImage: undefined,
                 }}
               />
             </div>
@@ -430,7 +430,7 @@ case "Defender":
             <div
               className="tile-projects-image-top"
               style={{
-                backgroundImage: 'url(/images/projects/Defender/Hero.png)',
+                backgroundImage: undefined,
               }}
             />
 
@@ -439,13 +439,13 @@ case "Defender":
               <div
                 className="tile-projects-image-wide"
                 style={{
-                  backgroundImage: 'url(/images/projects/Defender/image%203.jpg)',
+                  backgroundImage: undefined,
                 }}
               />
               <div
                 className="tile-projects-image-square"
                 style={{
-                  backgroundImage: 'url(/images/projects/Defender/image%202.jpg)',
+                  backgroundImage: undefined,
                 }}
               />
             </div>
@@ -458,7 +458,7 @@ case "Defender":
             <div
               className="tile-projects-image-top"
               style={{
-                backgroundImage: 'url(/images/projects/swipe-save/main.png)',
+                backgroundImage: undefined,
               }}
             />
 
@@ -467,13 +467,13 @@ case "Defender":
               <div
                 className="tile-projects-image-wide"
                 style={{
-                  backgroundImage: 'url(/images/projects/swipe-save/preview-1.png)',
+                  backgroundImage: undefined,
                 }}
               />
               <div
                 className="tile-projects-image-square"
                 style={{
-                  backgroundImage: 'url(/images/projects/swipe-save/preview-2.png)',
+                  backgroundImage: undefined,
                 }}
               />
             </div>
@@ -486,7 +486,7 @@ case "Defender":
             <div
               className="tile-projects-image-top"
               style={{
-                backgroundImage: 'url(/images/projects/feed-it-back/main.png)',
+                backgroundImage: undefined,
               }}
             />
 
@@ -495,13 +495,13 @@ case "Defender":
               <div
                 className="tile-projects-image-wide"
                 style={{
-                  backgroundImage: 'url(/images/projects/feed-it-back/preview-1.png)',
+                  backgroundImage: undefined,
                 }}
               />
               <div
                 className="tile-projects-image-square"
                 style={{
-                  backgroundImage: 'url(/images/projects/feed-it-back/preview-2.png)',
+                  backgroundImage: undefined,
                 }}
               />
             </div>
@@ -514,7 +514,7 @@ case "Defender":
             <div
               className="tile-projects-image-top"
               style={{
-                backgroundImage: 'url(/images/projects/chargedup/main.png)',
+                backgroundImage: undefined,
               }}
             />
 
@@ -523,13 +523,13 @@ case "Defender":
               <div
                 className="tile-projects-image-wide"
                 style={{
-                  backgroundImage: 'url(/images/projects/chargedup/preview-1.png)',
+                  backgroundImage: undefined,
                 }}
               />
               <div
                 className="tile-projects-image-square"
                 style={{
-                  backgroundImage: 'url(/images/projects/chargedup/preview-2.png)',
+                  backgroundImage: undefined,
                 }}
               />
             </div>

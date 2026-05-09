@@ -12,10 +12,10 @@ export interface ProcessSectionProps {
 
 export const ProcessSection: React.FC<ProcessSectionProps> = ({
   defaultProcess = 'Strategy',
-  strategyImage = '/images/process/strategy.png',
-  designImage = '/images/process/design.png',
-  developmentImage = '/images/process/development.png',
-  supportImage = '/images/projects/range-rover/preview-2.jpg',
+  strategyImage = '',
+  designImage = '',
+  developmentImage = '',
+  supportImage = '',
   disableHover = false,
   contentOpacity = 1
 }) => {

@@ -224,7 +224,7 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
         {/* Left image - bottom left */}
         <div className={`about-image-left ${isHovered ? 'hovered' : ''}`}>
           <img
-            src="/images/about/left.png"
+            src=""
             alt=""
             style={{
               width: '100%',
@@ -237,7 +237,7 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
         {/* Middle image - center, on top */}
         <div className={`about-image-middle ${isHovered ? 'hovered' : ''}`}>
           <img
-            src="/images/about/middle.png"
+            src=""
             alt=""
             style={{
               width: '100%',
@@ -250,7 +250,7 @@ export function TileAbout({ interactive = true }: TileAboutProps) {
         {/* Right image - top right */}
         <div className={`about-image-right ${isHovered ? 'hovered' : ''}`}>
           <img
-            src="/images/about/right.png"
+            src=""
             alt=""
             style={{
               width: '100%',
