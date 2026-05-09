@@ -10,6 +10,7 @@ export interface ProjectSectionProps {
   paragraphs: string[];
   bullets: ProjectSectionBullet[];
   image?: string;
+  showImage?: boolean;
 }
 
 export function ProjectSection({
@@ -17,6 +18,7 @@ export function ProjectSection({
   paragraphs,
   bullets,
   image = '',
+  showImage = true,
 }: ProjectSectionProps) {
   return (
     <>
@@ -27,7 +29,7 @@ export function ProjectSection({
 
         .psc-grid {
           display: grid;
-          grid-template-columns: 220px 1fr 1fr;
+          grid-template-columns: 260px 1fr;
           column-gap: 100px;
           row-gap: 40px;
           padding: 0 25px;
@@ -42,11 +44,18 @@ export function ProjectSection({
           line-height: 1.2;
         }
 
+        .psc-content {
+          display: flex;
+          gap: 100px;
+          align-items: flex-start;
+        }
+
         .psc-paragraphs {
+          flex: 1;
+          max-width: 580px;
           display: flex;
           flex-direction: column;
           gap: 20px;
-          max-width: 586px;
         }
 
         .psc-para {
@@ -59,10 +68,10 @@ export function ProjectSection({
         }
 
         .psc-bullets {
-          max-width: 250px;
+          flex-shrink: 0;
+          width: 220px;
           display: flex;
           flex-direction: column;
-          margin-left: auto;
         }
 
         .psc-bullet {
@@ -107,50 +116,51 @@ export function ProjectSection({
         }
 
         @media (max-width: 1024px) {
-          .psc-grid { grid-template-columns: 1fr 1fr; }
-          .psc-title { grid-column: 1 / -1; }
-          .psc-paragraphs { max-width: 100%; }
+          .psc-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
           .psc-wrap { margin-top: 80px; }
-          .psc-grid { grid-template-columns: 1fr; gap: 32px; }
-          .psc-bullets { max-width: 100%; }
+          .psc-grid { gap: 32px; }
+          .psc-content { flex-direction: column; gap: 32px; }
+          .psc-bullets { width: 100%; }
           .psc-image-wrap { margin-top: 60px; padding: 0 16px; }
         }
       `}</style>
 
       <div className="psc-wrap">
-        {/* Text grid */}
         <div className="psc-grid">
           <h2 className="psc-title">{title}</h2>
 
-          <div className="psc-paragraphs">
-            {paragraphs.map((p, i) => (
-              <p key={i} className="psc-para">{p}</p>
-            ))}
-          </div>
+          <div className="psc-content">
+            <div className="psc-paragraphs">
+              {paragraphs.map((p, i) => (
+                <p key={i} className="psc-para">{p}</p>
+              ))}
+            </div>
 
-          <div className="psc-bullets">
-            {bullets.map((b, i) => (
-              <div key={i} className="psc-bullet">
-                {b.icon
-                  ? <img src={b.icon} alt="" style={{ width: 24, height: 24, flexShrink: 0, border: 'none' }} />
-                  : <div className="psc-bullet-icon" />
-                }
-                <span className="psc-bullet-text">{b.text}</span>
-              </div>
-            ))}
+            <div className="psc-bullets">
+              {bullets.map((b, i) => (
+                <div key={i} className="psc-bullet">
+                  {b.icon
+                    ? <img src={b.icon} alt="" style={{ width: 24, height: 24, flexShrink: 0, border: 'none' }} />
+                    : <div className="psc-bullet-icon" />
+                  }
+                  <span className="psc-bullet-text">{b.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* 16:9 image */}
-        <div className="psc-image-wrap">
-          {image
-            ? <img src={image} alt={title} className="psc-image" />
-            : <div className="psc-image" />
-          }
-        </div>
+        {showImage && (
+          <div className="psc-image-wrap">
+            {image
+              ? <img src={image} alt={title} className="psc-image" />
+              : <div className="psc-image" />
+            }
+          </div>
+        )}
       </div>
     </>
   );

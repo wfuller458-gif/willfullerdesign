@@ -5,7 +5,7 @@ import React from 'react';
 export interface ProjectHeroProps {
   title: string;
   year: string;
-  brand: string;
+  brand: string | string[];
   industry: string;
   directors: string[];
   deliverables: string[];
@@ -22,7 +22,7 @@ export function ProjectHero({
   heroImage,
 }: ProjectHeroProps) {
   const meta = [
-    { label: 'Brand', values: [brand] },
+    { label: 'Client', values: Array.isArray(brand) ? brand : [brand] },
     { label: 'Industry', values: [industry] },
     { label: 'Directors', values: directors },
     { label: 'Deliverables', values: deliverables },
