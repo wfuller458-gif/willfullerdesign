@@ -106,12 +106,14 @@ export function ProjectHero({
         @media (max-width: 768px) {
           .ph-wrap { padding: 40px 25px 32px; }
           .ph-title { font-size: 42px; }
+          .ph-year { font-size: 32px; }
           .ph-meta { flex-direction: column; gap: 24px; }
           .ph-meta-cols { gap: 40px; flex-wrap: wrap; }
         }
 
         @media (max-width: 480px) {
           .ph-title { font-size: 32px; }
+          .ph-year { font-size: 24px; }
           .ph-meta-cols { gap: 28px; }
         }
       `}</style>

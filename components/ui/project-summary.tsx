@@ -125,7 +125,26 @@ export function ProjectSummary({
           .ps-wrap { margin-top: 80px; }
           .ps-summary { gap: 32px; }
           .ps-content { flex-direction: column; gap: 32px; }
-          .ps-images { width: 100%; margin-right: 0; margin-top: 60px; }
+          .ps-images {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            width: 100%;
+            margin: 60px 0 0 0;
+            height: auto !important;
+            padding-left: 25px;
+          }
+          .ps-images::-webkit-scrollbar { display: none; }
+          .ps-img-left,
+          .ps-img-right {
+            flex: none !important;
+            flex-shrink: 0;
+            aspect-ratio: var(--ps-aspect);
+            height: 300px;
+            width: auto;
+            scroll-snap-align: start;
+          }
         }
       `}</style>
 
@@ -153,11 +172,11 @@ export function ProjectSummary({
         <div className="ps-images" style={{ height: imageHeight }}>
           <div
             className="ps-img-left"
-            style={{ flex: leftFlex, backgroundImage: imageLeft ? `url(${imageLeft})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            style={{ flex: leftFlex, '--ps-aspect': leftFlex / imageHeight, backgroundImage: imageLeft ? `url(${imageLeft})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' } as React.CSSProperties}
           />
           <div
             className="ps-img-right"
-            style={{ flex: rightFlex, backgroundImage: imageRight ? `url(${imageRight})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            style={{ flex: rightFlex, '--ps-aspect': rightFlex / imageHeight, backgroundImage: imageRight ? `url(${imageRight})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' } as React.CSSProperties}
           />
         </div>
       </div>

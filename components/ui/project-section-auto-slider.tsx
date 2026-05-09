@@ -34,6 +34,7 @@ export function ProjectSectionAutoSlider({
           display: grid;
           grid-template-columns: 260px 1fr;
           column-gap: 100px;
+          row-gap: 40px;
           padding: 0 25px;
         }
 
