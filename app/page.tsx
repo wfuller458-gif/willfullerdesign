@@ -103,49 +103,49 @@ export default function Home() {
           title="Off-Road Controls"
           description="Lead the UX for upcoming Defender models by delivering an off-road experience that unifies cameras, terrain systems and incorporate new features into a seamless, engaging cockpit focused on usability, confidence and adventure."
           bullets={[
-            { text: 'Designed next generation Defender off-road experience' },
-            { text: 'UX ownership of every off-road feature' },
-            { text: 'Unified physical controls and digital feedback' },
+            { text: 'Designed next generation Defender off-road experience', icon: '/icons/Design.svg' },
+            { text: 'UX ownership of every off-road feature', icon: '/icons/car-profile.svg' },
+            { text: 'Unified physical controls and digital feedback', icon: '/icons/toggle-left.svg' },
           ]}
-          mainImage="" secondaryImage="" projectLink="/projects/defender" bubbleVariant="locked"
+          mainImage="/images/projects/off-road-controls/image-1.webp" secondaryImage="/images/projects/off-road-controls/image-2.webp" projectLink="/projects/defender" bubbleVariant="locked"
         />
         <ProjectPreview
           title="Feed It Back"
           description="Redesigned the case management platform for Feed It Back, a hospitality guest feedback tool used by major restaurant chains. Delivered the user experience design by transferring user research findings, into user flows, wireframes and full fidelity designs, for improved navigation, usability, and mobile compatibility."
           bullets={[
-            { text: 'Receives millions of reviews from top hospitality brands' },
-            { text: 'Multi million investment secured after platform overhaul' },
-            { text: "Feed It Back's platform continues to grow" },
+            { text: 'Receives millions of reviews from top hospitality brands', icon: '/icons/Chat.svg' },
+            { text: 'Multi million investment secured after platform overhaul', icon: '/icons/£.svg' },
+            { text: "Feed It Back's platform continues to grow", icon: '/icons/Grow.svg' },
           ]}
-          mainImage="" secondaryImage="" projectLink="/projects/feed-it-back" bubbleVariant="open"
+          mainImage="/images/projects/feed-it-back/image-1.webp" secondaryImage="/images/projects/feed-it-back/image-2.webp" projectLink="/projects/feed-it-back" bubbleVariant="open"
         />
         <ProjectPreview
           title="Driver Displays"
           description="Designed future digital driver displays for Land Rover vehicles, with a focus on cognitive load and attention management. Also responsible for maintaining and updating existing displays to ensure continued saleability across global markets."
           bullets={[
-            { text: 'Designs delivered for 120+ markets to 100,000+ vehicles' },
-            { text: 'Integrated Apple CarPlay and Android Auto' },
-            { text: 'Designed next generation driver displays' },
+            { text: 'Designs delivered for 120+ markets to 100,000+ vehicles', icon: '/icons/Globe.svg' },
+            { text: 'Integrated Apple CarPlay and Android Auto', icon: '/icons/Apple.svg' },
+            { text: 'Designed next generation driver displays', icon: '/icons/Design.svg' },
           ]}
-          mainImage="" secondaryImage="" projectLink="/projects/range-rover" bubbleVariant="locked"
+          mainImage="/images/projects/driver-displays/image-1.webp" secondaryImage="/images/projects/driver-displays/image-2.webp" projectLink="/projects/range-rover" bubbleVariant="locked"
         />
         <ProjectPreview
           title="Training Platform"
           description="Designed the user experience for a medical education platform for general practitioners and primary care clinicians, taking it from an in person service to a fully digital solution. Transferring user interview findings, into user flows, wireframes and full fidelity designs."
           bullets={[
-            { text: '30,000 clinicians supported annually through the platform' },
-            { text: 'Enabling professionals to complete training digitally' },
-            { text: 'In person only service to fully digital offering' },
+            { text: '30,000 clinicians supported annually through the platform', icon: '/icons/Users.svg' },
+            { text: 'Enabling professionals to complete training digitally', icon: '/icons/Test.svg' },
+            { text: 'In person only service to fully digital offering', icon: '/icons/Internet.svg' },
           ]}
-          mainImage="" secondaryImage="" projectLink="/projects/avinya" bubbleVariant="locked"
+          mainImage="/images/projects/training-platform/image-1.webp" secondaryImage="/images/projects/training-platform/image-2.webp" projectLink="/projects/avinya" bubbleVariant="locked"
         />
         <ProjectPreview
           title="Trick Trainer"
           description="Building fun side project, trick trainer app with my Black Labrador. It is a trick recognition tool that uses pose detection to detect when he's completed a command. The goal is to eventually have it entertain him autonomously. Its a passion project and dog enrichment experiment."
           bullets={[
-            { text: 'Leveraging machine learning and pose detection models' },
-            { text: 'Using the latest AI tools to bring my concepts to life' },
-            { text: 'Proof of concept build completed and tested' },
+            { text: 'Leveraging machine learning and pose detection models', icon: '/icons/Pose.svg' },
+            { text: 'Using the latest AI tools to bring my concepts to life', icon: '/icons/AI.svg' },
+            { text: 'Proof of concept build completed and tested', icon: '/icons/Build.svg' },
           ]}
           mainImage="" secondaryImage="" projectLink="/projects/swipe-save" bubbleVariant="coming-soon"
         />

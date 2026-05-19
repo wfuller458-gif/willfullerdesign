@@ -16,7 +16,7 @@ export default function TrainingPlatformProject() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header onMenuClick={() => setIsMenuOpen(true)} onContactClick={() => setIsContactOpen(true)} />
       </div>
-      <ProjectHero title="Training Platform" year="2020" brand="Full Clarity" industry="Healthcare" directors={['Ed Kemp']} deliverables={['Web App', 'UX Design', 'Wireframes']} heroImage="" />
+      <ProjectHero title="Training Platform" year="2020" brand="Full Clarity" industry="Healthcare" directors={['Ed Kemp']} deliverables={['Web App', 'UX Design', 'Wireframes']} heroImage="/images/projects/training-platform/image-1.webp" />
       <ProjectSummary
         paragraph="Designed the user experience for a medical education platform for general practitioners and primary care clinicians, taking it from an in-person service to a fully digital solution. Transferred user interview findings into user flows, wireframes and full fidelity designs."
         bullets={[
@@ -25,6 +25,8 @@ export default function TrainingPlatformProject() {
           { text: 'Transformed an in-person only service into a digital offering.' },
           { text: 'Delivered end-to-end UX from research through to high fidelity design.' },
         ]}
+        imageLeft="/images/projects/training-platform/summary-1.webp"
+        imageRight="/images/projects/training-platform/summary-2.webp"
       />
       <div style={{ height: '150px' }} />
       <Footer onContactClick={() => setIsContactOpen(true)} />

@@ -7,6 +7,7 @@ export interface ProjectSectionAutoSliderProps {
   images?: [string, string];
   interval?: number;
   showDots?: boolean;
+  cycle?: boolean;
 }
 
 export function ProjectSectionAutoSlider({
@@ -15,13 +16,15 @@ export function ProjectSectionAutoSlider({
   images = ['', ''],
   interval = 4000,
   showDots = true,
+  cycle = true,
 }: ProjectSectionAutoSliderProps) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
+    if (!cycle) return;
     const t = setInterval(() => setActive(p => (p + 1) % 2), interval);
     return () => clearInterval(t);
-  }, [interval]);
+  }, [interval, cycle]);
 
   return (
     <>

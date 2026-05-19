@@ -16,7 +16,7 @@ export default function DriverDisplaysProject() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header onMenuClick={() => setIsMenuOpen(true)} onContactClick={() => setIsContactOpen(true)} />
       </div>
-      <ProjectHero title="Driver Displays" year="2023" brand="Land Rover" industry="Automotive" directors={['TBC']} deliverables={['Instrument Cluster', 'Head Up Display', 'Design System']} heroImage="" />
+      <ProjectHero title="Driver Displays" year="2023" brand="Land Rover" industry="Automotive" directors={['TBC']} deliverables={['Instrument Cluster', 'Head Up Display', 'Design System']} heroImage="/images/projects/driver-displays/image-1.webp" />
       <ProjectSummary
         paragraph="Designed future digital driver displays for Land Rover vehicles, with a focus on cognitive load and attention management. Also responsible for maintaining and updating existing displays to ensure continued saleability across global markets."
         bullets={[

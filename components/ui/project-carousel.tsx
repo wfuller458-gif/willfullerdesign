@@ -17,18 +17,14 @@ export interface ProjectCarouselProps {
 
 export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
   images = [
+    '/images/projects/off-road-controls/image-1.webp',
+    '/images/projects/feed-it-back/image-1.webp',
+    '/images/projects/driver-displays/image-1.webp',
+    '/images/projects/training-platform/image-1.webp',
     '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
+    '/images/projects/off-road-controls/image-2.webp',
+    '/images/projects/feed-it-back/image-2.webp',
+    '/images/projects/driver-displays/image-2.webp',
   ]
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -242,18 +238,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
               zIndex: hoveredIndex === index ? 100 : 1
             }}
           >
-            <img
-              src={image}
-              alt={`Project ${index + 1}`}
-              loading="lazy"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-                borderRadius: '4px'
-              }}
-            />
+            {image
+              ? <img src={image} alt={`Project ${index + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '4px' }} />
+              : <div style={{ width: '100%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '4px' }} />
+            }
             {hoveredIndex === index && !isMobile && (
               <div
                 style={{
@@ -294,18 +282,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
                 zIndex: hoveredIndex === duplicateIndex ? 100 : 1
               }}
             >
-              <img
-                src={image}
-                alt={`Project ${index + 1}`}
-                loading="lazy"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
-                  borderRadius: '4px'
-                }}
-              />
+              {image
+                ? <img src={image} alt={`Project ${index + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '4px' }} />
+                : <div style={{ width: '100%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '4px' }} />
+              }
               {hoveredIndex === duplicateIndex && !isMobile && (
                 <div
                   style={{

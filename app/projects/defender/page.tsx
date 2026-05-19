@@ -16,7 +16,7 @@ export default function DefenderProject() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header onMenuClick={() => setIsMenuOpen(true)} onContactClick={() => setIsContactOpen(true)} />
       </div>
-      <ProjectHero title="Off-Road Controls" year="2024" brand="Land Rover Defender" industry="Automotive" directors={['Ed Kemp', 'Jon Hewines']} deliverables={['Instrument Cluster', 'Head Up Display', 'Augmented Reality']} heroImage="" />
+      <ProjectHero title="Off-Road Controls" year="2024" brand="Land Rover Defender" industry="Automotive" directors={['Ed Kemp', 'Jon Hewines']} deliverables={['Instrument Cluster', 'Head Up Display', 'Augmented Reality']} heroImage="/images/projects/off-road-controls/image-1.webp" />
       <ProjectSummary
         paragraph="Lead the UX for upcoming Defender models by delivering an off-road experience that unifies cameras, terrain systems and incorporates new features into a seamless, engaging cockpit focused on usability, confidence and adventure."
         bullets={[

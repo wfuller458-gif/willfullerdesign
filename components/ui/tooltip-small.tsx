@@ -122,11 +122,10 @@ export function TooltipSmall({ title, images, href }: TooltipSmallProps) {
               overflow: 'hidden'
             }}
           >
-            <img
-              src={src}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {src
+              ? <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              : <div className="absolute inset-0" style={{ backgroundColor: '#D9D9D9' }} />
+            }
           </div>
         ))}
       </div>

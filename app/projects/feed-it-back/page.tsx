@@ -11,6 +11,8 @@ import { ProjectSectionWithGallery } from '@/components/ui/project-section-with-
 import { ProjectSectionAutoSlider } from '@/components/ui/project-section-auto-slider';
 import { ProjectGalleryStrip } from '@/components/ui/project-gallery-strip';
 
+const BASE = '/images/projects/feed-it-back';
+
 export default function FeedItBackProject() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -20,15 +22,17 @@ export default function FeedItBackProject() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header onMenuClick={() => setIsMenuOpen(true)} onContactClick={() => setIsContactOpen(true)} />
       </div>
-      <ProjectHero title="Feed It Back" year="2020" brand={['Feed It Back', 'Full Clarity']} industry="Hospitality" directors={['Ed Kemp', 'Jon Hewines']} deliverables={['User Research Translation', 'Responsive Interface Design', 'Greyscale Screen Delivery', 'Atomic Design System']} heroImage="" />
+      <ProjectHero title="Feed It Back" year="2020" brand={['Feed It Back', 'Full Clarity']} industry="Hospitality" directors={['Ed Kemp', 'Jon Hewines']} deliverables={['User Research Translation', 'Responsive Interface Design', 'Greyscale Screen Delivery', 'Atomic Design System']} heroImage={`${BASE}/image-1.webp`} />
       <ProjectSummary
-        paragraph="Redesigned the case management platform for Feed It Back, a hospitality guest feedback tool used by major restaurant chains. Delivered the user experience design by transferring user research findings, into user flows, wireframes and full fidelity designs, for improved navigation, usability, and mobile compatibility."
+        paragraph="Redesigned the case management platform for Feed It Back, a hospitality guest feedback tool used by major restaurant chains. Delivered the user experience design by transferring user research findings, into user flows, wireframes and high fidelity designs, for improved navigation, usability, and mobile compatibility."
         bullets={[
-          { text: "Translated user research findings into UX design decisions for a full redesign of Feed It Back's case management software." },
-          { text: 'Designed responsive interfaces for customer experience managers across mobile, tablet, and desktop.' },
-          { text: 'Delivered 100+ greyscale screens covering every user flow and state across all three breakpoints.' },
-          { text: 'Built a structured atomic design system in Figma to enable seamless handoff to the UI designer.' },
+          { text: "Translated user research findings into UX design decisions for a full redesign of Feed It Back's case management software.", icon: '/icons/User.svg' },
+          { text: 'Designed responsive interfaces for customer experience managers across mobile, tablet, and desktop.', icon: '/icons/Responsive.svg' },
+          { text: 'Delivered 100+ greyscale screens covering every user flow and state across all three breakpoints.', icon: '/icons/Greyscale.svg' },
+          { text: 'Built a structured atomic design system in Figma to enable seamless handoff to the UI designer.', icon: '/icons/Atom.svg' },
         ]}
+        imageLeft={`${BASE}/summary-1.webp`}
+        imageRight={`${BASE}/summary-2.webp`}
       />
       <ProjectSection
         title="User Research"
@@ -38,12 +42,13 @@ export default function FeedItBackProject() {
           'Insights were gathered and organised highlighting specific problems with the current system. These findings directly informed the UX redesign efforts, ensuring that the new system would address user needs more effectively and improve overall satisfaction.',
         ]}
         bullets={[
-          { text: 'Users struggled to access historical and closed case information.' },
-          { text: 'Email sat outside the core system, creating unnecessary friction.' },
-          { text: 'Processes had too many steps, slowing users down.' },
-          { text: 'Everyday tasks took far longer than they should.' },
-          { text: 'Data entry was manual with no automation in place.' },
+          { text: 'Users struggled to access historical and closed case information.', icon: '/icons/Archive.svg' },
+          { text: 'Email sat outside the core system, creating unnecessary friction.', icon: '/icons/Email.svg' },
+          { text: 'Processes had too many steps, slowing users down.', icon: '/icons/Steps.svg' },
+          { text: 'Everyday tasks took far longer than they should.', icon: '/icons/Time.svg' },
+          { text: 'Data entry was manual with no automation in place.', icon: '/icons/Data.svg' },
         ]}
+        image={`${BASE}/user-research.webp`}
       />
 
       <ProjectSectionWithGallery
@@ -52,11 +57,15 @@ export default function FeedItBackProject() {
           'I was assigned the case management interface which brings together all the social media, TripAdvisor and email reviews the restaurant chains receive. Ed scoped out a sitemap, with the case management area being the main tool within the platform.',
           'I began quickly sketching possible layouts for this screen which accommodate a navigation bar and all the features required to solve the pain points identified from the user research.',
         ]}
-        bullets={['Site map', 'Screen layout', 'Core functionality']}
+        bullets={[
+          { text: 'Site map', icon: '/icons/1.svg' },
+          { text: 'Screen layout', icon: '/icons/2.svg' },
+          { text: 'Core functionality', icon: '/icons/3.svg' },
+        ]}
         images={[
-          { label: 'Site Map', width: 361, height: 533 },
-          { label: 'Initial Layout', width: 804, height: 533 },
-          { label: 'Key Optimisations - Flags, Tags and Templates', width: 804, height: 533 },
+          { src: `${BASE}/site-map.webp`, label: 'Site Map', width: 361, height: 533 },
+          { src: `${BASE}/initial-layout.webp`, label: 'Initial Layout', width: 804, height: 533 },
+          { src: `${BASE}/key-optimisations.webp`, label: 'Key Optimisations - Flags, Tags and Templates', width: 804, height: 533 },
         ]}
         galleryHeight={460}
       />
@@ -69,12 +78,13 @@ export default function FeedItBackProject() {
           'Components were well organised in Figma with all properties clearly named. This takes some time to set up but is extremely efficient in the long run.',
         ]}
         bullets={[
-          { text: 'Atoms' },
-          { text: 'Molecules' },
-          { text: 'Organisms' },
-          { text: 'Templates' },
-          { text: 'Pages' },
+          { text: 'Atoms', icon: '/icons/Atom.svg' },
+          { text: 'Molecules', icon: '/icons/Molecules.svg' },
+          { text: 'Organisms', icon: '/icons/Organisums.svg' },
+          { text: 'Templates', icon: '/icons/Template.svg' },
+          { text: 'Pages', icon: '/icons/Pages.svg' },
         ]}
+        image={`${BASE}/design-system.webp`}
       />
 
       <ProjectSection
@@ -84,8 +94,9 @@ export default function FeedItBackProject() {
           'Firstly I ensure that the design worked across all three breakpoints. I used auto layout and constraints in components to make them reusable across breakpoints. Custom mobile components were created when needed.',
         ]}
         bullets={[
-          { text: 'Greyscale UI keeps the focus on interaction and flow, not visual polish.' },
+          { text: 'Greyscale UI keeps the focus on interaction and flow, not visual polish.', icon: '/icons/Greyscale.svg' },
         ]}
+        image={`${BASE}/greyscale-ui.webp`}
       />
 
       <ProjectSectionAutoSlider
@@ -94,6 +105,7 @@ export default function FeedItBackProject() {
           'During this phase I created the user interactions and flows enabling the end user to achieve their goal of responding to all reviews and opening cases against negative reviews.',
           'The design system allowed me to pull together every state quickly and I could easily go back and add additional variants to components in order to achieve all user flows and states.',
         ]}
+        images={[`${BASE}/user-interaction-1.webp`, `${BASE}/user-interaction-2.webp`]}
       />
 
       <ProjectSectionAutoSlider
@@ -102,7 +114,9 @@ export default function FeedItBackProject() {
           'Simultaneously to my work a UI designer from Full Clarity began updating the design system components. They applied Feed It Backs branding, logos, and finalised colours and the design of every component.',
           'Since the components were created in an Atomic fashion all UI updates cascaded through every screen, user interaction and flow I had created.',
         ]}
+        images={[`${BASE}/finished-ui.webp`, `${BASE}/finished-ui.webp`]}
         showDots={false}
+        cycle={false}
       />
 
       <ProjectSectionWithGallery
@@ -112,10 +126,10 @@ export default function FeedItBackProject() {
         ]}
         bullets={[]}
         images={[
-          { label: 'Inbox', width: 533, height: 533 },
-          { label: 'Watchers', width: 533, height: 533 },
-          { label: 'Topic Tags', width: 533, height: 533 },
-          { label: 'Focused View', width: 533, height: 533 },
+          { src: `${BASE}/delivery-inbox.webp`, label: 'Inbox', width: 533, height: 533 },
+          { src: `${BASE}/delivery-watchers.webp`, label: 'Watchers', width: 533, height: 533 },
+          { src: `${BASE}/delivery-topic-tags.webp`, label: 'Topic Tags', width: 533, height: 533 },
+          { src: `${BASE}/delivery-focused-view.webp`, label: 'Focused View', width: 533, height: 533 },
         ]}
         galleryHeight={460}
       />
@@ -125,12 +139,12 @@ export default function FeedItBackProject() {
           reversed
           galleryHeight={460}
           images={[
-            { label: 'Sidebar', width: 360, height: 533 },
-            { label: 'Inbox', width: 360, height: 533 },
-            { label: 'Case History', width: 360, height: 533 },
-            { label: 'Tags', width: 360, height: 533 },
-            { label: 'Watchers', width: 360, height: 533 },
-            { label: 'Date Filter', width: 360, height: 533 },
+            { src: `${BASE}/delivery-2-sidebar.webp`, label: 'Sidebar', width: 360, height: 533 },
+            { src: `${BASE}/delivery-2-inbox.webp`, label: 'Inbox', width: 360, height: 533 },
+            { src: `${BASE}/delivery-2-case-history.webp`, label: 'Case History', width: 360, height: 533 },
+            { src: `${BASE}/delivery-2-tags.webp`, label: 'Tags', width: 360, height: 533 },
+            { src: `${BASE}/delivery-2-watchers.webp`, label: 'Watchers', width: 360, height: 533 },
+            { src: `${BASE}/delivery-2-date-filter.webp`, label: 'Date Filter', width: 360, height: 533 },
           ]}
         />
       </div>
@@ -142,9 +156,9 @@ export default function FeedItBackProject() {
           'This positioned Feed It Back as a key player in the rapidly growing customer feedback industry, attracting substantial new investment to support further growth and expansion.',
         ]}
         bullets={[
-          { text: 'Receives millions of reviews from top hospitality brands' },
-          { text: 'Multi million investment secured after platform overhaul' },
-          { text: "Feed It Back's platform continues to grow" },
+          { text: 'Receives millions of reviews from top hospitality brands', icon: '/icons/Chat.svg' },
+          { text: 'Multi million investment secured after platform overhaul', icon: '/icons/£.svg' },
+          { text: "Feed It Back's platform continues to grow", icon: '/icons/Grow.svg' },
         ]}
         showImage={false}
       />

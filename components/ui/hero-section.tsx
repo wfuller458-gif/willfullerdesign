@@ -7,7 +7,8 @@ import { useLoading } from '@/contexts/loading-context';
 const TAGLINES = [
   'User centred design',
   'User experience design',
-  'User interface design',
+  'Product design',
+  'Interaction design',
 ];
 
 export interface HeroSectionProps {
@@ -106,12 +107,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
           .hero-heading {
             font-family: DM Sans, sans-serif;
-            font-weight: 300;
-            font-size: 76px;
-            line-height: 82px;
+            font-weight: 400;
+            font-size: 96px;
+            line-height: 1;
             color: var(--brand-black);
             text-align: center;
-            margin: 0;
+            margin-top: 32px;
+            margin-bottom: 48px;
             max-width: 1100px;
           }
 
@@ -134,9 +136,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               padding: 40px;
             }
             .hero-heading {
-              font-size: 56px;
-              line-height: 60px;
-              max-width: 700px;
+              font-size: 72px;
+              line-height: 1;
+              margin-top: 24px;
+              margin-bottom: 36px;
+              max-width: 800px;
             }
             .hero-tagline {
               font-size: 18px;
@@ -154,8 +158,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               padding: 32px 24px;
             }
             .hero-heading {
-              font-size: 36px;
-              line-height: 42px;
+              font-size: 48px;
+              line-height: 1;
+              margin-top: 20px;
+              margin-bottom: 28px;
               max-width: 100%;
             }
             .hero-tagline {
@@ -174,8 +180,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               padding: 24px 16px;
             }
             .hero-heading {
-              font-size: 32px;
-              line-height: 38px;
+              font-size: 36px;
+              line-height: 1;
+              margin-top: 16px;
+              margin-bottom: 20px;
             }
           }
         `}
@@ -200,7 +208,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </AnimatePresence>
           </motion.div>
 
-          <h1 className="hero-heading" style={{ marginTop: '16px', marginBottom: '32px' }}>
+          <h1 className="hero-heading">
             {['Making', 'Ideas', 'Real'].map((word, i) => (
               <span key={word} style={{ display: 'inline-block', marginRight: i < 2 ? '0.22em' : 0 }}>
                 <motion.span

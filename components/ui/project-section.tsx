@@ -76,9 +76,8 @@ export function ProjectSection({
 
         .psc-bullet {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           gap: 12px;
-          padding-top: 16px;
         }
 
         .psc-bullet + .psc-bullet {

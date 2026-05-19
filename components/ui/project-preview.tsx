@@ -135,7 +135,7 @@ export function ProjectPreview({
 
         .pp-bullet {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           gap: 12px;
         }
 
@@ -251,8 +251,8 @@ export function ProjectPreview({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="pp-image-main" style={{ backgroundColor: '#D9D9D9' }} />
-          <div className="pp-image-secondary" style={{ backgroundColor: '#D9D9D9' }} />
+          <div className="pp-image-main" style={{ backgroundColor: '#D9D9D9', backgroundImage: mainImage ? `url(${mainImage})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          <div className="pp-image-secondary" style={{ backgroundColor: '#D9D9D9', backgroundImage: secondaryImage ? `url(${secondaryImage})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }} />
 
           {/* Cursor bubble */}
           {isHovering && bubbleVariant && (

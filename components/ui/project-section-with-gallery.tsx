@@ -8,10 +8,15 @@ export interface GalleryImage {
   height: number;
 }
 
+export interface GalleryBullet {
+  text: string;
+  icon?: string;
+}
+
 export interface ProjectSectionWithGalleryProps {
   title: string;
   paragraphs: string[];
-  bullets: string[];
+  bullets: GalleryBullet[];
   images: GalleryImage[];
   galleryHeight?: number;
 }
@@ -79,9 +84,8 @@ export function ProjectSectionWithGallery({
 
         .pswg-bullet {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           gap: 12px;
-          padding-top: 16px;
         }
 
         .pswg-bullet + .pswg-bullet {
@@ -186,10 +190,13 @@ export function ProjectSectionWithGallery({
             </div>
 
             <div className="pswg-bullets">
-              {bullets.map((text, i) => (
+              {bullets.map((b, i) => (
                 <div key={i} className="pswg-bullet">
-                  <div className="pswg-bullet-num">{i + 1}</div>
-                  <span className="pswg-bullet-text">{text}</span>
+                  {b.icon
+                    ? <img src={b.icon} alt="" style={{ width: 24, height: 24, flexShrink: 0 }} />
+                    : <div className="pswg-bullet-num">{i + 1}</div>
+                  }
+                  <span className="pswg-bullet-text">{b.text}</span>
                 </div>
               ))}
             </div>

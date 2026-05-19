@@ -139,8 +139,7 @@ export function ProjectHero({
         </div>
       </div>
 
-      {/* Full-width 16:9 hero image — grey placeholder */}
-      <div className="ph-image" style={{ backgroundColor: '#D9D9D9' }} />
+      <div className="ph-image" style={{ backgroundColor: '#D9D9D9', backgroundImage: heroImage ? `url(${heroImage})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }} />
     </>
   );
 }

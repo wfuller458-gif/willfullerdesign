@@ -71,14 +71,14 @@ export function ProjectSummary({
 
         .ps-bullet {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           gap: 12px;
-          padding-top: 16px;
         }
 
         .ps-bullet + .ps-bullet {
           border-top: 0.5px solid #9C9C9C;
           margin-top: 16px;
+          padding-top: 16px;
         }
 
         .ps-bullet-icon {
