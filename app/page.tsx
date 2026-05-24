@@ -12,7 +12,6 @@ import { IntroSection } from '@/components/ui/intro-section';
 import { CollaborationSection } from '@/components/ui/collaboration-section';
 import { Menu } from '@/components/ui/menu';
 import { PinPad } from '@/components/ui/pin-pad';
-import { useSound } from '@/contexts/sound-context';
 
 const handleContact = () => {
   window.location.href = 'mailto:will.fuller22@hotmail.com';
@@ -20,7 +19,6 @@ const handleContact = () => {
 
 export default function Home() {
   const router = useRouter();
-  const { playPinSuccess } = useSound();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showUnlockPin, setShowUnlockPin] = useState(false);
   const [pinError, setPinError] = useState(false);
@@ -40,13 +38,12 @@ export default function Home() {
       body: JSON.stringify({ pin }),
     });
     if (res.ok) {
-      playPinSuccess();
-      setShowUnlockPin(false);
-      router.push('/projects/training-platform');
-    } else {
-      setPinError(true);
-      setTimeout(() => setPinError(false), 600);
+      setTimeout(() => { setShowUnlockPin(false); router.push('/projects/training-platform'); }, 700);
+      return true;
     }
+    setPinError(true);
+    setTimeout(() => setPinError(false), 600);
+    return false;
   }, [router]);
 
   React.useEffect(() => {

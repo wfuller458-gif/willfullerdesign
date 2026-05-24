@@ -7,7 +7,7 @@ interface PinPadProps {
   projectTitle: string;
   onClose: () => void;
   // Page-level gate: async PIN verification
-  onPin?: (pin: string) => void;
+  onPin?: (pin: string) => Promise<boolean>;
   error?: boolean;
   // Preview-card mode: synchronous local check (legacy)
   correctPin?: string;
@@ -42,8 +42,9 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
     setEntered(next);
     if (next.length === pinLength) {
       if (onPin) {
-        // API-verified mode — parent handles success/error
-        onPin(next);
+        onPin(next).then(ok => {
+          if (ok) { playPinSuccess(); setSolved(true); }
+        });
       } else if (correctPin && onSuccess) {
         // Legacy local check
         if (next === correctPin) {
