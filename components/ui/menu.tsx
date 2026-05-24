@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from './button';
+import { useSound } from '@/contexts/sound-context';
 
 export interface MenuProps {
   onClose?: () => void;
@@ -13,6 +14,7 @@ export const Menu: React.FC<MenuProps> = ({
   onNavigate,
   onContactClick
 }) => {
+  const { playHover } = useSound();
   const navigationItems = ['Home', 'Projects', 'About'];
 
   // Update theme color when menu opens/closes
@@ -124,6 +126,7 @@ export const Menu: React.FC<MenuProps> = ({
                   key={item}
                   href="/"
                   className="nav-link-button"
+                  onMouseEnter={playHover}
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 300,
@@ -172,6 +175,7 @@ export const Menu: React.FC<MenuProps> = ({
                   key={item}
                   href="/projects"
                   className="nav-link-button"
+                  onMouseEnter={playHover}
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 300,
@@ -220,6 +224,7 @@ export const Menu: React.FC<MenuProps> = ({
                   key={item}
                   href="/about"
                   className="nav-link-button"
+                  onMouseEnter={playHover}
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 300,
@@ -272,6 +277,7 @@ export const Menu: React.FC<MenuProps> = ({
                     onNavigate?.(item.toLowerCase());
                   }
                 }}
+                onMouseEnter={playHover}
                 className="nav-link-button"
                 style={{
                   fontFamily: 'DM Sans, sans-serif',
@@ -318,6 +324,7 @@ export const Menu: React.FC<MenuProps> = ({
         {/* Close button */}
         <button
           onClick={onClose}
+          onMouseEnter={playHover}
           style={{
             width: '32px',
             height: '32px',
@@ -365,10 +372,10 @@ export const Menu: React.FC<MenuProps> = ({
           paddingBottom: 'max(16px, env(safe-area-inset-bottom))'
         }}
       >
-        <Button variant="primary-green" onClick={onContactClick}>
+        <Button variant="primary-green" onClick={onContactClick} onMouseEnter={playHover}>
           Get In Touch
         </Button>
-        <Button variant="whatsapp" onClick={() => window.open('https://wa.me/447305088562', '_blank')}>
+        <Button variant="whatsapp" onClick={() => window.open('https://wa.me/447305088562', '_blank')} onMouseEnter={playHover}>
           WhatsApp
         </Button>
       </div>

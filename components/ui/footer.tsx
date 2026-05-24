@@ -3,9 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from './icons';
+import { useSound } from '@/contexts/sound-context';
 
 const NavItem = ({ label, onClick, href }: { label: string; onClick?: () => void; href?: string }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { playHover } = useSound();
 
   const content = (
     <>
@@ -48,7 +50,7 @@ const NavItem = ({ label, onClick, href }: { label: string; onClick?: () => void
     return (
       <Link
         href={href}
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={() => { setIsHovered(true); playHover(); }}
         onMouseLeave={() => setIsHovered(false)}
         style={commonStyle}
       >
@@ -60,7 +62,7 @@ const NavItem = ({ label, onClick, href }: { label: string; onClick?: () => void
   return (
     <div
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => { setIsHovered(true); playHover(); }}
       onMouseLeave={() => setIsHovered(false)}
       style={commonStyle}
     >
@@ -71,11 +73,12 @@ const NavItem = ({ label, onClick, href }: { label: string; onClick?: () => void
 
 const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { playHover } = useSound();
 
   return (
     <div
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => { setIsHovered(true); playHover(); }}
       onMouseLeave={() => setIsHovered(false)}
       style={{
         flex: 1,
