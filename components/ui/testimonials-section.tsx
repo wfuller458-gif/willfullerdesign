@@ -49,7 +49,7 @@ export function TestimonialsSection() {
   const handleMouseEnter = useCallback(() => {
     if (photoRef.current) {
       const rect = photoRef.current.getBoundingClientRect();
-      setTooltipPos({ top: rect.top, left: rect.left });
+      setTooltipPos({ top: rect.top + window.scrollY, left: rect.left + window.scrollX });
     }
     setTooltipVisible(true);
   }, []);
@@ -146,7 +146,7 @@ export function TestimonialsSection() {
 
         .ts-tooltip {
           pointer-events: none;
-          position: fixed;
+          position: absolute;
           white-space: nowrap;
           background: #131313;
           border-radius: 8px;
@@ -163,7 +163,7 @@ export function TestimonialsSection() {
           content: '';
           position: absolute;
           top: 100%;
-          left: 28px;
+          left: 50%;
           transform: translateX(-50%);
           border: 6px solid transparent;
           border-top-color: #131313;
@@ -270,7 +270,8 @@ export function TestimonialsSection() {
           className="ts-tooltip"
           style={{
             top: tooltipPos.top - 66,
-            left: tooltipPos.left,
+            left: tooltipPos.left + 28,
+            transform: 'translateX(-50%)',
           }}
         >
           <img src="/icons/Linkedin.svg" alt="LinkedIn" width={20} height={20} style={{ filter: 'brightness(0) invert(1)' }} />
