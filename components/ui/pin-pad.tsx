@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { useSound } from '@/contexts/sound-context';
 
 interface PinPadProps {
   projectTitle: string;
@@ -20,6 +21,7 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
   const [entered, setEntered] = useState('');
   const [shake, setShake] = useState(false);
   const [solved, setSolved] = useState(false);
+  const { playSelect } = useSound();
   const pinLength = onPin ? PIN_LENGTH : (correctPin?.length ?? PIN_LENGTH);
 
   // Trigger shake when parent signals an error
@@ -216,7 +218,7 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
                 key={btn}
                 className={`pin-btn${btn === 'clr' || btn === 'del' ? ' pin-btn-action' : ''}`}
                 style={{ borderRadius: radius }}
-                onClick={() => press(btn)}
+                onClick={() => { playSelect(); press(btn); }}
               >
                 <span className="pin-btn-wrap">
                   <span className="pin-btn-label">{label}</span>

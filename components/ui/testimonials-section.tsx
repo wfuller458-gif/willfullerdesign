@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useSound } from '@/contexts/sound-context';
 
 const testimonials = [
   {
@@ -40,6 +41,7 @@ export function TestimonialsSection() {
 
   const next = useCallback(() => setActive(p => (p + 1) % total), [total]);
   const prev = useCallback(() => setActive(p => (p - 1 + total) % total), [total]);
+  const { playHover } = useSound();
 
   useEffect(() => {
     const t = setTimeout(next, DURATION);
@@ -321,8 +323,8 @@ export function TestimonialsSection() {
               </div>
               <div className="ts-nav">
                 <div className="ts-arrows">
-                  <button className="ts-arrow" onClick={prev} aria-label="Previous"><img src="/icons/arrow-left.svg" alt="Previous" width={20} height={20} /></button>
-                  <button className="ts-arrow" onClick={next} aria-label="Next"><img src="/icons/arrow-right.svg" alt="Next" width={20} height={20} /></button>
+                  <button className="ts-arrow" onClick={prev} onMouseEnter={playHover} aria-label="Previous"><img src="/icons/arrow-left.svg" alt="Previous" width={20} height={20} /></button>
+                  <button className="ts-arrow" onClick={next} onMouseEnter={playHover} aria-label="Next"><img src="/icons/arrow-right.svg" alt="Next" width={20} height={20} /></button>
                 </div>
                 <span className="ts-counter">{pad(active)} / {pad(total - 1)}</span>
               </div>

@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
+import { useSound } from '@/contexts/sound-context';
 
 interface Slide {
   stat: string;
@@ -25,6 +26,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
 export function IntroSection() {
   const [active, setActive] = useState(0);
   const total = slides.length;
+  const { playHover } = useSound();
 
   const next = useCallback(() => setActive(p => (p + 1) % total), [total]);
   const prev = useCallback(() => setActive(p => (p - 1 + total) % total), [total]);
@@ -220,8 +222,8 @@ export function IntroSection() {
 
           <div className="is-nav">
             <div className="is-arrows">
-              <button className="is-arrow" onClick={prev} aria-label="Previous"><img src="/icons/arrow-left.svg" alt="Previous" width={20} height={20} /></button>
-              <button className="is-arrow" onClick={next} aria-label="Next"><img src="/icons/arrow-right.svg" alt="Next" width={20} height={20} /></button>
+              <button className="is-arrow" onClick={prev} onMouseEnter={playHover} aria-label="Previous"><img src="/icons/arrow-left.svg" alt="Previous" width={20} height={20} /></button>
+              <button className="is-arrow" onClick={next} onMouseEnter={playHover} aria-label="Next"><img src="/icons/arrow-right.svg" alt="Next" width={20} height={20} /></button>
             </div>
             <span className="is-counter">{pad(active)} / {pad(total - 1)}</span>
           </div>

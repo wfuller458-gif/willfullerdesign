@@ -3,6 +3,7 @@ import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { LoadingProvider } from "@/contexts/loading-context";
+import { SoundProvider } from "@/contexts/sound-context";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -37,10 +38,12 @@ export default function RootLayout({
         className={`${inter.variable} ${dmSans.variable} antialiased`}
         style={{ fontFamily: 'var(--font-inter)', backgroundColor: '#f7f7f0' }}
       >
-        <LoadingProvider>
-          <LoadingScreen />
-          {children}
-        </LoadingProvider>
+        <SoundProvider>
+          <LoadingProvider>
+            <LoadingScreen />
+            {children}
+          </LoadingProvider>
+        </SoundProvider>
       </body>
     </html>
   );

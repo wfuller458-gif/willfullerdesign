@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "./button";
 import { useLoading } from "@/contexts/loading-context";
+import { useSound } from "@/contexts/sound-context";
+
 
 const ContactLink = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -47,6 +49,7 @@ export interface HeaderProps {
 
 export function Header({ onMenuClick, onContactClick }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
+  const { isMuted, toggleMuted, playHover } = useSound();
   const { animateIn } = useLoading();
 
   useEffect(() => {
@@ -92,7 +95,7 @@ export function Header({ onMenuClick, onContactClick }: HeaderProps) {
         justifyContent: 'space-between'
       }}>
         {/* Menu Button - Left */}
-        <div onClick={onMenuClick} style={{ display: 'flex', alignItems: 'baseline', cursor: 'pointer' }}>
+        <div onClick={onMenuClick} onMouseEnter={playHover} style={{ display: 'flex', alignItems: 'baseline', cursor: 'pointer' }}>
           <Button variant="menu">Menu</Button>
         </div>
 
@@ -111,16 +114,37 @@ export function Header({ onMenuClick, onContactClick }: HeaderProps) {
           Will Fuller
         </p>
 
-        {/* Contact Link - Right */}
-        <div onClick={onContactClick} style={{
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 500,
-          fontSize: '16px',
-          color: 'var(--brand-black)',
-          whiteSpace: 'nowrap',
-          cursor: 'pointer'
-        }}>
-          <ContactLink />
+        {/* Mute + Contact - Right */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <button
+            onClick={toggleMuted}
+            aria-label={isMuted ? 'Unmute' : 'Mute'}
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+              opacity: isMuted ? 0.4 : 1,
+              display: 'flex',
+              alignItems: 'center',
+              transition: 'opacity 0.2s ease',
+              lineHeight: 0,
+            }}
+          >
+            <img src={isMuted ? '/icons/Mute.svg' : '/icons/Sound On.svg'} alt={isMuted ? 'Muted' : 'Sound on'} width={24} height={24} style={{ display: 'block' }} />
+          </button>
+          <div onClick={onContactClick} onMouseEnter={playHover} style={{
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 500,
+            fontSize: '16px',
+            color: 'var(--brand-black)',
+            whiteSpace: 'nowrap',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+          }}>
+            <ContactLink />
+          </div>
         </div>
       </div>
     </motion.header>

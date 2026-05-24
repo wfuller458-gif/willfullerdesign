@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ProjectCarousel } from './project-carousel';
 import { Button } from './button';
 import { useLoading } from '@/contexts/loading-context';
+import { useSound } from '@/contexts/sound-context';
 
 const TAGLINES = [
   'User centred design',
@@ -31,6 +32,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [ukTime, setUkTime] = useState('');
   const [taglineIndex, setTaglineIndex] = useState(0);
   const { animateIn } = useLoading();
+  const { playHover } = useSound();
 
   const fadeUp = (delay: number) => ({
     initial: { opacity: 0, y: 20 },
@@ -224,7 +226,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </h1>
 
           <motion.div {...fadeUp(1.6)}>
-            <Button variant="primary-black" onClick={onContactClick}>
+            <Button variant="primary-black" onClick={onContactClick} onMouseEnter={playHover}>
               {buttonText}
             </Button>
           </motion.div>

@@ -3,6 +3,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { PinPad } from './pin-pad';
+import { useSound } from '@/contexts/sound-context';
 
 const PadlockIcon = () => (
   <svg width="36" height="42" viewBox="0 0 36 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,6 +41,7 @@ export function ProjectPreview({
   bubbleVariant,
 }: ProjectPreviewProps) {
   const router = useRouter();
+  const { playHover } = useSound();
   const [showPin, setShowPin] = useState(false);
   const [pinError, setPinError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -62,6 +64,7 @@ export function ProjectPreview({
   }, []);
 
   const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    playHover();
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
