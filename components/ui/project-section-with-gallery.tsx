@@ -122,8 +122,6 @@ export function ProjectSectionWithGallery({
           overflow-x: auto;
           display: flex;
           gap: 8px;
-          scroll-snap-type: x mandatory;
-          scroll-padding-left: calc(10% - 25px);
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
         }
@@ -142,7 +140,6 @@ export function ProjectSectionWithGallery({
           display: flex;
           flex-direction: column;
           gap: 12px;
-          scroll-snap-align: start;
         }
 
         .pswg-gallery-img {

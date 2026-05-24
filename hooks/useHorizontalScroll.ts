@@ -7,8 +7,6 @@ export function useHorizontalScroll() {
     const el = ref.current;
     if (!el) return;
 
-    let snapTimeout: ReturnType<typeof setTimeout>;
-
     // Drag: use clientX directly to avoid offsetLeft issues
     let isDragging = false;
     let startX = 0;
@@ -32,9 +30,6 @@ export function useHorizontalScroll() {
       if (!isDragging) return;
       isDragging = false;
       el.style.userSelect = '';
-      snapTimeout = setTimeout(() => {
-        el.style.scrollSnapType = '';
-      }, 150);
     };
 
     // Prevent browser from dragging images/elements inside the gallery
@@ -46,7 +41,6 @@ export function useHorizontalScroll() {
     window.addEventListener('mouseup', onMouseUp);
 
     return () => {
-      clearTimeout(snapTimeout);
       el.removeEventListener('mousedown', onMouseDown);
       el.removeEventListener('dragstart', onDragStart);
       window.removeEventListener('mousemove', onMouseMove);

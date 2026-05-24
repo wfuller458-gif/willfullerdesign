@@ -28,7 +28,6 @@ export function ProjectGalleryStrip({
           overflow-x: auto;
           display: flex;
           gap: 8px;
-          scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none;
         }
@@ -61,7 +60,6 @@ export function ProjectGalleryStrip({
           display: flex;
           flex-direction: column;
           gap: 12px;
-          scroll-snap-align: start;
           direction: ltr;
         }
 
