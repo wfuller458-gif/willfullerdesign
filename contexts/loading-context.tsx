@@ -12,10 +12,12 @@ const LoadingContext = createContext<LoadingContextType>({
   triggerAnimateIn: () => {},
 });
 
+let _animateIn = false;
+
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
-  const [animateIn, setAnimateIn] = useState(false);
+  const [animateIn, setAnimateIn] = useState(_animateIn);
   return (
-    <LoadingContext.Provider value={{ animateIn, triggerAnimateIn: () => setAnimateIn(true) }}>
+    <LoadingContext.Provider value={{ animateIn, triggerAnimateIn: () => { _animateIn = true; setAnimateIn(true); } }}>
       {children}
     </LoadingContext.Provider>
   );
