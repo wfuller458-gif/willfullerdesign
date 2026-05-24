@@ -47,8 +47,11 @@ export function ScrollHintBubble({ children }: ScrollHintBubbleProps) {
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    targetPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  }, []);
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    targetPos.current = { x, y };
+    if (isDragging) currentPos.current = { x, y };
+  }, [isDragging]);
 
   const handleMouseLeave = useCallback(() => {
     setIsVisible(false);
