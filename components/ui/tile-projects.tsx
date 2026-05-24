@@ -22,13 +22,13 @@ export function TileProjects({ defaultProject = "Range Rover", interactive = tru
   const getProjectUrl = (project: ProjectState) => {
     switch (project) {
       case "Range Rover":
-        return "/projects/range-rover";
+        return "/projects/driverdisplays";
       case "Swipe Save":
         return "/projects/swipe-save";
       case "Avinya":
         return "/projects/avinya";
 case "Defender":
-        return "/projects/defender";
+        return "/projects/offroadcontrols";
       case "Feed It Back":
         return "/projects/feed-it-back";
       case "ChargedUp":

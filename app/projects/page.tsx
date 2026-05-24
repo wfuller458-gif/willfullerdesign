@@ -188,7 +188,7 @@ export default function Projects() {
               { text: 'UX ownership of every off-road feature' },
               { text: 'Unified physical controls and digital feedback' },
             ]}
-            mainImage="" secondaryImage="" projectLink="/projects/defender" bubbleVariant="locked"
+            mainImage="" secondaryImage="" projectLink="/projects/offroadcontrols" bubbleVariant="locked"
           />
           <ProjectPreview
             title="Feed It Back"
@@ -208,7 +208,7 @@ export default function Projects() {
               { text: 'Integrated Apple CarPlay and Android Auto' },
               { text: 'Designed next generation driver displays' },
             ]}
-            mainImage="" secondaryImage="" projectLink="/projects/range-rover" bubbleVariant="locked"
+            mainImage="" secondaryImage="" projectLink="/projects/driverdisplays" bubbleVariant="locked"
           />
           <ProjectPreview
             title="Training Platform"

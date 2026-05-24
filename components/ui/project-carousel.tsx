@@ -79,7 +79,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
       return {
         name: 'Off-Road Controls',
         images: ['', '', ''] as [string, string, string],
-        href: '/projects/defender'
+        href: '/projects/offroadcontrols'
       };
     }
     if (pattern === 1) {
@@ -93,7 +93,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
       return {
         name: 'Driver Displays',
         images: ['', '', ''] as [string, string, string],
-        href: '/projects/range-rover'
+        href: '/projects/driverdisplays'
       };
     }
     if (pattern === 3) {

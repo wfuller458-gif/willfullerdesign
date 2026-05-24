@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 export interface ProjectSectionAutoSliderProps {
   title: string;
   paragraphs: string[];
-  images?: [string, string];
+  images?: string[];
   interval?: number;
   showDots?: boolean;
   cycle?: boolean;
@@ -21,10 +21,10 @@ export function ProjectSectionAutoSlider({
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    if (!cycle) return;
-    const t = setInterval(() => setActive(p => (p + 1) % 2), interval);
+    if (!cycle || images.length <= 1) return;
+    const t = setInterval(() => setActive(p => (p + 1) % images.length), interval);
     return () => clearInterval(t);
-  }, [interval, cycle]);
+  }, [interval, cycle, images.length]);
 
   return (
     <>
@@ -139,7 +139,7 @@ export function ProjectSectionAutoSlider({
                 ? <img key={i} src={src} alt="" className="psas-slide" style={{ opacity: active === i ? 1 : 0 }} />
                 : <div key={i} className="psas-slide" style={{ opacity: active === i ? 1 : 0, backgroundColor: i === 0 ? '#D9D9D9' : '#CECECE' }} />
             )}
-            {showDots && (
+            {showDots && images.length > 1 && (
               <div className="psas-dots">
                 {images.map((_, i) => (
                   <div key={i} className={`psas-dot${active === i ? ' psas-dot-active' : ''}`} />

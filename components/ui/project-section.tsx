@@ -11,6 +11,7 @@ export interface ProjectSectionProps {
   bullets: ProjectSectionBullet[];
   image?: string;
   showImage?: boolean;
+  imageLabel?: string;
 }
 
 export function ProjectSection({
@@ -19,6 +20,7 @@ export function ProjectSection({
   bullets,
   image = '',
   showImage = true,
+  imageLabel,
 }: ProjectSectionProps) {
   return (
     <>
@@ -158,6 +160,9 @@ export function ProjectSection({
               ? <img src={image} alt={title} className="psc-image" />
               : <div className="psc-image" />
             }
+            {imageLabel && (
+              <p style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: 12, color: 'var(--brand-black)', margin: '12px 0 0 0' }}>{imageLabel}</p>
+            )}
           </div>
         )}
       </div>
