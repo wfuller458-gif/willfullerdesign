@@ -30,34 +30,30 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(0);
-  const [scrolling, setScrolling] = useState(false);
   const { animateIn } = useLoading();
   const hasStarted = React.useRef(false);
-  // Capture whether animateIn was already true when this component mounted
+  // True when animateIn was already set on mount (back navigation / menu-home)
   const isSoftNav = React.useRef(animateIn);
+  const [visibleCount, setVisibleCount] = useState(() => isSoftNav.current ? images.length : 0);
+  const [scrolling, setScrolling] = useState(() => isSoftNav.current);
 
   useEffect(() => {
     if (!animateIn || hasStarted.current) return;
     hasStarted.current = true;
+    if (isSoftNav.current) return; // already fully visible, nothing to do
 
-    const softNav = isSoftNav.current;
-    const intro = softNav ? SOFT_INTRO_DELAY : INTRO_DELAY;
-    const stagger = softNav ? SOFT_STAGGER : STAGGER;
     const count = images.length;
-
-    // Lock scroll during carousel stagger on soft nav too
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
 
     for (let i = 0; i < count; i++) {
-      setTimeout(() => setVisibleCount(i + 1), intro + i * stagger);
+      setTimeout(() => setVisibleCount(i + 1), INTRO_DELAY + i * STAGGER);
     }
     setTimeout(() => {
       setScrolling(true);
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
-    }, intro + (count - 1) * stagger + IMG_DUR * 1000);
+    }, INTRO_DELAY + (count - 1) * STAGGER + IMG_DUR * 1000);
   }, [animateIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Detect if device is mobile/touch
@@ -224,7 +220,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
             className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
             onMouseEnter={() => !isMobile && setHoveredIndex(index)}
             onMouseLeave={() => !isMobile && setHoveredIndex(null)}
-            initial={{ opacity: 0, y: 8 }}
+            initial={isSoftNav.current ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={visibleCount >= images.length - index
               ? { opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 1, y: 0 }
               : { opacity: 0, y: 8 }}

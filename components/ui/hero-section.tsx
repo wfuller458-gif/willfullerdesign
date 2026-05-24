@@ -35,7 +35,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const { playHover } = useSound();
 
   const fadeUp = (delay: number) => ({
-    initial: { opacity: 0, y: 20 },
+    initial: animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
     animate: animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
     transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
   });
@@ -214,7 +214,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {['Making', 'Ideas', 'Real'].map((word, i) => (
               <span key={word} style={{ display: 'inline-block', marginRight: i < 2 ? '0.22em' : 0 }}>
                 <motion.span
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                   animate={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                   transition={{ delay: i * 0.45, duration: 0.65, ease: 'easeInOut' }}
                   style={{ display: 'inline-block' }}
