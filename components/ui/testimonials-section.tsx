@@ -116,7 +116,7 @@ export function TestimonialsSection() {
           line-height: 1.3;
           color: var(--brand-black);
           margin: 0;
-          min-height: 380px;
+          min-height: 500px;
           animation: ts-fade-in 0.4s ease forwards;
         }
 
