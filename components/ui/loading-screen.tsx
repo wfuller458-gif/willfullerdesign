@@ -32,6 +32,7 @@ export function LoadingScreen() {
   // Scroll lock + exit timer — only runs when animation is active
   useEffect(() => {
     if (!visible) return;
+    sessionStorage.setItem('intro-played', '1');
     window.scrollTo(0, 0);
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
@@ -68,7 +69,6 @@ export function LoadingScreen() {
           }
           onAnimationComplete={() => {
             if (exiting) {
-              sessionStorage.setItem('intro-played', '1');
               document.body.style.overflow = '';
               document.documentElement.style.overflow = '';
               setVisible(false);
