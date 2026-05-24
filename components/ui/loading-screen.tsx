@@ -15,9 +15,12 @@ export function LoadingScreen() {
   const pathname = usePathname();
   const { triggerAnimateIn } = useLoading();
 
-  // visible is true only if the very first page loaded was '/'
-  // useState initialiser runs once on mount — subsequent navigations don't change this
-  const [visible, setVisible] = useState(pathname === '/');
+  // Only show on the very first visit this session — never again on back/forward navigation
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    if (sessionStorage.getItem('intro-played')) return false;
+    return pathname === '/';
+  });
   const [exiting, setExiting] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -65,6 +68,7 @@ export function LoadingScreen() {
           }
           onAnimationComplete={() => {
             if (exiting) {
+              sessionStorage.setItem('intro-played', '1');
               document.body.style.overflow = '';
               document.documentElement.style.overflow = '';
               setVisible(false);
