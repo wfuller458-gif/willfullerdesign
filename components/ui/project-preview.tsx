@@ -45,7 +45,7 @@ export function ProjectPreview({
   const [showPin, setShowPin] = useState(false);
   const [pinError, setPinError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [bubblePos, setBubblePos] = useState({ x: 0, y: 0 });
+  const bubbleRef = useRef<HTMLDivElement>(null);
   const targetPos = useRef({ x: 0, y: 0 });
   const currentPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
@@ -54,7 +54,9 @@ export function ProjectPreview({
     const lerp = 0.12;
     currentPos.current.x += (targetPos.current.x - currentPos.current.x) * lerp;
     currentPos.current.y += (targetPos.current.y - currentPos.current.y) * lerp;
-    setBubblePos({ x: currentPos.current.x, y: currentPos.current.y });
+    if (bubbleRef.current) {
+      bubbleRef.current.style.transform = `translate(calc(${currentPos.current.x}px - 50%), calc(${currentPos.current.y}px - 50%))`;
+    }
     rafRef.current = requestAnimationFrame(animate);
   }, []);
 
@@ -258,11 +260,10 @@ export function ProjectPreview({
 
           {/* Cursor bubble */}
           {isHovering && bubbleVariant && (
-            <div style={{
+            <div ref={bubbleRef} style={{
               position: 'absolute',
-              left: bubblePos.x,
-              top: bubblePos.y,
-              transform: 'translate(-50%, -50%)',
+              top: 0,
+              left: 0,
               width: '144px',
               height: '144px',
               borderRadius: '50%',
