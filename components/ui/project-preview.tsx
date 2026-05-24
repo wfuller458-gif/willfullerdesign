@@ -91,9 +91,7 @@ export function ProjectPreview({
         }
 
         .pp-rule {
-          border: none;
-          border-top: 0.5px solid #9C9C9C;
-          margin: 0 0 25px 0;
+          display: none;
         }
 
         .pp-text-row {
@@ -109,8 +107,8 @@ export function ProjectPreview({
 
         .pp-title {
           font-family: DM Sans, sans-serif;
-          font-weight: 300;
-          font-size: 64px;
+          font-weight: 400;
+          font-size: 42px;
           line-height: 1.3;
           color: var(--brand-black);
           margin: 0 0 16px 0;
@@ -137,6 +135,7 @@ export function ProjectPreview({
           display: flex;
           align-items: center;
           gap: 12px;
+          max-width: 220px;
         }
 
         .pp-bullet-icon {
@@ -197,19 +196,19 @@ export function ProjectPreview({
         }
 
         @media (max-width: 1024px) {
-          .pp-title { font-size: 48px; }
+          .pp-title { font-size: 32px; }
           .pp-images { height: 420px; }
         }
 
         @media (max-width: 1024px) {
           .pp-text-row { grid-template-columns: 1fr; gap: 32px; align-items: start; }
-          .pp-title { font-size: 36px; }
+          .pp-title { font-size: 32px; }
           .pp-images { height: 300px; }
         }
 
         @media (max-width: 480px) {
           .pp-wrap { padding: 20px 16px; }
-          .pp-title { font-size: 28px; }
+          .pp-title { font-size: 24px; }
           .pp-images { height: 220px; }
         }
       `}</style>

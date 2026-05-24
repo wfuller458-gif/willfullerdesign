@@ -1,5 +1,6 @@
 'use client';
 import { ScrollHintBubble } from '@/components/ui/scroll-hint-bubble';
+import { useHorizontalScroll } from '@/hooks/useHorizontalScroll';
 
 export interface GalleryImage {
   src?: string;
@@ -28,6 +29,7 @@ export function ProjectSectionWithGallery({
   images,
   galleryHeight = 460,
 }: ProjectSectionWithGalleryProps) {
+  const galleryRef = useHorizontalScroll();
   return (
     <>
       <style>{`
@@ -204,7 +206,7 @@ export function ProjectSectionWithGallery({
         </div>
 
         <ScrollHintBubble>
-          <div className="pswg-gallery">
+          <div ref={galleryRef} className="pswg-gallery">
             <div className="pswg-gallery-lead" />
             {images.map((img, i) => {
               const imgWidth = Math.round(galleryHeight * (img.width / img.height));

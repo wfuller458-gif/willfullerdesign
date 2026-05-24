@@ -6,6 +6,9 @@ import { HeroSection } from '@/components/ui/hero-section';
 import { ProjectPreview } from '@/components/ui/project-preview';
 import { Footer } from '@/components/ui/footer';
 import { RecommendationCarousel } from '@/components/ui/recommendation-carousel';
+import { TestimonialsSection } from '@/components/ui/testimonials-section';
+import { IntroSection } from '@/components/ui/intro-section';
+import { CollaborationSection } from '@/components/ui/collaboration-section';
 import { Menu } from '@/components/ui/menu';
 
 const handleContact = () => {
@@ -91,14 +94,20 @@ export default function Home() {
           }
         `}
       </style>
-      <div className="intro-text-section">
-        <p className="intro-text">
-          I turn ideas into reality through expert judgment, craft, and a relentless attention to detail, creating experiences people love.
-        </p>
+      <IntroSection />
+
+      <CollaborationSection />
+
+      {/* Selected Works header */}
+      <div style={{ padding: '0 25px', marginTop: 150 }}>
+        <hr style={{ border: 'none', borderTop: '0.5px solid #9C9C9C', margin: '0 0 25px 0' }} />
+        <h2 style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: 32, lineHeight: 1.2, color: '#BBB7B4', margin: 0, whiteSpace: 'nowrap' }}>
+          Selected works
+        </h2>
       </div>
 
       {/* Project Previews */}
-      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '75px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '100px', marginTop: 100 }}>
         <ProjectPreview
           title="Off-Road Controls"
           description="Lead the UX for upcoming Defender models by delivering an off-road experience that unifies cameras, terrain systems and incorporate new features into a seamless, engaging cockpit focused on usability, confidence and adventure."
@@ -151,41 +160,7 @@ export default function Home() {
         />
       </div>
 
-      {/* Recommendations Section Header */}
-      <div style={{
-        width: '100%',
-        marginTop: '100px',
-        marginBottom: '80px'
-      }}>
-        <p style={{
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 400,
-          fontSize: '20px',
-          lineHeight: '1.4',
-          color: 'var(--brand-black)',
-          marginBottom: '24px',
-          textAlign: 'center'
-        }}>
-          Recommendations
-        </p>
-        <h2 style={{
-          fontSize: '42px',
-          lineHeight: '1.3',
-          color: 'var(--brand-black)',
-          marginBottom: '0',
-          textAlign: 'center'
-        }}>
-          <span style={{
-            fontFamily: 'DM Sans, sans-serif',
-            fontWeight: 300
-          }}>Tangible Impact</span>
-        </h2>
-      </div>
-
-      {/* Recommendation Cards */}
-      <div style={{ marginBottom: '100px' }}>
-        <RecommendationCarousel />
-      </div>
+      <TestimonialsSection />
 
       {/* Footer */}
       <Footer onContactClick={handleContact} />

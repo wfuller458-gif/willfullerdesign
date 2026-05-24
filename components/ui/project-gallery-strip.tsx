@@ -1,5 +1,6 @@
 'use client';
 import { ScrollHintBubble } from '@/components/ui/scroll-hint-bubble';
+import { useHorizontalScroll } from '@/hooks/useHorizontalScroll';
 
 export interface GalleryStripImage {
   src?: string;
@@ -19,6 +20,7 @@ export function ProjectGalleryStrip({
   galleryHeight = 460,
   reversed = false,
 }: ProjectGalleryStripProps) {
+  const galleryRef = useHorizontalScroll();
   return (
     <>
       <style>{`
@@ -83,7 +85,7 @@ export function ProjectGalleryStrip({
       `}</style>
 
       <ScrollHintBubble>
-        <div className={`pgs-gallery ${reversed ? 'pgs-gallery-rtl' : 'pgs-gallery-ltr'}`}>
+        <div ref={galleryRef} className={`pgs-gallery ${reversed ? 'pgs-gallery-rtl' : 'pgs-gallery-ltr'}`}>
           <div className="pgs-spacer" />
           {images.map((img, i) => {
             const imgWidth = Math.round(galleryHeight * (img.width / img.height));
