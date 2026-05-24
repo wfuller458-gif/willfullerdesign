@@ -8,12 +8,17 @@ const ArrowsIcon = () => (
   </svg>
 );
 
+const GrabIcon = () => (
+  <img src="/icons/grab.svg" alt="" width={28} height={28} style={{ filter: 'brightness(0) invert(1)' }} />
+);
+
 interface ScrollHintBubbleProps {
   children: React.ReactNode;
 }
 
 export function ScrollHintBubble({ children }: ScrollHintBubbleProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [bubblePos, setBubblePos] = useState({ x: 0, y: 0 });
 
   const targetPos = useRef({ x: 0, y: 0 });
@@ -47,17 +52,27 @@ export function ScrollHintBubble({ children }: ScrollHintBubbleProps) {
 
   const handleMouseLeave = useCallback(() => {
     setIsVisible(false);
+    setIsDragging(false);
     cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  const handleMouseDown = useCallback(() => setIsDragging(true), []);
+
+  useEffect(() => {
+    const onMouseUp = () => setIsDragging(false);
+    window.addEventListener('mouseup', onMouseUp);
+    return () => window.removeEventListener('mouseup', onMouseUp);
   }, []);
 
   useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
 
   return (
     <div
-      style={{ position: 'relative' }}
+      style={{ position: 'relative', cursor: 'none' }}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onMouseDown={handleMouseDown}
     >
       {children}
       {isVisible && (
@@ -66,7 +81,10 @@ export function ScrollHintBubble({ children }: ScrollHintBubbleProps) {
             position: 'absolute',
             left: bubblePos.x,
             top: bubblePos.y,
-            transform: 'translate(-50%, -50%)',
+            transform: `translate(-50%, -50%) scale(${isDragging ? 0.88 : 1})`,
+            transition: isDragging
+              ? 'transform 0.12s ease-out'
+              : 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
             width: 72,
             height: 72,
             borderRadius: '50%',
@@ -80,7 +98,7 @@ export function ScrollHintBubble({ children }: ScrollHintBubbleProps) {
             zIndex: 10,
           }}
         >
-          <ArrowsIcon />
+          {isDragging ? <GrabIcon /> : <ArrowsIcon />}
         </div>
       )}
     </div>
