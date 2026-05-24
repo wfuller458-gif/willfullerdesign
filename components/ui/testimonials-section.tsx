@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 const testimonials = [
   {
@@ -33,6 +33,9 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
 
 export function TestimonialsSection() {
   const [active, setActive] = useState(0);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
+  const photoRef = useRef<HTMLAnchorElement>(null);
   const total = testimonials.length;
 
   const next = useCallback(() => setActive(p => (p + 1) % total), [total]);
@@ -42,6 +45,16 @@ export function TestimonialsSection() {
     const t = setTimeout(next, DURATION);
     return () => clearTimeout(t);
   }, [active, next]);
+
+  const handleMouseEnter = useCallback(() => {
+    if (photoRef.current) {
+      const rect = photoRef.current.getBoundingClientRect();
+      setTooltipPos({ top: rect.top, left: rect.left });
+    }
+    setTooltipVisible(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => setTooltipVisible(false), []);
 
   const t = testimonials[active];
 
@@ -92,6 +105,7 @@ export function TestimonialsSection() {
           display: flex;
           flex-direction: column;
           gap: 32px;
+          overflow: visible;
         }
 
         .ts-quote {
@@ -110,6 +124,14 @@ export function TestimonialsSection() {
           display: flex;
           align-items: center;
           gap: 16px;
+          overflow: visible;
+        }
+
+        .ts-photo-wrap {
+          position: relative;
+          flex-shrink: 0;
+          display: inline-block;
+          text-decoration: none;
         }
 
         .ts-photo {
@@ -117,9 +139,52 @@ export function TestimonialsSection() {
           height: 56px;
           border-radius: 50%;
           object-fit: cover;
-          flex-shrink: 0;
+          display: block;
           background-color: #D9D9D9;
+          filter: grayscale(100%);
         }
+
+        .ts-tooltip {
+          pointer-events: none;
+          position: fixed;
+          white-space: nowrap;
+          background: #131313;
+          border-radius: 8px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+          padding: 10px 14px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          z-index: 1000;
+          transition: opacity 0.18s ease;
+        }
+
+        .ts-tooltip::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 28px;
+          transform: translateX(-50%);
+          border: 6px solid transparent;
+          border-top-color: #131313;
+        }
+
+        .ts-tooltip-text {
+          font-family: DM Sans, sans-serif;
+          font-weight: 300;
+          font-size: 13px;
+          color: #fff;
+          line-height: 1.3;
+        }
+
+        .ts-tooltip-sub {
+          font-family: DM Sans, sans-serif;
+          font-weight: 300;
+          font-size: 11px;
+          color: #9C9C9C;
+          display: block;
+        }
+
 
         .ts-author-name {
           font-family: DM Sans, sans-serif;
@@ -136,6 +201,7 @@ export function TestimonialsSection() {
           color: #9C9C9C;
           margin: 0;
           line-height: 1.4;
+          max-width: 360px;
         }
 
         .ts-bar-track {
@@ -199,6 +265,22 @@ export function TestimonialsSection() {
         }
       `}</style>
 
+      {tooltipVisible && (
+        <div
+          className="ts-tooltip"
+          style={{
+            top: tooltipPos.top - 66,
+            left: tooltipPos.left,
+          }}
+        >
+          <img src="/icons/Linkedin.svg" alt="LinkedIn" width={20} height={20} style={{ filter: 'brightness(0) invert(1)' }} />
+          <span className="ts-tooltip-text">
+            Verified on LinkedIn
+            <span className="ts-tooltip-sub">Click to view</span>
+          </span>
+        </div>
+      )}
+
       <div className="ts-wrap">
         <hr className="ts-rule" />
         <div className="ts-inner">
@@ -211,10 +293,22 @@ export function TestimonialsSection() {
 
             <div className="ts-author">
               {t.photo
-                ? <img src={t.photo} alt={t.name} className="ts-photo" />
+                ? (
+                  <a
+                    ref={photoRef}
+                    href="https://www.linkedin.com/in/will-fuller22/details/recommendations/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ts-photo-wrap"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <img src={t.photo} alt={t.name} className="ts-photo" />
+                  </a>
+                )
                 : <div className="ts-photo" />
               }
-              <div>
+              <div style={{ minWidth: 0 }}>
                 <p className="ts-author-name">{t.name}</p>
                 <p className="ts-author-role">{t.role}</p>
               </div>
