@@ -11,14 +11,18 @@ const WORD_DUR = 0.4;
 const HOLD = 700;
 const EXIT_DUR = 1.0;
 
+// Module-level flag: set once animation starts; resets only on hard reload or new tab
+let _introStarted = false;
+
 export function LoadingScreen() {
   const pathname = usePathname();
   const { triggerAnimateIn } = useLoading();
 
-  // Only show on the very first visit this session — never again on back/forward navigation
+  // Show only on the very first visit — module flag survives React remounts,
+  // sessionStorage survives module re-evaluation (HMR in dev)
   const [visible, setVisible] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    if (sessionStorage.getItem('intro-played')) return false;
+    if (_introStarted) return false;
+    if (typeof window !== 'undefined' && sessionStorage.getItem('intro-played')) return false;
     return pathname === '/';
   });
   const [exiting, setExiting] = useState(false);
@@ -32,13 +36,19 @@ export function LoadingScreen() {
   // Scroll lock + exit timer — only runs when animation is active
   useEffect(() => {
     if (!visible) return;
+    _introStarted = true;
     sessionStorage.setItem('intro-played', '1');
     window.scrollTo(0, 0);
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
     const allVisibleMs = (WORD_DELAY + WORD_DUR) * 1000;
     const t = setTimeout(() => setExiting(true), allVisibleMs + HOLD);
-    return () => clearTimeout(t);
+    // Always restore overflow on unmount — guards against mid-animation navigation
+    return () => {
+      clearTimeout(t);
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Counter 0 → 100
