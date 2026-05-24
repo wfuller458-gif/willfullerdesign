@@ -21,7 +21,7 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
   const [entered, setEntered] = useState('');
   const [shake, setShake] = useState(false);
   const [solved, setSolved] = useState(false);
-  const { playSelect, playPinSuccess, playPinError } = useSound();
+  const { playHover, playSelect, playPinSuccess, playPinError } = useSound();
   const pinLength = onPin ? PIN_LENGTH : (correctPin?.length ?? PIN_LENGTH);
 
   // Trigger shake when parent signals an error
