@@ -7,13 +7,14 @@ interface Slide {
 }
 
 const slides: Slide[] = [
-  { stat: '6+',    label: 'Years of experience designing complex user interfaces.' },
-  { stat: '5',     label: 'Major products shipped across automotive and healthcare.' },
-  { stat: '30k+',  label: 'Clinicians supported annually through platform design.' },
-  { stat: '100k+', label: 'Vehicles shipped globally with display designs across 120+ markets.' },
+  { stat: '6+',      label: 'Years of turning complexity into clarity across automotive, healthcare, hospitality and non-profit.' },
+  { stat: '100k+',   label: 'Vehicles across 120+ countries shipped with my design every year.' },
+  { stat: '30k+',    label: 'Clinicians trained every year through a platform I designed.' },
+  { stat: 'Millions',label: 'of customer reviews from Bill\'s, The Alchemist, Giggling Squid and more land in one inbox I designed.' },
+  { stat: '1,000+',  label: 'missionaries across 20+ African countries managed through a platform I designed.' },
 ];
 
-const QUOTE = 'I turn ideas into reality through expert judgment, craft, and a relentless attention to detail, creating experiences people love.';
+const QUOTE = 'Complex products deserve design as considered as the problem they\'re solving.';
 const AUTHOR = 'Will Fuller';
 const ROLE = 'Product Designer';
 
@@ -122,7 +123,7 @@ export function IntroSection() {
 
         .is-stat {
           font-family: DM Sans, sans-serif;
-          font-weight: 300;
+          font-weight: 400;
           font-size: 64px;
           line-height: 1.3;
           color: var(--brand-black);
