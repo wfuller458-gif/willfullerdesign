@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Header } from '@/components/ui/header';
 import { HeroSection } from '@/components/ui/hero-section';
 import { ProjectPreview } from '@/components/ui/project-preview';
@@ -10,13 +11,40 @@ import { TestimonialsSection } from '@/components/ui/testimonials-section';
 import { IntroSection } from '@/components/ui/intro-section';
 import { CollaborationSection } from '@/components/ui/collaboration-section';
 import { Menu } from '@/components/ui/menu';
+import { PinPad } from '@/components/ui/pin-pad';
 
 const handleContact = () => {
   window.location.href = 'mailto:will.fuller22@hotmail.com';
 };
 
 export default function Home() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showUnlockPin, setShowUnlockPin] = useState(false);
+  const [pinError, setPinError] = useState(false);
+
+  // Auto-open PIN pad when redirected from a protected page
+  useEffect(() => {
+    if (window.location.search.includes('unlock=training-platform')) {
+      setShowUnlockPin(true);
+      window.history.replaceState({}, '', '/');
+    }
+  }, []);
+
+  const handleUnlockPin = useCallback(async (pin: string) => {
+    const res = await fetch('/api/verify-pin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pin }),
+    });
+    if (res.ok) {
+      setShowUnlockPin(false);
+      router.push('/projects/training-platform');
+    } else {
+      setPinError(true);
+      setTimeout(() => setPinError(false), 600);
+    }
+  }, [router]);
 
   React.useEffect(() => {
     if (isMenuOpen) {
@@ -191,6 +219,16 @@ export default function Home() {
             }}
           />
         </div>
+      )}
+
+      {/* Training Platform PIN gate */}
+      {showUnlockPin && (
+        <PinPad
+          projectTitle="Training Platform"
+          onPin={handleUnlockPin}
+          error={pinError}
+          onClose={() => setShowUnlockPin(false)}
+        />
       )}
     </div>
   );

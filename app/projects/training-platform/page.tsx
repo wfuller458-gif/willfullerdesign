@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { Footer } from '@/components/ui/footer';
 import { Menu } from '@/components/ui/menu';
@@ -10,41 +10,12 @@ import { ProjectSection } from '@/components/ui/project-section';
 import { ProjectSectionWithGallery } from '@/components/ui/project-section-with-gallery';
 import { ProjectSectionAutoSlider } from '@/components/ui/project-section-auto-slider';
 import { ProjectGalleryStrip } from '@/components/ui/project-gallery-strip';
-import { PinPad } from '@/components/ui/pin-pad';
 
 const BASE = '/images/projects/training-platform';
 
 export default function TrainingPlatformProject() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [unlocked, setUnlocked] = useState(false);
-  const [pinError, setPinError] = useState(false);
-
-  const handlePin = useCallback(async (pin: string) => {
-    const res = await fetch('/api/verify-pin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pin }),
-    });
-    if (res.ok) {
-      setUnlocked(true);
-    } else {
-      setPinError(true);
-      setTimeout(() => setPinError(false), 600);
-    }
-  }, []);
-
-  if (!unlocked) {
-    return (
-      <PinPad
-        projectTitle="Training Platform"
-        onPin={handlePin}
-        error={pinError}
-        onClose={() => window.history.back()}
-      />
-    );
-  }
-
   return (
     <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
       <style>{`.overlay-wrapper{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.3);z-index:1000;padding:0}`}</style>

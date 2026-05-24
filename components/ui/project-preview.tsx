@@ -28,7 +28,6 @@ export interface ProjectPreviewProps {
   secondaryImage: string;
   projectLink?: string;
   bubbleVariant?: BubbleVariant;
-  pin?: string;
 }
 
 export function ProjectPreview({
@@ -39,10 +38,10 @@ export function ProjectPreview({
   secondaryImage,
   projectLink = '#',
   bubbleVariant,
-  pin = '1234',
 }: ProjectPreviewProps) {
   const router = useRouter();
   const [showPin, setShowPin] = useState(false);
+  const [pinError, setPinError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [bubblePos, setBubblePos] = useState({ x: 0, y: 0 });
   const targetPos = useRef({ x: 0, y: 0 });
@@ -215,6 +214,7 @@ export function ProjectPreview({
 
       <div className="pp-wrap" onClick={() => {
         if (bubbleVariant === 'coming-soon') return;
+        if (bubbleVariant === 'locked') { setShowPin(true); return; }
         router.push(projectLink);
       }}>
 
@@ -290,8 +290,16 @@ export function ProjectPreview({
       {showPin && (
         <PinPad
           projectTitle={title}
-          correctPin={pin}
-          onSuccess={() => { setShowPin(false); router.push(projectLink); }}
+          onPin={async (pin) => {
+            const res = await fetch('/api/verify-pin', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pin }),
+            });
+            if (res.ok) { setShowPin(false); router.push(projectLink); }
+            else { setPinError(true); setTimeout(() => setPinError(false), 600); }
+          }}
+          error={pinError}
           onClose={() => setShowPin(false)}
         />
       )}
