@@ -21,12 +21,13 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
   const [entered, setEntered] = useState('');
   const [shake, setShake] = useState(false);
   const [solved, setSolved] = useState(false);
-  const { playSelect } = useSound();
+  const { playSelect, playPinSuccess, playPinError } = useSound();
   const pinLength = onPin ? PIN_LENGTH : (correctPin?.length ?? PIN_LENGTH);
 
   // Trigger shake when parent signals an error
   useEffect(() => {
     if (error && !shake) {
+      playPinError();
       setShake(true);
       setTimeout(() => { setEntered(''); setShake(false); }, 550);
     }
@@ -46,9 +47,11 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
       } else if (correctPin && onSuccess) {
         // Legacy local check
         if (next === correctPin) {
+          playPinSuccess();
           setSolved(true);
           setTimeout(onSuccess, 500);
         } else {
+          playPinError();
           setShake(true);
           setTimeout(() => { setEntered(''); setShake(false); }, 550);
         }

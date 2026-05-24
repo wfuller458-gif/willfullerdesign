@@ -9,6 +9,8 @@ interface SoundContextValue {
   toggleMuted: () => void;
   playHover: () => void;
   playSelect: () => void;
+  playPinSuccess: () => void;
+  playPinError: () => void;
 }
 
 const SoundContext = createContext<SoundContextValue>({
@@ -16,12 +18,16 @@ const SoundContext = createContext<SoundContextValue>({
   toggleMuted: () => {},
   playHover: () => {},
   playSelect: () => {},
+  playPinSuccess: () => {},
+  playPinError: () => {},
 });
 
 export function SoundProvider({ children }: { children: React.ReactNode }) {
   const [isMuted, setIsMuted] = useState(false);
   const hoverRef = useRef<HTMLAudioElement | null>(null);
   const selectRef = useRef<HTMLAudioElement | null>(null);
+  const pinSuccessRef = useRef<HTMLAudioElement | null>(null);
+  const pinErrorRef = useRef<HTMLAudioElement | null>(null);
 
   const toggleMuted = useCallback(() => setIsMuted(m => !m), []);
 
@@ -41,6 +47,22 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     return selectRef.current;
   }, []);
 
+  const getPinSuccess = useCallback(() => {
+    if (!pinSuccessRef.current) {
+      pinSuccessRef.current = new Audio('/sounds/pin-success.mp3');
+      pinSuccessRef.current.volume = 0.5;
+    }
+    return pinSuccessRef.current;
+  }, []);
+
+  const getPinError = useCallback(() => {
+    if (!pinErrorRef.current) {
+      pinErrorRef.current = new Audio('/sounds/pin-error.mp3');
+      pinErrorRef.current.volume = 0.5;
+    }
+    return pinErrorRef.current;
+  }, []);
+
   const playHover = useCallback(() => {
     if (isMuted) return;
     const audio = getHover();
@@ -55,8 +77,22 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     audio.play().catch(() => {});
   }, [isMuted, getSelect]);
 
+  const playPinSuccess = useCallback(() => {
+    if (isMuted) return;
+    const audio = getPinSuccess();
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  }, [isMuted, getPinSuccess]);
+
+  const playPinError = useCallback(() => {
+    if (isMuted) return;
+    const audio = getPinError();
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  }, [isMuted, getPinError]);
+
   return (
-    <SoundContext.Provider value={{ isMuted, toggleMuted, playHover, playSelect }}>
+    <SoundContext.Provider value={{ isMuted, toggleMuted, playHover, playSelect, playPinSuccess, playPinError }}>
       {children}
     </SoundContext.Provider>
   );

@@ -41,7 +41,7 @@ export function ProjectPreview({
   bubbleVariant,
 }: ProjectPreviewProps) {
   const router = useRouter();
-  const { playHover } = useSound();
+  const { playHover, playPinSuccess } = useSound();
   const [showPin, setShowPin] = useState(false);
   const [pinError, setPinError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -299,7 +299,7 @@ export function ProjectPreview({
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ pin }),
             });
-            if (res.ok) { setShowPin(false); router.push(projectLink); }
+            if (res.ok) { playPinSuccess(); setShowPin(false); router.push(projectLink); }
             else { setPinError(true); setTimeout(() => setPinError(false), 600); }
           }}
           error={pinError}
