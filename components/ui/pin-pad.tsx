@@ -221,6 +221,7 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
                 key={btn}
                 className={`pin-btn${btn === 'clr' || btn === 'del' ? ' pin-btn-action' : ''}`}
                 style={{ borderRadius: radius }}
+                onMouseEnter={playHover}
                 onClick={() => { playSelect(); press(btn); }}
               >
                 <span className="pin-btn-wrap">
