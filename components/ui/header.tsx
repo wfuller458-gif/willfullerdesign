@@ -7,6 +7,61 @@ import { useLoading } from "@/contexts/loading-context";
 import { useSound } from "@/contexts/sound-context";
 
 
+const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; onToggle: () => void; onMouseEnter: () => void }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const icon = isMuted ? '/icons/Mute.svg' : '/icons/Sound On.svg';
+  const label = isMuted ? 'Unmute' : 'Mute';
+
+  return (
+    <button
+      onClick={onToggle}
+      onMouseEnter={() => { setIsHovered(true); onMouseEnter(); }}
+      onMouseLeave={() => setIsHovered(false)}
+      aria-label={label}
+      style={{
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        lineHeight: 0,
+        position: 'relative',
+        overflow: 'hidden',
+        width: 24,
+        height: 24,
+      }}
+    >
+      <img
+        src={icon}
+        alt={label}
+        width={24}
+        height={24}
+        style={{
+          display: 'block',
+          transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
+          transform: isHovered ? 'translateY(-100%)' : 'translateY(0)',
+        }}
+      />
+      <img
+        src={icon}
+        alt=""
+        aria-hidden
+        width={24}
+        height={24}
+        style={{
+          display: 'block',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
+          transform: isHovered ? 'translateY(0)' : 'translateY(100%)',
+        }}
+      />
+    </button>
+  );
+};
+
 const ContactLink = () => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -116,23 +171,7 @@ export function Header({ onMenuClick, onContactClick }: HeaderProps) {
 
         {/* Mute + Contact - Right */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <button
-            onClick={toggleMuted}
-            aria-label={isMuted ? 'Unmute' : 'Mute'}
-            style={{
-              background: 'none',
-              border: 'none',
-              padding: 0,
-              cursor: 'pointer',
-              opacity: isMuted ? 0.4 : 1,
-              display: 'flex',
-              alignItems: 'center',
-              transition: 'opacity 0.2s ease',
-              lineHeight: 0,
-            }}
-          >
-            <img src={isMuted ? '/icons/Mute.svg' : '/icons/Sound On.svg'} alt={isMuted ? 'Muted' : 'Sound on'} width={24} height={24} style={{ display: 'block' }} />
-          </button>
+          <SoundButton isMuted={isMuted} onToggle={toggleMuted} onMouseEnter={playHover} />
           <div onClick={onContactClick} onMouseEnter={playHover} style={{
             fontFamily: 'Inter, sans-serif',
             fontWeight: 500,
