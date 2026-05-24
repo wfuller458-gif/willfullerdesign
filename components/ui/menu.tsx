@@ -14,7 +14,7 @@ export const Menu: React.FC<MenuProps> = ({
   onNavigate,
   onContactClick
 }) => {
-  const { playHover } = useSound();
+  const { playHover, playSelect } = useSound();
   const navigationItems = ['Home', 'Projects', 'About'];
 
   // Update theme color when menu opens/closes
@@ -323,8 +323,7 @@ export const Menu: React.FC<MenuProps> = ({
 
         {/* Close button */}
         <button
-          onClick={onClose}
-          onMouseEnter={playHover}
+          onClick={() => { playSelect(); onClose?.(); }}
           style={{
             width: '32px',
             height: '32px',

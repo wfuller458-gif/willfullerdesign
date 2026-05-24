@@ -171,7 +171,7 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
             </h2>
           </div>
           <button
-            onClick={onClose}
+            onClick={() => { playSelect(); onClose(); }}
             style={{ width: '32px', height: '32px', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
             aria-label="Close"
           >
