@@ -276,7 +276,7 @@ export function TestimonialsSection() {
         >
           <img src="/icons/Linkedin.svg" alt="LinkedIn" width={20} height={20} style={{ filter: 'brightness(0) invert(1)' }} />
           <span className="ts-tooltip-text">
-            Verified on LinkedIn
+            Recommendation
             <span className="ts-tooltip-sub">Click to view</span>
           </span>
         </div>
