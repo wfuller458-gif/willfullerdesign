@@ -215,7 +215,6 @@ export function ProjectPreview({
 
       <div className="pp-wrap" onClick={() => {
         if (bubbleVariant === 'coming-soon') return;
-        if (bubbleVariant === 'locked') { setShowPin(true); return; }
         router.push(projectLink);
       }}>
 

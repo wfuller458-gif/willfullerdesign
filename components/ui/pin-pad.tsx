@@ -4,18 +4,31 @@ import { useState, useEffect, useCallback } from 'react';
 
 interface PinPadProps {
   projectTitle: string;
-  correctPin: string;
-  onSuccess: () => void;
   onClose: () => void;
+  // Page-level gate: async PIN verification
+  onPin?: (pin: string) => void;
+  error?: boolean;
+  // Preview-card mode: synchronous local check (legacy)
+  correctPin?: string;
+  onSuccess?: () => void;
 }
 
 const BUTTONS = ['1','2','3','4','5','6','7','8','9','clr','0','del'];
+const PIN_LENGTH = 6;
 
-export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadProps) {
+export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin, onSuccess }: PinPadProps) {
   const [entered, setEntered] = useState('');
   const [shake, setShake] = useState(false);
   const [solved, setSolved] = useState(false);
-  const pinLength = correctPin.length;
+  const pinLength = onPin ? PIN_LENGTH : (correctPin?.length ?? PIN_LENGTH);
+
+  // Trigger shake when parent signals an error
+  useEffect(() => {
+    if (error && !shake) {
+      setShake(true);
+      setTimeout(() => { setEntered(''); setShake(false); }, 550);
+    }
+  }, [error]);
 
   const press = useCallback((val: string) => {
     if (shake || solved) return;
@@ -25,15 +38,21 @@ export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadP
     const next = entered + val;
     setEntered(next);
     if (next.length === pinLength) {
-      if (next === correctPin) {
-        setSolved(true);
-        setTimeout(onSuccess, 500);
-      } else {
-        setShake(true);
-        setTimeout(() => { setEntered(''); setShake(false); }, 550);
+      if (onPin) {
+        // API-verified mode — parent handles success/error
+        onPin(next);
+      } else if (correctPin && onSuccess) {
+        // Legacy local check
+        if (next === correctPin) {
+          setSolved(true);
+          setTimeout(onSuccess, 500);
+        } else {
+          setShake(true);
+          setTimeout(() => { setEntered(''); setShake(false); }, 550);
+        }
       }
     }
-  }, [entered, shake, solved, pinLength, correctPin, onSuccess]);
+  }, [entered, shake, solved, pinLength, onPin, correctPin, onSuccess]);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -136,7 +155,7 @@ export function PinPad({ projectTitle, correctPin, onSuccess, onClose }: PinPadP
         boxSizing: 'border-box',
       }}>
 
-        {/* Header row — title left, close right (matches menu) */}
+        {/* Header row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div>
             <p style={{ color: 'rgba(255,255,255,0.45)', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', margin: '0 0 10px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>

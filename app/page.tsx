@@ -116,7 +116,7 @@ export default function Home() {
             { text: 'UX ownership of every off-road feature', icon: '/icons/car-profile.svg' },
             { text: 'Unified physical controls and digital feedback', icon: '/icons/toggle-left.svg' },
           ]}
-          mainImage="/images/projects/off-road-controls/image-1.webp" secondaryImage="/images/projects/off-road-controls/image-2.webp" projectLink="/projects/offroadcontrols" bubbleVariant="locked"
+          mainImage="/images/projects/off-road-controls/image-1.webp" secondaryImage="/images/projects/off-road-controls/image-2.webp" projectLink="/projects/offroadcontrols" bubbleVariant="coming-soon"
         />
         <ProjectPreview
           title="Feed It Back"
@@ -136,7 +136,7 @@ export default function Home() {
             { text: 'Integrated Apple CarPlay and Android Auto', icon: '/icons/Apple.svg' },
             { text: 'Designed next generation driver displays', icon: '/icons/Design.svg' },
           ]}
-          mainImage="/images/projects/driver-displays/image-1.webp" secondaryImage="/images/projects/driver-displays/image-2.webp" projectLink="/projects/driverdisplays" bubbleVariant="locked"
+          mainImage="/images/projects/driver-displays/image-1.webp" secondaryImage="/images/projects/driver-displays/image-2.webp" projectLink="/projects/driverdisplays" bubbleVariant="coming-soon"
         />
         <ProjectPreview
           title="Training Platform"
