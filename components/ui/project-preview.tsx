@@ -41,7 +41,7 @@ export function ProjectPreview({
   bubbleVariant,
 }: ProjectPreviewProps) {
   const router = useRouter();
-  const { playHover, playPinSuccess } = useSound();
+  const { playHover, playSelect, playPinSuccess } = useSound();
   const [showPin, setShowPin] = useState(false);
   const [pinError, setPinError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -217,6 +217,7 @@ export function ProjectPreview({
 
       <div className="pp-wrap" onClick={() => {
         if (bubbleVariant === 'coming-soon') return;
+        playSelect();
         if (bubbleVariant === 'locked') { setShowPin(true); return; }
         router.push(projectLink);
       }}>
