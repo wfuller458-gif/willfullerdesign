@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useLoading } from "@/contexts/loading-context";
 import { useSound } from "@/contexts/sound-context";
 import { RightPanel } from "./right-panel";
+import { ArrowUpRight } from "./icons";
 
 function smoothScrollToTop(duration = 420) {
   const startY = window.scrollY;
@@ -97,6 +98,7 @@ const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; on
 const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMouseEnter?: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { playSelect } = useSound();
+  const ease = '750ms cubic-bezier(0.16, 1.2, 0.3, 1)';
 
   return (
     <button
@@ -106,19 +108,48 @@ const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMous
       style={{
         fontFamily: 'Inter, sans-serif',
         fontWeight: 300,
-        fontSize: '16px',
-        color: '#131313',
-        background: isHovered ? '#8a8a8a' : '#9C9C9C',
+        fontSize: '13px',
+        color: isHovered ? '#008E24' : 'var(--brand-black)',
+        background: isHovered ? '#E0EADB' : '#E3E1DE',
         border: 'none',
         borderRadius: '4px',
-        padding: '6px 10px',
+        padding: '5px 8px',
         cursor: 'pointer',
         whiteSpace: 'nowrap',
-        transition: 'background 300ms ease',
+        transition: `background ${ease}, color ${ease}`,
         lineHeight: 1,
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '4px',
       }}
     >
-      Get in touch
+      {/* Slide-up text */}
+      <span style={{ position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
+        <span style={{
+          display: 'inline-block',
+          transition: `transform ${ease}`,
+          transform: isHovered ? 'translateY(-100%)' : 'translateY(0)',
+        }}>
+          Get in touch
+        </span>
+        <span style={{
+          position: 'absolute', left: 0, top: 0, display: 'inline-block',
+          transition: `transform ${ease}`,
+          transform: isHovered ? 'translateY(0)' : 'translateY(100%)',
+        }}>
+          Get in touch
+        </span>
+      </span>
+
+      {/* Diagonal arrow */}
+      <span style={{ position: 'relative', overflow: 'hidden', display: 'inline-flex', width: '12px', height: '12px', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+        <span style={{ position: 'absolute', transition: `transform ${ease}`, transform: isHovered ? 'translate(100%, -100%)' : 'translate(0, 0)', display: 'flex' }}>
+          <ArrowUpRight style={{ width: 12, height: 12 }} />
+        </span>
+        <span style={{ position: 'absolute', transition: `transform ${ease}`, transform: isHovered ? 'translate(0, 0)' : 'translate(-100%, 100%)', display: 'flex' }}>
+          <ArrowUpRight style={{ width: 12, height: 12 }} />
+        </span>
+      </span>
     </button>
   );
 };
