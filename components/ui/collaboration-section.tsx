@@ -84,7 +84,7 @@ export function CollaborationSection() {
 
         @media (max-width: 1024px) {
           .cs-inner { grid-template-columns: 1fr; gap: 40px; }
-          .cs-grid { grid-template-columns: repeat(5, 1fr); gap: 24px 32px; }
+          .cs-grid { grid-template-columns: repeat(5, 1fr); gap: 24px 32px; width: 100%; margin-left: 0; }
           .cs-logo-img { width: 80px; height: 80px; }
         }
 

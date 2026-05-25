@@ -254,6 +254,7 @@ export function ProjectPreview({
           onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          style={{ cursor: isHovering && bubbleVariant ? 'none' : undefined }}
         >
           <div className="pp-image-main" style={{ backgroundColor: '#D9D9D9', backgroundImage: mainImage ? `url(${mainImage})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }} />
           <div className="pp-image-secondary" style={{ backgroundColor: '#D9D9D9', backgroundImage: secondaryImage ? `url(${secondaryImage})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }} />
