@@ -51,9 +51,9 @@ export default function TrainingPlatformProject() {
           'Before a single wireframe was drawn, we needed to understand the clinician completing their CPD and the provider delivering it. Research workshops with healthcare professionals revealed they were busy people, with a strict annual requirement with no flexible way to meet it.',
         ]}
         bullets={[
-          { text: 'CPD points are a regulatory requirement', icon: '/icons/Data.svg' },
-          { text: 'Yearly CPD points quota required to be met by GPs', icon: '/icons/Time.svg' },
-          { text: 'Platform must support a vast array of content topics', icon: '/icons/Globe.svg' },
+          { text: 'CPD points are a regulatory requirement', icon: '/icons/Test.svg' },
+          { text: 'Yearly CPD points quota required to be met by GPs', icon: '/icons/Date.svg' },
+          { text: 'Platform must support a vast array of content topics', icon: '/icons/Data.svg' },
           { text: 'Topic areas specific to individuals line of work', icon: '/icons/Filter.svg' },
           { text: 'Platform must support written and video content', icon: '/icons/Video.svg' },
         ]}
@@ -102,7 +102,7 @@ export default function TrainingPlatformProject() {
         ]}
         bullets={[
           { text: 'Greyscale keeps feedback focused on content and structure, not visual polish', icon: '/icons/Greyscale.svg' },
-          { text: 'A more professional format for client reviews than hand drawn sketches', icon: '/icons/Users.svg' },
+          { text: 'A more professional format for client reviews than hand drawn sketches', icon: '/icons/User.svg' },
         ]}
         images={[
           { src: `${BASE}/client-review-dashboard.webp`, label: 'Dashboard', width: 3216, height: 2132 },
@@ -181,8 +181,8 @@ export default function TrainingPlatformProject() {
         ]}
         bullets={[
           { text: '30,000 clinicians supported annually through the platform', icon: '/icons/Users.svg' },
-          { text: 'Enabling professionals to complete training digitally', icon: '/icons/Build.svg' },
-          { text: 'In person only service to fully digital offering', icon: '/icons/Globe.svg' },
+          { text: 'Enabling professionals to complete training digitally', icon: '/icons/Test.svg' },
+          { text: 'In person only service to fully digital offering', icon: '/icons/Internet.svg' },
         ]}
         showImage={false}
       />
