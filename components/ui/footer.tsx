@@ -220,7 +220,6 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
             order: -1;
             flex: 0 0 100%;
             border-left: 0.5px solid #9C9C9C;
-            border-bottom: none;
             height: 120px;
           }
 
