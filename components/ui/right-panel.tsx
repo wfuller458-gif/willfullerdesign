@@ -61,7 +61,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
       }}>
         {/* Header row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
+          <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 400, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
             {title}
           </h2>
           <button

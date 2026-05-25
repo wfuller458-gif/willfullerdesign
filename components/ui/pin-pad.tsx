@@ -171,7 +171,7 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
             <p style={{ color: 'rgba(255,255,255,0.45)', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', margin: '0 0 10px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
               Enter PIN to access
             </p>
-            <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
+            <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 400, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
               {projectTitle}
             </h2>
           </div>
