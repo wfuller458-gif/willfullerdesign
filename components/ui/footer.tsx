@@ -106,7 +106,7 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translateY(-100%)' : 'translateY(0)'
         }}>
-          Get In Touch
+          Get in touch
         </span>
         <span style={{
           position: 'absolute',
@@ -116,7 +116,7 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translateY(0)' : 'translateY(100%)'
         }}>
-          Get In Touch
+          Get in touch
         </span>
       </span>
       <span style={{
@@ -257,7 +257,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
           </span>
         </div>
 
-        {/* Middle — Get In Touch */}
+        {/* Middle — Get in touch */}
         <div className="footer-col footer-col-cta">
           <GetInTouchButton onClick={onContactClick} />
         </div>

@@ -538,7 +538,7 @@ export default function AboutPage() {
                   setIsContactOpen(true);
                 }}
               >
-                Get In Touch
+                Get in touch
               </Button>
               <Button
                 variant="whatsapp-black"

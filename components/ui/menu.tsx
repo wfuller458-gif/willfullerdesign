@@ -375,7 +375,7 @@ export const Menu: React.FC<MenuProps> = ({
         }}
       >
         <Button variant="primary-green" onClick={onContactClick} onMouseEnter={playHover}>
-          Get In Touch
+          Get in touch
         </Button>
         <Button variant="whatsapp" onClick={() => window.open('https://wa.me/447305088562', '_blank')} onMouseEnter={playHover}>
           WhatsApp

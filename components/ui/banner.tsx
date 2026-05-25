@@ -92,7 +92,7 @@ export function Banner({ variant, onContactClick }: BannerProps) {
             className="shrink-0"
             onClick={isOrange ? onContactClick : undefined}
           >
-            {isOrange ? "Get In Touch" : "View All Projects"}
+            {isOrange ? "Get in touch" : "View All Projects"}
           </Button>
         </div>
       </div>

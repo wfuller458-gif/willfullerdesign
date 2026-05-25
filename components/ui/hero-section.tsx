@@ -24,7 +24,7 @@ export interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({
   tagline = 'UX / Product Designer.',
   heading = 'Helping businesses turn ideas into usable, scalable products',
-  buttonText = 'Get In Touch',
+  buttonText = 'Get in touch',
   location = 'Stratford-Upon-Avon',
   country = 'United Kingdom',
   onContactClick
