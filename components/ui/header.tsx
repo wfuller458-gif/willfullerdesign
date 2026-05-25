@@ -179,7 +179,7 @@ export function Header({ onContactClick }: HeaderProps) {
 
         {/* Centre — nav links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <NavLink label="Projects" href="/projects" />
+          <NavLink label="Projects" href="/#selected-works" />
           <NavLink label="About" href="/about" />
           <NavLink label="Resume" href="#" />
         </div>

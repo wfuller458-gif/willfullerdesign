@@ -151,7 +151,7 @@ export default function Home() {
       <CollaborationSection />
 
       {/* Selected Works header */}
-      <div className="selected-works-header">
+      <div id="selected-works" className="selected-works-header">
         <hr style={{ border: 'none', borderTop: '0.5px solid #9C9C9C', margin: '0 0 25px 0' }} />
         <h2 style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: 32, lineHeight: 1.2, color: '#BBB7B4', margin: 0, whiteSpace: 'nowrap' }}>
           Selected works
