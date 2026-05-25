@@ -120,7 +120,7 @@ const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMous
         lineHeight: 1,
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '4px',
+        gap: '8px',
       }}
     >
       {/* Slide-up text */}
