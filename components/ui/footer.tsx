@@ -277,9 +277,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
             color: 'var(--brand-black)',
             lineHeight: '1.6'
           }}>
-            <div>Stratford-Upon-Avon</div>
-            <div>Warwickshire</div>
-            <div>United Kingdom</div>
+            <div>Stratford-Upon-Avon, UK</div>
           </div>
           <span style={{
             position: 'absolute',
