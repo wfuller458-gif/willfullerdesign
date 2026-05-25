@@ -48,7 +48,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         position: 'fixed',
         top: 0,
         right: 0,
-        width: '531px',
+        width: '45%',
         height: '100vh',
         backgroundColor: 'rgba(30, 30, 28, 0.7)',
         backdropFilter: 'blur(15px)',
