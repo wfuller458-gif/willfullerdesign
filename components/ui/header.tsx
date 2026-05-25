@@ -300,7 +300,7 @@ export function Header({ onContactClick }: HeaderProps) {
         </div>
 
         {/* Right — sound + contact */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'flex-end' }}>
           <SoundButton isMuted={isMuted} onToggle={toggleMuted} onMouseEnter={playHover} />
           <ContactButton onClick={onContactClick} onMouseEnter={playHover} />
         </div>
