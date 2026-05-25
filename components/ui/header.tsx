@@ -168,8 +168,8 @@ export function Header({ onContactClick }: HeaderProps) {
     >
       <div style={{
         height: '100%',
-        paddingLeft: '16px',
-        paddingRight: '16px',
+        paddingLeft: '25px',
+        paddingRight: '25px',
         display: 'grid',
         gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
