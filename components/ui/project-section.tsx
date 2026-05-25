@@ -121,15 +121,22 @@ export function ProjectSection({
         }
 
         @media (max-width: 1024px) {
+          .psc-wrap { margin-top: 100px; }
           .psc-grid { grid-template-columns: 1fr; }
+          .psc-content { gap: 60px; }
+          .psc-image-wrap { margin-top: 60px; }
         }
 
         @media (max-width: 768px) {
-          .psc-wrap { margin-top: 80px; }
+          .psc-wrap { margin-top: 60px; }
           .psc-grid { gap: 32px; }
           .psc-content { flex-direction: column; gap: 32px; }
           .psc-bullets { width: 100%; }
-          .psc-image-wrap { margin-top: 60px; padding: 0 16px; }
+          .psc-image-wrap { margin-top: 40px; padding: 0 16px; }
+        }
+
+        @media (max-width: 480px) {
+          .psc-wrap { margin-top: 40px; }
         }
       `}</style>
 

@@ -112,13 +112,19 @@ export function ProjectSectionAutoSlider({
         }
 
         @media (max-width: 1024px) {
+          .psas-wrap { margin-top: 100px; }
           .psas-grid { grid-template-columns: 1fr; }
+          .psas-image-wrap { margin-top: 60px; }
         }
 
         @media (max-width: 768px) {
-          .psas-wrap { margin-top: 80px; }
+          .psas-wrap { margin-top: 60px; }
           .psas-grid { grid-template-columns: 1fr; gap: 32px; }
-          .psas-image-wrap { margin-top: 60px; padding: 0 16px; }
+          .psas-image-wrap { margin-top: 40px; padding: 0 16px; }
+        }
+
+        @media (max-width: 480px) {
+          .psas-wrap { margin-top: 40px; }
         }
       `}</style>
 

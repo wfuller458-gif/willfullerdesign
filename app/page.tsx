@@ -87,7 +87,7 @@ export default function Home() {
           /* Tablet and below */
           @media (max-width: 1024px) {
             .intro-text-section {
-              padding: 150px 40px;
+              padding: 100px 40px;
             }
 
             .intro-text {
@@ -116,6 +116,34 @@ export default function Home() {
               font-size: 18px;
             }
           }
+
+          .selected-works-header {
+            padding: 0 25px;
+            margin-top: 150px;
+          }
+
+          .project-previews-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 100px;
+            margin-top: 100px;
+          }
+
+          @media (max-width: 1024px) {
+            .selected-works-header { margin-top: 100px; }
+            .project-previews-list { gap: 60px; margin-top: 60px; }
+          }
+
+          @media (max-width: 768px) {
+            .selected-works-header { margin-top: 60px; }
+            .project-previews-list { gap: 40px; margin-top: 40px; }
+          }
+
+          @media (max-width: 480px) {
+            .selected-works-header { margin-top: 40px; }
+            .project-previews-list { gap: 24px; margin-top: 24px; }
+          }
         `}
       </style>
       <IntroSection />
@@ -123,7 +151,7 @@ export default function Home() {
       <CollaborationSection />
 
       {/* Selected Works header */}
-      <div style={{ padding: '0 25px', marginTop: 150 }}>
+      <div className="selected-works-header">
         <hr style={{ border: 'none', borderTop: '0.5px solid #9C9C9C', margin: '0 0 25px 0' }} />
         <h2 style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: 32, lineHeight: 1.2, color: '#BBB7B4', margin: 0, whiteSpace: 'nowrap' }}>
           Selected works
@@ -131,7 +159,7 @@ export default function Home() {
       </div>
 
       {/* Project Previews */}
-      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '100px', marginTop: 100 }}>
+      <div className="project-previews-list">
         <ProjectPreview
           title="Off-Road Controls"
           description="Off-road capability is at the heart of what makes a Defender a Defender. I led the UX for upcoming models unifying cameras, terrain systems and new features into a cockpit experience as capable and refined as the vehicle itself."

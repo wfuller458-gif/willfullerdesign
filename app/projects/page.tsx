@@ -145,6 +145,25 @@ export default function Projects() {
               padding: 0 8px;
             }
           }
+
+          .project-previews-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 100px;
+          }
+
+          @media (max-width: 1024px) {
+            .project-previews-list { gap: 60px; }
+          }
+
+          @media (max-width: 768px) {
+            .project-previews-list { gap: 40px; }
+          }
+
+          @media (max-width: 480px) {
+            .project-previews-list { gap: 24px; }
+          }
         `}
       </style>
       <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
@@ -179,7 +198,7 @@ export default function Projects() {
         </div>
 
         {/* Project Previews */}
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '100px' }}>
+        <div className="project-previews-list">
           <ProjectPreview
             title="Off-Road Controls"
             description="Lead the UX for upcoming Defender models by delivering an off-road experience that unifies cameras, terrain systems and incorporate new features into a seamless, engaging cockpit focused on usability, confidence and adventure."

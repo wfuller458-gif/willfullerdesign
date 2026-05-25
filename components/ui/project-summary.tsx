@@ -116,12 +116,14 @@ export function ProjectSummary({
         }
 
         @media (max-width: 1024px) {
+          .ps-wrap { margin-top: 100px; }
           .ps-summary { grid-template-columns: 1fr; }
-          .ps-images { width: 95%; }
+          .ps-content { gap: 60px; }
+          .ps-images { width: 95%; margin-top: 60px; }
         }
 
         @media (max-width: 768px) {
-          .ps-wrap { margin-top: 80px; }
+          .ps-wrap { margin-top: 60px; }
           .ps-summary { gap: 32px; }
           .ps-content { flex-direction: column; gap: 32px; }
           .ps-images {
@@ -130,7 +132,7 @@ export function ProjectSummary({
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             width: 100%;
-            margin: 60px 0 0 0;
+            margin: 40px 0 0 0;
             height: auto !important;
             padding-left: 25px;
           }
@@ -144,6 +146,10 @@ export function ProjectSummary({
             width: auto;
             scroll-snap-align: start;
           }
+        }
+
+        @media (max-width: 480px) {
+          .ps-wrap { margin-top: 40px; }
         }
       `}</style>
 

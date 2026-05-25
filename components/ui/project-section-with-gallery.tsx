@@ -166,18 +166,25 @@ export function ProjectSectionWithGallery({
         }
 
         @media (max-width: 1024px) {
+          .pswg-wrap { margin-top: 100px; }
           .pswg-grid { grid-template-columns: 1fr; }
           .pswg-title { grid-column: 1 / -1; }
+          .pswg-content { gap: 60px; }
+          .pswg-gallery { margin-top: 60px; }
         }
 
         @media (max-width: 768px) {
-          .pswg-wrap { margin-top: 80px; }
+          .pswg-wrap { margin-top: 60px; }
           .pswg-grid { gap: 32px; }
           .pswg-content { flex-direction: column; gap: 32px; }
           .pswg-bullets { width: 100%; }
-          .pswg-gallery { margin-top: 60px; scroll-padding-left: 16px; }
+          .pswg-gallery { margin-top: 40px; scroll-padding-left: 16px; }
           .pswg-gallery-lead { width: 16px; }
           .pswg-gallery-spacer { width: 16px; }
+        }
+
+        @media (max-width: 480px) {
+          .pswg-wrap { margin-top: 40px; }
         }
       `}</style>
 
