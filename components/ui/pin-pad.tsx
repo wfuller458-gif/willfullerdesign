@@ -144,7 +144,7 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
 
       {/* Backdrop */}
       <div
-        style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', zIndex: 200 }}
+        style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 200 }}
         onClick={onClose}
       />
 
