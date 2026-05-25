@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TooltipSmall } from './tooltip-small';
 import { useLoading } from '@/contexts/loading-context';
+import { useSound } from '@/contexts/sound-context';
 
 const INTRO_DELAY = 1800;
 const STAGGER = 100;
@@ -20,17 +21,20 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
     '/images/projects/off-road-controls/image-1.webp',
     '/images/projects/feed-it-back/image-1.webp',
     '/images/projects/driver-displays/image-1.webp',
-    '/images/projects/training-platform/image-1.webp',
-    '',
+    '/images/projects/training-platform/image-2.webp',
+    '/images/projects/trick-trainer/image-1.webp',
     '/images/projects/off-road-controls/image-2.webp',
     '/images/projects/feed-it-back/image-2.webp',
     '/images/projects/driver-displays/image-2.webp',
+    '/images/projects/training-platform/image-1.webp',
+    '/images/projects/trick-trainer/image-carousel.webp',
   ]
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const { animateIn } = useLoading();
+  const { playHover } = useSound();
   const hasStarted = React.useRef(false);
   // True when animateIn was already set on mount (back navigation / menu-home)
   const isSoftNav = React.useRef(animateIn);
@@ -69,40 +73,61 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const getProjectData = useCallback((index: number): { name: string; images: [string, string, string]; href: string } => {
+  const getProjectData = useCallback((index: number): { name: string; tooltipImage: string; href: string; comingSoon: boolean; locked: boolean } => {
     const pattern = index % 5;
+    const isFirstHalf = (index % 10) < 5;
     if (pattern === 0) {
       return {
         name: 'Off-Road Controls',
-        images: ['', '', ''] as [string, string, string],
-        href: '/projects/offroadcontrols'
+        tooltipImage: isFirstHalf
+          ? '/images/projects/off-road-controls/image-2.webp'
+          : '/images/projects/off-road-controls/image-1.webp',
+        href: '/projects/offroadcontrols',
+        comingSoon: true,
+        locked: false,
       };
     }
     if (pattern === 1) {
       return {
         name: 'Feed It Back',
-        images: ['', '', ''] as [string, string, string],
-        href: '/projects/feed-it-back'
+        tooltipImage: isFirstHalf
+          ? '/images/projects/feed-it-back/image-2.webp'
+          : '/images/projects/feed-it-back/image-1.webp',
+        href: '/projects/feed-it-back',
+        comingSoon: false,
+        locked: false,
       };
     }
     if (pattern === 2) {
       return {
         name: 'Driver Displays',
-        images: ['', '', ''] as [string, string, string],
-        href: '/projects/driverdisplays'
+        tooltipImage: isFirstHalf
+          ? '/images/projects/driver-displays/image-2.webp'
+          : '/images/projects/driver-displays/image-1.webp',
+        href: '/projects/driverdisplays',
+        comingSoon: true,
+        locked: false,
       };
     }
     if (pattern === 3) {
       return {
         name: 'Training Platform',
-        images: ['', '', ''] as [string, string, string],
-        href: '/projects/avinya'
+        tooltipImage: isFirstHalf
+          ? '/images/projects/training-platform/image-1.webp'
+          : '/images/projects/training-platform/image-2.webp',
+        href: '/projects/training-platform',
+        comingSoon: false,
+        locked: true,
       };
     }
     return {
       name: 'Trick Trainer',
-      images: ['', '', ''] as [string, string, string],
-      href: '/projects/swipe-save'
+      tooltipImage: isFirstHalf
+        ? '/images/projects/trick-trainer/image-carousel.webp'
+        : '/images/projects/trick-trainer/image-1.webp',
+      href: '/projects/swipe-save',
+      comingSoon: true,
+      locked: false,
     };
   }, []);
 
@@ -218,7 +243,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
           <motion.div
             key={`first-${index}`}
             className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
-            onMouseEnter={() => !isMobile && setHoveredIndex(index)}
+            onMouseEnter={() => { if (!isMobile) { setHoveredIndex(index); playHover(); } }}
             onMouseLeave={() => !isMobile && setHoveredIndex(null)}
             initial={isSoftNav.current ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             animate={visibleCount >= images.length - index
@@ -251,8 +276,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
               >
                 <TooltipSmall
                   title={getProjectData(index).name}
-                  images={getProjectData(index).images}
-                  href={getProjectData(index).href}
+                  image={getProjectData(index).tooltipImage}
+                  href={getProjectData(index).comingSoon || getProjectData(index).locked ? undefined : getProjectData(index).href}
+                  comingSoon={getProjectData(index).comingSoon}
+                  onClickOverride={getProjectData(index).locked ? () => window.dispatchEvent(new CustomEvent('unlock-training-platform')) : undefined}
                 />
               </div>
             )}
@@ -266,7 +293,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
             <div
               key={`second-${index}`}
               className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
-              onMouseEnter={() => !isMobile && setHoveredIndex(duplicateIndex)}
+              onMouseEnter={() => { if (!isMobile) { setHoveredIndex(duplicateIndex); playHover(); } }}
               onMouseLeave={() => !isMobile && setHoveredIndex(null)}
               style={{
                 flexShrink: 0,
@@ -295,8 +322,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
                 >
                   <TooltipSmall
                     title={getProjectData(index).name}
-                    images={getProjectData(index).images}
-                    href={getProjectData(index).href}
+                    image={getProjectData(index).tooltipImage}
+                    href={getProjectData(index).comingSoon || getProjectData(index).locked ? undefined : getProjectData(index).href}
+                    comingSoon={getProjectData(index).comingSoon}
+                    onClickOverride={getProjectData(index).locked ? () => window.dispatchEvent(new CustomEvent('unlock-training-platform')) : undefined}
                   />
                 </div>
               )}

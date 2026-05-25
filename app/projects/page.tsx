@@ -228,9 +228,11 @@ export default function Projects() {
               { text: 'Using the latest AI tools to bring my concepts to life', icon: '/icons/AI.svg' },
               { text: 'Proof of concept build completed and tested', icon: '/icons/Build.svg' },
             ]}
-            mainImage="" secondaryImage="" projectLink="/projects/swipe-save" bubbleVariant="coming-soon"
+            mainImage="/images/projects/trick-trainer/image-1.webp" secondaryImage="/images/projects/trick-trainer/image-2.webp" projectLink="/projects/swipe-save" bubbleVariant="coming-soon"
           />
         </div>
+
+        <div style={{ height: '150px' }} />
 
       {/* Footer */}
       <Footer

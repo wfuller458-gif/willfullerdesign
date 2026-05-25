@@ -127,6 +127,7 @@ export const Menu: React.FC<MenuProps> = ({
                   href="/"
                   className="nav-link-button"
                   onMouseEnter={playHover}
+                  onClick={playSelect}
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 300,
@@ -176,6 +177,7 @@ export const Menu: React.FC<MenuProps> = ({
                   href="/projects"
                   className="nav-link-button"
                   onMouseEnter={playHover}
+                  onClick={playSelect}
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 300,
@@ -225,6 +227,7 @@ export const Menu: React.FC<MenuProps> = ({
                   href="/about"
                   className="nav-link-button"
                   onMouseEnter={playHover}
+                  onClick={playSelect}
                   style={{
                     fontFamily: 'DM Sans, sans-serif',
                     fontWeight: 300,

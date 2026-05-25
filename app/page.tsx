@@ -23,12 +23,15 @@ export default function Home() {
   const [showUnlockPin, setShowUnlockPin] = useState(false);
   const [pinError, setPinError] = useState(false);
 
-  // Auto-open PIN pad when redirected from a protected page
+  // Auto-open PIN pad when redirected from a protected page or triggered by carousel
   useEffect(() => {
     if (window.location.search.includes('unlock=training-platform')) {
       setShowUnlockPin(true);
       window.history.replaceState({}, '', '/');
     }
+    const handler = () => setShowUnlockPin(true);
+    window.addEventListener('unlock-training-platform', handler);
+    return () => window.removeEventListener('unlock-training-platform', handler);
   }, []);
 
   const handleUnlockPin = useCallback(async (pin: string) => {
@@ -131,7 +134,7 @@ export default function Home() {
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '100px', marginTop: 100 }}>
         <ProjectPreview
           title="Off-Road Controls"
-          description="Lead the UX for upcoming Defender models by delivering an off-road experience that unifies cameras, terrain systems and incorporate new features into a seamless, engaging cockpit focused on usability, confidence and adventure."
+          description="Off-road capability is at the heart of what makes a Defender a Defender. I led the UX for upcoming models unifying cameras, terrain systems and new features into a cockpit experience as capable and refined as the vehicle itself."
           bullets={[
             { text: 'Designed next generation Defender off-road experience', icon: '/icons/Design.svg' },
             { text: 'UX ownership of every off-road feature', icon: '/icons/car-profile.svg' },
@@ -171,13 +174,13 @@ export default function Home() {
         />
         <ProjectPreview
           title="Trick Trainer"
-          description="Building fun side project, trick trainer app with my Black Labrador. It is a trick recognition tool that uses pose detection to detect when he's completed a command. The goal is to eventually have it entertain him autonomously. Its a passion project and dog enrichment experiment."
+          description="Trick recognition tool that uses pose detection to detect when my dog has completed a command. The goal is to eventually have it entertain him autonomously. Its a passion project and dog enrichment experiment."
           bullets={[
-            { text: 'Leveraging machine learning and pose detection models', icon: '/icons/Pose.svg' },
-            { text: 'Using the latest AI tools to bring my concepts to life', icon: '/icons/AI.svg' },
-            { text: 'Proof of concept build completed and tested', icon: '/icons/Build.svg' },
+            { text: 'Machine learning and pose detection models', icon: '/icons/Pose.svg' },
+            { text: 'Using AI tools to bring my concepts to life', icon: '/icons/AI.svg' },
+            { text: 'Proof of concept build completed', icon: '/icons/Build.svg' },
           ]}
-          mainImage="" secondaryImage="" projectLink="/projects/swipe-save" bubbleVariant="coming-soon"
+          mainImage="/images/projects/trick-trainer/image-1.webp" secondaryImage="/images/projects/trick-trainer/image-2.webp" projectLink="/projects/swipe-save" bubbleVariant="coming-soon"
         />
       </div>
 

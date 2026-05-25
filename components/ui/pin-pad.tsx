@@ -67,8 +67,8 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key >= '0' && e.key <= '9') press(e.key);
-      else if (e.key === 'Backspace') press('del');
+      if (e.key >= '0' && e.key <= '9') { playSelect(); press(e.key); }
+      else if (e.key === 'Backspace') { playSelect(); press('del'); }
       else if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKey);
