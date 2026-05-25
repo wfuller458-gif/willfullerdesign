@@ -108,7 +108,7 @@ const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMous
       style={{
         fontFamily: 'Inter, sans-serif',
         fontWeight: 300,
-        fontSize: '13px',
+        fontSize: '16px',
         color: isHovered ? '#008E24' : 'var(--brand-black)',
         background: isHovered ? '#E0EADB' : '#E3E1DE',
         border: 'none',
