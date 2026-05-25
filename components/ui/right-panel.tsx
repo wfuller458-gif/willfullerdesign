@@ -12,6 +12,8 @@ interface RightPanelProps {
 export function RightPanel({ title, onClose, children }: RightPanelProps) {
   const { playSelect } = useSound();
 
+  const handleOverlayClick = () => { playSelect(); onClose(); };
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
@@ -38,7 +40,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
       {/* Backdrop */}
       <div
         style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 200 }}
-        onClick={onClose}
+        onClick={handleOverlayClick}
       />
 
       {/* Panel */}
