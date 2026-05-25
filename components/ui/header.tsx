@@ -113,7 +113,7 @@ const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMous
         background: isHovered ? '#E0EADB' : '#E3E1DE',
         border: 'none',
         borderRadius: '4px',
-        padding: '5px 8px',
+        padding: '10px 16px',
         cursor: 'pointer',
         whiteSpace: 'nowrap',
         transition: `background ${ease}, color ${ease}`,
