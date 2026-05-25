@@ -62,10 +62,14 @@ export function ProjectSectionWithGallery({
 
         .pswg-paragraphs {
           flex: 1;
-          max-width: 580px;
+          max-width: 400px;
           display: flex;
           flex-direction: column;
           gap: 20px;
+        }
+
+        .pswg-paragraphs--wide {
+          max-width: 600px;
         }
 
         .pswg-para {
@@ -78,8 +82,8 @@ export function ProjectSectionWithGallery({
         }
 
         .pswg-bullets {
-          flex-shrink: 0;
-          width: 220px;
+          flex: 1;
+          max-width: 400px;
           display: flex;
           flex-direction: column;
         }
@@ -182,7 +186,7 @@ export function ProjectSectionWithGallery({
           <h2 className="pswg-title">{title}</h2>
 
           <div className="pswg-content">
-            <div className="pswg-paragraphs">
+            <div className={`pswg-paragraphs${bullets.length === 0 ? ' pswg-paragraphs--wide' : ''}`}>
               {paragraphs.map((p, i) => (
                 <p key={i} className="pswg-para">{p}</p>
               ))}

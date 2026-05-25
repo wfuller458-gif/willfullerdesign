@@ -141,9 +141,9 @@ export default function Home() {
         />
         <ProjectPreview
           title="Feed It Back"
-          description="Redesigned the case management platform for Feed It Back, a hospitality guest feedback tool used by major restaurant chains. Delivered the user experience design by transferring user research findings, into user flows, wireframes and full fidelity designs, for improved navigation, usability, and mobile compatibility."
+          description="The existing platform was fragmented, slow with users adopting workarounds. I redesigned it into a single, condensed inbox handling every review, every case from every channel for some of the UK's biggest restaurant chains."
           bullets={[
-            { text: 'Receives millions of reviews from top hospitality brands', icon: '/icons/Chat.svg' },
+            { text: 'The inbox receives millions of reviews', icon: '/icons/Chat.svg' },
             { text: 'Multi million investment secured after platform overhaul', icon: '/icons/£.svg' },
             { text: "Feed It Back's platform continues to grow", icon: '/icons/Grow.svg' },
           ]}

@@ -24,12 +24,12 @@ export default function FeedItBackProject() {
       </div>
       <ProjectHero title="Feed It Back" year="2020" brand={['Feed It Back', 'Full Clarity']} industry="Hospitality" directors={['Ed Kemp', 'Jon Hewines']} deliverables={['User Research Translation', 'Responsive Interface Design', 'Greyscale Screen Delivery', 'Atomic Design System']} heroImage={`${BASE}/image-1.webp`} />
       <ProjectSummary
-        paragraph="Redesigned the case management platform for Feed It Back, a hospitality guest feedback tool used by major restaurant chains. Delivered the user experience design by transferring user research findings, into user flows, wireframes and high fidelity designs, for improved navigation, usability, and mobile compatibility."
+        paragraph="Feed It Back's case management platform had a problem. Email lived outside the system. Historical cases were buried. Every task took too many steps, too much time, too much manual effort. For customer experience managers handling hundreds of reviews a day across some of the UK's biggest restaurant chains that wasn't just frustrating, it was costing them business. My job was to fix it. Not with multiple screens, but with one inbox."
         bullets={[
-          { text: "Translated user research findings into UX design decisions for a full redesign of Feed It Back's case management software.", icon: '/icons/User.svg' },
-          { text: 'Designed responsive interfaces for customer experience managers across mobile, tablet, and desktop.', icon: '/icons/Responsive.svg' },
-          { text: 'Delivered 100+ greyscale screens covering every user flow and state across all three breakpoints.', icon: '/icons/Greyscale.svg' },
-          { text: 'Built a structured atomic design system in Figma to enable seamless handoff to the UI designer.', icon: '/icons/Atom.svg' },
+          { text: 'Unified social, TripAdvisor and email into one condensed inbox', icon: '/icons/Chat.svg' },
+          { text: 'Designed 100+ screens across mobile, tablet and desktop', icon: '/icons/Responsive.svg' },
+          { text: '100+ greyscale screens covering every user flow and state', icon: '/icons/Greyscale.svg' },
+          { text: 'Built an atomic design system in Figma for seamless handoff', icon: '/icons/Atom.svg' },
         ]}
         imageLeft={`${BASE}/summary-1.webp`}
         imageRight={`${BASE}/summary-2.webp`}
@@ -37,16 +37,14 @@ export default function FeedItBackProject() {
       <ProjectSection
         title="User Research"
         paragraphs={[
-          'The user research conducted by Ed Kemp was a critical step in identifying key pain points and opportunities for improvement.',
-          "Ed ensured user interviews covered various company sizes and usage scenarios. This comprehensive approach helped uncover the existing system's inefficiencies and unnecessary steps in the workflow.",
-          'Insights were gathered and organised highlighting specific problems with the current system. These findings directly informed the UX redesign efforts, ensuring that the new system would address user needs more effectively and improve overall satisfaction.',
+          'Before a single wireframe was drawn, the research told a clear story. Users were overwhelmed by friction jumping between systems, hunting for closed cases, entering data by hand that should have been automatic. Every pain point became the blueprint for the platform overhaul. Every design decision that followed was made in direct response to what users actually experienced.',
         ]}
         bullets={[
-          { text: 'Users struggled to access historical and closed case information.', icon: '/icons/Archive.svg' },
-          { text: 'Email sat outside the core system, creating unnecessary friction.', icon: '/icons/Email.svg' },
-          { text: 'Processes had too many steps, slowing users down.', icon: '/icons/Steps.svg' },
-          { text: 'Everyday tasks took far longer than they should.', icon: '/icons/Time.svg' },
-          { text: 'Data entry was manual with no automation in place.', icon: '/icons/Data.svg' },
+          { text: 'Historical and closed cases were hard to find', icon: '/icons/Archive.svg' },
+          { text: 'Email lived outside the core system', icon: '/icons/Email.svg' },
+          { text: 'Too many steps to complete basic tasks', icon: '/icons/Steps.svg' },
+          { text: 'Everyday tasks took far longer than they should', icon: '/icons/Time.svg' },
+          { text: 'Data entry was manual with no automation in place', icon: '/icons/Data.svg' },
         ]}
         image={`${BASE}/user-research.webp`}
       />
@@ -54,8 +52,7 @@ export default function FeedItBackProject() {
       <ProjectSectionWithGallery
         title="Low Fidelity Wireframes"
         paragraphs={[
-          'I was assigned the case management interface which brings together all the social media, TripAdvisor and email reviews the restaurant chains receive. Ed scoped out a sitemap, with the case management area being the main tool within the platform.',
-          'I began quickly sketching possible layouts for this screen which accommodate a navigation bar and all the features required to solve the pain points identified from the user research.',
+          'With the problems defined, I started fast rough sketches exploring how one screen could carry the full weight of the platform navigation, inbox, case viewer, email, and review management all within a single, condensed interface. The challenge was to make every feature, just one interaction away.',
         ]}
         bullets={[
           { text: 'Site map', icon: '/icons/1.svg' },
@@ -73,9 +70,7 @@ export default function FeedItBackProject() {
       <ProjectSection
         title="Design System"
         paragraphs={[
-          'With a clear layout approved by Ed I began working in Figma. I split the screen up into its core elements, navigation bar, sidebar, inbox items, WYSIWYG text editor and case viewer.',
-          'Many smaller details were still missing from the design, I gradually built out more and more ensuring all the small "atoms" such icons, tags, flags and user profile components were created. The smaller components fed into the "molecules" → "organisms" → "templates" allowing me to assemble full screen components as "pages".',
-          'Components were well organised in Figma with all properties clearly named. This takes some time to set up but is extremely efficient in the long run.',
+          'With a layout approved I moved into Figma, building from the ground up. Atoms first icons, tags, flags, user profile components. Then molecules, organisms, templates and finally full pages. Every component named, every property documented. It took a methodical approach to set up but paid back exponentially when changes needed to cascade across 100+ screens instantly.',
         ]}
         bullets={[
           { text: 'Atoms', icon: '/icons/Atom.svg' },
@@ -87,32 +82,18 @@ export default function FeedItBackProject() {
         image={`${BASE}/design-system.webp`}
       />
 
-      <ProjectSection
-        title="Greyscale UI"
-        paragraphs={[
-          'With full screen components completed in the form of "pages" I was able to start working up the states and flows required for the case management platform. Regular reviews were conducted with the client once key milestones of the designs were reached.',
-          'Firstly I ensure that the design worked across all three breakpoints. I used auto layout and constraints in components to make them reusable across breakpoints. Custom mobile components were created when needed.',
-        ]}
-        bullets={[
-          { text: 'Greyscale UI keeps the focus on interaction and flow, not visual polish.', icon: '/icons/Greyscale.svg' },
-        ]}
-        image={`${BASE}/greyscale-ui.webp`}
-      />
-
       <ProjectSectionAutoSlider
         title="User Interaction"
         paragraphs={[
-          'During this phase I created the user interactions and flows enabling the end user to achieve their goal of responding to all reviews and opening cases against negative reviews.',
-          'The design system allowed me to pull together every state quickly and I could easily go back and add additional variants to components in order to achieve all user flows and states.',
+          'Designing in greyscale kept the focus where it needed to be on interaction and flow, not visual polish. I worked across all three breakpoints simultaneously, using auto layout and constraints to make components reusable across mobile, tablet and desktop. Every state, every flow, every edge case accounted for before a single brand colour was applied.',
         ]}
-        images={[`${BASE}/user-interaction-1.webp`, `${BASE}/user-interaction-2.webp`]}
+        images={[`${BASE}/greyscale-ui.webp`, `${BASE}/user-interaction-1.webp`, `${BASE}/user-interaction-2.webp`]}
       />
 
       <ProjectSectionAutoSlider
         title="Finished UI"
         paragraphs={[
-          'Simultaneously to my work a UI designer from Full Clarity began updating the design system components. They applied Feed It Backs branding, logos, and finalised colours and the design of every component.',
-          'Since the components were created in an Atomic fashion all UI updates cascaded through every screen, user interaction and flow I had created.',
+          "While I completed the UX, a UI designer from Full Clarity applied Feed It Back's visual identity to the design system. Since every screen was built atomically, the entire project updated at once. Branding, colour, and visual polish cascading through every interaction and flow without a single screen needing to be rebuilt.",
         ]}
         images={[`${BASE}/finished-ui.webp`, `${BASE}/finished-ui.webp`]}
         showDots={false}
@@ -122,7 +103,7 @@ export default function FeedItBackProject() {
       <ProjectSectionWithGallery
         title="Delivery"
         paragraphs={[
-          "The entire design was reviewed extensively with the client and any adjustments and feedback were actioned quickly. Handoff was made to Feed It Back who's internal developers were handling development of the platform.",
+          "Every screen reviewed, every piece of feedback actioned. When the time came, handoff was clean a fully documented Figma design system and 100+ screens handed directly to Feed It Back's internal development team, ready to build.",
         ]}
         bullets={[]}
         images={[
@@ -152,8 +133,7 @@ export default function FeedItBackProject() {
       <ProjectSection
         title="Outcome"
         paragraphs={[
-          "This project enabled a significant transformation of Feed It Back's case management platform, helping Feed It Back expand its presence within the UK hospitality market.",
-          'This positioned Feed It Back as a key player in the rapidly growing customer feedback industry, attracting substantial new investment to support further growth and expansion.',
+          "The platform transformation helped Feed It Back expand its presence across the UK hospitality market. Today millions of reviews from brands like Bill's, The Alchemist and Giggling Squid land in the inbox I designed. Shortly after the overhaul, Feed It Back secured multi million pound investment.",
         ]}
         bullets={[
           { text: 'Receives millions of reviews from top hospitality brands', icon: '/icons/Chat.svg' },

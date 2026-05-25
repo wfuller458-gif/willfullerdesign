@@ -67,6 +67,7 @@ export function ProjectSummary({
 
         .ps-bullets {
           flex: 1;
+          max-width: 400px;
         }
 
         .ps-bullet {
@@ -76,9 +77,7 @@ export function ProjectSummary({
         }
 
         .ps-bullet + .ps-bullet {
-          border-top: 0.5px solid #9C9C9C;
           margin-top: 16px;
-          padding-top: 16px;
         }
 
         .ps-bullet-icon {

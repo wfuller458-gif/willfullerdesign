@@ -54,10 +54,14 @@ export function ProjectSection({
 
         .psc-paragraphs {
           flex: 1;
-          max-width: 580px;
+          max-width: 400px;
           display: flex;
           flex-direction: column;
           gap: 20px;
+        }
+
+        .psc-paragraphs--wide {
+          max-width: 600px;
         }
 
         .psc-para {
@@ -70,8 +74,8 @@ export function ProjectSection({
         }
 
         .psc-bullets {
-          flex-shrink: 0;
-          width: 220px;
+          flex: 1;
+          max-width: 400px;
           display: flex;
           flex-direction: column;
         }
@@ -134,7 +138,7 @@ export function ProjectSection({
           <h2 className="psc-title">{title}</h2>
 
           <div className="psc-content">
-            <div className="psc-paragraphs">
+            <div className={`psc-paragraphs${bullets.length === 0 ? ' psc-paragraphs--wide' : ''}`}>
               {paragraphs.map((p, i) => (
                 <p key={i} className="psc-para">{p}</p>
               ))}

@@ -54,7 +54,7 @@ export function ProjectSectionAutoSlider({
           display: flex;
           flex-direction: column;
           gap: 20px;
-          max-width: 580px;
+          max-width: 600px;
         }
 
         .psas-para {
