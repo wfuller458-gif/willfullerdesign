@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLoading } from "@/contexts/loading-context";
 import { useSound } from "@/contexts/sound-context";
+import { RightPanel } from "./right-panel";
 
 function smoothScrollToId(id: string, duration = 420) {
   const el = document.getElementById(id);
@@ -152,6 +153,7 @@ export interface HeaderProps {
 
 export function Header({ onContactClick }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
+  const [openPanel, setOpenPanel] = useState<'about' | 'resume' | null>(null);
   const { isMuted, toggleMuted, playHover } = useSound();
   const { animateIn } = useLoading();
   const pathname = usePathname();
@@ -182,6 +184,7 @@ export function Header({ onContactClick }: HeaderProps) {
   }, []);
 
   return (
+    <>
     <motion.header
       initial={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
       animate={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
@@ -210,8 +213,8 @@ export function Header({ onContactClick }: HeaderProps) {
         {/* Centre — nav links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <NavLink label="Projects" href="/#selected-works" onLinkClick={handleProjectsClick} />
-          <NavLink label="About" href="/about" />
-          <NavLink label="Resume" href="#" />
+          <NavLink label="About" onClick={() => setOpenPanel('about')} />
+          <NavLink label="Resume" onClick={() => setOpenPanel('resume')} />
         </div>
 
         {/* Right — sound + contact */}
@@ -221,5 +224,13 @@ export function Header({ onContactClick }: HeaderProps) {
         </div>
       </div>
     </motion.header>
+
+    {openPanel && (
+      <RightPanel
+        title={openPanel === 'about' ? 'About' : 'Resume'}
+        onClose={() => setOpenPanel(null)}
+      />
+    )}
+    </>
   );
 }
