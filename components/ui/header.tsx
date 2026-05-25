@@ -8,6 +8,19 @@ import { useLoading } from "@/contexts/loading-context";
 import { useSound } from "@/contexts/sound-context";
 import { RightPanel } from "./right-panel";
 
+function smoothScrollToTop(duration = 420) {
+  const startY = window.scrollY;
+  let start: number | null = null;
+  function step(ts: number) {
+    if (start === null) start = ts;
+    const progress = Math.min((ts - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    window.scrollTo(0, startY * (1 - ease));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 function smoothScrollToId(id: string, duration = 420) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -168,6 +181,15 @@ export function Header({ onContactClick }: HeaderProps) {
     }
   };
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      smoothScrollToTop();
+    } else {
+      router.push('/');
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.8) {
@@ -208,7 +230,7 @@ export function Header({ onContactClick }: HeaderProps) {
         alignItems: 'center',
       }}>
         {/* Left — Will Fuller */}
-        <NavLink label="Will Fuller" href="/" />
+        <NavLink label="Will Fuller" href="/" onLinkClick={handleHomeClick} />
 
         {/* Centre — nav links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
