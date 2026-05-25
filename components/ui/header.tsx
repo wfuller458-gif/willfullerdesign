@@ -94,6 +94,35 @@ const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; on
   );
 };
 
+const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMouseEnter?: () => void }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const { playSelect } = useSound();
+
+  return (
+    <button
+      onClick={() => { playSelect(); onClick?.(); }}
+      onMouseEnter={() => { setIsHovered(true); onMouseEnter?.(); }}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 300,
+        fontSize: '14px',
+        color: 'var(--brand-black)',
+        background: 'transparent',
+        border: `1px solid ${isHovered ? 'var(--brand-black)' : 'rgba(0,0,0,0.35)'}`,
+        borderRadius: '999px',
+        padding: '6px 14px',
+        cursor: 'pointer',
+        whiteSpace: 'nowrap',
+        transition: 'border-color 300ms ease',
+        lineHeight: 1,
+      }}
+    >
+      Get in touch
+    </button>
+  );
+};
+
 const NavLink = ({ label, href, onClick, onLinkClick }: { label: string; href?: string; onClick?: () => void; onLinkClick?: (e: React.MouseEvent) => void }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { playHover, playSelect } = useSound();
@@ -242,7 +271,7 @@ export function Header({ onContactClick }: HeaderProps) {
         {/* Right — sound + contact */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'flex-end' }}>
           <SoundButton isMuted={isMuted} onToggle={toggleMuted} onMouseEnter={playHover} />
-          <NavLink label="Contact" onClick={onContactClick} />
+          <ContactButton onClick={onContactClick} onMouseEnter={playHover} />
         </div>
       </div>
     </motion.header>
