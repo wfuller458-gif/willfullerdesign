@@ -279,7 +279,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 color: '#008E24'
               }}
             >
-              Available For Work
+              Available for work
             </span>
           </div>
         </motion.div>
