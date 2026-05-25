@@ -136,6 +136,10 @@ export function PinPad({ projectTitle, onClose, onPin, error = false, correctPin
           to   { transform: translateX(0);    opacity: 1; }
         }
         .pin-panel { animation: pin-in 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @media (max-width: 560px) {
+          .pin-panel { width: 100% !important; }
+        }
       `}</style>
 
       {/* Backdrop */}
