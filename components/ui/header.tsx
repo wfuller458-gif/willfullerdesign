@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button } from "./button";
+import Link from "next/link";
 import { useLoading } from "@/contexts/loading-context";
 import { useSound } from "@/contexts/sound-context";
-
 
 const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; onToggle: () => void; onMouseEnter: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -62,26 +61,31 @@ const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; on
   );
 };
 
-const ContactLink = () => {
+const NavLink = ({ label, href, onClick }: { label: string; href?: string; onClick?: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { playHover, playSelect } = useSound();
 
-  return (
-    <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'inline-block',
-        cursor: 'pointer'
-      }}
-    >
+  const textStyle: React.CSSProperties = {
+    fontFamily: 'Inter, sans-serif',
+    fontWeight: 300,
+    fontSize: '16px',
+    color: 'var(--brand-black)',
+    whiteSpace: 'nowrap',
+    textDecoration: 'none',
+    position: 'relative',
+    overflow: 'hidden',
+    display: 'inline-block',
+    cursor: 'pointer',
+  };
+
+  const inner = (
+    <>
       <span style={{
         display: 'inline-block',
         transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
-        transform: isHovered ? 'translateY(-100%)' : 'translateY(0)'
+        transform: isHovered ? 'translateY(-100%)' : 'translateY(0)',
       }}>
-        Contact
+        {label}
       </span>
       <span style={{
         position: 'absolute',
@@ -89,10 +93,35 @@ const ContactLink = () => {
         top: 0,
         display: 'inline-block',
         transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
-        transform: isHovered ? 'translateY(0)' : 'translateY(100%)'
+        transform: isHovered ? 'translateY(0)' : 'translateY(100%)',
       }}>
-        Contact
+        {label}
       </span>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        style={textStyle}
+        onMouseEnter={() => { setIsHovered(true); playHover(); }}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={playSelect}
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      style={textStyle}
+      onMouseEnter={() => { setIsHovered(true); playHover(); }}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => { playSelect(); onClick?.(); }}
+    >
+      {inner}
     </div>
   );
 };
@@ -102,18 +131,14 @@ export interface HeaderProps {
   onContactClick?: () => void;
 }
 
-export function Header({ onMenuClick, onContactClick }: HeaderProps) {
+export function Header({ onContactClick }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
   const { isMuted, toggleMuted, playHover } = useSound();
   const { animateIn } = useLoading();
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      // Hero section is roughly first 100vh, then process section starts
-      // Switch to process section color when scrolled past hero
-      if (scrollY > window.innerHeight * 0.8) {
+      if (window.scrollY > window.innerHeight * 0.8) {
         setBackgroundColor('rgba(240,240,233,0.3)');
       } else {
         setBackgroundColor('rgba(247,247,240,0.3)');
@@ -121,7 +146,7 @@ export function Header({ onMenuClick, onContactClick }: HeaderProps) {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -132,58 +157,37 @@ export function Header({ onMenuClick, onContactClick }: HeaderProps) {
       animate={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
       transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
       style={{
-      position: 'relative',
-      width: '100%',
-      height: '56px',
-      backdropFilter: 'blur(15px)',
-      WebkitBackdropFilter: 'blur(15px)',
-      backgroundColor,
-      transition: 'background-color 300ms ease'
-    }}>
+        position: 'relative',
+        width: '100%',
+        height: '56px',
+        backdropFilter: 'blur(15px)',
+        WebkitBackdropFilter: 'blur(15px)',
+        backgroundColor,
+        transition: 'background-color 300ms ease',
+      }}
+    >
       <div style={{
         height: '100%',
-        position: 'relative',
         paddingLeft: '16px',
         paddingRight: '16px',
-        display: 'flex',
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
-        justifyContent: 'space-between'
       }}>
-        {/* Menu Button - Left */}
-        <div onClick={onMenuClick} onMouseEnter={playHover} style={{ display: 'flex', alignItems: 'baseline', cursor: 'pointer' }}>
-          <Button variant="menu">Menu</Button>
+        {/* Left — Will Fuller */}
+        <NavLink label="Will Fuller" href="/" />
+
+        {/* Centre — nav links */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <NavLink label="Projects" href="/projects" />
+          <NavLink label="About" href="/about" />
+          <NavLink label="Resume" href="#" />
         </div>
 
-        {/* Logo/Name - Center */}
-        <p style={{
-          position: 'absolute',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 300,
-          fontSize: '16px',
-          color: 'var(--brand-black)',
-          whiteSpace: 'nowrap',
-          margin: 0
-        }}>
-          Will Fuller
-        </p>
-
-        {/* Mute + Contact - Right */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Right — sound + contact */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'flex-end' }}>
           <SoundButton isMuted={isMuted} onToggle={toggleMuted} onMouseEnter={playHover} />
-          <div onClick={onContactClick} onMouseEnter={playHover} style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
-            fontSize: '16px',
-            color: 'var(--brand-black)',
-            whiteSpace: 'nowrap',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-          }}>
-            <ContactLink />
-          </div>
+          <NavLink label="Contact" onClick={onContactClick} />
         </div>
       </div>
     </motion.header>
