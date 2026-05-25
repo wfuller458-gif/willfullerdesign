@@ -210,6 +210,11 @@ export function ProjectPreview({
           .pp-images { height: 300px; }
         }
 
+        @media (max-width: 768px) {
+          .pp-image-secondary { display: none; }
+          .pp-image-main { flex: 1; }
+        }
+
         @media (max-width: 480px) {
           .pp-wrap { padding: 20px 16px; }
           .pp-title { font-size: 24px; }
