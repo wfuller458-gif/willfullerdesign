@@ -142,12 +142,12 @@ const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMous
       </span>
 
       {/* Diagonal arrow */}
-      <span style={{ position: 'relative', overflow: 'hidden', display: 'inline-flex', width: '12px', height: '12px', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+      <span style={{ position: 'relative', overflow: 'hidden', display: 'inline-flex', width: '18px', height: '18px', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
         <span style={{ position: 'absolute', transition: `transform ${ease}`, transform: isHovered ? 'translate(100%, -100%)' : 'translate(0, 0)', display: 'flex' }}>
-          <ArrowUpRight style={{ width: 12, height: 12 }} />
+          <ArrowUpRight style={{ width: 18, height: 18 }} />
         </span>
         <span style={{ position: 'absolute', transition: `transform ${ease}`, transform: isHovered ? 'translate(0, 0)' : 'translate(-100%, 100%)', display: 'flex' }}>
-          <ArrowUpRight style={{ width: 12, height: 12 }} />
+          <ArrowUpRight style={{ width: 18, height: 18 }} />
         </span>
       </span>
     </button>
