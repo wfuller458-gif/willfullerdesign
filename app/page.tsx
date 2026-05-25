@@ -161,11 +161,11 @@ export default function Home() {
         />
         <ProjectPreview
           title="Training Platform"
-          description="Designed the user experience for a medical education platform for general practitioners and primary care clinicians, taking it from an in person service to a fully digital solution. Transferring user interview findings, into user flows, wireframes and full fidelity designs."
+          description="A healthcare training provider delivered Continuing Professional Development (CPD) entirely in person. I designed the platform that took it fully digital now training 30,000 clinicians every year."
           bullets={[
             { text: '30,000 clinicians supported annually through the platform', icon: '/icons/Users.svg' },
             { text: 'Enabling professionals to complete training digitally', icon: '/icons/Test.svg' },
-            { text: 'In person only service to fully digital offering', icon: '/icons/Internet.svg' },
+            { text: 'In person to fully digital offering', icon: '/icons/Internet.svg' },
           ]}
           mainImage="/images/projects/training-platform/image-1.webp" secondaryImage="/images/projects/training-platform/image-2.webp" projectLink="/projects/training-platform" bubbleVariant="locked"
         />

@@ -34,12 +34,12 @@ export default function TrainingPlatformProject() {
       />
 
       <ProjectSummary
-        paragraph="Designed the user experience for a medical education platform for general practitioners and primary care clinicians, taking it from an in person service to a fully digital solution. Transferring user research and workshops findings, into user flows, wireframes and high fidelity designs."
+        paragraph="A healthcare training provider had outgrown their model. Thousands of GPs and primary care clinicians needed to complete CPD points every year to maintain their licences. The only way to do it was in person. My job was to change that. Taking a service that had never existed online and designing it into a fully digital platform."
         bullets={[
-          { text: 'Translated user research and workshop findings into UX design decisions', icon: '/icons/User.svg' },
+          { text: 'Took a healthcare training service from in-person to fully digital', icon: '/icons/User.svg' },
           { text: 'Designed responsive interfaces across mobile, tablet, and desktop', icon: '/icons/Responsive.svg' },
           { text: 'Delivered 100+ greyscale screens', icon: '/icons/Greyscale.svg' },
-          { text: 'Built a structured atomic design system in Figma', icon: '/icons/Atom.svg' },
+          { text: 'Built a structured atomic design system in Figma.', icon: '/icons/Atom.svg' },
         ]}
         imageLeft={`${BASE}/summary-1.webp`}
         imageRight={`${BASE}/summary-2.webp`}
@@ -48,25 +48,23 @@ export default function TrainingPlatformProject() {
       <ProjectSection
         title="Discovery & Research"
         paragraphs={[
-          'Ed Kemp and Jon Hewines led the user research and project scoping in close collaboration with the healthcare training provider. The research phase focused on understanding how healthcare professionals currently approach continuing professional development (CPD) including what CPD points are, how they\'re structured, and why completing them annually is a regulatory requirement.',
-          'Design workshops were held with leaders from the training platform, many of whom had first hand experience as healthcare professionals themselves. This gave direct insight into both the user\'s world and the operational challenges of the provider, who were looking to transition from an in person model to a predominantly digital offering. A digital platform would make it far easier to track CPD progress throughout the year, while giving busy healthcare professionals the flexibility to learn on their own terms.',
+          'Before a single wireframe was drawn, we needed to understand the clinician completing their CPD and the provider delivering it. Research workshops with healthcare professionals revealed they were busy people, with a strict annual requirement with no flexible way to meet it.',
         ]}
         bullets={[
-          { text: 'CPD points quantitative measure of learning and professional development', icon: '/icons/Data.svg' },
-          { text: 'Yearly CPD points quota required to be met by GPs to maintain licenses', icon: '/icons/Time.svg' },
+          { text: 'CPD points are a regulatory requirement', icon: '/icons/Data.svg' },
+          { text: 'Yearly CPD points quota required to be met by GPs', icon: '/icons/Time.svg' },
           { text: 'Platform must support a vast array of content topics', icon: '/icons/Globe.svg' },
-          { text: 'Healthcare professionals have topic areas specific for their line of work', icon: '/icons/Filter.svg' },
+          { text: 'Topic areas specific to individuals line of work', icon: '/icons/Filter.svg' },
           { text: 'Platform must support written and video content', icon: '/icons/Video.svg' },
         ]}
         image={`${BASE}/discovery-research.webp`}
-        imageLabel="Example workshop from a similar project by Full Clarity"
+        imageLabel="Example workshop completed by Full Clarity"
       />
 
       <ProjectSectionWithGallery
         title="Low Fidelity Wireframes"
         paragraphs={[
-          'Working closely with Ed, I began by reviewing the proposed sitemap and understanding the content requirements for each area of the platform. From there, I moved into sketching layout concepts, iterating on ideas and reviewing them regularly with Ed.',
-          'Key interface elements were explored during this process including the navigation structure, learning content layouts, filter patterns, and the CPD progress tracker.',
+          'The platform had a lot of content to carry with filtering and progress tracking. It all needed to feel effortless to a clinician while being scalable for the service provider to maintain and add content overtime. Rough sketches came first to find layouts, explore interactions and refined until the structure felt right.',
         ]}
         bullets={[
           { text: 'Site map', icon: '/icons/1.svg' },
@@ -85,9 +83,7 @@ export default function TrainingPlatformProject() {
       <ProjectSection
         title="Design System"
         paragraphs={[
-          'With the layout and design direction agreed with Ed, I moved into Figma to begin building the design system. Following an atomic design approach, I started by breaking the interface down into its core elements establishing the navigation bar, page titles, and key navigation components to set the overall framework.',
-          'From there, I assembled a comprehensive component library consisting of icons, button styles, and more specific elements such as the CPD progress bar, content preview cards, search bars, and filter dropdowns.',
-          'Components were well organised with all properties clearly named. This is time consuming to set up, but providing an efficient and reusable set of building blocks for the screens ahead.',
+          'With the layout agreed, I moved into Figma and started building components atomically. Navigation, page titles, buttons, icons then the more specific elements like the CPD progress bars, content preview cards, search bars, filter dropdowns. Every component named, every property documented. This took a methodical approach, this allowed the screen designs which followed to be created fast, consistently and easy to edit.',
         ]}
         bullets={[
           { text: 'Atoms', icon: '/icons/Atom.svg' },
@@ -102,8 +98,7 @@ export default function TrainingPlatformProject() {
       <ProjectSectionWithGallery
         title="Client Review"
         paragraphs={[
-          'With the design system foundations in place, I had the components needed to begin building screens. I prioritised the three core platform screens as the focus for an initial client review.',
-          'The review was positive, with the client excited to see the product coming to life. Feedback was gathered on several screens and taken away for further refinement.',
+          'With the core screens built I presented to the client in greyscale keeping feedback focused on structure and interaction, not visual polish. The response was positive. Some key changes were made, the CPD timeline felt too prominent on the Dashboard. It was reduced to a circular indicator and relocated. Since the design system was built atomically, the adjustment took minutes not days. No disruption to the wider designs while providing the client with the desired outcome.',
         ]}
         bullets={[
           { text: 'Greyscale keeps feedback focused on content and structure, not visual polish', icon: '/icons/Greyscale.svg' },
@@ -111,25 +106,10 @@ export default function TrainingPlatformProject() {
         ]}
         images={[
           { src: `${BASE}/client-review-dashboard.webp`, label: 'Dashboard', width: 3216, height: 2132 },
-          { src: `${BASE}/client-review-cpd.webp`, label: 'Continued Professional Development', width: 3216, height: 2132 },
-          { src: `${BASE}/client-review-content.webp`, label: 'Content', width: 3216, height: 2132 },
-        ]}
-        galleryHeight={460}
-      />
-
-      <ProjectSectionWithGallery
-        title="Design Improvements"
-        paragraphs={[
-          'Adjustments were made, reviewed first with Ed and then presented back to the client. The primary change involved the relationship between the Dashboard and My CPD screens. The client felt the timeline was too prominent on the Dashboard, so it was reduced to a circular indicator. The timeline component was relocated to My CPD screen.',
-          'Working in greyscale meant no time was lost on unnecessary visual polish when changes were requested. With the design system built atomically, adjusting and rearranging components was quick and efficient delivering an outcome that met the client\'s needs without disruption to the wider designs.',
-        ]}
-        bullets={[
-          { text: 'Fast interaction and adjustment', icon: '/icons/Build.svg' },
-          { text: 'Clients needs met efficiently', icon: '/icons/Users.svg' },
-        ]}
-        images={[
           { src: `${BASE}/improvements-dashboard.webp`, label: 'Timeline Removed, Circular Indicator Added', width: 3216, height: 2132 },
+          { src: `${BASE}/client-review-cpd.webp`, label: 'Continued Professional Development', width: 3216, height: 2132 },
           { src: `${BASE}/improvements-cpd.webp`, label: 'Timeline and Feedback Banner Added', width: 3216, height: 2132 },
+          { src: `${BASE}/client-review-content.webp`, label: 'Content', width: 3216, height: 2132 },
         ]}
         galleryHeight={460}
       />
@@ -137,8 +117,7 @@ export default function TrainingPlatformProject() {
       <ProjectSectionAutoSlider
         title="User Interaction"
         paragraphs={[
-          'With the design stable, I turned my attention to mapping out the full user interactions and flows. The focus was on enabling the end user to achieve their core goals, creating an account with the training platform and completing content that contributes towards their yearly CPD points.',
-          'The design system proved its value here, allowing me to pull together every screen state efficiently and easily extend components with additional variants to cover all flows and edge cases.',
+          'With the design stable I mapped out the full user flows from creating an account through to completing content and earning CPD points. Every screen state, every edge case, every flow covered. The design system made this fast, pulling together variants and states without starting from scratch each time.',
         ]}
         images={[
           `${BASE}/user-interaction-1.webp`,
@@ -154,7 +133,7 @@ export default function TrainingPlatformProject() {
       <ProjectSectionAutoSlider
         title="Finished UI"
         paragraphs={[
-          'Simultaneously, a UI designer at Full Clarity began updating the design system components applying the client\'s branding, typography, colours, and logos to every element. Because the components had been built atomically, all visual updates cascaded automatically through every screen, interaction, and flow, bringing the platform to life without any rework to the underlying UX.',
+          "While I completed the UX a UI designer at Full Clarity applied the client's visual identity to every component. The design system enabled branding, typography and colour to cascaded through every screen automatically bringing the platform to life without a single screen needing to be rebuilt.",
         ]}
         images={[
           `${BASE}/finished-ui-1.webp`,
@@ -167,7 +146,7 @@ export default function TrainingPlatformProject() {
       <ProjectSectionWithGallery
         title="Delivery"
         paragraphs={[
-          'Full Clarity handled development of the platform in house. Thanks to the stability of the greyscale designs refined through client feedback the developers were able to begin build work ahead of the finalised visual design. Greyscale UI lends itself well to this handoff, communicating structure and behaviour clearly without the distraction of visual styling, allowing front end work to follow once the UI was complete.',
+          "Thanks to the stability of the greyscale designs, Full Clarity's development team were able to begin building before the visual design was even finalised. Greyscale communicates structure and behaviour clearly the developers had everything they needed to move fast.",
         ]}
         bullets={[]}
         images={[
@@ -198,7 +177,7 @@ export default function TrainingPlatformProject() {
       <ProjectSection
         title="Outcome"
         paragraphs={[
-          'This project enabled a significant transformation for the medical education provider, expanding their offering from solely in person training to a fully digital platform. Healthcare professionals now have the flexibility to learn on their own terms supporting 30,000 clinicians per year in completing their CPD requirements.',
+          'A service that only existed in person became a fully digital platform accessible anywhere, at any time. Healthcare professionals can now complete their CPD requirements on their own terms with no unnecessary friction. Today the platform supports 30,000 clinicians every year in meeting their annual requirements.',
         ]}
         bullets={[
           { text: '30,000 clinicians supported annually through the platform', icon: '/icons/Users.svg' },
