@@ -185,67 +185,114 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
   };
 
   return (
-    <div style={{
-      width: '100%',
-      backgroundColor: 'var(--brand-off-white-200)',
-      overflow: 'hidden',
-      display: 'flex'
-    }}>
-      {/* Left — nav + copyright */}
-      <div style={{ ...colBase, display: 'flex', flexDirection: 'column', gap: '8px', borderRadius: '0' }}>
-        {['Home', 'Projects', 'About'].map((item) => (
-          <NavItem
-            key={item}
-            label={item}
-            href={item === 'Home' ? '/' : item === 'Projects' ? '/projects' : '/about'}
-          />
-        ))}
-        <span style={{
-          position: 'absolute',
-          bottom: '16px',
-          right: '16px',
-          fontSize: '12px',
-          fontWeight: 300,
-          color: 'var(--brand-black)'
-        }}>
-          ©{year}
-        </span>
-      </div>
+    <>
+      <style>{`
+        .footer-wrap {
+          width: 100%;
+          background-color: var(--brand-off-white-200);
+          overflow: hidden;
+          display: flex;
+        }
 
-      {/* Middle — Get In Touch */}
-      <div style={{ ...colBase, borderLeft: 'none', padding: 0, display: 'flex' }}>
-        <GetInTouchButton onClick={onContactClick} />
-      </div>
+        .footer-col {
+          flex: 1;
+          border: 0.5px solid #9C9C9C;
+          padding: 16px;
+          position: relative;
+          height: 180px;
+          font-family: Inter, sans-serif;
+          box-sizing: border-box;
+        }
 
-      {/* Right — name, address, time */}
-      <div style={{ ...colBase, borderLeft: 'none', borderRadius: '0' }}>
-        <span style={{ fontSize: '16px', fontWeight: 300, color: 'var(--brand-black)' }}>
-          Will Fuller
-        </span>
-        <div style={{
-          position: 'absolute',
-          bottom: '16px',
-          left: '16px',
-          fontSize: '12px',
-          fontWeight: 300,
-          color: 'var(--brand-black)',
-          lineHeight: '1.6'
-        }}>
-          <div>Stratford-Upon-Avon</div>
-          <div>Warwickshire</div>
-          <div>United Kingdom</div>
+        .footer-col + .footer-col {
+          border-left: none;
+        }
+
+        .footer-col-cta {
+          padding: 0;
+          display: flex;
+        }
+
+        @media (max-width: 768px) {
+          .footer-wrap { flex-wrap: wrap; }
+
+          .footer-col-cta {
+            order: -1;
+            flex: 0 0 100%;
+            border-left: 0.5px solid #9C9C9C;
+            border-bottom: none;
+            height: 120px;
+          }
+
+          .footer-col-nav,
+          .footer-col-info {
+            flex: 1;
+            border-top: none;
+          }
+
+          .footer-col-info {
+            border-left: none;
+          }
+        }
+      `}</style>
+
+      <div className="footer-wrap">
+        {/* Left — nav + copyright */}
+        <div className="footer-col footer-col-nav" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {['Home', 'Projects', 'About'].map((item) => (
+            <NavItem
+              key={item}
+              label={item}
+              href={item === 'Home' ? '/' : item === 'Projects' ? '/projects' : '/about'}
+            />
+          ))}
+          <span style={{
+            position: 'absolute',
+            bottom: '16px',
+            right: '16px',
+            fontSize: '12px',
+            fontWeight: 300,
+            color: 'var(--brand-black)'
+          }}>
+            ©{year}
+          </span>
         </div>
-        <span style={{
-          position: 'absolute',
-          bottom: '16px',
-          right: '16px',
-          fontSize: '12px',
-          fontWeight: 300,
-          color: 'var(--brand-black)'
-        }}>
-          {currentTime}
-        </span>
+
+        {/* Middle — Get In Touch */}
+        <div className="footer-col footer-col-cta">
+          <GetInTouchButton onClick={onContactClick} />
+        </div>
+
+        {/* Right — name, address, time */}
+        <div className="footer-col footer-col-info">
+          <span style={{ fontSize: '16px', fontWeight: 300, color: 'var(--brand-black)' }}>
+            Will Fuller
+          </span>
+          <div style={{
+            position: 'absolute',
+            bottom: '16px',
+            left: '16px',
+            fontSize: '12px',
+            fontWeight: 300,
+            color: 'var(--brand-black)',
+            lineHeight: '1.6'
+          }}>
+            <div>Stratford-Upon-Avon</div>
+            <div>Warwickshire</div>
+            <div>United Kingdom</div>
+          </div>
+          <span style={{
+            position: 'absolute',
+            bottom: '16px',
+            right: '16px',
+            fontSize: '12px',
+            fontWeight: 300,
+            color: 'var(--brand-black)'
+          }}>
+            {currentTime}
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
