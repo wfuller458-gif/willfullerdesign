@@ -3,8 +3,27 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useLoading } from "@/contexts/loading-context";
 import { useSound } from "@/contexts/sound-context";
+
+function smoothScrollToId(id: string, duration = 420) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const headerHeight = 56 + 16;
+  const targetY = el.getBoundingClientRect().top + window.scrollY - headerHeight;
+  const startY = window.scrollY;
+  const diff = targetY - startY;
+  let start: number | null = null;
+  function step(ts: number) {
+    if (start === null) start = ts;
+    const progress = Math.min((ts - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    window.scrollTo(0, startY + diff * ease);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
 
 const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; onToggle: () => void; onMouseEnter: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -61,7 +80,7 @@ const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; on
   );
 };
 
-const NavLink = ({ label, href, onClick }: { label: string; href?: string; onClick?: () => void }) => {
+const NavLink = ({ label, href, onClick, onLinkClick }: { label: string; href?: string; onClick?: () => void; onLinkClick?: (e: React.MouseEvent) => void }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { playHover, playSelect } = useSound();
 
@@ -107,7 +126,7 @@ const NavLink = ({ label, href, onClick }: { label: string; href?: string; onCli
         style={textStyle}
         onMouseEnter={() => { setIsHovered(true); playHover(); }}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={playSelect}
+        onClick={(e) => { playSelect(); onLinkClick?.(e); }}
       >
         {inner}
       </Link>
@@ -135,6 +154,17 @@ export function Header({ onContactClick }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
   const { isMuted, toggleMuted, playHover } = useSound();
   const { animateIn } = useLoading();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleProjectsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      smoothScrollToId('selected-works');
+    } else {
+      router.push('/#selected-works');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,7 +209,7 @@ export function Header({ onContactClick }: HeaderProps) {
 
         {/* Centre — nav links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <NavLink label="Projects" href="/#selected-works" />
+          <NavLink label="Projects" href="/#selected-works" onLinkClick={handleProjectsClick} />
           <NavLink label="About" href="/about" />
           <NavLink label="Resume" href="#" />
         </div>

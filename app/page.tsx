@@ -120,6 +120,7 @@ export default function Home() {
           .selected-works-header {
             padding: 0 25px;
             margin-top: 150px;
+            scroll-margin-top: 72px;
           }
 
           .project-previews-list {
