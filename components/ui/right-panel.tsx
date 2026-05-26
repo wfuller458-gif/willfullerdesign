@@ -61,7 +61,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
           position: 'absolute',
           top: 0, left: 0, right: 0,
           zIndex: 10,
-          backgroundColor: 'transparent',
+          backgroundColor: 'rgba(30, 30, 28, 0.7)',
           padding: '32px 32px 0 32px',
           display: 'flex',
           flexDirection: 'column',
@@ -84,7 +84,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         </div>
 
         {/* Scroll container — starts below the fixed header */}
-        <div style={{ position: 'absolute', inset: 0, overflowY: 'auto', overscrollBehavior: 'contain', zIndex: 11 }}>
+        <div style={{ position: 'absolute', inset: 0, overflowY: 'auto', overscrollBehavior: 'contain', zIndex: 9 }}>
           <div style={{ padding: '112px 32px 48px 32px' }}>
             {children}
           </div>
