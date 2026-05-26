@@ -219,6 +219,68 @@ const NavLink = ({ label, href, onClick, onLinkClick }: { label: string; href?: 
   );
 };
 
+const roles = [
+  {
+    title: 'UX Interaction Designer — Digital Cockpit',
+    company: 'Jaguar Land Rover',
+    dates: 'Apr 2022 — Present',
+    bullets: [
+      "Designed and delivered UX for Land Rover's next-generation instrument cluster and 3rd generation head-up display, pending global launch.",
+      'Contributed to an augmented reality head-up display concept project.',
+      'Designed the off-road cockpit experience for Land Rover Defender, creating purpose built controls integral to the Defender\'s "go anywhere" brand identity.',
+      'Built and managed the driver display design system, adopted across Land Rover, Jaguar and Tata Motors Avinya platforms.',
+    ],
+  },
+  {
+    title: 'UX / UI Designer',
+    company: 'Suru Partners',
+    dates: 'Apr 2021 — Mar 2022',
+    bullets: [
+      'Designed a platform to enable Africa Inland Mission to manage their global operations supporting missionaries across 20+ African countries.',
+      'Designed Fair For You, an ethical lending and e-commerce platform enabling financially vulnerable consumers to purchase household essentials with affordable credit, as an alternative to high cost lenders.',
+    ],
+  },
+  {
+    title: 'Freelance UX / UI Designer',
+    company: 'Self-employed',
+    dates: 'Oct 2020 — Mar 2022',
+    bullets: [
+      'Working with Full Clarity, I designed two products a case management inbox for Feed It Back used by major UK restaurants, and a GP training platform enabling healthcare practitioners to track and complete their professional development.',
+      'Designed end-to-end web app for Zeus, a Berlin-based startup serving independent restaurant owners.',
+    ],
+  },
+  {
+    title: 'Creative Design Intern',
+    company: 'ChargedUp',
+    dates: 'Jun 2018 — Sep 2018',
+    bullets: [
+      'Worked directly with the founding team during launch, helping scale their charging stations to venues across London.',
+    ],
+  },
+];
+
+const ResumeContent = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+    {roles.map((role, i) => (
+      <div key={i}>
+        <p style={{ margin: '0 0 2px', fontFamily: 'DM Sans, sans-serif', fontWeight: 500, fontSize: '14px', color: 'white', lineHeight: 1.4 }}>
+          {role.title}
+        </p>
+        <p style={{ margin: '0 0 10px', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>
+          {role.company} · {role.dates}
+        </p>
+        <ul style={{ margin: 0, paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          {role.bullets.map((b, j) => (
+            <li key={j} style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+);
+
 export interface HeaderProps {
   onMenuClick?: () => void;
   onContactClick?: () => void;
@@ -311,7 +373,9 @@ export function Header({ onContactClick }: HeaderProps) {
       <RightPanel
         title={openPanel === 'about' ? 'About' : 'Resume'}
         onClose={() => setOpenPanel(null)}
-      />
+      >
+        {openPanel === 'resume' && <ResumeContent />}
+      </RightPanel>
     )}
     </>
   );

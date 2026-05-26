@@ -76,7 +76,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         </div>
 
         {/* Content */}
-        <div style={{ flex: 1, marginTop: '32px' }}>
+        <div style={{ flex: 1, marginTop: '32px', overflowY: 'auto', paddingRight: '4px' }}>
           {children}
         </div>
       </div>
