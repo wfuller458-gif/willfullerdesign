@@ -57,7 +57,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         overflow: 'hidden',
       }}>
         {/* Full-height scroll container — scrollbar runs edge to edge */}
-        <div style={{ position: 'absolute', inset: 0, overflowY: 'auto' }}>
+        <div style={{ position: 'absolute', inset: 0, overflowY: 'auto', overscrollBehavior: 'contain' }}>
 
           {/* Sticky header */}
           <div style={{
