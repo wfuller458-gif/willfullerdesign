@@ -221,7 +221,7 @@ const NavLink = ({ label, href, onClick, onLinkClick }: { label: string; href?: 
 
 const roles = [
   {
-    title: 'UX Interaction Designer — Digital Cockpit',
+    title: 'UX Interaction Designer • Digital Cockpit',
     company: 'Jaguar Land Rover',
     dates: 'Apr 2022 — Present',
     bullets: [
@@ -263,15 +263,15 @@ const ResumeContent = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
     {roles.map((role, i) => (
       <div key={i}>
-        <p style={{ margin: '0 0 2px', fontFamily: 'DM Sans, sans-serif', fontWeight: 500, fontSize: '14px', color: 'white', lineHeight: 1.4 }}>
+        <p style={{ margin: '0 0 6px', fontFamily: 'DM Sans, sans-serif', fontWeight: 500, fontSize: '16px', color: 'white', lineHeight: 1.4 }}>
           {role.title}
         </p>
-        <p style={{ margin: '0 0 10px', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>
-          {role.company} · {role.dates}
+        <p style={{ margin: '0 0 16px', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>
+          {role.company} • {role.dates}
         </p>
         <ul style={{ margin: 0, paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
           {role.bullets.map((b, j) => (
-            <li key={j} style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '13px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>
+            <li key={j} style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '16px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>
               {b}
             </li>
           ))}

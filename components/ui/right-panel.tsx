@@ -126,7 +126,7 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
             WebkitMaskImage: 'linear-gradient(to bottom, transparent 96px, black 112px)',
           }}
         >
-          <div style={{ padding: '112px 32px 48px 32px' }}>
+          <div style={{ padding: '131px 32px 48px 32px' }}>
             {children}
           </div>
         </div>
