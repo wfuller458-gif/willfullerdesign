@@ -6,9 +6,9 @@ import { useLoading } from '@/contexts/loading-context';
 import { useSound } from '@/contexts/sound-context';
 
 const TAGLINES = [
+  'Product design',
   'User centred design',
   'User experience design',
-  'Product design',
   'Interaction design',
 ];
 

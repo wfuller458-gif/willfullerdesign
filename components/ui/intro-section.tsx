@@ -239,7 +239,7 @@ export function IntroSection() {
           <div className="is-right-inner">
             <p className="is-quote">{QUOTE}</p>
             <div className="is-author">
-              <div className="is-photo" />
+              <img src="/images/profiles/will-fuller.jpg" alt="Will Fuller" className="is-photo" />
               <div>
                 <p className="is-author-name">{AUTHOR}</p>
                 <p className="is-author-role">{ROLE}</p>

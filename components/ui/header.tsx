@@ -221,63 +221,132 @@ const NavLink = ({ label, href, onClick, onLinkClick }: { label: string; href?: 
 
 const roles = [
   {
-    title: 'UX Interaction Designer • Digital Cockpit',
     company: 'Jaguar Land Rover',
-    dates: 'Apr 2022 — Present',
+    title: 'UX Interaction Designer Digital Cockpit',
+    dates: '2022 — Present',
     bullets: [
-      "Designed and delivered UX for Land Rover's next-generation instrument cluster and 3rd generation head-up display, pending global launch.",
+      "Designed and delivered UX for Land Rover's next-generation instrument cluster and 3rd generation head-up display, launching globally soon.",
       'Contributed to an augmented reality head-up display concept project.',
-      'Designed the off-road cockpit experience for Land Rover Defender, creating purpose built controls integral to the Defender\'s "go anywhere" brand identity.',
-      'Built and managed the driver display design system, adopted across Land Rover, Jaguar and Tata Motors Avinya platforms.',
+      'Designed the off-road cockpit for Land Rover Defender, creating a purposeful experience integral to the Defender\'s "go anywhere" brand identity.',
+      'Built and managed the driver display design system, adopted across Land Rover, Jaguar and Tata Motors nameplates.',
     ],
   },
   {
-    title: 'UX / UI Designer',
     company: 'Suru Partners',
-    dates: 'Apr 2021 — Mar 2022',
+    title: 'UX / UI Designer',
+    dates: '2021 — 2022',
     bullets: [
       'Designed a platform to enable Africa Inland Mission to manage their global operations supporting missionaries across 20+ African countries.',
       'Designed Fair For You, an ethical lending and e-commerce platform enabling financially vulnerable consumers to purchase household essentials with affordable credit, as an alternative to high cost lenders.',
     ],
   },
   {
-    title: 'Freelance UX / UI Designer',
-    company: 'Self-employed',
-    dates: 'Oct 2020 — Mar 2022',
+    company: 'Freelance',
+    title: 'UX / UI Designer',
+    dates: '2020 — 2021',
     bullets: [
       'Working with Full Clarity, I designed two products a case management inbox for Feed It Back used by major UK restaurants, and a GP training platform enabling healthcare practitioners to track and complete their professional development.',
-      'Designed end-to-end web app for Zeus, a Berlin-based startup serving independent restaurant owners.',
+      'End-to-end design of a web app for Zeus, a Berlin-based startup serving independent restaurant owners.',
     ],
   },
   {
-    title: 'Creative Design Intern',
     company: 'ChargedUp',
-    dates: 'Jun 2018 — Sep 2018',
+    title: 'Creative Design Intern',
+    dates: '2018',
     bullets: [
       'Worked directly with the founding team during launch, helping scale their charging stations to venues across London.',
     ],
   },
 ];
 
+const skills = [
+  'Figma', 'Claude Code', 'End-to-end Design', 'Ideation', 'Information Architecture',
+  'Site Mapping', 'Wireframing', 'Prototyping', 'Interaction Design', 'Systemic Thinking',
+  'Complex Problem Solving', 'Research Synthesis', 'Data Informed Design', 'Design Systems',
+  'Agile Design & Development', 'Developer Handoff', 'Cross Functional Collaboration', 'Stakeholder Management',
+];
+
+const AboutContent = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <p style={{ margin: 0, fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '24px', color: 'white', lineHeight: 1.5 }}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
+    </p>
+    <p style={{ margin: 0, fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '24px', color: 'white', lineHeight: 1.5 }}>
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p style={{ margin: 0, fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '24px', color: 'white', lineHeight: 1.5 }}>
+      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+    </p>
+    <img
+      src="/images/profiles/will-fuller.jpg"
+      alt="Will Fuller"
+      style={{ width: '100%', display: 'block', borderRadius: '4px', marginTop: '8px' }}
+    />
+  </div>
+);
+
+const hr = <hr style={{ border: 'none', borderTop: '0.5px solid rgba(255,255,255,0.25)', margin: 0 }} />;
+const f = (weight: number, size: string, color: string, extra?: React.CSSProperties): React.CSSProperties => ({
+  fontFamily: 'DM Sans, sans-serif', fontWeight: weight, fontSize: size, color, margin: 0, lineHeight: 1.6, ...extra,
+});
+
 const ResumeContent = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-    {roles.map((role, i) => (
-      <div key={i}>
-        <p style={{ margin: '0 0 6px', fontFamily: 'DM Sans, sans-serif', fontWeight: 500, fontSize: '16px', color: 'white', lineHeight: 1.4 }}>
-          {role.title}
-        </p>
-        <p style={{ margin: '0 0 16px', fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>
-          {role.company} • {role.dates}
-        </p>
-        <ul style={{ margin: 0, paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          {role.bullets.map((b, j) => (
-            <li key={j} style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '16px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>
-              {b}
-            </li>
-          ))}
-        </ul>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+    {/* Summary */}
+    <p style={f(300, '16px', 'rgba(255,255,255,0.85)', { lineHeight: 1.7 })}>
+      Senior product designer with 6+ years experience across automotive, healthcare, hospitality and startups. Trained in industrial design, I approach every project holistically considering the entire product and experience, not just the screen in front of me. I obsess over core design principles, because I believe great design is the sum of many small decisions done right. I create clarity where there isn't any, scope complexity into something manageable, and build with craft and precision from brief to delivery. I'm drawn to focused teams with the ambition to make something truly exceptional.
+    </p>
+
+    {hr}
+
+    {/* Experience */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+      {roles.map((role, i) => (
+        <div key={i}>
+          <p style={f(400, '20px', 'white', { marginBottom: '4px' })}>{role.company}</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '12px' }}>
+            <p style={f(400, '18px', 'rgba(255,255,255,0.6)')}>{role.title}</p>
+            <p style={f(400, '18px', 'rgba(255,255,255,0.6)', { flexShrink: 0, marginLeft: '16px' })}>{role.dates}</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {role.bullets.map((b, j) => (
+              <p key={j} style={f(300, '16px', 'rgba(255,255,255,0.75)')}>{b}</p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {hr}
+
+    {/* Skills */}
+    <div>
+      <p style={f(400, '20px', 'white', { marginBottom: '12px' })}>Skills</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        {skills.map((s, i) => (
+          <span key={i} style={{
+            fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: '14px',
+            color: 'rgba(255,255,255,0.75)',
+            backgroundColor: 'rgba(255,255,255,0.08)',
+            border: '0.5px solid rgba(255,255,255,0.2)',
+            borderRadius: '6px',
+            padding: '6px 12px',
+            display: 'inline-block',
+            lineHeight: 1,
+          }}>{s}</span>
+        ))}
       </div>
-    ))}
+    </div>
+
+    {hr}
+
+    {/* Education */}
+    <div>
+      <p style={f(400, '20px', 'white', { marginBottom: '4px' })}>Loughborough University</p>
+      <p style={f(400, '18px', 'rgba(255,255,255,0.6)')}>Industrial Design 1st Class Honours</p>
+    </div>
+
   </div>
 );
 
@@ -374,6 +443,7 @@ export function Header({ onContactClick }: HeaderProps) {
         title={openPanel === 'about' ? 'About' : 'Resume'}
         onClose={() => setOpenPanel(null)}
       >
+        {openPanel === 'about' && <AboutContent />}
         {openPanel === 'resume' && <ResumeContent />}
       </RightPanel>
     )}
