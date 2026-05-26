@@ -54,32 +54,43 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         backdropFilter: 'blur(15px)',
         WebkitBackdropFilter: 'blur(15px)',
         zIndex: 201,
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '32px 0 32px 32px',
-        boxSizing: 'border-box',
+        overflow: 'hidden',
       }}>
-        {/* Header row */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', paddingRight: '32px' }}>
-          <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 400, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
-            {title}
-          </h2>
-          <button
-            onClick={() => { playSelect(); onClose(); }}
-            style={{ width: '32px', height: '32px', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
-            aria-label="Close"
-          >
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: 'var(--brand-white)' }}>
-              <path d="M24 8L8 24M8 8L24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
+        {/* Full-height scroll container — scrollbar runs edge to edge */}
+        <div style={{ position: 'absolute', inset: 0, overflowY: 'auto' }}>
 
-        {/* Content */}
-        <div style={{ flex: 1, marginTop: '32px', overflowY: 'auto' }}>
-          <div style={{ paddingRight: '32px' }}>
+          {/* Sticky header */}
+          <div style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 10,
+            backgroundColor: 'rgba(30, 30, 28, 0.85)',
+            backdropFilter: 'blur(15px)',
+            WebkitBackdropFilter: 'blur(15px)',
+            padding: '32px 32px 20px 32px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+          }}>
+            <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 400, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
+              {title}
+            </h2>
+            <button
+              onClick={() => { playSelect(); onClose(); }}
+              style={{ width: '32px', height: '32px', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+              aria-label="Close"
+            >
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: 'var(--brand-white)' }}>
+                <path d="M24 8L8 24M8 8L24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Content */}
+          <div style={{ padding: '16px 32px 48px 32px' }}>
             {children}
           </div>
+
         </div>
       </div>
     </>
