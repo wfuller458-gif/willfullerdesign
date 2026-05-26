@@ -84,8 +84,8 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         </div>
 
         {/* Scroll container — starts below the fixed header */}
-        <div style={{ position: 'absolute', top: '96px', left: 0, right: 0, bottom: 0, overflowY: 'auto', overscrollBehavior: 'contain' }}>
-          <div style={{ padding: '0 32px 48px 32px' }}>
+        <div style={{ position: 'absolute', inset: 0, overflowY: 'auto', overscrollBehavior: 'contain', zIndex: 11 }}>
+          <div style={{ padding: '96px 32px 48px 32px' }}>
             {children}
           </div>
         </div>
