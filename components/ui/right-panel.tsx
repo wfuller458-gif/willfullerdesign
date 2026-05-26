@@ -56,11 +56,11 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         zIndex: 201,
         display: 'flex',
         flexDirection: 'column',
-        padding: '32px',
+        padding: '32px 0 32px 32px',
         boxSizing: 'border-box',
       }}>
         {/* Header row */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', paddingRight: '32px' }}>
           <h2 style={{ color: 'white', fontFamily: 'DM Sans, sans-serif', fontWeight: 400, fontSize: '30px', margin: 0, lineHeight: 1.15 }}>
             {title}
           </h2>
@@ -76,8 +76,10 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         </div>
 
         {/* Content */}
-        <div style={{ flex: 1, marginTop: '32px', overflowY: 'auto', paddingRight: '4px' }}>
-          {children}
+        <div style={{ flex: 1, marginTop: '32px', overflowY: 'auto' }}>
+          <div style={{ paddingRight: '32px' }}>
+            {children}
+          </div>
         </div>
       </div>
     </>
