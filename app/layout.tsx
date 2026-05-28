@@ -35,6 +35,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" style={{ backgroundColor: '#f7f7f0' }}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `history.scrollRestoration = 'manual';` }} />
+      </head>
       <body
         className={`${inter.variable} ${dmSans.variable} antialiased`}
         style={{ fontFamily: 'var(--font-inter)', backgroundColor: '#f7f7f0' }}
