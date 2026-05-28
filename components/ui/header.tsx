@@ -288,7 +288,7 @@ const PolaroidStrip = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const posRef = useRef(0);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
   const pausedRef = useRef(false);
 
   useEffect(() => { pausedRef.current = hoveredIdx !== null; }, [hoveredIdx]);

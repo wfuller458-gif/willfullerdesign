@@ -37,7 +37,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const fadeUp = (delay: number) => ({
     initial: animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
     animate: animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   });
 
   useEffect(() => {

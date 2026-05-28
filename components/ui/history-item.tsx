@@ -8,7 +8,7 @@ export interface HistoryItemProps {
   date: string;
   company: string;
   tooltipDescription?: string;
-  tooltipImages?: [string, string] | [string, string, string];
+  tooltipImages?: [] | [string, string] | [string, string, string];
   isExpanded?: boolean;
   onToggle?: () => void;
 }
@@ -294,7 +294,7 @@ export function HistoryItem({ date, company, tooltipDescription, tooltipImages, 
       </div>
 
       {/* Tooltip - shows on hover for non-accordion mode */}
-      {!useAccordion && isHovered && tooltipDescription && tooltipImages && (
+      {!useAccordion && isHovered && tooltipDescription && tooltipImages && tooltipImages.length >= 2 && (
         <div
           className="history-tooltip"
           style={{
@@ -305,7 +305,7 @@ export function HistoryItem({ date, company, tooltipDescription, tooltipImages, 
         >
           <TooltipLarge
             description={tooltipDescription}
-            images={tooltipImages}
+            images={tooltipImages as [string, string] | [string, string, string]}
           />
         </div>
       )}
