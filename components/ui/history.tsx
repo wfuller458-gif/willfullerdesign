@@ -7,7 +7,7 @@ export interface HistoryEntry {
   date: string;
   company: string;
   tooltipDescription?: string;
-  tooltipImages?: [string, string] | [string, string, string];
+  tooltipImages?: [] | [string, string] | [string, string, string];
 }
 
 export interface HistoryProps {
