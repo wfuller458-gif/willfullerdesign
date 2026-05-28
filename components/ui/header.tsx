@@ -267,21 +267,21 @@ const skills = [
 ];
 
 const stripItems = [
-  { src: '/images/about/img_6144-1.jpg',   base: -5, hover: -9  },
-  { src: '/images/about/img_9254-1.jpg',   base:  4, hover:  8  },
-  { src: '/images/about/img_1793-1.jpg',   base: -8, hover: -4  },
-  { src: '/images/about/img_5720-1.jpg',   base:  6, hover: 10  },
-  { src: '/images/about/img_6193-1.jpg',   base: -3, hover:  1  },
-  { src: '/images/about/img_2150-1.jpg',   base:  7, hover: 11  },
-  { src: '/images/about/img_3476-1.jpg',   base: -4, hover: -8  },
-  { src: '/images/about/img_1813-1.jpg',   base:  3, hover:  7  },
-  { src: '/images/about/img_5659-1.jpg',   base: -6, hover: -2  },
-  { src: '/images/about/img_6399-1.jpg',   base:  5, hover:  9  },
-  { src: '/images/about/img_1800-1.jpg',   base: -7, hover: -3  },
-  { src: '/images/about/img_5674-2-1.jpg', base:  2, hover:  6  },
-  { src: '/images/about/img_6242-1.jpg',   base: -2, hover:  2  },
-  { src: '/images/about/img_9120-1.jpg',   base:  8, hover:  4  },
-  { src: '/images/about/img_2181-1.jpg',   base: -5, hover: -1  },
+  { src: '/images/About/img_6144-1.jpg',   base: -5, hover: -9  },
+  { src: '/images/About/img_9254-1.jpg',   base:  4, hover:  8  },
+  { src: '/images/About/img_1793-1.jpg',   base: -8, hover: -4  },
+  { src: '/images/About/img_5720-1.jpg',   base:  6, hover: 10  },
+  { src: '/images/About/img_6193-1.jpg',   base: -3, hover:  1  },
+  { src: '/images/About/img_2150-1.jpg',   base:  7, hover: 11  },
+  { src: '/images/About/img_3476-1.jpg',   base: -4, hover: -8  },
+  { src: '/images/About/img_1813-1.jpg',   base:  3, hover:  7  },
+  { src: '/images/About/img_5659-1.jpg',   base: -6, hover: -2  },
+  { src: '/images/About/img_6399-1.jpg',   base:  5, hover:  9  },
+  { src: '/images/About/img_1800-1.jpg',   base: -7, hover: -3  },
+  { src: '/images/About/img_5674-2-1.jpg', base:  2, hover:  6  },
+  { src: '/images/About/img_6242-1.jpg',   base: -2, hover:  2  },
+  { src: '/images/About/img_9120-1.jpg',   base:  8, hover:  4  },
+  { src: '/images/About/img_2181-1.jpg',   base: -5, hover: -1  },
 ];
 
 const PolaroidStrip = () => {
