@@ -106,10 +106,11 @@ export function ArrowRight({ className, style }: { className?: string; style?: R
   );
 }
 
-export function ArrowUpRight({ className }: { className?: string }) {
+export function ArrowUpRight({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <svg
       className={className}
+      style={style}
       width="24"
       height="24"
       viewBox="0 0 24 24"
