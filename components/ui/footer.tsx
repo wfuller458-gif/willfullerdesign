@@ -215,6 +215,19 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
           display: flex;
         }
 
+        .footer-info-bottom {
+          position: absolute;
+          bottom: 16px;
+          left: 16px;
+          right: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          font-size: 12px;
+          font-weight: 300;
+          color: var(--brand-black);
+        }
+
         @media (max-width: 768px) {
           .footer-wrap { flex-wrap: wrap; }
 
@@ -234,6 +247,12 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
           .footer-col-info {
             border-left: none;
           }
+
+          .footer-info-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+          }
         }
       `}</style>
 
@@ -241,7 +260,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
         {/* Left — nav + copyright */}
         <div className="footer-col footer-col-nav" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <NavItem label="Home" href="/" />
-          <NavItem label="Projects" href="/projects" />
+          <NavItem label="Projects" href="/#selected-works" />
           <NavItem label="About" onClick={() => setOpenPanel('about')} />
           <NavItem label="Resume" onClick={() => setOpenPanel('resume')} />
           <span style={{
@@ -266,27 +285,10 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
           <span style={{ fontSize: '16px', fontWeight: 300, color: 'var(--brand-black)' }}>
             Will Fuller
           </span>
-          <div style={{
-            position: 'absolute',
-            bottom: '16px',
-            left: '16px',
-            fontSize: '12px',
-            fontWeight: 300,
-            color: 'var(--brand-black)',
-            lineHeight: '1.6'
-          }}>
-            <div>Stratford-Upon-Avon, UK</div>
+          <div className="footer-info-bottom">
+            <span className="footer-info-location">Stratford-Upon-Avon, UK</span>
+            <span className="footer-info-time">{currentTime}</span>
           </div>
-          <span style={{
-            position: 'absolute',
-            bottom: '16px',
-            right: '16px',
-            fontSize: '12px',
-            fontWeight: 300,
-            color: 'var(--brand-black)'
-          }}>
-            {currentTime}
-          </span>
         </div>
       </div>
     </>

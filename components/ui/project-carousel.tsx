@@ -82,7 +82,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
         tooltipImage: isFirstHalf
           ? '/images/projects/off-road-controls/image-2.webp'
           : '/images/projects/off-road-controls/image-1.webp',
-        href: '/projects/offroadcontrols',
+        href: '#',
         comingSoon: true,
         locked: false,
       };
@@ -104,7 +104,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
         tooltipImage: isFirstHalf
           ? '/images/projects/driver-displays/image-2.webp'
           : '/images/projects/driver-displays/image-1.webp',
-        href: '/projects/driverdisplays',
+        href: '#',
         comingSoon: true,
         locked: false,
       };
@@ -125,7 +125,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
       tooltipImage: isFirstHalf
         ? '/images/projects/trick-trainer/image-carousel.webp'
         : '/images/projects/trick-trainer/image-1.webp',
-      href: '/projects/swipe-save',
+      href: '#',
       comingSoon: true,
       locked: false,
     };

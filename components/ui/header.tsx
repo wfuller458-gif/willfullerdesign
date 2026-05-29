@@ -550,7 +550,7 @@ export function Header({ onContactClick }: HeaderProps) {
           </div>
           <button
             className="hdr-hamburger-left"
-            onClick={() => setMobileMenuOpen(o => !o)}
+            onClick={() => { playSelect(); setMobileMenuOpen(o => !o); }}
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             style={{
               background: 'none', border: 'none', padding: 0, cursor: 'pointer',

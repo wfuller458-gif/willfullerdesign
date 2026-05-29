@@ -10,7 +10,6 @@ import { RecommendationCarousel } from '@/components/ui/recommendation-carousel'
 import { TestimonialsSection } from '@/components/ui/testimonials-section';
 import { IntroSection } from '@/components/ui/intro-section';
 import { CollaborationSection } from '@/components/ui/collaboration-section';
-import { Menu } from '@/components/ui/menu';
 import { PinPad } from '@/components/ui/pin-pad';
 
 const handleContact = () => {
@@ -19,7 +18,6 @@ const handleContact = () => {
 
 export default function Home() {
   const router = useRouter();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showUnlockPin, setShowUnlockPin] = useState(false);
   const [pinError, setPinError] = useState(false);
 
@@ -49,17 +47,11 @@ export default function Home() {
     return false;
   }, [router]);
 
-  React.useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen]);
-
   return (
     <div style={{ backgroundColor: 'var(--brand-off-white-100)', minHeight: '100vh' }}>
       {/* Sticky Header */}
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header
-          onMenuClick={() => setIsMenuOpen(true)}
           onContactClick={handleContact}
         />
       </div>
@@ -169,7 +161,7 @@ export default function Home() {
             { text: 'UX ownership of every off-road feature', icon: '/icons/car-profile.svg' },
             { text: 'Unified physical controls and digital feedback', icon: '/icons/toggle-left.svg' },
           ]}
-          mainImage="/images/projects/off-road-controls/image-1.webp" secondaryImage="/images/projects/off-road-controls/image-2.webp" projectLink="/projects/offroadcontrols" bubbleVariant="coming-soon"
+          mainImage="/images/projects/off-road-controls/image-1.webp" secondaryImage="/images/projects/off-road-controls/image-2.webp" projectLink="#" bubbleVariant="coming-soon"
         />
         <ProjectPreview
           title="Feed It Back"
@@ -189,7 +181,7 @@ export default function Home() {
             { text: 'Integrated Apple CarPlay and Android Auto', icon: '/icons/Apple.svg' },
             { text: 'Designed next generation driver displays', icon: '/icons/Design.svg' },
           ]}
-          mainImage="/images/projects/driver-displays/image-1.webp" secondaryImage="/images/projects/driver-displays/image-2.webp" projectLink="/projects/driverdisplays" bubbleVariant="coming-soon"
+          mainImage="/images/projects/driver-displays/image-1.webp" secondaryImage="/images/projects/driver-displays/image-2.webp" projectLink="#" bubbleVariant="coming-soon"
         />
         <ProjectPreview
           title="Training Platform"
@@ -209,7 +201,7 @@ export default function Home() {
             { text: 'Using AI tools to bring my concepts to life', icon: '/icons/AI.svg' },
             { text: 'Proof of concept build completed', icon: '/icons/Build.svg' },
           ]}
-          mainImage="/images/projects/trick-trainer/image-1.webp" secondaryImage="/images/projects/trick-trainer/image-2.webp" projectLink="/projects/swipe-save" bubbleVariant="coming-soon"
+          mainImage="/images/projects/trick-trainer/image-1.webp" secondaryImage="/images/projects/trick-trainer/image-2.webp" projectLink="#" bubbleVariant="coming-soon"
         />
       </div>
 
@@ -232,19 +224,6 @@ export default function Home() {
           }
         `}
       </style>
-
-      {/* Menu Overlay */}
-      {isMenuOpen && (
-        <div className="overlay-wrapper">
-          <Menu
-            onClose={() => setIsMenuOpen(false)}
-            onContactClick={() => {
-              setIsMenuOpen(false);
-              handleContact();
-            }}
-          />
-        </div>
-      )}
 
       {/* Training Platform PIN gate */}
       {showUnlockPin && (
