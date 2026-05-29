@@ -150,6 +150,8 @@ export function ProjectSummary({
 
         @media (max-width: 480px) {
           .ps-wrap { margin-top: 40px; }
+          .ps-summary { padding-left: 16px; padding-right: 16px; }
+          .ps-images { padding-left: 16px; }
         }
       `}</style>
 

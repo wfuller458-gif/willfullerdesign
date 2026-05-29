@@ -112,6 +112,7 @@ export function ProjectHero({
         }
 
         @media (max-width: 480px) {
+          .ph-wrap { padding-left: 16px; padding-right: 16px; }
           .ph-title { font-size: 32px; }
           .ph-year { font-size: 24px; }
           .ph-meta-cols { gap: 28px; }

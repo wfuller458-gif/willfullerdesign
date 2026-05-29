@@ -125,7 +125,7 @@ export default function Projects() {
 
             .projects-list {
               margin-bottom: 60px;
-              padding: 0 8px;
+              padding: 0 16px;
             }
           }
 
@@ -142,7 +142,7 @@ export default function Projects() {
 
             .projects-list {
               margin-bottom: 40px;
-              padding: 0 8px;
+              padding: 0 16px;
             }
           }
 

@@ -137,6 +137,7 @@ export function ProjectSection({
 
         @media (max-width: 480px) {
           .psc-wrap { margin-top: 40px; }
+          .psc-grid { padding-left: 16px; padding-right: 16px; }
         }
       `}</style>
 

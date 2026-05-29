@@ -125,6 +125,7 @@ export function ProjectSectionAutoSlider({
 
         @media (max-width: 480px) {
           .psas-wrap { margin-top: 40px; }
+          .psas-grid { padding-left: 16px; padding-right: 16px; }
         }
       `}</style>
 

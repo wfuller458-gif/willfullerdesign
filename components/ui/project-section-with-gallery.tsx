@@ -185,6 +185,7 @@ export function ProjectSectionWithGallery({
 
         @media (max-width: 480px) {
           .pswg-wrap { margin-top: 40px; }
+          .pswg-grid { padding-left: 16px; padding-right: 16px; }
         }
       `}</style>
 
