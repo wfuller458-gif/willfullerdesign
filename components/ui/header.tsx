@@ -40,10 +40,11 @@ function smoothScrollToId(id: string, duration = 420) {
   requestAnimationFrame(step);
 }
 
-const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; onToggle: () => void; onMouseEnter: () => void }) => {
+const SoundButton = ({ isMuted, onToggle, onMouseEnter, invert }: { isMuted: boolean; onToggle: () => void; onMouseEnter: () => void; invert?: boolean }) => {
   const [isHovered, setIsHovered] = useState(false);
   const icon = isMuted ? '/icons/Mute.svg' : '/icons/Sound On.svg';
   const label = isMuted ? 'Unmute' : 'Mute';
+  const imgFilter = invert ? 'brightness(0) invert(1)' : undefined;
 
   return (
     <button
@@ -74,6 +75,7 @@ const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; on
           display: 'block',
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translateY(-100%)' : 'translateY(0)',
+          filter: imgFilter,
         }}
       />
       <img
@@ -89,6 +91,7 @@ const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; on
           left: 0,
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translateY(0)' : 'translateY(100%)',
+          filter: imgFilter,
         }}
       />
     </button>
@@ -492,6 +495,15 @@ export function Header({ onContactClick }: HeaderProps) {
     };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    const color = (mobileMenuOpen || openPanel !== null) ? '#1e1e1c' : '#f7f7f0';
+    document.querySelector('meta[name="theme-color"]')?.remove();
+    const meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    meta.content = color;
+    document.head.appendChild(meta);
+  }, [mobileMenuOpen, openPanel]);
+
   return (
     <>
     <style>{`
@@ -515,9 +527,9 @@ export function Header({ onContactClick }: HeaderProps) {
         zIndex: 9999,
         width: '100%',
         height: '56px',
-        backdropFilter: 'blur(15px)',
-        WebkitBackdropFilter: 'blur(15px)',
-        backgroundColor,
+        backdropFilter: mobileMenuOpen ? 'none' : 'blur(15px)',
+        WebkitBackdropFilter: mobileMenuOpen ? 'none' : 'blur(15px)',
+        backgroundColor: mobileMenuOpen ? '#1e1e1c' : backgroundColor,
         transition: 'background-color 300ms ease',
       }}
     >
@@ -545,26 +557,27 @@ export function Header({ onContactClick }: HeaderProps) {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '5px', width: '20px' }}>
               <span style={{
                 display: 'block', width: '20px', height: '1.5px',
-                background: 'var(--brand-black)',
-                transition: 'transform 300ms ease',
+                background: mobileMenuOpen ? 'white' : 'var(--brand-black)',
+                transition: 'transform 300ms ease, background 300ms ease',
                 transform: mobileMenuOpen ? 'translateY(6.5px) rotate(45deg)' : 'none',
               }} />
               <span style={{
                 display: 'block', width: '20px', height: '1.5px',
-                background: 'var(--brand-black)',
-                transition: 'opacity 300ms ease',
+                background: mobileMenuOpen ? 'white' : 'var(--brand-black)',
+                transition: 'opacity 300ms ease, background 300ms ease',
                 opacity: mobileMenuOpen ? 0 : 1,
               }} />
               <span style={{
                 display: 'block', width: '20px', height: '1.5px',
-                background: 'var(--brand-black)',
-                transition: 'transform 300ms ease',
+                background: mobileMenuOpen ? 'white' : 'var(--brand-black)',
+                transition: 'transform 300ms ease, background 300ms ease',
                 transform: mobileMenuOpen ? 'translateY(-6.5px) rotate(-45deg)' : 'none',
               }} />
             </div>
             <span style={{
               fontFamily: 'Inter, sans-serif', fontWeight: 300,
-              fontSize: '16px', color: 'var(--brand-black)',
+              fontSize: '16px', color: mobileMenuOpen ? 'white' : 'var(--brand-black)',
+              transition: 'color 300ms ease',
             }}>
               Menu
             </span>
@@ -580,7 +593,7 @@ export function Header({ onContactClick }: HeaderProps) {
 
         {/* Right — sound + contact */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'flex-end' }}>
-          <SoundButton isMuted={isMuted} onToggle={toggleMuted} onMouseEnter={playHover} />
+          <SoundButton isMuted={isMuted} onToggle={toggleMuted} onMouseEnter={playHover} invert={mobileMenuOpen} />
           <ContactButton onClick={onContactClick} onMouseEnter={playHover} />
         </div>
       </div>
@@ -595,44 +608,81 @@ export function Header({ onContactClick }: HeaderProps) {
           transition={{ duration: 0.25, ease: 'easeOut' }}
           style={{
             position: 'fixed',
-            top: '56px',
+            top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: '#1e1e1c',
-            zIndex: 9998,
+            backgroundColor: 'rgba(30, 30, 28, 0.7)',
+            backdropFilter: 'blur(15px)',
+            WebkitBackdropFilter: 'blur(15px)',
+            zIndex: 10000,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             padding: '0 32px',
           }}
         >
-          {[
-            {
-              label: 'Projects',
-              onClick: () => {
-                setMobileMenuOpen(false);
-                if (pathname === '/') smoothScrollToId('selected-works');
-                else router.push('/#selected-works');
+          {/* Close button — same size and position as About/Resume panel X */}
+          <button
+            onClick={() => { playSelect(); setMobileMenuOpen(false); }}
+            aria-label="Close menu"
+            style={{
+              position: 'absolute',
+              top: 32,
+              right: 32,
+              width: 32,
+              height: 32,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: 'var(--brand-white)' }}>
+              <path d="M24 8L8 24M8 8L24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {/* Nav items */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {[
+              {
+                label: 'Home',
+                onClick: () => {
+                  setMobileMenuOpen(false);
+                  if (pathname === '/') smoothScrollToTop();
+                  else router.push('/');
+                },
               },
-            },
-            { label: 'About', onClick: () => { setMobileMenuOpen(false); setOpenPanel('about'); } },
-            { label: 'Resume', onClick: () => { setMobileMenuOpen(false); setOpenPanel('resume'); } },
-          ].map(({ label, onClick }) => (
-            <button
-              key={label}
-              onClick={() => { playSelect(); onClick(); }}
-              style={{
-                background: 'none', border: 'none', padding: '16px 0',
-                cursor: 'pointer', textAlign: 'left',
-                fontFamily: 'DM Sans, sans-serif', fontWeight: 300,
-                fontSize: 'clamp(42px, 12vw, 64px)',
-                color: 'white', lineHeight: 1.15, letterSpacing: '-0.02em',
-              }}
-            >
-              {label}
-            </button>
-          ))}
+              {
+                label: 'Projects',
+                onClick: () => {
+                  setMobileMenuOpen(false);
+                  if (pathname === '/') smoothScrollToId('selected-works');
+                  else router.push('/#selected-works');
+                },
+              },
+              { label: 'About', onClick: () => { setMobileMenuOpen(false); setOpenPanel('about'); } },
+              { label: 'Resume', onClick: () => { setMobileMenuOpen(false); setOpenPanel('resume'); } },
+            ].map(({ label, onClick }) => (
+              <button
+                key={label}
+                onClick={() => { playSelect(); onClick(); }}
+                style={{
+                  background: 'none', border: 'none', padding: '16px 0',
+                  cursor: 'pointer', textAlign: 'left',
+                  fontFamily: 'DM Sans, sans-serif', fontWeight: 300,
+                  fontSize: 'clamp(42px, 12vw, 64px)',
+                  color: 'white', lineHeight: 1.15, letterSpacing: '-0.02em',
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

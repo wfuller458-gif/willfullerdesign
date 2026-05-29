@@ -66,11 +66,15 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         .right-panel { animation: panel-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
         .right-panel-scroll::-webkit-scrollbar { display: none; }
         .right-panel-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+        @media (max-width: 768px) {
+          .right-panel { width: 100% !important; }
+          .right-panel-fixed-header { padding-top: max(32px, env(safe-area-inset-top, 32px)) !important; }
+        }
       `}</style>
 
       {/* Backdrop */}
       <div
-        style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 200 }}
+        style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 10000 }}
         onClick={handleOverlayClick}
       />
 
@@ -84,11 +88,11 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         backgroundColor: 'rgba(30, 30, 28, 0.7)',
         backdropFilter: 'blur(15px)',
         WebkitBackdropFilter: 'blur(15px)',
-        zIndex: 201,
+        zIndex: 10001,
         overflow: 'hidden',
       }}>
         {/* Fixed header — lives outside the scroll container */}
-        <div style={{
+        <div className="right-panel-fixed-header" style={{
           position: 'absolute',
           top: 0, left: 0, right: 0,
           zIndex: 10,

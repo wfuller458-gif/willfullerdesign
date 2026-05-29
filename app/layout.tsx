@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { LoadingScreen } from "@/components/ui/loading-screen";
@@ -19,10 +19,13 @@ const dmSans = DM_Sans({
   style: ["normal", "italic"],
 });
 
+export const viewport: Viewport = {
+  themeColor: '#f7f7f0',
+};
+
 export const metadata: Metadata = {
   title: "Will Fuller Portfolio",
   description: "UX / Product Designer specializing in digital experiences, design systems, and emerging AI tools.",
-  themeColor: "#f7f7f0",
   appleWebApp: {
     statusBarStyle: "default",
   },
