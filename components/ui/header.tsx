@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLoading } from "@/contexts/loading-context";
@@ -439,7 +439,8 @@ export interface HeaderProps {
 export function Header({ onContactClick }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
   const [openPanel, setOpenPanel] = useState<'about' | 'resume' | null>(null);
-  const { isMuted, toggleMuted, playHover } = useSound();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isMuted, toggleMuted, playHover, playSelect } = useSound();
   const { animateIn } = useLoading();
   const pathname = usePathname();
   const router = useRouter();
@@ -477,14 +478,41 @@ export function Header({ onContactClick }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <>
+    <style>{`
+      .hdr-desktop-nav { display: flex; align-items: center; gap: 24px; }
+      .hdr-will-fuller { display: block; }
+      .hdr-hamburger-left { display: none; }
+      .hdr-grid { grid-template-columns: 1fr auto 1fr; }
+      @media (max-width: 768px) {
+        .hdr-desktop-nav { display: none; }
+        .hdr-will-fuller { display: none; }
+        .hdr-hamburger-left { display: flex; }
+        .hdr-grid { grid-template-columns: auto 1fr auto; }
+      }
+    `}</style>
     <motion.header
       initial={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
       animate={animateIn ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
       transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
       style={{
         position: 'relative',
+        zIndex: 9999,
         width: '100%',
         height: '56px',
         backdropFilter: 'blur(15px)',
@@ -493,19 +521,58 @@ export function Header({ onContactClick }: HeaderProps) {
         transition: 'background-color 300ms ease',
       }}
     >
-      <div style={{
+      <div className="hdr-grid" style={{
         height: '100%',
         paddingLeft: '25px',
         paddingRight: '25px',
         display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
       }}>
-        {/* Left — Will Fuller */}
-        <NavLink label="Will Fuller" href="/" onLinkClick={handleHomeClick} />
+        {/* Left — Will Fuller (desktop) / Hamburger+Menu (mobile) */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="hdr-will-fuller">
+            <NavLink label="Will Fuller" href="/" onLinkClick={handleHomeClick} />
+          </div>
+          <button
+            className="hdr-hamburger-left"
+            onClick={() => setMobileMenuOpen(o => !o)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            style={{
+              background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+              alignItems: 'center', gap: '10px',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '5px', width: '20px' }}>
+              <span style={{
+                display: 'block', width: '20px', height: '1.5px',
+                background: 'var(--brand-black)',
+                transition: 'transform 300ms ease',
+                transform: mobileMenuOpen ? 'translateY(6.5px) rotate(45deg)' : 'none',
+              }} />
+              <span style={{
+                display: 'block', width: '20px', height: '1.5px',
+                background: 'var(--brand-black)',
+                transition: 'opacity 300ms ease',
+                opacity: mobileMenuOpen ? 0 : 1,
+              }} />
+              <span style={{
+                display: 'block', width: '20px', height: '1.5px',
+                background: 'var(--brand-black)',
+                transition: 'transform 300ms ease',
+                transform: mobileMenuOpen ? 'translateY(-6.5px) rotate(-45deg)' : 'none',
+              }} />
+            </div>
+            <span style={{
+              fontFamily: 'Inter, sans-serif', fontWeight: 300,
+              fontSize: '16px', color: 'var(--brand-black)',
+            }}>
+              Menu
+            </span>
+          </button>
+        </div>
 
-        {/* Centre — nav links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+        {/* Centre — nav links (desktop only) */}
+        <div className="hdr-desktop-nav">
           <NavLink label="Projects" href="/#selected-works" onLinkClick={handleProjectsClick} />
           <NavLink label="About" onClick={() => setOpenPanel('about')} />
           <NavLink label="Resume" onClick={() => setOpenPanel('resume')} />
@@ -518,6 +585,57 @@ export function Header({ onContactClick }: HeaderProps) {
         </div>
       </div>
     </motion.header>
+
+    <AnimatePresence>
+      {mobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          style={{
+            position: 'fixed',
+            top: '56px',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: '#1e1e1c',
+            zIndex: 9998,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            padding: '0 32px',
+          }}
+        >
+          {[
+            {
+              label: 'Projects',
+              onClick: () => {
+                setMobileMenuOpen(false);
+                if (pathname === '/') smoothScrollToId('selected-works');
+                else router.push('/#selected-works');
+              },
+            },
+            { label: 'About', onClick: () => { setMobileMenuOpen(false); setOpenPanel('about'); } },
+            { label: 'Resume', onClick: () => { setMobileMenuOpen(false); setOpenPanel('resume'); } },
+          ].map(({ label, onClick }) => (
+            <button
+              key={label}
+              onClick={() => { playSelect(); onClick(); }}
+              style={{
+                background: 'none', border: 'none', padding: '16px 0',
+                cursor: 'pointer', textAlign: 'left',
+                fontFamily: 'DM Sans, sans-serif', fontWeight: 300,
+                fontSize: 'clamp(42px, 12vw, 64px)',
+                color: 'white', lineHeight: 1.15, letterSpacing: '-0.02em',
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </motion.div>
+      )}
+    </AnimatePresence>
 
     {openPanel && (
       <RightPanel

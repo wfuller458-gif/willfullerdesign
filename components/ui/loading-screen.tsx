@@ -98,7 +98,7 @@ export function LoadingScreen() {
           </span>
 
           {/* Name */}
-          <div style={{ display: 'flex', gap: '26px' }}>
+          <div style={{ display: 'flex', gap: 'clamp(12px, 3vw, 26px)' }}>
             {WORDS.map((word, i) => (
               <motion.span
                 key={word}
@@ -108,7 +108,7 @@ export function LoadingScreen() {
                 style={{
                   display: 'inline-block',
                   color: '#ffffff',
-                  fontSize: '96px',
+                  fontSize: 'clamp(42px, 12vw, 96px)',
                   lineHeight: 1.15,
                   fontFamily: 'DM Sans, sans-serif',
                   fontWeight: 500,
