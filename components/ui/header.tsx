@@ -286,11 +286,11 @@ export function Header({ onContactClick }: HeaderProps) {
           </div>
           <button
             className="hdr-hamburger-left"
-            onClick={() => { playSelect(); router.push('/menu'); }}
+            onClick={() => { playSelect(); window.location.href = '/menu'; }}
             aria-label="Open menu"
             style={{
               background: 'none', border: 'none', padding: 0, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', gap: '10px',
+              alignItems: 'center', gap: '10px',
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '5px', width: '20px' }}>
