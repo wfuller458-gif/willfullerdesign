@@ -142,7 +142,7 @@ export default function Home() {
           }
 
           @media (max-width: 480px) {
-            .selected-works-header { margin-top: 40px; }
+            .selected-works-header { margin-top: 40px; padding-left: 16px; padding-right: 16px; }
             .project-previews-list { gap: 24px; margin-top: 24px; }
           }
         `}

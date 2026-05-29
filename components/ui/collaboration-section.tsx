@@ -94,6 +94,7 @@ export function CollaborationSection() {
 
         @media (max-width: 480px) {
           .cs-grid { grid-template-columns: repeat(3, 1fr); }
+          .cs-wrap { padding-left: 16px; padding-right: 16px; }
         }
       `}</style>
 

@@ -265,6 +265,10 @@ export function TestimonialsSection() {
           .ts-wrap { padding: 0 25px 100px; margin-top: 100px; }
           .ts-quote { font-size: 20px; }
         }
+
+        @media (max-width: 480px) {
+          .ts-wrap { padding-left: 16px; padding-right: 16px; }
+        }
       `}</style>
 
       {tooltipVisible && (

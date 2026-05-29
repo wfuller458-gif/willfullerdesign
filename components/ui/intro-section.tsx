@@ -211,6 +211,10 @@ export function IntroSection() {
           .is-quote { font-size: 28px; }
           .is-stat { font-size: 48px; margin-top: 24px; }
         }
+
+        @media (max-width: 480px) {
+          .is-wrap { padding-left: 16px; padding-right: 16px; }
+        }
       `}</style>
 
       <div className="is-wrap">
