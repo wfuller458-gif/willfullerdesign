@@ -601,6 +601,14 @@ export function Header({ onContactClick }: HeaderProps) {
 
     <AnimatePresence>
       {mobileMenuOpen && (
+        <>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 9999 }}
+        />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -684,6 +692,7 @@ export function Header({ onContactClick }: HeaderProps) {
             ))}
           </div>
         </motion.div>
+        </>
       )}
     </AnimatePresence>
 
