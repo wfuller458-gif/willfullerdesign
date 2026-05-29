@@ -498,11 +498,13 @@ export function Header({ onContactClick }: HeaderProps) {
 
   useEffect(() => {
     const color = (mobileMenuOpen || openPanel !== null) ? '#1e1e1c' : '#f7f7f0';
-    document.querySelector('meta[name="theme-color"]')?.remove();
-    const meta = document.createElement('meta');
-    meta.name = 'theme-color';
+    let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      document.head.appendChild(meta);
+    }
     meta.content = color;
-    document.head.appendChild(meta);
   }, [mobileMenuOpen, openPanel]);
 
   return (
