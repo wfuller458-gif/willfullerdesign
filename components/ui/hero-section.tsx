@@ -160,7 +160,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               padding: 32px 24px;
             }
             .hero-heading {
-              font-size: 48px;
+              font-size: clamp(56px, 14vw, 72px);
               line-height: 1;
               margin-top: 20px;
               margin-bottom: 28px;
@@ -182,10 +182,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               padding: 24px 16px;
             }
             .hero-heading {
-              font-size: 36px;
+              font-size: 42px;
               line-height: 1;
               margin-top: 16px;
               margin-bottom: 20px;
+            }
+            .hero-cta button {
+              font-size: 16px;
+              padding: 10px 14px;
             }
           }
         `}
@@ -225,7 +229,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             ))}
           </h1>
 
-          <motion.div {...fadeUp(1.6)}>
+          <motion.div {...fadeUp(1.6)} className="hero-cta">
             <Button variant="primary-black" onClick={onContactClick} onMouseEnter={playHover}>
               {buttonText}
             </Button>
