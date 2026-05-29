@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from './icons';
 import { useSound } from '@/contexts/sound-context';
+import { usePanel } from '@/contexts/panel-context';
 
 const NavItem = ({ label, onClick, href }: { label: string; onClick?: () => void; href?: string }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -154,6 +155,7 @@ export interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
+  const { setOpenPanel } = usePanel();
   const [currentTime, setCurrentTime] = useState('');
   const year = new Date().getFullYear();
 
@@ -238,13 +240,10 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
       <div className="footer-wrap">
         {/* Left — nav + copyright */}
         <div className="footer-col footer-col-nav" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {['Home', 'Projects', 'About'].map((item) => (
-            <NavItem
-              key={item}
-              label={item}
-              href={item === 'Home' ? '/' : item === 'Projects' ? '/projects' : '/about'}
-            />
-          ))}
+          <NavItem label="Home" href="/" />
+          <NavItem label="Projects" href="/projects" />
+          <NavItem label="About" onClick={() => setOpenPanel('about')} />
+          <NavItem label="Resume" onClick={() => setOpenPanel('resume')} />
           <span style={{
             position: 'absolute',
             bottom: '16px',

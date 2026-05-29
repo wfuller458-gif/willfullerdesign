@@ -4,6 +4,7 @@ import "./globals.css";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { LoadingProvider } from "@/contexts/loading-context";
 import { SoundProvider } from "@/contexts/sound-context";
+import { PanelProvider } from "@/contexts/panel-context";
 import { ScrollReset } from "@/components/ui/scroll-reset";
 
 const inter = Inter({
@@ -48,8 +49,10 @@ export default function RootLayout({
         <ScrollReset />
         <SoundProvider>
           <LoadingProvider>
-            <LoadingScreen />
-            {children}
+            <PanelProvider>
+              <LoadingScreen />
+              {children}
+            </PanelProvider>
           </LoadingProvider>
         </SoundProvider>
       </body>

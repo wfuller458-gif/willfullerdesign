@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLoading } from "@/contexts/loading-context";
 import { useSound } from "@/contexts/sound-context";
+import { usePanel } from "@/contexts/panel-context";
 import { RightPanel } from "./right-panel";
 import { ArrowUpRight } from "./icons";
 
@@ -441,7 +442,7 @@ export interface HeaderProps {
 
 export function Header({ onContactClick }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
-  const [openPanel, setOpenPanel] = useState<'about' | 'resume' | null>(null);
+  const { openPanel, setOpenPanel } = usePanel();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isMuted, toggleMuted, playHover, playSelect } = useSound();
   const { animateIn } = useLoading();
