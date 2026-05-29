@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ArrowUpRight } from './icons';
 import { useSound } from '@/contexts/sound-context';
 import { usePanel } from '@/contexts/panel-context';
@@ -156,7 +157,16 @@ export interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
   const { setOpenPanel } = usePanel();
+  const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
   const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
   const year = new Date().getFullYear();
 
   useEffect(() => {
@@ -261,8 +271,8 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
         <div className="footer-col footer-col-nav" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <NavItem label="Home" href="/" />
           <NavItem label="Projects" href="/#selected-works" />
-          <NavItem label="About" onClick={() => setOpenPanel('about')} />
-          <NavItem label="Resume" onClick={() => setOpenPanel('resume')} />
+          <NavItem label="About" onClick={() => isMobile ? router.push('/about') : setOpenPanel('about')} />
+          <NavItem label="Resume" onClick={() => isMobile ? router.push('/resume') : setOpenPanel('resume')} />
           <span style={{
             position: 'absolute',
             bottom: '16px',
