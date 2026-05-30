@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSound } from '@/contexts/sound-context';
 
@@ -12,6 +13,15 @@ export default function MenuPage() {
   const router = useRouter();
   const { playSelect } = useSound();
 
+  useEffect(() => {
+    document.body.style.backgroundColor = '#1e1e1c';
+    document.documentElement.style.backgroundColor = '#1e1e1c';
+    return () => {
+      document.body.style.backgroundColor = '';
+      document.documentElement.style.backgroundColor = '';
+    };
+  }, []);
+
   const items = [
     { label: 'Home',     href: '/' },
     { label: 'Projects', href: '/#selected-works' },
@@ -22,7 +32,7 @@ export default function MenuPage() {
   return (
     <div style={{
       backgroundColor: '#1e1e1c',
-      minHeight: '100vh',
+      minHeight: '100dvh',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
