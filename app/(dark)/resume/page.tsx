@@ -25,17 +25,16 @@ export default function ResumePage() {
         zIndex: 100,
       }}>
         <div style={{
-          height: '56px',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'space-between',
-          padding: '0 32px',
+          padding: '32px 32px 24px',
         }}>
           <h2 style={{ margin: 0, fontFamily: 'DM Sans, sans-serif', fontWeight: 400, fontSize: '20px', color: 'white' }}>
             Resume
           </h2>
           <button
-            onClick={() => { playSelect(); router.back(); }}
+            onClick={() => { playSelect(); const origin = sessionStorage.getItem('menuOrigin') || '/'; sessionStorage.removeItem('menuOrigin'); router.push(origin); }}
             aria-label="Close"
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, color: 'white' }}
           >
@@ -45,11 +44,7 @@ export default function ResumePage() {
         <hr style={{ border: 'none', borderTop: '0.5px solid rgba(255,255,255,0.25)', margin: 0 }} />
       </div>
 
-      <div style={{
-        paddingTop: 'calc(57px + env(safe-area-inset-top, 0px))',
-        paddingBottom: '48px',
-        padding: 'calc(57px + env(safe-area-inset-top, 0px)) 32px 48px',
-      }}>
+      <div style={{ padding: 'calc(121px + env(safe-area-inset-top, 0px)) 32px 48px' }}>
         <ResumeContent />
       </div>
     </div>

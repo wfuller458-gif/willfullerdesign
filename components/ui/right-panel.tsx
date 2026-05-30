@@ -65,10 +65,21 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
         }
         .right-panel { animation: panel-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
         .right-panel-scroll::-webkit-scrollbar { display: none; }
-        .right-panel-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+        .right-panel-scroll {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          mask-image: linear-gradient(to bottom, transparent 96px, black 112px);
+          -webkit-mask-image: linear-gradient(to bottom, transparent 96px, black 112px);
+        }
+        .right-panel-scroll-content { padding: 131px 32px 48px 32px; }
         @media (max-width: 768px) {
           .right-panel { width: 100% !important; }
           .right-panel-fixed-header { padding-top: max(32px, env(safe-area-inset-top, 32px)) !important; }
+          .right-panel-scroll {
+            mask-image: linear-gradient(to bottom, transparent calc(env(safe-area-inset-top, 32px) + 76px), black calc(env(safe-area-inset-top, 32px) + 92px));
+            -webkit-mask-image: linear-gradient(to bottom, transparent calc(env(safe-area-inset-top, 32px) + 76px), black calc(env(safe-area-inset-top, 32px) + 92px));
+          }
+          .right-panel-scroll-content { padding-top: calc(env(safe-area-inset-top, 32px) + 100px); }
         }
       `}</style>
 
@@ -126,11 +137,9 @@ export function RightPanel({ title, onClose, children }: RightPanelProps) {
             overflowY: 'auto',
             overscrollBehavior: 'contain',
             zIndex: 9,
-            maskImage: 'linear-gradient(to bottom, transparent 96px, black 112px)',
-            WebkitMaskImage: 'linear-gradient(to bottom, transparent 96px, black 112px)',
           }}
         >
-          <div style={{ padding: '131px 32px 48px 32px' }}>
+          <div className="right-panel-scroll-content">
             {children}
           </div>
         </div>

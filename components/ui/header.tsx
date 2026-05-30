@@ -286,7 +286,7 @@ export function Header({ onContactClick }: HeaderProps) {
           </div>
           <button
             className="hdr-hamburger-left"
-            onClick={() => { playSelect(); window.location.href = '/menu'; }}
+            onClick={() => { playSelect(); sessionStorage.setItem('menuOrigin', pathname); window.location.href = '/menu'; }}
             aria-label="Open menu"
             style={{
               background: 'none', border: 'none', padding: 0, cursor: 'pointer',
