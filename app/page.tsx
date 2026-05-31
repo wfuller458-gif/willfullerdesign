@@ -13,7 +13,7 @@ import { CollaborationSection } from '@/components/ui/collaboration-section';
 import { PinPad } from '@/components/ui/pin-pad';
 
 const handleContact = () => {
-  window.location.href = 'mailto:will.fuller22@hotmail.com';
+  window.location.href = 'mailto:willfullerdesign@gmail.com';
 };
 
 export default function Home() {
