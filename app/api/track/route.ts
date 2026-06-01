@@ -16,11 +16,6 @@ export async function POST(req: NextRequest) {
     const kv = await getKv();
     if (!kv) return NextResponse.json({ ok: true }); // dev: silently succeed
 
-    const ip =
-      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-      req.headers.get('x-real-ip') ||
-      '127.0.0.1';
-
     const key = `session:${sessionId}`;
     const existing = await kv.get<Session>(key);
 
@@ -31,22 +26,15 @@ export async function POST(req: NextRequest) {
       await kv.set(key, { ...existing, lastSeen: Date.now(), pages });
       await kv.zadd('sessions', { score: Date.now(), member: sessionId });
     } else {
-      let geo = { city: 'Unknown', country: 'Unknown', countryCode: '', lat: 0, lng: 0 };
-      const isLocal = ip === '127.0.0.1' || ip === '::1';
-
-      if (!isLocal) {
-        try {
-          const r = await fetch(`https://ipapi.co/${ip}/json/`);
-          const d = await r.json();
-          geo = {
-            city: d.city || 'Unknown',
-            country: d.country_name || 'Unknown',
-            countryCode: d.country_code || '',
-            lat: d.latitude || 0,
-            lng: d.longitude || 0,
-          };
-        } catch {}
-      }
+      // Vercel injects geo headers automatically — no external API needed
+      const cityRaw = req.headers.get('x-vercel-ip-city');
+      const geo = {
+        city: cityRaw ? decodeURIComponent(cityRaw) : 'Unknown',
+        country: req.headers.get('x-vercel-ip-country-region') || req.headers.get('x-vercel-ip-country') || 'Unknown',
+        countryCode: req.headers.get('x-vercel-ip-country') || '',
+        lat: parseFloat(req.headers.get('x-vercel-ip-latitude') || '0'),
+        lng: parseFloat(req.headers.get('x-vercel-ip-longitude') || '0'),
+      };
 
       const session: Session = {
         id: sessionId,
