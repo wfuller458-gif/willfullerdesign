@@ -6,6 +6,7 @@ import { LoadingProvider } from "@/contexts/loading-context";
 import { SoundProvider } from "@/contexts/sound-context";
 import { PanelProvider } from "@/contexts/panel-context";
 import { ScrollReset } from "@/components/ui/scroll-reset";
+import { PageTracker } from "@/components/ui/page-tracker";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -47,6 +48,7 @@ export default function RootLayout({
         style={{ fontFamily: 'var(--font-inter)', backgroundColor: '#f7f7f0' }}
       >
         <ScrollReset />
+        <PageTracker />
         <SoundProvider>
           <LoadingProvider>
             <PanelProvider>

@@ -1,0 +1,204 @@
+'use client';
+
+import { useState } from 'react';
+import type { Session } from '@/lib/types';
+import { AnalyticsGlobe } from './analytics-globe';
+
+function timeAgo(ts: number): string {
+  const diff = Date.now() - ts;
+  const m = Math.floor(diff / 60000);
+  const h = Math.floor(diff / 3600000);
+  const d = Math.floor(diff / 86400000);
+  if (d > 0) return `${d}d ago`;
+  if (h > 0) return `${h}h ago`;
+  if (m > 0) return `${m}m ago`;
+  return 'just now';
+}
+
+function getFlagEmoji(code: string): string {
+  if (!code || code.length !== 2) return '🌍';
+  return code
+    .toUpperCase()
+    .replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0)));
+}
+
+function DeviceIcon({ device }: { device: string }) {
+  if (device === 'mobile') return <span title="Mobile">📱</span>;
+  return <span title="Desktop">💻</span>;
+}
+
+interface Props {
+  sessions: Session[];
+}
+
+const MAP_STYLES = [
+  { id: 'mapbox://styles/mapbox/satellite-streets-v12', label: 'Satellite', icon: '🛰️' },
+  { id: 'mapbox://styles/mapbox/satellite-v9',          label: 'Satellite (clean)', icon: '🌍' },
+  { id: 'mapbox://styles/mapbox/dark-v11',              label: 'Dark', icon: '🌑' },
+  { id: 'mapbox://styles/mapbox/light-v11',             label: 'Light', icon: '🗺️' },
+  { id: 'mapbox://styles/mapbox/navigation-night-v1',   label: 'Night Nav', icon: '🚗' },
+  { id: 'mapbox://styles/mapbox/outdoors-v12',          label: 'Outdoors', icon: '🏔️' },
+];
+
+export function AnalyticsDashboard({ sessions }: Props) {
+  const [selected, setSelected] = useState<Session | null>(null);
+  const [mapStyle, setMapStyle] = useState(MAP_STYLES[0].id);
+
+  return (
+    <div style={{ width: '100vw', height: '100vh', background: '#0a0a1a', position: 'relative', overflow: 'hidden' }}>
+
+      {/* Globe */}
+      <AnalyticsGlobe sessions={sessions} selected={selected} onSelect={setSelected} mapStyle={mapStyle} />
+
+      {/* Stats chip — top left */}
+      <div style={{
+        position: 'absolute', top: 24, left: 24,
+        background: 'rgba(10,10,30,0.85)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        borderRadius: 12, padding: '10px 16px',
+        color: '#fff', fontSize: 13, display: 'flex', gap: 16, alignItems: 'center',
+      }}>
+        <span style={{ color: '#a5b4fc', fontWeight: 600 }}>Will Fuller Analytics</span>
+        <span style={{ color: '#888' }}>·</span>
+        <span>
+          <span style={{ color: '#4ade80', fontWeight: 600 }}>{sessions.length}</span>
+          <span style={{ color: '#888' }}> sessions</span>
+        </span>
+      </div>
+
+      {/* Selected session detail — top right */}
+      {selected && (
+        <div style={{
+          position: 'absolute', top: 24, right: 24, width: 280,
+          background: 'rgba(10,10,30,0.92)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255,255,255,0.12)',
+          borderRadius: 16, padding: 20, color: '#fff',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+            <div>
+              <div style={{ fontSize: 18 }}>{getFlagEmoji(selected.countryCode)} <strong>{selected.city}</strong></div>
+              <div style={{ color: '#888', fontSize: 12, marginTop: 2 }}>{selected.country}</div>
+            </div>
+            <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: 18, lineHeight: 1 }}>✕</button>
+          </div>
+
+          <div style={{ display: 'flex', gap: 8, marginBottom: 14, fontSize: 12, color: '#888' }}>
+            <DeviceIcon device={selected.device} />
+            <span style={{ textTransform: 'capitalize' }}>{selected.device}</span>
+            <span>·</span>
+            <span>{timeAgo(selected.lastSeen)}</span>
+          </div>
+
+          {selected.referrer && (
+            <div style={{ marginBottom: 12, fontSize: 12, color: '#94a3b8' }}>
+              <span style={{ color: '#64748b' }}>From: </span>
+              <span style={{ wordBreak: 'break-all' }}>
+                {selected.referrer.replace(/^https?:\/\//, '').split('/')[0] || 'direct'}
+              </span>
+            </div>
+          )}
+
+          <div style={{ fontSize: 12, color: '#64748b', marginBottom: 6 }}>Pages visited</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {selected.pages.map((p, i) => (
+              <div key={p} style={{
+                background: 'rgba(255,255,255,0.05)',
+                borderRadius: 6, padding: '5px 10px',
+                fontSize: 12, color: '#e2e8f0',
+                display: 'flex', alignItems: 'center', gap: 8,
+              }}>
+                <span style={{ color: '#4f46e5', fontWeight: 600, minWidth: 16 }}>{i + 1}</span>
+                {p}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Map style switcher — bottom right */}
+      <div style={{
+        position: 'absolute', bottom: 24, right: 24,
+        background: 'rgba(10,10,30,0.88)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        borderRadius: 16, padding: '10px 8px',
+        display: 'flex', flexDirection: 'column', gap: 2,
+      }}>
+        {MAP_STYLES.map(s => (
+          <button
+            key={s.id}
+            onClick={() => setMapStyle(s.id)}
+            style={{
+              background: mapStyle === s.id ? 'rgba(99,102,241,0.3)' : 'transparent',
+              border: mapStyle === s.id ? '1px solid rgba(99,102,241,0.6)' : '1px solid transparent',
+              borderRadius: 10,
+              padding: '6px 12px',
+              cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 8,
+              color: mapStyle === s.id ? '#a5b4fc' : '#94a3b8',
+              fontSize: 12,
+              fontFamily: 'inherit',
+              whiteSpace: 'nowrap',
+              transition: 'all 0.15s',
+            }}
+          >
+            <span style={{ fontSize: 14 }}>{s.icon}</span>
+            {s.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Session list — bottom left */}
+      <div style={{
+        position: 'absolute', bottom: 24, left: 24, width: 300,
+        maxHeight: '50vh',
+        background: 'rgba(10,10,30,0.88)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        borderRadius: 16, overflow: 'hidden',
+        display: 'flex', flexDirection: 'column',
+      }}>
+        <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)', fontSize: 11, color: '#64748b', letterSpacing: 1, textTransform: 'uppercase' }}>
+          Recent Sessions
+        </div>
+        <div style={{ overflowY: 'auto', flex: 1 }}>
+          {sessions.length === 0 && (
+            <div style={{ padding: 20, color: '#555', fontSize: 13, textAlign: 'center' }}>
+              No sessions yet — deploy to start tracking.
+            </div>
+          )}
+          {sessions.map(s => (
+            <div
+              key={s.id}
+              onClick={() => setSelected(s)}
+              style={{
+                padding: '10px 16px',
+                borderBottom: '1px solid rgba(255,255,255,0.05)',
+                cursor: 'pointer',
+                background: selected?.id === s.id ? 'rgba(99,102,241,0.15)' : 'transparent',
+                display: 'flex', alignItems: 'center', gap: 10,
+                transition: 'background 0.15s',
+              }}
+              onMouseEnter={e => { if (selected?.id !== s.id) (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.04)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = selected?.id === s.id ? 'rgba(99,102,241,0.15)' : 'transparent'; }}
+            >
+              <span style={{ fontSize: 20 }}>{getFlagEmoji(s.countryCode)}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {s.city}, {s.country}
+                </div>
+                <div style={{ fontSize: 11, color: '#64748b', marginTop: 1 }}>
+                  {s.pages.length} page{s.pages.length !== 1 ? 's' : ''} · {timeAgo(s.lastSeen)}
+                </div>
+              </div>
+              <DeviceIcon device={s.device} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  );
+}

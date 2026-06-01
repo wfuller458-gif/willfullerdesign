@@ -12,15 +12,20 @@
   },
   "dependencies": {
     "@fontsource/source-serif-pro": "^5.2.5",
+    "@vercel/kv": "^3.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.25",
     "lucide-react": "^0.556.0",
+    "mapbox-gl": "^3.24.0",
     "next": "16.0.7",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-globe.gl": "^2.38.0",
+    "react-map-gl": "^8.1.1",
     "resend": "^6.6.0",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
