@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import type { Session } from '@/lib/types';
 import { AnalyticsGlobe } from './analytics-globe';
+import type { AnalyticsGlobeHandle } from './analytics-globe';
 
 function timeAgo(ts: number): string {
   const diff = Date.now() - ts;
@@ -31,24 +32,17 @@ interface Props {
   sessions: Session[];
 }
 
-const MAP_STYLES = [
-  { id: 'mapbox://styles/mapbox/satellite-streets-v12', label: 'Satellite', icon: '🛰️' },
-  { id: 'mapbox://styles/mapbox/satellite-v9',          label: 'Satellite (clean)', icon: '🌍' },
-  { id: 'mapbox://styles/mapbox/dark-v11',              label: 'Dark', icon: '🌑' },
-  { id: 'mapbox://styles/mapbox/light-v11',             label: 'Light', icon: '🗺️' },
-  { id: 'mapbox://styles/mapbox/navigation-night-v1',   label: 'Night Nav', icon: '🚗' },
-  { id: 'mapbox://styles/mapbox/outdoors-v12',          label: 'Outdoors', icon: '🏔️' },
-];
+const MAP_STYLE = 'mapbox://styles/mapbox/outdoors-v12';
 
 export function AnalyticsDashboard({ sessions }: Props) {
   const [selected, setSelected] = useState<Session | null>(null);
-  const [mapStyle, setMapStyle] = useState(MAP_STYLES[0].id);
+  const globeRef = useRef<AnalyticsGlobeHandle>(null);
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#0a0a1a', position: 'relative', overflow: 'hidden' }}>
 
       {/* Globe */}
-      <AnalyticsGlobe sessions={sessions} selected={selected} onSelect={setSelected} mapStyle={mapStyle} />
+      <AnalyticsGlobe ref={globeRef} sessions={sessions} selected={selected} onSelect={setSelected} mapStyle={MAP_STYLE} />
 
       {/* Stats chip — top left */}
       <div style={{
@@ -59,12 +53,24 @@ export function AnalyticsDashboard({ sessions }: Props) {
         borderRadius: 12, padding: '10px 16px',
         color: '#fff', fontSize: 13, display: 'flex', gap: 16, alignItems: 'center',
       }}>
-        <span style={{ color: '#a5b4fc', fontWeight: 600 }}>Will Fuller Analytics</span>
+        <span style={{ color: '#a5b4fc', fontWeight: 600 }}>willfullerdesign.com analytics</span>
         <span style={{ color: '#888' }}>·</span>
         <span>
           <span style={{ color: '#4ade80', fontWeight: 600 }}>{sessions.length}</span>
           <span style={{ color: '#888' }}> sessions</span>
         </span>
+        <span style={{ color: '#888' }}>·</span>
+        <button
+          onClick={() => globeRef.current?.resetView()}
+          title="Reset view"
+          style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: '#94a3b8', fontSize: 15, padding: 0, lineHeight: 1,
+            display: 'flex', alignItems: 'center', gap: 4,
+          }}
+        >
+          ⊙ Reset
+        </button>
       </div>
 
       {/* Selected session detail — top right */}
@@ -116,39 +122,6 @@ export function AnalyticsDashboard({ sessions }: Props) {
           </div>
         </div>
       )}
-
-      {/* Map style switcher — bottom right */}
-      <div style={{
-        position: 'absolute', bottom: 24, right: 24,
-        background: 'rgba(10,10,30,0.88)',
-        backdropFilter: 'blur(12px)',
-        border: '1px solid rgba(255,255,255,0.1)',
-        borderRadius: 16, padding: '10px 8px',
-        display: 'flex', flexDirection: 'column', gap: 2,
-      }}>
-        {MAP_STYLES.map(s => (
-          <button
-            key={s.id}
-            onClick={() => setMapStyle(s.id)}
-            style={{
-              background: mapStyle === s.id ? 'rgba(99,102,241,0.3)' : 'transparent',
-              border: mapStyle === s.id ? '1px solid rgba(99,102,241,0.6)' : '1px solid transparent',
-              borderRadius: 10,
-              padding: '6px 12px',
-              cursor: 'pointer',
-              display: 'flex', alignItems: 'center', gap: 8,
-              color: mapStyle === s.id ? '#a5b4fc' : '#94a3b8',
-              fontSize: 12,
-              fontFamily: 'inherit',
-              whiteSpace: 'nowrap',
-              transition: 'all 0.15s',
-            }}
-          >
-            <span style={{ fontSize: 14 }}>{s.icon}</span>
-            {s.label}
-          </button>
-        ))}
-      </div>
 
       {/* Session list — bottom left */}
       <div style={{
