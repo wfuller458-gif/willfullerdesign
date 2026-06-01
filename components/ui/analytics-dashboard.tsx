@@ -34,9 +34,21 @@ interface Props {
 
 const MAP_STYLE = 'mapbox://styles/mapbox/outdoors-v12';
 
-export function AnalyticsDashboard({ sessions }: Props) {
+export function AnalyticsDashboard({ sessions: initialSessions }: Props) {
+  const [sessions, setSessions] = useState<Session[]>(initialSessions);
   const [selected, setSelected] = useState<Session | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const globeRef = useRef<AnalyticsGlobeHandle>(null);
+
+  const deleteSession = async (id: string) => {
+    setSessions(prev => prev.filter(s => s.id !== id));
+    if (selected?.id === id) setSelected(null);
+    await fetch('/api/analytics-delete', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId: id }),
+    });
+  };
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#0a0a1a', position: 'relative', overflow: 'hidden' }}>
@@ -53,7 +65,7 @@ export function AnalyticsDashboard({ sessions }: Props) {
         borderRadius: 12, padding: '10px 16px',
         color: '#fff', fontSize: 13, display: 'flex', gap: 16, alignItems: 'center',
       }}>
-        <span style={{ color: '#a5b4fc', fontWeight: 600 }}>willfullerdesign.com analytics</span>
+        <a href="https://willfullerdesign.com" style={{ color: '#a5b4fc', fontWeight: 600, textDecoration: 'none' }}>willfullerdesign.com</a>
         <span style={{ color: '#888' }}>·</span>
         <span>
           <span style={{ color: '#4ade80', fontWeight: 600 }}>{sessions.length}</span>
@@ -146,16 +158,17 @@ export function AnalyticsDashboard({ sessions }: Props) {
             <div
               key={s.id}
               onClick={() => setSelected(s)}
+              onMouseEnter={() => setHoveredId(s.id)}
+              onMouseLeave={() => setHoveredId(null)}
               style={{
                 padding: '10px 16px',
                 borderBottom: '1px solid rgba(255,255,255,0.05)',
                 cursor: 'pointer',
-                background: selected?.id === s.id ? 'rgba(99,102,241,0.15)' : 'transparent',
+                background: selected?.id === s.id ? 'rgba(99,102,241,0.15)' : hoveredId === s.id ? 'rgba(255,255,255,0.04)' : 'transparent',
                 display: 'flex', alignItems: 'center', gap: 10,
                 transition: 'background 0.15s',
+                position: 'relative',
               }}
-              onMouseEnter={e => { if (selected?.id !== s.id) (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.04)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = selected?.id === s.id ? 'rgba(99,102,241,0.15)' : 'transparent'; }}
             >
               <span style={{ fontSize: 20 }}>{getFlagEmoji(s.countryCode)}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -166,7 +179,18 @@ export function AnalyticsDashboard({ sessions }: Props) {
                   {s.pages.length} page{s.pages.length !== 1 ? 's' : ''} · {timeAgo(s.lastSeen)}
                 </div>
               </div>
-              <DeviceIcon device={s.device} />
+              {hoveredId === s.id ? (
+                <button
+                  onClick={e => { e.stopPropagation(); deleteSession(s.id); }}
+                  style={{
+                    background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.4)',
+                    borderRadius: 6, color: '#f87171', cursor: 'pointer',
+                    fontSize: 11, padding: '3px 7px', flexShrink: 0,
+                  }}
+                >✕</button>
+              ) : (
+                <DeviceIcon device={s.device} />
+              )}
             </div>
           ))}
         </div>
