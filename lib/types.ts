@@ -10,4 +10,5 @@ export interface Session {
   pages: string[];
   device: 'desktop' | 'mobile' | 'unknown';
   referrer: string;
+  isOwner?: boolean;
 }

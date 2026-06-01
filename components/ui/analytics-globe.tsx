@@ -78,19 +78,19 @@ export const AnalyticsGlobe = forwardRef<AnalyticsGlobeHandle, Props>(
                 width: 40,
                 height: 40,
                 borderRadius: '50%',
-                border: `2.5px solid ${selected?.id === s.id ? '#fff' : 'rgba(255,255,255,0.75)'}`,
-                overflow: 'hidden',
+                background: avatarColor(s.id),
+                border: `2.5px solid ${s.isOwner ? '#fbbf24' : selected?.id === s.id ? '#fff' : 'rgba(255,255,255,0.75)'}`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 17,
                 cursor: 'pointer',
-                boxShadow: `0 0 ${selected?.id === s.id ? '18px' : '8px'} ${avatarColor(s.id)}bb`,
+                boxShadow: `0 0 ${selected?.id === s.id ? '18px' : '8px'} ${s.isOwner ? '#fbbf2499' : avatarColor(s.id) + 'bb'}`,
                 transform: selected?.id === s.id ? 'scale(1.35)' : 'scale(1)',
                 transition: 'transform 0.2s, box-shadow 0.2s',
               }}
             >
-              <img
-                src="/images/profiles/Will Fuller.png"
-                alt=""
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
+              {getFlagEmoji(s.countryCode)}
             </div>
           </Marker>
         ))}

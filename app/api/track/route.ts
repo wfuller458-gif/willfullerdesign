@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
       await kv.zadd('sessions', { score: Date.now(), member: sessionId });
     } else {
       const geo = await geolocate(req);
+      const isOwner = req.cookies.get('analytics-auth')?.value === 'granted';
       const session: Session = {
         id: sessionId,
         startedAt: Date.now(),
@@ -76,6 +77,7 @@ export async function POST(req: NextRequest) {
         pages: [page],
         device: device || 'unknown',
         referrer: referrer || '',
+        isOwner,
       };
       await kv.set(key, session, { ex: 60 * 60 * 24 * 30 });
       await kv.zadd('sessions', { score: Date.now(), member: sessionId });
