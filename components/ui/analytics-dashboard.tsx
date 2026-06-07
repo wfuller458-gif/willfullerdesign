@@ -4,8 +4,10 @@ import { useState, useRef } from 'react';
 import type { Session } from '@/lib/types';
 import { AnalyticsGlobe } from './analytics-globe';
 import type { AnalyticsGlobeHandle } from './analytics-globe';
-import { PLANET_STYLE } from './planet-style';
+import { PLANETS, PLANET_STYLE, PLANET_LABEL } from './planet-style';
 import type { Planet } from './planet-style';
+
+const nextPlanet = (p: Planet): Planet => PLANETS[(PLANETS.indexOf(p) + 1) % PLANETS.length];
 
 function timeAgo(ts: number): string {
   const diff = Date.now() - ts;
@@ -86,7 +88,7 @@ export function AnalyticsDashboard({ sessions: initialSessions }: Props) {
         </button>
         <span style={{ color: '#888' }}>·</span>
         <button
-          onClick={() => setPlanet(p => (p === 'earth' ? 'mars' : 'earth'))}
+          onClick={() => setPlanet(nextPlanet)}
           title="Switch globe surface"
           style={{
             background: 'none', border: 'none', cursor: 'pointer',
@@ -94,7 +96,7 @@ export function AnalyticsDashboard({ sessions: initialSessions }: Props) {
             display: 'flex', alignItems: 'center', gap: 5,
           }}
         >
-          {planet === 'earth' ? '🌍 Earth' : '🔴 Mars'}
+          {PLANET_LABEL[planet]}
         </button>
       </div>
 

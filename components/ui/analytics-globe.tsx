@@ -26,6 +26,22 @@ const FOG: Record<Planet, FogSpecification> = {
     'space-color': 'rgb(20, 10, 12)',
     'star-intensity': 0.6,
   },
+  // Airless body — a faint silvery-grey glow rather than a "real" atmosphere.
+  moon: {
+    color: 'rgb(196, 198, 204)',
+    'high-color': 'rgb(110, 114, 130)',
+    'horizon-blend': 0.015,
+    'space-color': 'rgb(8, 8, 16)',
+    'star-intensity': 0.7,
+  },
+  // Sun-blasted and airless — warm, stark, slightly brighter starfield.
+  mercury: {
+    color: 'rgb(214, 192, 168)',
+    'high-color': 'rgb(150, 120, 96)',
+    'horizon-blend': 0.015,
+    'space-color': 'rgb(16, 11, 9)',
+    'star-intensity': 0.75,
+  },
 };
 
 function getFlagEmoji(code: string): string {
