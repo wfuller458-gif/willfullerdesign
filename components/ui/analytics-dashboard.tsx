@@ -4,6 +4,8 @@ import { useState, useRef } from 'react';
 import type { Session } from '@/lib/types';
 import { AnalyticsGlobe } from './analytics-globe';
 import type { AnalyticsGlobeHandle } from './analytics-globe';
+import { PLANET_STYLE } from './planet-style';
+import type { Planet } from './planet-style';
 
 function timeAgo(ts: number): string {
   const diff = Date.now() - ts;
@@ -32,12 +34,11 @@ interface Props {
   sessions: Session[];
 }
 
-const MAP_STYLE = 'mapbox://styles/mapbox/outdoors-v12';
-
 export function AnalyticsDashboard({ sessions: initialSessions }: Props) {
   const [sessions, setSessions] = useState<Session[]>(initialSessions);
   const [selected, setSelected] = useState<Session | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [planet, setPlanet] = useState<Planet>('earth');
   const globeRef = useRef<AnalyticsGlobeHandle>(null);
 
   const deleteSession = async (id: string) => {
@@ -54,7 +55,7 @@ export function AnalyticsDashboard({ sessions: initialSessions }: Props) {
     <div style={{ width: '100vw', height: '100vh', background: '#0a0a1a', position: 'relative', overflow: 'hidden' }}>
 
       {/* Globe */}
-      <AnalyticsGlobe ref={globeRef} sessions={sessions} selected={selected} onSelect={setSelected} mapStyle={MAP_STYLE} />
+      <AnalyticsGlobe ref={globeRef} sessions={sessions} selected={selected} onSelect={setSelected} mapStyle={PLANET_STYLE[planet]} planet={planet} />
 
       {/* Stats chip — top left */}
       <div style={{
@@ -82,6 +83,18 @@ export function AnalyticsDashboard({ sessions: initialSessions }: Props) {
           }}
         >
           ⊙ Reset
+        </button>
+        <span style={{ color: '#888' }}>·</span>
+        <button
+          onClick={() => setPlanet(p => (p === 'earth' ? 'mars' : 'earth'))}
+          title="Switch globe surface"
+          style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: '#94a3b8', fontSize: 13, padding: 0, lineHeight: 1,
+            display: 'flex', alignItems: 'center', gap: 5,
+          }}
+        >
+          {planet === 'earth' ? '🌍 Earth' : '🔴 Mars'}
         </button>
       </div>
 
