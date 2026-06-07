@@ -7,6 +7,7 @@ import { SoundProvider } from "@/contexts/sound-context";
 import { PanelProvider } from "@/contexts/panel-context";
 import { ScrollReset } from "@/components/ui/scroll-reset";
 import { PageTracker } from "@/components/ui/page-tracker";
+import { GlobeAnalyticsTracker } from "@/components/ui/globe-analytics-tracker";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -49,6 +50,7 @@ export default function RootLayout({
       >
         <ScrollReset />
         <PageTracker />
+        <GlobeAnalyticsTracker />
         <SoundProvider>
           <LoadingProvider>
             <PanelProvider>
