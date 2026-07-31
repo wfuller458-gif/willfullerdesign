@@ -3,8 +3,8 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
-const API_KEY = 'ga_cam3oT_I7v5cuubloj6ZOeMZbaSslGFr';
-const ENDPOINT = 'https://globe-analytics-90h6dus5o-will-fullers-projects.vercel.app/api/track';
+const API_KEY = 'ga_JOJpE1AUIMKvXp3LIyCyQmfAO1QtnD8O';
+const ENDPOINT = 'https://globe-analytics-will-fullers-projects.vercel.app/api/track';
 const SESSION_KEY = '_ga_sid';
 const SESSION_TS_KEY = '_ga_ts';
 const SESSION_TTL = 30 * 60 * 1000;
