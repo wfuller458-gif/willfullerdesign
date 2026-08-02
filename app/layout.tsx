@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { LoadingProvider } from "@/contexts/loading-context";
 import { SoundProvider } from "@/contexts/sound-context";
 import { PanelProvider } from "@/contexts/panel-context";
 import { ScrollReset } from "@/components/ui/scroll-reset";
-import { GlobeAnalyticsTracker } from "@/components/ui/globe-analytics-tracker";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,13 +42,16 @@ export default function RootLayout({
     <html lang="en" style={{ backgroundColor: '#f7f7f0' }}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `history.scrollRestoration = 'manual';` }} />
+        <Script
+          src="https://globe-analytics-will-fullers-projects.vercel.app/snippet.js?key=ga_JOJpE1AUIMKvXp3LIyCyQmfAO1QtnD8O"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         className={`${inter.variable} ${dmSans.variable} antialiased`}
         style={{ fontFamily: 'var(--font-inter)', backgroundColor: '#f7f7f0' }}
       >
         <ScrollReset />
-        <GlobeAnalyticsTracker />
         <SoundProvider>
           <LoadingProvider>
             <PanelProvider>
