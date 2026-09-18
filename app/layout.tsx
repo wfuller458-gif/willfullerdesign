@@ -43,7 +43,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: `history.scrollRestoration = 'manual';` }} />
         <Script
-          src="https://globe-analytics-will-fullers-projects.vercel.app/snippet.js?key=ga_JOJpE1AUIMKvXp3LIyCyQmfAO1QtnD8O"
+          src="https://globe-analytics-will-fullers-projects.vercel.app/snippet.js?key=ga_WPDGM0k6WthqRFFLN6lvnkTCVO2-2BL6"
           strategy="afterInteractive"
         />
       </head>
