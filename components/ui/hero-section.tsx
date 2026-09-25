@@ -16,6 +16,7 @@ export interface HeroSectionProps {
   tagline?: string;
   taglines?: string[];
   showCarouselTooltip?: boolean;
+  carouselImages?: string[];
   heading?: string;
   buttonText?: string;
   location?: string;
@@ -27,6 +28,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   tagline = 'UX / Product Designer.',
   taglines = TAGLINES,
   showCarouselTooltip = true,
+  carouselImages,
   heading = 'Helping businesses turn ideas into usable, scalable products',
   buttonText = 'Get in touch',
   location = 'Stratford-Upon-Avon',
@@ -295,7 +297,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Carousel — always 20vh */}
       <div className="hero-carousel-wrapper">
-        <ProjectCarousel showTooltip={showCarouselTooltip} />
+        <ProjectCarousel showTooltip={showCarouselTooltip} images={carouselImages} />
       </div>
     </div>
   );

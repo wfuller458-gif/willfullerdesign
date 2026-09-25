@@ -10,14 +10,26 @@ import { TestimonialsSection } from '@/components/ui/testimonials-section';
 import { IntroSection } from '@/components/ui/intro-section';
 import { CollaborationSection } from '@/components/ui/collaboration-section';
 import { PinPad } from '@/components/ui/pin-pad';
+import { BookingDrawer } from '@/components/ui/booking-drawer';
 
-const handleContact = () => {
-  window.location.href = 'mailto:willfullerdesign@gmail.com';
-};
+// Hero carousel without Trick Trainer; module-level so the memoised carousel isn't re-rendered
+const CAROUSEL_IMAGES = [
+  '/images/projects/off-road-controls/image-1.webp',
+  '/images/projects/feed-it-back/image-1.webp',
+  '/images/projects/driver-displays/image-1.webp',
+  '/images/projects/training-platform/image-2.webp',
+  '/images/projects/off-road-controls/image-2.webp',
+  '/images/projects/feed-it-back/image-2.webp',
+  '/images/projects/driver-displays/image-2.webp',
+  '/images/projects/training-platform/image-1.webp',
+];
 
 export default function Freelance() {
   const router = useRouter();
   const [showUnlockPin, setShowUnlockPin] = useState(false);
+  const [showBooking, setShowBooking] = useState(false);
+  const handleContact = useCallback(() => setShowBooking(true), []);
+  const closeBooking = useCallback(() => setShowBooking(false), []);
   const [pinError, setPinError] = useState(false);
 
   // Auto-open PIN pad when redirected from a protected page or triggered by carousel
@@ -53,11 +65,12 @@ export default function Freelance() {
         <Header
           onContactClick={handleContact}
           contactLabel="Book a free call"
+          showProjects={false}
         />
       </div>
 
       {/* Hero Section */}
-      <HeroSection onContactClick={handleContact} buttonText="Book a free call" taglines={['Designer & Developer']} showCarouselTooltip={false} />
+      <HeroSection onContactClick={handleContact} buttonText="Book a free call" taglines={['Designer & Developer']} showCarouselTooltip={false} carouselImages={CAROUSEL_IMAGES} />
 
       {/* Intro Text */}
       <style>
@@ -110,11 +123,11 @@ export default function Freelance() {
           }
         `}
       </style>
-      <IntroSection quote="I design refined digital experiences that reflect the quality of what you deliver, for premium service brands whose reputation has outgrown their website." />
+      <IntroSection reversed quote="I design refined digital experiences that reflect the quality of what you deliver, for premium service brands whose reputation has outgrown their website." />
 
-      <CollaborationSection />
+      <CollaborationSection title="I have worked with" />
 
-      <TestimonialsSection />
+      <TestimonialsSection title="Testimonials" />
 
       {/* Footer */}
       <Footer onContactClick={handleContact} contactLabel="Book a free call" showProjects={false} />
@@ -133,6 +146,9 @@ export default function Freelance() {
           }
         `}
       </style>
+
+      {/* Call booking drawer */}
+      {showBooking && <BookingDrawer onClose={closeBooking} />}
 
       {/* Training Platform PIN gate */}
       {showUnlockPin && (

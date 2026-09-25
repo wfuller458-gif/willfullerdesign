@@ -13,7 +13,7 @@ const logos = [
   { src: '/logos/aim.svg',         label: 'AIMs'          },
 ];
 
-export function CollaborationSection() {
+export function CollaborationSection({ title = 'In collaboration with' }: { title?: string } = {}) {
   return (
     <>
       <style>{`
@@ -101,7 +101,7 @@ export function CollaborationSection() {
       <div className="cs-wrap">
         <hr className="cs-rule" />
         <div className="cs-inner">
-          <h2 className="cs-title">In collaboration with</h2>
+          <h2 className="cs-title">{title}</h2>
           <div className="cs-grid">
             {logos.map(({ src, label }) => (
               <div key={label} className="cs-logo-item">

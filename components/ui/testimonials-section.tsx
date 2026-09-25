@@ -32,7 +32,7 @@ const testimonials = [
 const DURATION = 6000;
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 
-export function TestimonialsSection() {
+export function TestimonialsSection({ title = 'Tangible impact' }: { title?: string } = {}) {
   const [active, setActive] = useState(0);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
@@ -291,7 +291,7 @@ export function TestimonialsSection() {
       <div className="ts-wrap">
         <hr className="ts-rule" />
         <div className="ts-inner">
-          <h2 className="ts-title">Tangible impact</h2>
+          <h2 className="ts-title">{title}</h2>
 
           <div className="ts-right">
             <p key={active} className="ts-quote">

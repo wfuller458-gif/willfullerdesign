@@ -203,9 +203,10 @@ const NavLink = ({ label, href, onClick, onLinkClick }: { label: string; href?: 
 export interface HeaderProps {
   onContactClick?: () => void;
   contactLabel?: string;
+  showProjects?: boolean;
 }
 
-export function Header({ onContactClick, contactLabel }: HeaderProps) {
+export function Header({ onContactClick, contactLabel, showProjects = true }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
   const { openPanel, setOpenPanel } = usePanel();
   const { isMuted, toggleMuted, playHover, playSelect } = useSound();
@@ -307,7 +308,7 @@ export function Header({ onContactClick, contactLabel }: HeaderProps) {
 
         {/* Centre — nav links (desktop only) */}
         <div className="hdr-desktop-nav">
-          <NavLink label="Projects" href="/#selected-works" onLinkClick={handleProjectsClick} />
+          {showProjects && <NavLink label="Projects" href="/#selected-works" onLinkClick={handleProjectsClick} />}
           <NavLink label="About" onClick={() => setOpenPanel('about')} />
           <NavLink label="Resume" onClick={() => setOpenPanel('resume')} />
         </div>

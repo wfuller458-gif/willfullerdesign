@@ -23,7 +23,7 @@ const DURATION = 5000;
 
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 
-export function IntroSection({ quote = QUOTE }: { quote?: string } = {}) {
+export function IntroSection({ quote = QUOTE, reversed = false }: { quote?: string; reversed?: boolean } = {}) {
   const [active, setActive] = useState(0);
   const total = slides.length;
   const { playHover } = useSound();
@@ -215,9 +215,17 @@ export function IntroSection({ quote = QUOTE }: { quote?: string } = {}) {
         @media (max-width: 480px) {
           .is-wrap { padding-left: 16px; padding-right: 16px; }
         }
+
+        /* Reversed: quote on the left, stats on the right (quote first when stacked) */
+        .is-wrap.is-reversed { flex-direction: row-reverse; }
+        .is-wrap.is-reversed .is-right-inner { margin-left: 0; margin-right: auto; }
+
+        @media (max-width: 768px) {
+          .is-wrap.is-reversed { flex-direction: column-reverse; }
+        }
       `}</style>
 
-      <div className="is-wrap">
+      <div className={`is-wrap${reversed ? ' is-reversed' : ''}`}>
         {/* Left panel */}
         <div className="is-left">
           <div className="is-bar-track">
