@@ -23,7 +23,7 @@ const DURATION = 5000;
 
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 
-export function IntroSection({ quote = QUOTE, reversed = false }: { quote?: string; reversed?: boolean } = {}) {
+export function IntroSection({ quote = QUOTE, role = ROLE, reversed = false }: { quote?: string; role?: string; reversed?: boolean } = {}) {
   const [active, setActive] = useState(0);
   const total = slides.length;
   const { playHover } = useSound();
@@ -254,7 +254,7 @@ export function IntroSection({ quote = QUOTE, reversed = false }: { quote?: stri
               <img src="/images/profiles/will-fuller.jpg" alt="Will Fuller" className="is-photo" />
               <div>
                 <p className="is-author-name">{AUTHOR}</p>
-                <p className="is-author-role">{ROLE}</p>
+                <p className="is-author-role">{role}</p>
               </div>
             </div>
           </div>
