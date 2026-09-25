@@ -2,16 +2,18 @@
 import { BOOKING, type Busy } from './booking';
 
 const cfg = () => ({
-  clientId: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-  calendarId: process.env.GOOGLE_CALENDAR_ID || 'primary',
+  clientId: process.env.GOOGLE_CLIENT_ID?.trim(),
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET?.trim(),
+  refreshToken: process.env.GOOGLE_REFRESH_TOKEN?.trim(),
+  calendarId: process.env.GOOGLE_CALENDAR_ID?.trim() || 'primary',
 });
 
-export const isCalendarConfigured = () => {
-  const c = cfg();
-  return Boolean(c.clientId && c.clientSecret && c.refreshToken);
-};
+const REQUIRED = ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_REFRESH_TOKEN'] as const;
+
+// Names (never values) of required keys that are missing or blank
+export const missingCalendarKeys = () => REQUIRED.filter(k => !process.env[k]?.trim());
+
+export const isCalendarConfigured = () => missingCalendarKeys().length === 0;
 
 // Demo mode (fake bookings) is only allowed locally; in production missing keys are an error
 export const calendarMode = (): 'live' | 'demo' | 'unconfigured' =>

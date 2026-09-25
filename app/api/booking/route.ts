@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateSlots, windowEnd } from '@/lib/booking';
-import { calendarMode, createCallEvent, getBusy } from '@/lib/google-calendar';
+import { calendarMode, missingCalendarKeys, createCallEvent, getBusy } from '@/lib/google-calendar';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,8 +22,9 @@ export async function POST(req: NextRequest) {
 
   const mode = calendarMode();
   if (mode === 'unconfigured') {
-    console.error('Call booking: GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / GOOGLE_REFRESH_TOKEN not set');
-    return NextResponse.json({ error: 'Booking is temporarily unavailable.' }, { status: 503 });
+    const missing = missingCalendarKeys();
+    console.error(`Call booking: missing env vars ${missing.join(', ')}`);
+    return NextResponse.json({ error: 'Booking is temporarily unavailable.', missing }, { status: 503 });
   }
   const demo = mode === 'demo';
   const now = Date.now();
