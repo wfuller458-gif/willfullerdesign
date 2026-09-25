@@ -14,6 +14,8 @@ const TAGLINES = [
 
 export interface HeroSectionProps {
   tagline?: string;
+  taglines?: string[];
+  showCarouselTooltip?: boolean;
   heading?: string;
   buttonText?: string;
   location?: string;
@@ -23,6 +25,8 @@ export interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   tagline = 'UX / Product Designer.',
+  taglines = TAGLINES,
+  showCarouselTooltip = true,
   heading = 'Helping businesses turn ideas into usable, scalable products',
   buttonText = 'Get in touch',
   location = 'Stratford-Upon-Avon',
@@ -41,12 +45,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   });
 
   useEffect(() => {
-    if (!animateIn) return;
+    if (!animateIn || taglines.length < 2) return;
     const cycle = setInterval(() => {
-      setTaglineIndex(i => (i + 1) % TAGLINES.length);
+      setTaglineIndex(i => (i + 1) % taglines.length);
     }, 4200);
     return () => clearInterval(cycle);
-  }, [animateIn]);
+  }, [animateIn, taglines.length]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -209,7 +213,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
               >
-                {TAGLINES[taglineIndex]}
+                {taglines[taglineIndex % taglines.length]}
               </motion.p>
             </AnimatePresence>
           </motion.div>
@@ -291,7 +295,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Carousel — always 20vh */}
       <div className="hero-carousel-wrapper">
-        <ProjectCarousel />
+        <ProjectCarousel showTooltip={showCarouselTooltip} />
       </div>
     </div>
   );

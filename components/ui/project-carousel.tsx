@@ -14,9 +14,11 @@ const SOFT_STAGGER = 42;
 
 export interface ProjectCarouselProps {
   images?: string[];
+  showTooltip?: boolean;
 }
 
 export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
+  showTooltip = true,
   images = [
     '/images/projects/off-road-controls/image-1.webp',
     '/images/projects/feed-it-back/image-1.webp',
@@ -228,7 +230,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
       <div
         className="carousel-track"
         onMouseEnter={() => !isMobile && setIsHovered(true)}
-        onMouseLeave={() => !isMobile && setIsHovered(false)}
+        onMouseLeave={() => { if (!isMobile) { setIsHovered(false); setHoveredIndex(null); } }}
         style={{
           display: 'flex',
           gap: isHovered && !isMobile ? '44px' : '8px',
@@ -244,11 +246,9 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
             key={`first-${index}`}
             className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
             onMouseEnter={() => { if (!isMobile) { setHoveredIndex(index); playHover(); } }}
-            onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+            onMouseLeave={() => showTooltip && !isMobile && setHoveredIndex(null)}
             initial={isSoftNav.current ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-            animate={visibleCount >= images.length - index
-              ? { opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 1, y: 0 }
-              : { opacity: 0, y: 8 }}
+            animate={visibleCount >= images.length - index ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
             transition={{ duration: IMG_DUR, ease: 'easeInOut' }}
             style={{
               flexShrink: 0,
@@ -259,11 +259,14 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
               zIndex: hoveredIndex === index ? 100 : 1
             }}
           >
-            {image
-              ? <img src={image} alt={`Project ${index + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '4px' }} />
-              : <div style={{ width: '100%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '4px' }} />
-            }
-            {hoveredIndex === index && !isMobile && (
+            {/* Hover dim uses a CSS transition — animating it with framer flashes to full opacity for a frame when the animation completes */}
+            <div style={{ width: '100%', height: '100%', opacity: isHovered && !isMobile && hoveredIndex !== null && hoveredIndex !== index ? 0.5 : 1, transition: 'opacity 0.3s ease' }}>
+              {image
+                ? <img src={image} alt={`Project ${index + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '4px' }} />
+                : <div style={{ width: '100%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '4px' }} />
+              }
+            </div>
+            {showTooltip && hoveredIndex === index && !isMobile && (
               <div
                 style={{
                   position: 'absolute',
@@ -294,7 +297,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
               key={`second-${index}`}
               className={`carousel-item ${isHovered && !isMobile ? 'hovered' : ''}`}
               onMouseEnter={() => { if (!isMobile) { setHoveredIndex(duplicateIndex); playHover(); } }}
-              onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+              onMouseLeave={() => showTooltip && !isMobile && setHoveredIndex(null)}
               style={{
                 flexShrink: 0,
                 borderRadius: '4px',
@@ -309,7 +312,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = React.memo(({
                 ? <img src={image} alt={`Project ${index + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '4px' }} />
                 : <div style={{ width: '100%', height: '100%', backgroundColor: '#D9D9D9', borderRadius: '4px' }} />
               }
-              {hoveredIndex === duplicateIndex && !isMobile && (
+              {showTooltip && hoveredIndex === duplicateIndex && !isMobile && (
                 <div
                   style={{
                     position: 'absolute',

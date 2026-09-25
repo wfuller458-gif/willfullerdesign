@@ -98,7 +98,7 @@ const SoundButton = ({ isMuted, onToggle, onMouseEnter }: { isMuted: boolean; on
   );
 };
 
-const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMouseEnter?: () => void }) => {
+const ContactButton = ({ onClick, onMouseEnter, label = 'Get in touch' }: { onClick?: () => void; onMouseEnter?: () => void; label?: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { playSelect } = useSound();
   const ease = '750ms cubic-bezier(0.16, 1.2, 0.3, 1)';
@@ -128,10 +128,10 @@ const ContactButton = ({ onClick, onMouseEnter }: { onClick?: () => void; onMous
     >
       <span style={{ position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
         <span style={{ display: 'inline-block', transition: `transform ${ease}`, transform: isHovered ? 'translateY(-100%)' : 'translateY(0)' }}>
-          Get in touch
+          {label}
         </span>
         <span style={{ position: 'absolute', left: 0, top: 0, display: 'inline-block', transition: `transform ${ease}`, transform: isHovered ? 'translateY(0)' : 'translateY(100%)' }}>
-          Get in touch
+          {label}
         </span>
       </span>
       <span style={{ position: 'relative', overflow: 'hidden', display: 'inline-flex', width: '18px', height: '18px', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -202,9 +202,10 @@ const NavLink = ({ label, href, onClick, onLinkClick }: { label: string; href?: 
 
 export interface HeaderProps {
   onContactClick?: () => void;
+  contactLabel?: string;
 }
 
-export function Header({ onContactClick }: HeaderProps) {
+export function Header({ onContactClick, contactLabel }: HeaderProps) {
   const [backgroundColor, setBackgroundColor] = useState('rgba(247,247,240,0.3)');
   const { openPanel, setOpenPanel } = usePanel();
   const { isMuted, toggleMuted, playHover, playSelect } = useSound();
@@ -314,7 +315,7 @@ export function Header({ onContactClick }: HeaderProps) {
         {/* Right — sound + contact */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'flex-end' }}>
           <SoundButton isMuted={isMuted} onToggle={toggleMuted} onMouseEnter={playHover} />
-          <ContactButton onClick={onContactClick} onMouseEnter={playHover} />
+          <ContactButton onClick={onContactClick} onMouseEnter={playHover} label={contactLabel} />
         </div>
       </div>
     </motion.header>

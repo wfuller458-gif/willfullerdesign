@@ -73,7 +73,7 @@ const NavItem = ({ label, onClick, href }: { label: string; onClick?: () => void
   );
 };
 
-const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
+const GetInTouchButton = ({ onClick, label = 'Get in touch' }: { onClick?: () => void; label?: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { playHover } = useSound();
 
@@ -108,7 +108,7 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translateY(-100%)' : 'translateY(0)'
         }}>
-          Get in touch
+          {label}
         </span>
         <span style={{
           position: 'absolute',
@@ -118,7 +118,7 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
           transition: 'transform 750ms cubic-bezier(0.16, 1.2, 0.3, 1)',
           transform: isHovered ? 'translateY(0)' : 'translateY(100%)'
         }}>
-          Get in touch
+          {label}
         </span>
       </span>
       <span style={{
@@ -153,9 +153,11 @@ const GetInTouchButton = ({ onClick }: { onClick?: () => void }) => {
 
 export interface FooterProps {
   onContactClick?: () => void;
+  contactLabel?: string;
+  showProjects?: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
+export const Footer: React.FC<FooterProps> = ({ onContactClick, contactLabel, showProjects = true }) => {
   const { setOpenPanel } = usePanel();
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
@@ -270,7 +272,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
         {/* Left — nav + copyright */}
         <div className="footer-col footer-col-nav" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <NavItem label="Home" href="/" />
-          <NavItem label="Projects" href="/#selected-works" />
+          {showProjects && <NavItem label="Projects" href="/#selected-works" />}
           <NavItem label="About" onClick={() => isMobile ? router.push('/about') : setOpenPanel('about')} />
           <NavItem label="Resume" onClick={() => isMobile ? router.push('/resume') : setOpenPanel('resume')} />
           <span style={{
@@ -287,7 +289,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
 
         {/* Middle — Get in touch */}
         <div className="footer-col footer-col-cta">
-          <GetInTouchButton onClick={onContactClick} />
+          <GetInTouchButton onClick={onContactClick} label={contactLabel} />
         </div>
 
         {/* Right — name, address, time */}

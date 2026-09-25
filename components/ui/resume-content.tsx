@@ -57,7 +57,7 @@ export const ResumeContent = () => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
     <p style={f(300, '24px', 'rgba(255,255,255,0.85)', { lineHeight: 1.5 })}>
-      Senior product designer with 6+ years experience across automotive, healthcare, hospitality and startups. Trained in Industrial Design, I approach every project holistically considering the entire product and experience, not just the screen in front of me. I obsess over core design principles, because I believe great design is the sum of many small decisions done right. I create clarity where there isn't any, scope complexity into something manageable, and build with craft and precision from brief to delivery. I'm drawn to focused teams with the ambition to make something truly exceptional.
+      Senior product designer with 7+ years experience across automotive, healthcare, hospitality and startups. Trained in Industrial Design, I approach every project holistically considering the entire product and experience, not just the screen in front of me. I obsess over core design principles, because I believe great design is the sum of many small decisions done right. I create clarity where there isn't any, scope complexity into something manageable, and build with craft and precision from brief to delivery. I'm drawn to focused teams with the ambition to make something truly exceptional.
     </p>
 
     {hr}

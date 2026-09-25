@@ -8,7 +8,7 @@ interface Slide {
 }
 
 const slides: Slide[] = [
-  { stat: '6+',      label: 'Years of turning complexity into clarity across automotive, healthcare, hospitality and non-profit.' },
+  { stat: '7+',      label: 'Years of turning complexity into clarity across automotive, healthcare, hospitality and non-profit.' },
   { stat: '100k+',   label: 'Vehicles across 120+ countries shipped with my design every year.' },
   { stat: '30k+',    label: 'Clinicians trained every year through a platform I designed.' },
   { stat: 'Millions',label: 'of customer reviews from Bill\'s, The Alchemist, Giggling Squid and more land in one inbox I designed.' },
@@ -23,7 +23,7 @@ const DURATION = 5000;
 
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 
-export function IntroSection() {
+export function IntroSection({ quote = QUOTE }: { quote?: string } = {}) {
   const [active, setActive] = useState(0);
   const total = slides.length;
   const { playHover } = useSound();
@@ -241,7 +241,7 @@ export function IntroSection() {
         {/* Right panel */}
         <div className="is-right">
           <div className="is-right-inner">
-            <p className="is-quote">{QUOTE}</p>
+            <p className="is-quote">{quote}</p>
             <div className="is-author">
               <img src="/images/profiles/will-fuller.jpg" alt="Will Fuller" className="is-photo" />
               <div>
