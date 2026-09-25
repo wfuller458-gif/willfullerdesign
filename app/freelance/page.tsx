@@ -123,7 +123,7 @@ export default function Freelance() {
           }
         `}
       </style>
-      <IntroSection reversed quote="I design refined digital experiences that reflect the quality of what you deliver, for premium service brands whose reputation has outgrown their website." />
+      <IntroSection reversed quote="I design refined digital experiences that reflect the quality of what you deliver, for premium service providers whose reputation has outgrown their website." />
 
       <CollaborationSection title="I have worked with" />
 
