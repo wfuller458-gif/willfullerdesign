@@ -4,21 +4,32 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/ui/header';
 import { HeroSection } from '@/components/ui/hero-section';
-import { ProjectPreview } from '@/components/ui/project-preview';
 import { Footer } from '@/components/ui/footer';
 import { RecommendationCarousel } from '@/components/ui/recommendation-carousel';
 import { TestimonialsSection } from '@/components/ui/testimonials-section';
 import { IntroSection } from '@/components/ui/intro-section';
 import { CollaborationSection } from '@/components/ui/collaboration-section';
 import { PinPad } from '@/components/ui/pin-pad';
+import { BookingDrawer } from '@/components/ui/booking-drawer';
 
-const handleContact = () => {
-  window.location.href = 'mailto:willfullerdesign@gmail.com';
-};
+// Hero carousel without Trick Trainer; module-level so the memoised carousel isn't re-rendered
+const CAROUSEL_IMAGES = [
+  '/images/projects/off-road-controls/image-1.webp',
+  '/images/projects/feed-it-back/image-1.webp',
+  '/images/projects/driver-displays/image-1.webp',
+  '/images/projects/training-platform/image-2.webp',
+  '/images/projects/off-road-controls/image-2.webp',
+  '/images/projects/feed-it-back/image-2.webp',
+  '/images/projects/driver-displays/image-2.webp',
+  '/images/projects/training-platform/image-1.webp',
+];
 
 export default function Home() {
   const router = useRouter();
   const [showUnlockPin, setShowUnlockPin] = useState(false);
+  const [showBooking, setShowBooking] = useState(false);
+  const handleContact = useCallback(() => setShowBooking(true), []);
+  const closeBooking = useCallback(() => setShowBooking(false), []);
   const [pinError, setPinError] = useState(false);
 
   // Auto-open PIN pad when redirected from a protected page or triggered by carousel
@@ -53,11 +64,13 @@ export default function Home() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100 }}>
         <Header
           onContactClick={handleContact}
+          contactLabel="Book a free call"
+          showProjects={false}
         />
       </div>
 
       {/* Hero Section */}
-      <HeroSection onContactClick={handleContact} />
+      <HeroSection onContactClick={handleContact} buttonText="Book a free call" taglines={['Designer & Developer']} showCarouselTooltip={false} carouselImages={CAROUSEL_IMAGES} />
 
       {/* Intro Text */}
       <style>
@@ -108,107 +121,16 @@ export default function Home() {
               font-size: 18px;
             }
           }
-
-          .selected-works-header {
-            padding: 0 25px;
-            margin-top: 150px;
-            scroll-margin-top: 72px;
-          }
-
-          .project-previews-list {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 100px;
-            margin-top: 100px;
-          }
-
-          @media (max-width: 1024px) {
-            .selected-works-header { margin-top: 100px; }
-            .project-previews-list { gap: 60px; margin-top: 60px; }
-          }
-
-          @media (max-width: 768px) {
-            .selected-works-header { margin-top: 60px; }
-            .project-previews-list { gap: 40px; margin-top: 40px; }
-          }
-
-          @media (max-width: 480px) {
-            .selected-works-header { margin-top: 40px; padding-left: 16px; padding-right: 16px; }
-            .project-previews-list { gap: 24px; margin-top: 24px; }
-          }
         `}
       </style>
-      <IntroSection />
+      <IntroSection reversed role="Designer & Developer" quote="I design refined digital experiences that reflect the quality of what you deliver, for premium service providers whose reputation has outgrown their website." />
 
-      <CollaborationSection />
+      <CollaborationSection title="I have worked with" />
 
-      {/* Selected Works header */}
-      <div id="selected-works" className="selected-works-header">
-        <hr style={{ border: 'none', borderTop: '0.5px solid #9C9C9C', margin: '0 0 25px 0' }} />
-        <h2 style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 300, fontSize: 32, lineHeight: 1.2, color: '#BBB7B4', margin: 0, whiteSpace: 'nowrap' }}>
-          Selected works
-        </h2>
-      </div>
-
-      {/* Project Previews */}
-      <div className="project-previews-list">
-        <ProjectPreview
-          title="Off-Road Controls"
-          description="Off-road capability is at the heart of what makes a Defender a Defender. I led the UX for upcoming models unifying cameras, terrain systems and new features into a cockpit experience as capable and refined as the vehicle itself."
-          bullets={[
-            { text: 'Designed next generation Defender off-road experience', icon: '/icons/Design.svg' },
-            { text: 'UX ownership of every off-road feature', icon: '/icons/car-profile.svg' },
-            { text: 'Unified physical controls and digital feedback', icon: '/icons/toggle-left.svg' },
-          ]}
-          mainImage="/images/projects/off-road-controls/image-1.webp" secondaryImage="/images/projects/off-road-controls/image-2.webp" projectLink="#" bubbleVariant="coming-soon"
-        />
-        <ProjectPreview
-          title="Feed It Back"
-          description="The existing platform was fragmented, slow with users adopting workarounds. I redesigned it into a single, condensed inbox handling every review, every case from every channel for some of the UK's biggest restaurant chains."
-          bullets={[
-            { text: 'The inbox receives millions of reviews', icon: '/icons/Chat.svg' },
-            { text: 'Multi million investment secured after platform overhaul', icon: '/icons/£.svg' },
-            { text: "Feed It Back's platform continues to grow", icon: '/icons/Grow.svg' },
-          ]}
-          mainImage="/images/projects/feed-it-back/image-1.webp" secondaryImage="/images/projects/feed-it-back/image-2.webp" projectLink="/projects/feed-it-back" bubbleVariant="open"
-        />
-        <ProjectPreview
-          title="Driver Displays"
-          description="Designed future digital driver displays for Land Rover vehicles, with a focus on cognitive load and attention management. Also responsible for maintaining and updating existing displays to ensure continued saleability across global markets."
-          bullets={[
-            { text: 'Designs delivered for 120+ markets to 100,000+ vehicles', icon: '/icons/Globe.svg' },
-            { text: 'Integrated Apple CarPlay and Android Auto', icon: '/icons/Apple.svg' },
-            { text: 'Designed next generation driver displays', icon: '/icons/Design.svg' },
-          ]}
-          mainImage="/images/projects/driver-displays/image-1.webp" secondaryImage="/images/projects/driver-displays/image-2.webp" projectLink="#" bubbleVariant="coming-soon"
-        />
-        <ProjectPreview
-          title="Training Platform"
-          description="A healthcare training provider delivered Continuing Professional Development (CPD) entirely in person. I designed the platform that took it fully digital now training 30,000 clinicians every year."
-          bullets={[
-            { text: '30,000 clinicians supported annually through the platform', icon: '/icons/Users.svg' },
-            { text: 'Enabling professionals to complete training digitally', icon: '/icons/Test.svg' },
-            { text: 'In person to fully digital offering', icon: '/icons/Internet.svg' },
-          ]}
-          mainImage="/images/projects/training-platform/image-1.webp" secondaryImage="/images/projects/training-platform/image-2.webp" projectLink="/projects/training-platform" bubbleVariant="locked"
-        />
-        <ProjectPreview
-          title="Trick Trainer"
-          description="Trick recognition tool that uses pose detection to detect when my dog has completed a command. The goal is to eventually have it entertain him autonomously. Its a passion project and dog enrichment experiment."
-          bullets={[
-            { text: 'Machine learning and pose detection models', icon: '/icons/Pose.svg' },
-            { text: 'Using AI tools to bring my concepts to life', icon: '/icons/AI.svg' },
-            { text: 'Proof of concept build completed', icon: '/icons/Build.svg' },
-          ]}
-          mainImage="/images/projects/trick-trainer/image-1.webp" secondaryImage="/images/projects/trick-trainer/image-2.webp" projectLink="#" bubbleVariant="coming-soon"
-        />
-      </div>
-
-      <TestimonialsSection />
+      <TestimonialsSection title="Testimonials" />
 
       {/* Footer */}
-      <Footer onContactClick={handleContact} />
+      <Footer onContactClick={handleContact} contactLabel="Book a free call" showProjects={false} />
 
       <style>
         {`
@@ -224,6 +146,9 @@ export default function Home() {
           }
         `}
       </style>
+
+      {/* Call booking drawer */}
+      {showBooking && <BookingDrawer onClose={closeBooking} />}
 
       {/* Training Platform PIN gate */}
       {showUnlockPin && (

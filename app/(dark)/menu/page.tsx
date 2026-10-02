@@ -14,7 +14,6 @@ export default function MenuPage() {
 
   const items = [
     { label: 'Home',     href: '/' },
-    { label: 'Projects', href: '/#selected-works' },
     { label: 'About',    href: '/about' },
     { label: 'Resume',   href: '/resume' },
   ];
